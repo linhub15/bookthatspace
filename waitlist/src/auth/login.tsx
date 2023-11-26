@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
-import { supabase } from "./supabase";
+import { supabase } from "../supabase";
 
-export default function Login() {
+export function Login() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 

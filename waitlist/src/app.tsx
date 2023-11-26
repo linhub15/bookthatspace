@@ -1,11 +1,12 @@
-import Login from "./login";
+import { Link, Outlet } from "@tanstack/react-router";
 
-function App() {
+export function App() {
   return (
     <>
-      <Login />
+      <h1>App</h1>
+      <Link to="/signup">Sign up</Link>
+      <Link to="/login">Login</Link>
+      <Outlet />
     </>
   );
 }
-
-export default App;
