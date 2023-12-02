@@ -1,12 +1,18 @@
-import { redirect, RootRoute, Route, Router } from "@tanstack/react-router";
+import {
+  redirect,
+  RootRoute,
+  Route,
+  RoutePaths,
+  Router,
+} from "@tanstack/react-router";
 import { Signup } from "./auth/signup";
-import { Profile } from "./profile/profile";
 import { checkAuthenticated } from "./auth/use_authenticated.signal";
 import { App } from "./app";
 import { LoginPassword } from "./auth/login_password";
 import { EmailConfirmation } from "./auth/email_confirmation";
 import { ForgotPassword } from "./auth/forgot_password";
 import { ResetPassword } from "./auth/reset_password";
+import { dashboardRoutes } from "./dashboard/dashboard.routes";
 
 const rootRoute = new RootRoute({
   component: App,
@@ -20,7 +26,7 @@ const loginRoute = new Route({
     const authed = await checkAuthenticated();
     if (authed) {
       throw redirect({
-        to: "/profile",
+        to: "/dashboard/profile",
         replace: true,
       });
     }
@@ -35,24 +41,8 @@ const signupRoute = new Route({
     const authed = await checkAuthenticated();
     if (authed) {
       throw redirect({
-        to: "/profile",
+        to: "/dashboard/profile",
         replace: true,
-      });
-    }
-  },
-});
-
-const profileRoute = new Route({
-  id: "profile",
-  getParentRoute: () => rootRoute,
-  path: "profile",
-  component: Profile,
-  beforeLoad: async () => {
-    const authed = await checkAuthenticated();
-    if (!authed) {
-      throw redirect({
-        to: "/login",
-        search: { redirect: "/profile" },
       });
     }
   },
@@ -87,16 +77,19 @@ const resetPasswordRoute = new Route({
 const routeTree = rootRoute.addChildren([
   loginRoute,
   signupRoute,
-  profileRoute,
   emailConfirmationRoute,
   forgotPasswordRoute,
   resetPasswordRoute,
+  dashboardRoutes,
 ]);
 
-export const router = new Router({ routeTree });
+const router = new Router({ routeTree });
+
+type AppPaths = RoutePaths<typeof routeTree>;
 
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }
 }
+export { type AppPaths, rootRoute, router };

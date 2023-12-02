@@ -20,7 +20,7 @@ export function ResetPassword() {
 
       alert("Password updated");
 
-      return navigate({ to: "/profile" });
+      return navigate({ to: "/dashboard/profile" });
     },
   });
 

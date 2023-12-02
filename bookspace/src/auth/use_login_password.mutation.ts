@@ -19,7 +19,7 @@ export function useLoginWithPassword() {
       }
 
       authenticated.value = true;
-      return navigate({ to: "/profile" });
+      return navigate({ to: "/dashboard/profile" });
     },
   });
   return mutation;
