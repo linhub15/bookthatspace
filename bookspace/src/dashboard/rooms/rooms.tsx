@@ -35,9 +35,9 @@ export function Rooms() {
         </div>
       </div>
       <div className="px-4 py-6 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <dl className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {rooms.data?.map((room) => <RoomCard key={room.id} room={room} />)}
-        </div>
+        </dl>
 
         <Modal
           open={open}

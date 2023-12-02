@@ -9,38 +9,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      calendar_event: {
-        Row: {
-          created_at: string
-          end: string
-          id: string
-          room_id: string
-          start: string
-        }
-        Insert: {
-          created_at?: string
-          end: string
-          id?: string
-          room_id: string
-          start: string
-        }
-        Update: {
-          created_at?: string
-          end?: string
-          id?: string
-          room_id?: string
-          start?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "calendar_event_room_id_fkey"
-            columns: ["room_id"]
-            isOneToOne: false
-            referencedRelation: "room"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       profile: {
         Row: {
           created_at: string
@@ -74,37 +42,37 @@ export interface Database {
         Row: {
           address: string | null
           created_at: string
-          creator_id: string
           description: string | null
           hourly_cost: number | null
           id: string
           max_capacity: number | null
           name: string
+          profile_id: string
         }
         Insert: {
           address?: string | null
           created_at?: string
-          creator_id?: string
           description?: string | null
           hourly_cost?: number | null
           id?: string
           max_capacity?: number | null
           name: string
+          profile_id?: string
         }
         Update: {
           address?: string | null
           created_at?: string
-          creator_id?: string
           description?: string | null
           hourly_cost?: number | null
           id?: string
           max_capacity?: number | null
           name?: string
+          profile_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "room_creator_id_fkey"
-            columns: ["creator_id"]
+            foreignKeyName: "room_profile_id_fkey"
+            columns: ["profile_id"]
             isOneToOne: false
             referencedRelation: "profile"
             referencedColumns: ["id"]
@@ -139,6 +107,41 @@ export interface Database {
         Relationships: [
           {
             foreignKeyName: "room_availability_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "room"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      room_booking: {
+        Row: {
+          booked_by_email: string
+          created_at: string
+          end: string
+          id: string
+          room_id: string
+          start: string
+        }
+        Insert: {
+          booked_by_email: string
+          created_at?: string
+          end: string
+          id?: string
+          room_id: string
+          start: string
+        }
+        Update: {
+          booked_by_email?: string
+          created_at?: string
+          end?: string
+          id?: string
+          room_id?: string
+          start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "room_booking_room_id_fkey"
             columns: ["room_id"]
             isOneToOne: false
             referencedRelation: "room"

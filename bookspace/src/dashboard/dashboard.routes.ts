@@ -1,16 +1,19 @@
-import { redirect, Route } from "@tanstack/react-router";
+import { Route } from "@tanstack/react-router";
 import { Dashboard } from "./dashboard";
 import { Rooms } from "./rooms/rooms";
 import { rootRoute } from "../app.router";
 import { Profile } from "./profile/profile";
-import { checkAuthenticated } from "../auth/use_authenticated.signal";
 import { Room } from "./rooms/room";
 import { Bookings } from "./bookings/bookings";
+import { authGuard } from "../auth/auth.routes";
 
 const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "dashboard",
   component: Dashboard,
+  beforeLoad: async (ctx) => {
+    await authGuard(ctx.location.pathname);
+  },
 });
 
 const roomsRoute = new Route({
@@ -36,14 +39,8 @@ const profileRoute = new Route({
   getParentRoute: () => dashboardRoute,
   path: "profile",
   component: Profile,
-  beforeLoad: async () => {
-    const authed = await checkAuthenticated();
-    if (!authed) {
-      throw redirect({
-        to: "/login",
-        search: { redirect: "/dashboard/profile" },
-      });
-    }
+  beforeLoad: async (ctx) => {
+    await authGuard(ctx.location.pathname);
   },
 });
 
