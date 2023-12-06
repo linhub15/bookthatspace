@@ -6,6 +6,8 @@ import { Profile } from "./profile/profile";
 import { Room } from "./rooms/room";
 import { Bookings } from "./bookings/bookings";
 import { authGuard } from "../auth/auth.routes";
+import { Widget } from "./widget/widget";
+import { supabase } from "../supabase";
 
 const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
@@ -34,6 +36,15 @@ const bookingsRoute = new Route({
   component: Bookings,
 });
 
+const widgetRoute = new Route({
+  getParentRoute: () => dashboardRoute,
+  path: "widget",
+  component: (ctx) => Widget({ profileId: ctx.useLoaderData().data?.user?.id }),
+  loader: () => {
+    return supabase.auth.getUser();
+  },
+});
+
 const profileRoute = new Route({
   id: "profile",
   getParentRoute: () => dashboardRoute,
@@ -48,5 +59,6 @@ export const dashboardRoutes = dashboardRoute.addChildren([
   roomsRoute,
   roomRoute,
   bookingsRoute,
+  widgetRoute,
   profileRoute,
 ]);

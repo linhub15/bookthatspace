@@ -1,9 +1,10 @@
-import { Tables } from "../../supabase";
 import Modal from "../../components/modal";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import { useAddRoom, useRooms } from "./hooks";
 import { Link } from "@tanstack/react-router";
+import { Tables } from "../../types/supabase_types";
+import { maskHourlyRate } from "../../masks/masks";
 
 export function Rooms() {
   const [open, setOpen] = useState(false);
@@ -185,15 +186,4 @@ function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
       </form.Provider>
     </div>
   );
-}
-
-function maskHourlyRate(rate: number | null) {
-  if (!rate) return "Free";
-  const masked = rate.toLocaleString("en-US", {
-    style: "currency",
-    currency: "CAD",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  });
-  return `${masked} / Hour`;
 }

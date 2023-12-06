@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Temporal } from "@js-temporal/polyfill";
 import { supabase } from "../../supabase";
 import { Fragment } from "react";
+import { maskDate, maskTimeRange } from "../../masks/masks";
 
 export function Bookings() {
   const { data: bookingGroups } = useBookings();
@@ -28,7 +29,7 @@ export function Bookings() {
               >
                 <div className="flex px-6 py-6 justify-between align-top">
                   <div>
-                    <div>{maskTime(booking?.start, booking?.end)}</div>
+                    <div>{maskTimeRange(booking?.start, booking?.end)}</div>
                     <div>{booking?.room?.name}</div>
                   </div>
                   <div className="text-right">
@@ -45,28 +46,6 @@ export function Bookings() {
       </div>
     </div>
   );
-}
-
-function maskDate(date: string) {
-  return Temporal.PlainDate.from(date).toLocaleString(undefined, {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
-
-function maskTime(start: string, end: string) {
-  const s = Temporal.Instant.from(start).toLocaleString(
-    undefined,
-    { hourCycle: "h24", hour: "numeric", minute: "2-digit" },
-  );
-  const e = Temporal.Instant.from(end).toLocaleString(
-    undefined,
-    { hourCycle: "h24", hour: "numeric", minute: "2-digit" },
-  );
-
-  return `${s} - ${e}`;
 }
 
 function useBookings() {

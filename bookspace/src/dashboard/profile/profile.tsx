@@ -1,8 +1,8 @@
 import { supabase } from "../../supabase";
 import { authenticated } from "../../auth/use_authenticated.signal";
 import { useNavigate } from "@tanstack/react-router";
-import { type Tables } from "../../supabase.types";
 import { useQuery } from "@tanstack/react-query";
+import { Tables } from "../../types/supabase_types";
 
 export function Profile() {
   const navigate = useNavigate();

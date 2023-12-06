@@ -5,6 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   CalendarIcon,
+  CodeBracketSquareIcon,
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -15,14 +16,19 @@ const navigation: {
   icon: HeroIcon;
 }[] = [
   {
+    name: "Bookings",
+    to: "/dashboard/bookings",
+    icon: CalendarIcon,
+  },
+  {
     name: "Rooms",
     to: "/dashboard/rooms",
     icon: HomeIcon,
   },
   {
-    name: "Bookings",
-    to: "/dashboard/bookings",
-    icon: CalendarIcon,
+    name: "Widget",
+    to: "/dashboard/widget",
+    icon: CodeBracketSquareIcon,
   },
 ];
 
