@@ -9,6 +9,7 @@ import {
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { cn } from "@/lib/utils/cn";
 
 const navigation: {
   name: string;
@@ -31,10 +32,6 @@ const navigation: {
     icon: CodeBracketSquareIcon,
   },
 ];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -113,20 +110,21 @@ export function Dashboard() {
                                   to={item.to}
                                   className="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   activeProps={{
-                                    className: classNames(
+                                    className: cn(
                                       "bg-gray-50 text-indigo-600",
                                     ),
                                   }}
                                   inactiveProps={{
-                                    className: classNames(
+                                    className: cn(
                                       "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
                                     ),
                                   }}
+                                  onClick={() => setSidebarOpen(false)}
                                 >
                                   {({ isActive }) => (
                                     <>
                                       <item.icon
-                                        className={classNames(
+                                        className={cn(
                                           isActive
                                             ? "text-indigo-600"
                                             : "text-gray-400 group-hover:text-indigo-600",
@@ -207,10 +205,10 @@ function DesktopSidebar() {
                     to={item.to}
                     className="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                     activeProps={{
-                      className: classNames("bg-gray-50 text-indigo-600"),
+                      className: cn("bg-gray-50 text-indigo-600"),
                     }}
                     inactiveProps={{
-                      className: classNames(
+                      className: cn(
                         "text-gray-700 hover:text-indigo-600 hover:bg-gray-50",
                       ),
                     }}
@@ -218,7 +216,7 @@ function DesktopSidebar() {
                     {({ isActive }) => (
                       <>
                         <item.icon
-                          className={classNames(
+                          className={cn(
                             isActive
                               ? "text-indigo-600"
                               : "text-gray-400 group-hover:text-indigo-600",

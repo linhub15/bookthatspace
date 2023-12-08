@@ -8,6 +8,8 @@ import { Bookings } from "./bookings/bookings";
 import { authGuard } from "../auth/auth.routes";
 import { Widget } from "./widget/widget";
 import { supabase } from "../supabase";
+import { Booking } from "./bookings/booking";
+import { z } from "zod";
 
 const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
@@ -30,10 +32,17 @@ const roomRoute = new Route({
   component: (ctx) => Room({ roomId: ctx.useParams().roomId }),
 });
 
-const bookingsRoute = new Route({
+export const bookingsRoute = new Route({
   getParentRoute: () => dashboardRoute,
   path: "bookings",
+  validateSearch: z.object({ tab: z.string().optional() }),
   component: Bookings,
+});
+
+const bookingRoute = new Route({
+  getParentRoute: () => dashboardRoute,
+  path: "bookings/$bookingId/view",
+  component: (ctx) => Booking({ bookingId: ctx.useParams().bookingId }),
 });
 
 const widgetRoute = new Route({
@@ -59,6 +68,7 @@ export const dashboardRoutes = dashboardRoute.addChildren([
   roomsRoute,
   roomRoute,
   bookingsRoute,
+  bookingRoute,
   widgetRoute,
   profileRoute,
 ]);

@@ -1,12 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "../supabase";
-import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { authenticated } from "./use_authenticated.signal";
-import { loginRoute } from "./auth.routes";
 import { AppPaths } from "../app.router";
 
-export function useLoginWithPassword() {
-  const { redirect } = useSearch({ from: loginRoute.id });
+export function useLoginWithPassword(redirect?: string) {
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: async (params: { email: string; password: string }) => {

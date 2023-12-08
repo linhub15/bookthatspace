@@ -29,9 +29,15 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.12.2
     version: 5.12.2(react@18.2.0)
+  '@tanstack/react-query-devtools':
+    specifier: ^5.13.3
+    version: 5.13.3(@tanstack/react-query@5.12.2)(react@18.2.0)
   '@tanstack/react-router':
     specifier: 0.0.1-beta.225
     version: 0.0.1-beta.225(react-dom@18.2.0)(react@18.2.0)
+  clsx:
+    specifier: ^2.0.0
+    version: 2.0.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -91,6 +97,9 @@ devDependencies:
   vite:
     specifier: ^5.0.6
     version: 5.0.6
+  vite-tsconfig-paths:
+    specifier: ^4.2.2
+    version: 4.2.2(typescript@5.3.3)(vite@5.0.6)
 
 packages:
 
@@ -973,6 +982,10 @@ packages:
     resolution: {integrity: sha512-WbZztNmKq0t6QjdNmHzezbi/uifYo9j6e2GLJkodsYaYUlzMbAp91RDyeHkIZrm7EfO4wa6Sm5sxJZm5SPlh6w==}
     dev: false
 
+  /@tanstack/query-devtools@5.13.3:
+    resolution: {integrity: sha512-1acztPKZexvM9Ns2T0aq4rMVSDA3VGdB73KF7zT/KNVl6VfnBvs24wuIRVSPZKqyZznZTzT3/DzcpntYqg9hmw==}
+    dev: false
+
   /@tanstack/react-form@0.10.3(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-kQiaycvv1R4a/+eMlVNK0kMmUxH3qJkeX7JJjstwiVNw9M2GNRmKDSLWoJg6v81OuUpoY2aEIY/Sgh41NtlEtw==}
     peerDependencies:
@@ -990,6 +1003,17 @@ packages:
       '@tanstack/store': 0.1.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@tanstack/react-query-devtools@5.13.3(@tanstack/react-query@5.12.2)(react@18.2.0):
+    resolution: {integrity: sha512-ct58CMRrcjANRWCQ6cxzSUtme2jlX5au63+ckhMONob8bIk5VRfUEi4R49AWNJFL5haTBKe0InC0AV4bWi75VQ==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.12.2
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-devtools': 5.13.3
+      '@tanstack/react-query': 5.12.2(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /@tanstack/react-query@5.12.2(react@18.2.0):
@@ -1371,6 +1395,11 @@ packages:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
     dev: false
 
+  /clsx@2.0.0:
+    resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
+    engines: {node: '>=6'}
+    dev: false
+
   /color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
@@ -1745,6 +1774,10 @@ packages:
       ignore: 5.3.0
       merge2: 1.4.1
       slash: 3.0.0
+    dev: true
+
+  /globrex@0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
     dev: true
 
   /graphemer@1.4.0:
@@ -2406,6 +2439,19 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
+  /tsconfck@2.1.2(typescript@5.3.3):
+    resolution: {integrity: sha512-ghqN1b0puy3MhhviwO2kGF8SeMDNhEbnKxjK7h6+fvY9JAxqvXi8y5NAHSQv687OVboS2uZIByzGd45/YxrRHg==}
+    engines: {node: ^14.13.1 || ^16 || >=18}
+    hasBin: true
+    peerDependencies:
+      typescript: ^4.3.5 || ^5.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 5.3.3
+    dev: true
+
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
     dev: false
@@ -2459,6 +2505,23 @@ packages:
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: true
+
+  /vite-tsconfig-paths@4.2.2(typescript@5.3.3)(vite@5.0.6):
+    resolution: {integrity: sha512-dq0FjyxHHDnp0uS3P12WEOX2W7NeuLzX9AWP38D7Zw2CTbFErapwQVlCiT5DMJcVWKQ1MMdTe92PZl/rBQ7qcw==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+    dependencies:
+      debug: 4.3.4
+      globrex: 0.1.2
+      tsconfck: 2.1.2(typescript@5.3.3)
+      vite: 5.0.6
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
     dev: true
 
   /vite@5.0.6:
