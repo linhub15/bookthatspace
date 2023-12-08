@@ -2,5 +2,9 @@
   "deno.enable": false,
   "deno.lint": true,
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "denoland.vscode-deno"
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }

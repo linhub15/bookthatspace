@@ -29,6 +29,7 @@ export function LoginPassword() {
               }}
               className="space-y-6"
             >
+              <h1 className="text-2xl text-center">Login</h1>
               <form.Field name="email">
                 {(field) => (
                   (

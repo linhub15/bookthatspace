@@ -7,11 +7,16 @@ export function Signup() {
 
   const form = useForm({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
     onSubmit: async (values) => {
-      signupMutation.mutateAsync({ ...values, data: { name: "test" } });
+      signupMutation.mutateAsync({
+        email: values.email,
+        password: values.password,
+        data: { name: values.name },
+      });
     },
   });
 
@@ -28,6 +33,26 @@ export function Signup() {
               }}
               className="space-y-6"
             >
+              <h1 className="text-2xl text-center">Create an account</h1>
+              <form.Field name="name">
+                {(field) => (field.state.value !== undefined &&
+                  (
+                    <div>
+                      <label className="block text-sm font-medium leading-6 text-gray-900">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        name={field.name}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                      />
+                    </div>
+                  ))}
+              </form.Field>
+
               <form.Field name="email">
                 {(field) => (field.state.value !== undefined &&
                   (
