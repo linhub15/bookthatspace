@@ -1,6 +1,6 @@
 import { Link, Outlet } from "@tanstack/react-router";
 import { type AppPaths } from "../app.router";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
+import { supabase } from "../supabase";
 
 const navigation: {
   name: string;
@@ -167,11 +168,15 @@ export function Dashboard() {
           </div>
           <Link to="/dashboard/profile">
             <span className="sr-only">Your profile</span>
-            <img
-              className="h-8 w-8 rounded-full bg-gray-50"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
+            <span className="border-2 border-gray-300 inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
+              <svg
+                className="h-full w-full text-gray-300"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </span>
           </Link>
         </div>
 
@@ -186,6 +191,15 @@ export function Dashboard() {
 }
 
 function DesktopSidebar() {
+  const [email, setEmail] = useState<string>();
+  useEffect(() => {
+    const email = async () => {
+      const user = await supabase.auth.getUser();
+      setEmail(user?.data?.user?.email);
+    };
+
+    email();
+  }, []);
   return (
     <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
       <div className="flex h-16 shrink-0 items-center">
@@ -236,15 +250,19 @@ function DesktopSidebar() {
           <li className="-mx-6 mt-auto">
             <Link
               to="/dashboard/profile"
-              className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+              className="flex items-center gap-x-4 px-6 py-4 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
             >
-              <img
-                className="h-8 w-8 rounded-full bg-gray-50"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt="stock photo"
-              />
+              <span className="border-2 border-gray-300 inline-block min-h-8 w-8 overflow-hidden rounded-full bg-gray-100">
+                <svg
+                  className="h-full w-full text-gray-300"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </span>
               <span className="sr-only">Your profile</span>
-              <span aria-hidden="true">Profile</span>
+              <span className="truncate" aria-hidden="true">{email}</span>
             </Link>
           </li>
         </ul>
