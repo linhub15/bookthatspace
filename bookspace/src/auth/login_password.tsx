@@ -2,6 +2,7 @@ import { useForm } from "@tanstack/react-form";
 import { useLoginWithPassword } from "./use_login_password.mutation";
 import { Link, useSearch } from "@tanstack/react-router";
 import { loginRoute } from "./auth.routes";
+import { FormGroup } from "../components/form/form_group";
 
 export function LoginPassword() {
   const { redirect } = useSearch({ from: loginRoute.id });
@@ -33,7 +34,7 @@ export function LoginPassword() {
               <form.Field name="email">
                 {(field) => (
                   (
-                    <div>
+                    <FormGroup>
                       <label
                         htmlFor={field.name}
                         className="block text-sm font-medium leading-6 text-gray-900"
@@ -49,7 +50,7 @@ export function LoginPassword() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </div>
+                    </FormGroup>
                   )
                 )}
               </form.Field>
@@ -57,7 +58,7 @@ export function LoginPassword() {
               <form.Field name="password">
                 {(field) => (
                   (
-                    <div>
+                    <FormGroup>
                       <label
                         htmlFor={field.name}
                         className="block text-sm font-medium leading-6 text-gray-900"
@@ -81,7 +82,7 @@ export function LoginPassword() {
                           Forgot password?
                         </Link>
                       </div>
-                    </div>
+                    </FormGroup>
                   )
                 )}
               </form.Field>

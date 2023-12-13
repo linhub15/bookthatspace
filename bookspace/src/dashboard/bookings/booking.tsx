@@ -1,9 +1,10 @@
+import { BackButton } from "@/src/components/buttons/back_button";
+import { Card } from "@/src/components/card";
 import { maskDate, maskTimeRange } from "@/src/masks/masks";
 import { supabase } from "@/src/supabase";
 import { Enums, Tables } from "@/src/types/supabase_types";
 import {
   CalendarDaysIcon,
-  ChevronLeftIcon,
   ClockIcon,
   CreditCardIcon,
   UserCircleIcon,
@@ -20,15 +21,8 @@ export function Booking(props: Props) {
   return (
     <>
       <div className="py-4">
-        <Link
-          to="/dashboard/bookings"
-          className="rounded-md inline-flex bg-white px-2.5 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-        >
-          <ChevronLeftIcon
-            className="-ml-0.5 h-5 w-5"
-            aria-hidden="true"
-          />
-          Back
+        <Link className="w-fit" to="/dashboard/bookings">
+          <BackButton />
         </Link>
       </div>
       <div>
@@ -44,7 +38,7 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
     <>
       <div className="lg:col-start-3 lg:row-end-1 max-w-xs">
         <h2 className="sr-only">Summary</h2>
-        <div className="rounded-lg bg-white shadow-sm ring-1 ring-gray-900/5">
+        <Card>
           <dl className="flex flex-wrap">
             <div className="flex py-6 w-full justify-between">
               <div className="flex-col pl-6">
@@ -118,7 +112,7 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
             </div>
           </dl>
           <div className="border-t border-gray-900/5 px-6 py-6">
-            Some kind of notes or description they entered
+            {booking.description}
           </div>
           <div className="border-t border-gray-900/5 px-6 py-6">
             <a
@@ -149,13 +143,13 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
 
               <button
                 className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => approve.mutate({ status: "cancelled" })}
+                onClick={() => approve.mutate({ status: "rejected" })}
               >
                 Reject
               </button>
             </div>
           )}
-        </div>
+        </Card>
       </div>
     </>
   );

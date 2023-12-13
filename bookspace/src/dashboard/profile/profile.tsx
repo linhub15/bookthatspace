@@ -3,6 +3,7 @@ import { authenticated } from "../../auth/use_authenticated.signal";
 import { useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Tables } from "../../types/supabase_types";
+import { Card } from "@/src/components/card";
 
 export function Profile() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export function Profile() {
   });
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+    <Card>
       <div className="px-4 py-6 sm:px-6">
         <h3 className="text-base font-semibold leading-7 text-gray-900">
           Profile
@@ -32,7 +33,7 @@ export function Profile() {
       <div className="border-t border-gray-100">
         <dl className="divide-y divide-gray-100">
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-900">Full name</dt>
+            <dt className="text-sm font-medium text-gray-900">Name</dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
               {profile?.name}
             </dd>
@@ -61,6 +62,6 @@ export function Profile() {
             </button>
           )}
       </div>
-    </div>
+    </Card>
   );
 }

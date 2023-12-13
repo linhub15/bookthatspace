@@ -5,6 +5,7 @@ import { useAddRoom, useRooms } from "./hooks";
 import { Link } from "@tanstack/react-router";
 import { Tables } from "../../types/supabase_types";
 import { maskHourlyRate } from "../../masks/masks";
+import { Card } from "@/src/components/card";
 
 export function Rooms() {
   const [open, setOpen] = useState(false);
@@ -15,7 +16,7 @@ export function Rooms() {
   };
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+    <Card>
       <div className="px-4 py-6 sm:px-6 flex justify-between">
         <div>
           <h3 className="text-base font-semibold leading-7 text-gray-900">
@@ -50,7 +51,7 @@ export function Rooms() {
           />
         </Modal>
       </div>
-    </div>
+    </Card>
   );
 }
 

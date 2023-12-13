@@ -1,6 +1,7 @@
 import { useForm } from "@tanstack/react-form";
 import { useSignupWithPassword } from "./use_signup_password.mutation";
 import { Link } from "@tanstack/react-router";
+import { FormGroup } from "../components/form/form_group";
 
 export function Signup() {
   const signupMutation = useSignupWithPassword();
@@ -33,11 +34,11 @@ export function Signup() {
               }}
               className="space-y-6"
             >
-              <h1 className="text-2xl text-center">Create an account</h1>
+              <h1 className="text-2xl text-center">Sign up</h1>
               <form.Field name="name">
                 {(field) => (field.state.value !== undefined &&
                   (
-                    <div>
+                    <FormGroup>
                       <label className="block text-sm font-medium leading-6 text-gray-900">
                         Name
                       </label>
@@ -49,14 +50,14 @@ export function Signup() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </div>
+                    </FormGroup>
                   ))}
               </form.Field>
 
               <form.Field name="email">
                 {(field) => (field.state.value !== undefined &&
                   (
-                    <div>
+                    <FormGroup>
                       <label className="block text-sm font-medium leading-6 text-gray-900">
                         Email
                       </label>
@@ -68,14 +69,14 @@ export function Signup() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </div>
+                    </FormGroup>
                   ))}
               </form.Field>
 
               <form.Field name="password">
                 {(field) => (field.state.value !== undefined &&
                   (
-                    <div>
+                    <FormGroup>
                       <label className="block text-sm font-medium leading-6 text-gray-900">
                         Password
                       </label>
@@ -87,7 +88,7 @@ export function Signup() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </div>
+                    </FormGroup>
                   ))}
               </form.Field>
 

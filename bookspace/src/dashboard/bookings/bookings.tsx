@@ -6,6 +6,7 @@ import { maskDate, maskTimeRange } from "../../masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { bookingsRoute } from "../dashboard.routes";
+import { Card } from "@/src/components/card";
 
 type Tabs = "upcoming" | "pending" | "past" | "all";
 
@@ -27,7 +28,7 @@ export function Bookings() {
   ];
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+    <Card>
       <div className="px-4 py-6 sm:px-6 flex justify-between">
         <div>
           <h3 className="text-base font-semibold leading-7 text-gray-900">
@@ -40,7 +41,7 @@ export function Bookings() {
       </div>
       <Tabs options={tabOptions} value={tab} />
       <BookingList tab={tab} />
-    </div>
+    </Card>
   );
 }
 

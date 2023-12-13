@@ -4,9 +4,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "../../supabase";
 import { DurationSlider } from "../../components/duration_slider";
 import { Temporal } from "@js-temporal/polyfill";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { Tables } from "../../types/supabase_types";
 import { maskHourlyRate, maskTime } from "../../masks/masks";
+import { BackButton } from "@/src/components/buttons/back_button";
+import { FormGroup } from "@/src/components/form/form_group";
+import { Card } from "@/src/components/card";
 
 const timeOptions = Array.from(Array(24 * 2), (_, i) => {
   return Temporal.PlainTime.from({
@@ -24,6 +26,8 @@ function useCreateBooking() {
         date: Temporal.PlainDate;
         start: Temporal.PlainTime;
         duration: Temporal.Duration;
+        email: string;
+        description?: string;
       },
     ) => {
       const start = Temporal.PlainDateTime.from({
@@ -40,7 +44,8 @@ function useCreateBooking() {
         start: start.toString({ timeZoneName: "never" }),
         end: end.toString({ timeZoneName: "never" }),
         room_id: args.roomId,
-        booked_by_email: "ddd",
+        booked_by_email: args.email,
+        description: args.description,
       });
     },
   });
@@ -74,6 +79,9 @@ export function Widget(props: { profileId?: string }) {
 
   const availableTimes: Temporal.PlainTime[] = timeOptions;
   const [selectedTime, setSelectedTime] = useState<Temporal.PlainTime>();
+  const [formData, setFormData] = useState<
+    { email: string; description?: string }
+  >({ email: "", description: undefined });
 
   const selectDay = (day?: Date) => {
     if (!day) return;
@@ -128,6 +136,16 @@ export function Widget(props: { profileId?: string }) {
                 onChange={setSelectedDuration}
               />
             </div>
+
+            {selectedTime &&
+              (
+                <div className="py-4">
+                  <BookingForm
+                    value={formData}
+                    onChange={(v) => setFormData(v)}
+                  />
+                </div>
+              )}
           </Step>
         )}
       </div>
@@ -137,6 +155,8 @@ export function Widget(props: { profileId?: string }) {
           selectedDay={selectedDay}
           selectedTime={selectedTime}
           selectedDuration={selectedDuration}
+          email={formData.email}
+          description={formData.description}
         />
       )}
     </div>
@@ -242,6 +262,43 @@ function Duration(props: DurationProps) {
   );
 }
 
+type BookingFormProps = {
+  value: { email: string; description?: string };
+  onChange: (value: { email: string; description?: string }) => void;
+};
+
+function BookingForm(props: BookingFormProps) {
+  return (
+    <form className="space-y-4">
+      <FormGroup>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Email
+        </label>
+        <input
+          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          type="email"
+          placeholder="email"
+          value={props.value.email}
+          onChange={(e) =>
+            props.onChange({ ...props.value, email: e.target.value })}
+        />
+      </FormGroup>
+      <FormGroup>
+        <label className="block text-sm font-medium leading-6 text-gray-900">
+          Additional Information
+        </label>
+        <textarea
+          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          rows={3}
+          value={props.value.description}
+          onChange={(e) =>
+            props.onChange({ ...props.value, description: e.target.value })}
+        />
+      </FormGroup>
+    </form>
+  );
+}
+
 function maskDuration(value: Minutes) {
   const hours = Math.floor(value / 60);
   const minutes = value % 60;
@@ -252,21 +309,9 @@ function Step(
   props: { heading: string; onBack?: () => void } & PropsWithChildren,
 ) {
   return (
-    <div className="bg-white shadow sm:rounded-lg">
+    <Card>
       <div className="flex gap-6 px-4 py-5 sm:px-6 items-center">
-        {props.onBack && (
-          <button
-            type="button"
-            onClick={props.onBack}
-            className="rounded-md inline-flex bg-white px-2.5 py-1.5 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            <ChevronLeftIcon
-              className="-ml-0.5 h-5 w-5"
-              aria-hidden="true"
-            />
-            Back
-          </button>
-        )}
+        {props.onBack && <BackButton onClick={props.onBack} />}
         <h3 className="text-base font-semibold leading-6 text-gray-900">
           {props.heading}
         </h3>
@@ -274,16 +319,25 @@ function Step(
       <div className="px-4 py-5 sm:px-6">
         {props.children}
       </div>
-    </div>
+    </Card>
   );
 }
 
 function Summary(
-  { selectedRoom, selectedDay, selectedTime, selectedDuration }: {
+  {
+    selectedRoom,
+    selectedDay,
+    selectedTime,
+    selectedDuration,
+    email,
+    description,
+  }: {
     selectedRoom: Tables<"room">;
     selectedDay?: Temporal.PlainDate;
     selectedTime?: Temporal.PlainTime;
     selectedDuration?: Temporal.Duration;
+    email: string;
+    description?: string;
   },
 ) {
   const createBooking = useCreateBooking();
@@ -352,6 +406,8 @@ function Summary(
                 date: selectedDay!,
                 start: selectedTime!,
                 duration: selectedDuration!,
+                email: email,
+                description: description,
               })}
           >
             Reserve your booking
