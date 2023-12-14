@@ -82,7 +82,7 @@ export interface Database {
       room_availability: {
         Row: {
           created_at: string
-          day_of_week: string
+          day_of_week: Database["public"]["Enums"]["day_of_week"]
           end: string
           id: string
           room_id: string
@@ -90,7 +90,7 @@ export interface Database {
         }
         Insert: {
           created_at?: string
-          day_of_week: string
+          day_of_week: Database["public"]["Enums"]["day_of_week"]
           end: string
           id?: string
           room_id: string
@@ -98,7 +98,7 @@ export interface Database {
         }
         Update: {
           created_at?: string
-          day_of_week?: string
+          day_of_week?: Database["public"]["Enums"]["day_of_week"]
           end?: string
           id?: string
           room_id?: string
@@ -166,6 +166,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
+      day_of_week: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun"
       room_booking_status:
         | "needs_approval"
         | "cancelled"

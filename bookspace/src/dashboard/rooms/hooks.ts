@@ -54,3 +54,24 @@ export function useDeleteRoom() {
 
   return deleteRoom;
 }
+
+export function useRoomAvailability(roomId: string) {
+  const query = useQuery({
+    queryKey: ["rooms", "availability"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("room_availability")
+        .select()
+        .eq("room_id", roomId);
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      return data;
+    },
+  });
+
+  return query;
+}

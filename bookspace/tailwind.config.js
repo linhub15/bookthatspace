@@ -6,5 +6,9 @@ export default {
   theme: {
     extend: {},
   },
+  safelist: [{
+    pattern: /col-start-+/,
+    variants: ["sm"],
+  }],
   plugins: [forms, aspectRatio],
 };
