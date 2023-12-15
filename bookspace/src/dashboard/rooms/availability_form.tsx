@@ -66,7 +66,6 @@ export function AvailabilityForm(props: Props) {
   const form = useForm({
     defaultValues: values,
     onSubmit: async ({ value }) => {
-      console.log(value);
       const output = Object.values(value)
         .filter((value) => value.touched)
         .map((value) => {

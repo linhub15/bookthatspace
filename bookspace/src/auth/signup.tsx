@@ -14,9 +14,9 @@ export function Signup() {
     },
     onSubmit: async (values) => {
       signupMutation.mutateAsync({
-        email: values.email,
-        password: values.password,
-        data: { name: values.name },
+        email: values.value.email,
+        password: values.value.password,
+        data: { name: values.value.name },
       });
     },
   });

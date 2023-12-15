@@ -13,7 +13,7 @@ export function LoginPassword() {
       password: "",
     },
     onSubmit: async (values) => {
-      await loginWithPassword.mutateAsync(values);
+      await loginWithPassword.mutateAsync(values.value);
     },
   });
 
@@ -28,7 +28,7 @@ export function LoginPassword() {
                 e.stopPropagation();
                 void form.handleSubmit();
               }}
-              className="space-y-6"
+              className="space-y-8"
             >
               <h1 className="text-2xl text-center">Login</h1>
               <form.Field name="email">
@@ -43,7 +43,7 @@ export function LoginPassword() {
                       </label>
                       <input
                         type="email"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         id={field.name}
                         name={field.name}
                         value={field.state.value}
@@ -59,29 +59,29 @@ export function LoginPassword() {
                 {(field) => (
                   (
                     <FormGroup>
-                      <label
-                        htmlFor={field.name}
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Password
-                      </label>
+                      <div className="flex justify-between">
+                        <label
+                          htmlFor={field.name}
+                          className="block text-sm font-medium leading-6 text-gray-900"
+                        >
+                          Password
+                        </label>
+                        <Link
+                          to="/forgot-password"
+                          className="text-sm leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
+                        >
+                          Forgot password?
+                        </Link>
+                      </div>
                       <input
                         type="password"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         id={field.name}
                         name={field.name}
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                      <div className="text-sm leading-6 py-2">
-                        <Link
-                          to="/forgot-password"
-                          className="font-semibold text-indigo-600 hover:text-indigo-500"
-                        >
-                          Forgot password?
-                        </Link>
-                      </div>
                     </FormGroup>
                   )
                 )}
