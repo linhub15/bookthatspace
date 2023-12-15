@@ -1,4 +1,4 @@
-import Modal from "../../components/modal";
+import { Modal } from "../../components/modal";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import { useAddRoom, useRooms } from "./hooks";
@@ -38,7 +38,12 @@ export function Rooms() {
       </div>
       <div className="px-4 py-6 sm:px-6">
         <dl className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {rooms.data?.map((room) => <RoomCard key={room.id} room={room} />)}
+          {rooms.data?.map((room, index) => (
+            <RoomCard
+              key={index}
+              room={room}
+            />
+          ))}
         </dl>
 
         <Modal
@@ -91,8 +96,8 @@ function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
     onSubmit: async (values) => {
       await addRoom.mutateAsync(
         {
-          name: values.name,
-          hourly_cost: Number(values.hourly_cost) ?? null,
+          name: values.value.name,
+          hourly_cost: Number(values.value.hourly_cost) ?? null,
         },
       );
     },
@@ -171,7 +176,6 @@ function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
             <button
               type="submit"
               className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-              onClick={() => {}}
             >
               Create Room
             </button>

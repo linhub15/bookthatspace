@@ -57,7 +57,7 @@ export function useDeleteRoom() {
 
 export function useRoomAvailability(roomId: string) {
   const query = useQuery({
-    queryKey: ["rooms", "availability"],
+    queryKey: ["rooms", "availability", roomId],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("room_availability")
