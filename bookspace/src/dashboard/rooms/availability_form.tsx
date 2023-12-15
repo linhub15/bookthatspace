@@ -26,6 +26,7 @@ type Availability = {
 };
 
 const midnight = Temporal.PlainTime.from({ hour: 0 }).toJSON();
+const oneOClock = Temporal.PlainTime.from({ hour: 1 }).toJSON();
 
 export function AvailabilityForm(props: Props) {
   const { values: blocks } = props;
@@ -47,7 +48,7 @@ export function AvailabilityForm(props: Props) {
         availabilityId: undefined,
         day_of_week: weekday,
         start: midnight,
-        end: midnight,
+        end: oneOClock,
       };
   };
 

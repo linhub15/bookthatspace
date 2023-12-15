@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 type Props = {
   open: boolean;
+  /** Called when backdrop is clicked. Use `() => {}` to disable backdrop close */
   onDismiss: () => void;
 } & PropsWithChildren;
 

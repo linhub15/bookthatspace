@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../../supabase";
+import { TablesInsert } from "@/src/types/supabase_types";
 
 export function useRooms() {
   const rooms = useQuery({
@@ -15,6 +16,12 @@ export function useRooms() {
   });
 
   return rooms;
+}
+
+export function useRoom(roomId: string) {
+  const rooms = useRooms();
+  const room = rooms.data?.find((room) => room.id === roomId);
+  return { ...rooms, data: room };
 }
 
 export function useAddRoom() {
@@ -74,4 +81,69 @@ export function useRoomAvailability(roomId: string) {
   });
 
   return query;
+}
+
+export function useChangeAvailability(args: { roomId: string }) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: async (
+      availabilities: {
+        action: "upsert" | "delete";
+        payload: TablesInsert<"room_availability">;
+      }[],
+    ) => {
+      const toDelete = availabilities
+        .filter((a) => a.action === "delete" && a.payload.id)
+        .map((a) => a.payload.id);
+      const toInsert = availabilities
+        .filter((a) => a.action === "upsert" && !a.payload.id)
+        .map((a) => {
+          delete a.payload.id;
+          return a.payload;
+        });
+      const toUpdate = availabilities
+        .filter((a) => a.action === "upsert" && a.payload.id)
+        .map((a) => a.payload);
+
+      const errors = [];
+
+      if (toUpdate.length > 0) {
+        const { error } = await supabase
+          .from("room_availability")
+          .upsert([...toUpdate])
+          .eq("room_id", args.roomId);
+
+        !!error && errors.push(error);
+      }
+
+      if (toInsert.length > 0) {
+        const { error } = await supabase
+          .from("room_availability")
+          .insert([...toInsert]);
+
+        !!error && errors.push(error);
+      }
+
+      if (toDelete.length > 0) {
+        const { error } = await supabase
+          .from("room_availability")
+          .delete()
+          .in("id", toDelete);
+
+        !!error && errors.push(error);
+      }
+
+      if (errors.length > 0) {
+        console.log(errors);
+        alert("Error updating availability");
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["rooms", "availability", args.roomId],
+      });
+    },
+  });
+
+  return mutation;
 }

@@ -23,12 +23,12 @@ export function LoginPassword() {
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
           <form.Provider>
             <form
+              className="space-y-8"
               onSubmit={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 void form.handleSubmit();
               }}
-              className="space-y-8"
             >
               <h1 className="text-2xl text-center">Login</h1>
               <form.Field name="email">
@@ -36,14 +36,15 @@ export function LoginPassword() {
                   (
                     <FormGroup>
                       <label
-                        htmlFor={field.name}
                         className="block text-sm font-medium leading-6 text-gray-900"
+                        htmlFor={field.name}
                       >
                         Email
                       </label>
                       <input
-                        type="email"
                         className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        type="email"
+                        tabIndex={1}
                         id={field.name}
                         name={field.name}
                         value={field.state.value}
@@ -61,21 +62,23 @@ export function LoginPassword() {
                     <FormGroup>
                       <div className="flex justify-between">
                         <label
-                          htmlFor={field.name}
                           className="block text-sm font-medium leading-6 text-gray-900"
+                          htmlFor={field.name}
                         >
                           Password
                         </label>
                         <Link
-                          to="/forgot-password"
                           className="text-sm leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
+                          to="/forgot-password"
+                          tabIndex={2}
                         >
                           Forgot password?
                         </Link>
                       </div>
                       <input
-                        type="password"
                         className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        type="password"
+                        tabIndex={1}
                         id={field.name}
                         name={field.name}
                         value={field.state.value}
@@ -89,8 +92,9 @@ export function LoginPassword() {
 
               <div>
                 <button
-                  type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  type="submit"
+                  tabIndex={1}
                 >
                   Login
                 </button>
@@ -103,8 +107,8 @@ export function LoginPassword() {
       <p className="mt-10 text-center text-sm text-gray-500">
         Not a member?{" "}
         <Link
-          to="/signup"
           className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          to="/signup"
         >
           Sign up for free
         </Link>
