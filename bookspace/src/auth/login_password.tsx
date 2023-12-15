@@ -3,6 +3,7 @@ import { useLoginWithPassword } from "./use_login_password.mutation";
 import { Link, useSearch } from "@tanstack/react-router";
 import { loginRoute } from "./auth.routes";
 import { FormGroup } from "../components/form/form_group";
+import { Label } from "../components/form/label";
 
 export function LoginPassword() {
   const { redirect } = useSearch({ from: loginRoute.id });
@@ -35,12 +36,7 @@ export function LoginPassword() {
                 {(field) => (
                   (
                     <FormGroup>
-                      <label
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                        htmlFor={field.name}
-                      >
-                        Email
-                      </label>
+                      <Label htmlFor={field.name}>Email</Label>
                       <input
                         className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         type="email"
@@ -61,12 +57,7 @@ export function LoginPassword() {
                   (
                     <FormGroup>
                       <div className="flex justify-between">
-                        <label
-                          className="block text-sm font-medium leading-6 text-gray-900"
-                          htmlFor={field.name}
-                        >
-                          Password
-                        </label>
+                        <Label htmlFor={field.name}>Password</Label>
                         <Link
                           className="text-sm leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
                           to="/forgot-password"

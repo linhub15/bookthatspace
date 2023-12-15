@@ -1,6 +1,4 @@
-import { Route } from "@tanstack/react-router";
-import { Dashboard } from "./dashboard";
-import { Rooms } from "./rooms/rooms";
+import { lazyRouteComponent, Route } from "@tanstack/react-router";
 import { rootRoute } from "../app.router";
 import { Profile } from "./profile/profile";
 import { Room } from "./rooms/room";
@@ -14,7 +12,7 @@ import { z } from "zod";
 const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "dashboard",
-  component: Dashboard,
+  component: lazyRouteComponent(() => import("./dashboard"), "Dashboard"),
   beforeLoad: async (ctx) => {
     await authGuard(ctx.location.pathname);
   },
@@ -23,7 +21,7 @@ const dashboardRoute = new Route({
 const roomsRoute = new Route({
   getParentRoute: () => dashboardRoute,
   path: "rooms",
-  component: Rooms,
+  component: lazyRouteComponent(() => import("./rooms/rooms"), "Rooms"),
 });
 
 const roomRoute = new Route({

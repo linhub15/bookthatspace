@@ -6,6 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { Tables } from "../../types/supabase_types";
 import { maskHourlyRate } from "../../masks/masks";
 import { Card } from "@/src/components/card";
+import { Label } from "@/src/components/form/label";
 
 export function Rooms() {
   const [open, setOpen] = useState(false);
@@ -117,12 +118,7 @@ function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
           <form.Field name="name">
             {(field) => (
               <>
-                <label
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                  htmlFor={field.name}
-                >
-                  Room name
-                </label>
+                <Label htmlFor={field.name}>Room name</Label>
                 <div className="mt-2">
                   <input
                     type="text"
@@ -139,12 +135,9 @@ function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
           <form.Field name="hourly_cost">
             {(field) => (
               <div className="mt-6">
-                <label
-                  htmlFor={field.name}
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
+                <Label htmlFor={field.name}>
                   Price
-                </label>
+                </Label>
                 <div className="relative mt-2 rounded-md shadow-sm">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                     <span className="text-gray-500 sm:text-sm">$</span>

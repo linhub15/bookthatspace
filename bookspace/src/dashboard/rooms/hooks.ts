@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../../supabase";
-import { TablesInsert } from "@/src/types/supabase_types";
+import { TablesInsert, TablesUpdate } from "@/src/types/supabase_types";
 
 export function useRooms() {
   const rooms = useQuery({
@@ -21,7 +21,7 @@ export function useRooms() {
 export function useRoom(roomId: string) {
   const rooms = useRooms();
   const room = rooms.data?.find((room) => room.id === roomId);
-  return { ...rooms, data: room };
+  return { data: room };
 }
 
 export function useAddRoom() {
@@ -42,6 +42,28 @@ export function useAddRoom() {
     },
   });
   return addRoom;
+}
+
+export function useUpdateRoom(roomId: string) {
+  const queryClient = useQueryClient();
+  const updateRoom = useMutation({
+    mutationFn: async (
+      args: { room: TablesUpdate<"room"> },
+    ) => {
+      const { error } = await supabase
+        .from("room")
+        .update(args.room)
+        .eq("id", roomId);
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      queryClient.invalidateQueries({ queryKey: ["rooms"] });
+    },
+  });
+  return updateRoom;
 }
 
 export function useDeleteRoom() {

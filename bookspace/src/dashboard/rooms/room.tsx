@@ -7,9 +7,9 @@ import { maskHourlyRate } from "@/src/masks/masks";
 import { Temporal } from "@js-temporal/polyfill";
 import { useWeekCalendar } from "./use_week_calendar";
 
-import { useChangeAvailabilityModal } from "./use_change_availability_modal";
+import { useChangeAvailabilityModal } from "./change_availability/use_change_availability_modal";
 import { useDeleteRoomModal } from "./use_delete_room_modal";
-import { useEditRoomModal } from "./use_edit_room.modal";
+import { useEditRoomModal } from "./edit_room/use_edit_room.modal";
 
 type Props = {
   roomId: string;
@@ -17,8 +17,8 @@ type Props = {
 
 export function Room(props: Props) {
   const navigate = useNavigate();
-  const { data: room } = useRoom(props.roomId);
 
+  const editRoom = useEditRoomModal({ roomId: props.roomId });
   const deleteRoom = useDeleteRoomModal({
     roomId: props.roomId,
     onSuccess: () => {
@@ -34,8 +34,7 @@ export function Room(props: Props) {
     roomId: props.roomId,
   });
 
-  const editRoom = useEditRoomModal();
-
+  const { data: room } = useRoom(props.roomId);
   if (!room) return <div>loading...</div>;
 
   return (
@@ -98,7 +97,7 @@ export function Room(props: Props) {
               </div>
               <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
                 <dt className="text-sm font-medium leading-6 text-gray-900">
-                  About
+                  Description
                 </dt>
                 <dd className="leading-6 text-gray-700">
                   {room.description}
@@ -143,9 +142,9 @@ export function Room(props: Props) {
           </calendar.WeekView>
         </Card>
       </div>
-      <changeAvailability.Modal />
       <editRoom.Modal />
       <deleteRoom.Modal />
+      <changeAvailability.Modal />
     </>
   );
 }

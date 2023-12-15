@@ -29,5 +29,6 @@ export function useDeleteRoomModal(props: Props) {
       </Modal>
     );
   };
+
   return { Modal: modal, open: () => setOpen(true) };
 }

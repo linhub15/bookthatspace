@@ -1,7 +1,7 @@
 import { Modal } from "@/src/components/modal";
 import { useState } from "react";
 import { AvailabilityForm } from "./availability_form";
-import { useChangeAvailability, useRoom, useRoomAvailability } from "./hooks";
+import { useChangeAvailability, useRoom, useRoomAvailability } from "../hooks";
 
 type Props = {
   roomId: string;
