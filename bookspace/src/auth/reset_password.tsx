@@ -17,10 +17,10 @@ export function ResetPassword() {
         alert(error.message);
         return;
       }
-
+    },
+    onSuccess: () => {
       alert("Password updated");
-
-      return navigate({ to: "/dashboard/profile" });
+      navigate({ to: "/dashboard/profile" });
     },
   });
 

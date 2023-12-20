@@ -18,9 +18,10 @@ export function useLoginWithPassword(redirect?: string) {
         alert(response.error.message);
         return;
       }
-
+    },
+    onSuccess: () => {
       authenticated.value = true;
-      return navigate({ to: redirect as AppPaths });
+      navigate({ to: redirect as AppPaths });
     },
   });
   return mutation;

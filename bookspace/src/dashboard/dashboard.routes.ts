@@ -1,4 +1,4 @@
-import { lazyRouteComponent, Route } from "@tanstack/react-router";
+import { Route } from "@tanstack/react-router";
 import { rootRoute } from "../app.router";
 import { Profile } from "./profile/profile";
 import { Room } from "./rooms/room";
@@ -7,12 +7,14 @@ import { authGuard } from "../auth/auth.routes";
 import { Widget } from "./widget/widget";
 import { supabase } from "../supabase";
 import { Booking } from "./bookings/booking";
+import { Dashboard } from "./dashboard";
+import { Rooms } from "./rooms/rooms";
 import { z } from "zod";
 
 const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "dashboard",
-  component: lazyRouteComponent(() => import("./dashboard"), "Dashboard"),
+  component: Dashboard,
   beforeLoad: async (ctx) => {
     await authGuard(ctx.location.pathname);
   },
@@ -21,7 +23,7 @@ const dashboardRoute = new Route({
 const roomsRoute = new Route({
   getParentRoute: () => dashboardRoute,
   path: "rooms",
-  component: lazyRouteComponent(() => import("./rooms/rooms"), "Rooms"),
+  component: Rooms,
 });
 
 const roomRoute = new Route({
