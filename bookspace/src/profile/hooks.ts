@@ -1,6 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { Tables, TablesInsert, TablesUpdate } from "../types/supabase_types";
+import { signal } from "@preact/signals";
+
+export const registered = signal(false);
 
 export function useProfile() {
   return useQuery({

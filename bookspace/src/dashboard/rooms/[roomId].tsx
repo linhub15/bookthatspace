@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, Route, useNavigate } from "@tanstack/react-router";
 import { useRoom, useRoomAvailability } from "./hooks";
 import { BackButton } from "@/src/components/buttons/back_button";
 import { Card } from "@/src/components/card";
@@ -10,31 +10,35 @@ import { useWeekCalendar } from "./use_week_calendar";
 import { useChangeAvailabilityModal } from "./change_availability/use_change_availability_modal";
 import { useDeleteRoomModal } from "./use_delete_room_modal";
 import { useEditRoomModal } from "./edit_room/use_edit_room.modal";
+import { dashboardRoute } from "../dashboard.routes";
 
-type Props = {
-  roomId: string;
-};
+export const roomRoute = new Route({
+  getParentRoute: () => dashboardRoute,
+  path: "rooms/$roomId",
+  component: Room,
+});
 
-export function Room(props: Props) {
+function Room() {
+  const { roomId } = roomRoute.useParams();
   const navigate = useNavigate();
 
-  const editRoom = useEditRoomModal({ roomId: props.roomId });
+  const editRoom = useEditRoomModal({ roomId: roomId });
   const deleteRoom = useDeleteRoomModal({
-    roomId: props.roomId,
+    roomId: roomId,
     onSuccess: () => {
       navigate({ to: "/dashboard/rooms" });
     },
   });
 
-  const availability = useRoomAvailability(props.roomId);
+  const availability = useRoomAvailability(roomId);
 
   const calendar = useWeekCalendar();
 
   const changeAvailability = useChangeAvailabilityModal({
-    roomId: props.roomId,
+    roomId: roomId,
   });
 
-  const { data: room } = useRoom(props.roomId);
+  const { data: room } = useRoom(roomId);
   if (!room) return <div>loading...</div>;
 
   return (

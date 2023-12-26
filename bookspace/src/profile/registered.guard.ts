@@ -1,13 +1,16 @@
 import { redirect } from "@tanstack/react-router";
 import { supabase } from "../supabase";
+import { registered } from "./hooks";
 
 export async function registeredGuard() {
+  if (registered.value) return;
+
   const { data } = await supabase.from("profile").select("id").limit(1)
     .single();
 
-  const registered = !!data?.id;
+  registered.value = !!data?.id;
 
-  if (!registered) {
+  if (!registered.value) {
     throw redirect({
       to: "/register",
     });

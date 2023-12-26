@@ -1,6 +1,6 @@
 import { PropsWithChildren, useState } from "react";
 import { Calendar } from "../../components/calendar";
-import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "../../supabase";
 import { DurationSlider } from "../../components/duration_slider";
 import { Temporal } from "@js-temporal/polyfill";
@@ -55,8 +55,8 @@ function useCreateBooking() {
 }
 
 export function Widget() {
-  const { data } = useSuspenseQuery(userQueryOptions);
-  const profileId = data.data.user?.id;
+  const { data } = useQuery(userQueryOptions);
+  const profileId = data?.data.user?.id;
 
   const rooms = useQuery({
     queryKey: ["rooms", profileId],
