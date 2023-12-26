@@ -15,20 +15,19 @@ import {
 } from "./auth/auth.routes";
 import { dashboardRoutes } from "./dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
+import { registerRoute } from "./profile/register";
 
 const rootRoute = new RootRoute({
   component: Outlet,
 });
 
 const appIndex = new Route({
-  id: "index",
   getParentRoute: () => rootRoute,
   path: "/",
   component: App,
 });
 
 const splatRoute = new Route({
-  id: "splat",
   getParentRoute: () => rootRoute,
   path: "$",
   component: NotFound,
@@ -42,6 +41,7 @@ const routeTree = rootRoute.addChildren([
   emailConfirmationRoute,
   forgotPasswordRoute,
   resetPasswordRoute,
+  registerRoute,
   dashboardRoutes,
 ]);
 

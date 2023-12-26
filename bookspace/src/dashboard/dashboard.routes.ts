@@ -1,22 +1,25 @@
 import { Route } from "@tanstack/react-router";
 import { rootRoute } from "../app.router";
 import { Profile } from "./profile/profile";
-import { Room } from "./rooms/room";
+import { roomRoute } from "./rooms/[roomId]";
 import { Bookings } from "./bookings/bookings";
 import { authGuard } from "../auth/auth.routes";
 import { Widget } from "./widget/widget";
-import { supabase } from "../supabase";
-import { Booking } from "./bookings/booking";
+import { bookingRoute } from "./bookings/[bookingId]";
 import { Dashboard } from "./dashboard";
 import { Rooms } from "./rooms/rooms";
 import { z } from "zod";
+import { QueryClient } from "@tanstack/react-query";
+import { userQueryOptions } from "../auth/user_query_options";
+import { registeredGuard } from "../profile/registered.guard";
 
-const dashboardRoute = new Route({
+export const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "dashboard",
   component: Dashboard,
   beforeLoad: async (ctx) => {
     await authGuard(ctx.location.pathname);
+    await registeredGuard();
   },
 });
 
@@ -26,12 +29,6 @@ const roomsRoute = new Route({
   component: Rooms,
 });
 
-const roomRoute = new Route({
-  getParentRoute: () => dashboardRoute,
-  path: "rooms/$roomId",
-  component: (ctx) => Room({ roomId: ctx.useParams().roomId }),
-});
-
 export const bookingsRoute = new Route({
   getParentRoute: () => dashboardRoute,
   path: "bookings",
@@ -39,23 +36,14 @@ export const bookingsRoute = new Route({
   component: Bookings,
 });
 
-const bookingRoute = new Route({
-  getParentRoute: () => dashboardRoute,
-  path: "bookings/$bookingId/view",
-  component: (ctx) => Booking({ bookingId: ctx.useParams().bookingId }),
-});
-
 const widgetRoute = new Route({
   getParentRoute: () => dashboardRoute,
   path: "widget",
-  component: (ctx) => Widget({ profileId: ctx.useLoaderData().data?.user?.id }),
-  loader: () => {
-    return supabase.auth.getUser();
-  },
+  loader: () => (new QueryClient()).ensureQueryData(userQueryOptions),
+  component: Widget,
 });
 
 const profileRoute = new Route({
-  id: "profile",
   getParentRoute: () => dashboardRoute,
   path: "profile",
   component: Profile,
