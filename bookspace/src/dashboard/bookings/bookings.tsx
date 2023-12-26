@@ -162,10 +162,9 @@ function BookingList(props: { tab: Tabs }) {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/groupBy#browser_compatibility
   const grouped: Map<string, typeof data> = new Map();
   data?.forEach((booking) => {
-    const key = Temporal.Instant
+    const key = Temporal.PlainDate
       .from(booking.start)
-      .toLocaleString()
-      .split(",")[0];
+      .toString();
 
     if (grouped.has(key)) {
       grouped.get(key)?.push(booking);
