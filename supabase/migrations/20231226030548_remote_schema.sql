@@ -10,8 +10,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-CREATE EXTENSION IF NOT EXISTS "pg_net" WITH SCHEMA "extensions";
-
 CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
 
 CREATE EXTENSION IF NOT EXISTS "pg_graphql" WITH SCHEMA "graphql";
@@ -135,7 +133,7 @@ ALTER TABLE ONLY "public"."room"
 
 CREATE POLICY "Profile viewable by creator" ON "public"."profile" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "id"));
 
-CREATE POLICY "anon_can_create" ON "public"."room_booking" FOR INSERT TO "authenticated", "anon" WITH CHECK (("booked_by_email" IS NOT NULL));
+CREATE POLICY "anon_can_create" ON "public"."room_booking" FOR INSERT TO "anon", "authenticated" WITH CHECK (("booked_by_email" IS NOT NULL));
 
 CREATE POLICY "owner_can_all" ON "public"."room" TO "authenticated" USING (("auth"."uid"() = "profile_id")) WITH CHECK (true);
 
