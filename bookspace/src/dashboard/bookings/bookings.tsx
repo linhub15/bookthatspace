@@ -4,7 +4,7 @@ import { supabase } from "../../supabase";
 import { Fragment } from "react";
 import { maskDate, maskTimeRange } from "../../masks/masks";
 import { cn } from "@/lib/utils/cn";
-import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
 import { bookingsRoute } from "../dashboard.routes";
 import { Card } from "@/src/components/card";
 
@@ -97,59 +97,43 @@ type TabsProps = {
 
 function Tabs(props: TabsProps) {
   const tabs = props.options;
-  const navigate = useNavigate();
 
   return (
     <>
-      <div className="px-4 sm:hidden">
-        <label htmlFor="tabs" className="sr-only">
-          Select a tab
-        </label>
-        <select
-          id="tabs"
-          name="tabs"
-          className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-          value={props.value}
-          onChange={(e) => navigate({ search: { tab: e.target.value } })}
+      <div className="px-4 pb-2 sm:px-6 border-b border-gray-200 overflow-x-auto">
+        <nav
+          className="-mb-px flex space-x-6 md:space-x-8"
+          aria-label="Tabs"
         >
           {tabs.map((tab) => (
-            <option key={tab.name} value={tab.value}>{tab.name}</option>
+            <Link
+              search={{ tab: tab.value }}
+              key={tab.name}
+              className={cn(
+                tab.value === props.value
+                  ? "bg-gray-100 text-gray-700"
+                  : "text-gray-500 hover:text-gray-700",
+                "rounded-md px-3 py-2 text-sm font-medium inline-flex",
+              )}
+            >
+              {tab.name}
+              {tab.count
+                ? (
+                  <span
+                    className={cn(
+                      tab.value === props.value
+                        ? "bg-indigo-100 text-indigo-600"
+                        : "bg-gray-100 text-gray-900",
+                      "ml-2 rounded-full py-0.5 px-2.5 text-xs font-medium inline-block",
+                    )}
+                  >
+                    {tab.count}
+                  </span>
+                )
+                : null}
+            </Link>
           ))}
-        </select>
-      </div>
-      <div className="hidden sm:block">
-        <div className="px-4 sm:px-6 border-b border-gray-200">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-            {tabs.map((tab) => (
-              <Link
-                search={{ tab: tab.value }}
-                key={tab.name}
-                className={cn(
-                  tab.value === props.value
-                    ? "border-indigo-500 text-indigo-600"
-                    : "border-transparent text-gray-500 hover:border-gray-200 hover:text-gray-700",
-                  "flex whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium",
-                )}
-              >
-                {tab.name}
-                {tab.count
-                  ? (
-                    <span
-                      className={cn(
-                        tab.value === props.value
-                          ? "bg-indigo-100 text-indigo-600"
-                          : "bg-gray-100 text-gray-900",
-                        "ml-3 hidden rounded-full py-0.5 px-2.5 text-xs font-medium md:inline-block",
-                      )}
-                    >
-                      {tab.count}
-                    </span>
-                  )
-                  : null}
-              </Link>
-            ))}
-          </nav>
-        </div>
+        </nav>
       </div>
     </>
   );
