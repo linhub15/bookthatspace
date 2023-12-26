@@ -1,8 +1,8 @@
 import { supabase } from "../supabase";
+import { emailConfirmationRoute } from "./auth.routes";
 
-export function EmailConfirmation(
-  { email }: { email: string },
-) {
+export function EmailConfirmation() {
+  const { email } = emailConfirmationRoute.useParams();
   const resendConfirmation = async () => {
     const { error } = await supabase.auth.resend({
       type: "signup",

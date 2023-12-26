@@ -1,24 +1,12 @@
 import { supabase } from "../../supabase";
 import { authenticated } from "../../auth/use_authenticated.signal";
 import { useNavigate } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { Tables } from "../../types/supabase_types";
 import { Card } from "@/src/components/card";
+import { useProfile } from "@/src/profile/hooks";
 
 export function Profile() {
   const navigate = useNavigate();
-  const { data: profile } = useQuery({
-    queryKey: ["profile"],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("profile").select();
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      return data.at(0) as Tables<"profile">;
-    },
-  });
+  const { data: profile } = useProfile();
 
   return (
     <Card>

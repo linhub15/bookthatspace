@@ -1,6 +1,6 @@
 import { PropsWithChildren, useState } from "react";
 import { Calendar } from "../../components/calendar";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { supabase } from "../../supabase";
 import { DurationSlider } from "../../components/duration_slider";
 import { Temporal } from "@js-temporal/polyfill";
@@ -10,6 +10,7 @@ import { BackButton } from "@/src/components/buttons/back_button";
 import { FormGroup } from "@/src/components/form/form_group";
 import { Card } from "@/src/components/card";
 import { Label } from "@/src/components/form/label";
+import { userQueryOptions } from "@/src/auth/user_query_options";
 
 const timeOptions = Array.from(Array(24 * 2), (_, i) => {
   return Temporal.PlainTime.from({
@@ -53,13 +54,16 @@ function useCreateBooking() {
   return mutation;
 }
 
-export function Widget(props: { profileId?: string }) {
+export function Widget() {
+  const { data } = useSuspenseQuery(userQueryOptions);
+  const profileId = data.data.user?.id;
+
   const rooms = useQuery({
-    queryKey: ["rooms", props.profileId],
+    queryKey: ["rooms", profileId],
     queryFn: async () => {
       const { data, error } = await supabase.from("room").select().eq(
         "profile_id",
-        props.profileId!,
+        profileId!,
       );
 
       if (error) {
@@ -69,7 +73,7 @@ export function Widget(props: { profileId?: string }) {
 
       return data;
     },
-    enabled: !!props.profileId,
+    enabled: !!profileId,
   });
   const [selectedRoom, setSelectedRoom] = useState<Tables<"room">>();
   const [selectedDay, setSelectedDay] = useState<Temporal.PlainDate>();

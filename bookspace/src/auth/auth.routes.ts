@@ -52,7 +52,7 @@ const signupRoute = new Route({
 const emailConfirmationRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "confirm-email/$email",
-  component: (ctx) => EmailConfirmation({ email: ctx.useParams().email }),
+  component: EmailConfirmation,
 });
 
 const forgotPasswordRoute = new Route({
