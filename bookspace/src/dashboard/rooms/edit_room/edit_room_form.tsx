@@ -18,7 +18,7 @@ export function EditRoomForm(props: Props) {
       address: room?.address ?? undefined,
       description: room?.description ?? undefined,
       max_capacity: room?.max_capacity?.toString() ?? undefined,
-      hourly_rate: room?.hourly_cost?.toString() ?? undefined,
+      hourly_rate: room?.hourly_rate?.toString() ?? undefined,
     },
     onSubmit: async (values) => {
       await updateRoom.mutateAsync({
@@ -27,7 +27,7 @@ export function EditRoomForm(props: Props) {
           address: values.value.address,
           description: values.value.description,
           max_capacity: Number(values.value.max_capacity) ?? null,
-          hourly_cost: Number(values.value.hourly_rate) ?? null,
+          hourly_rate: Number(values.value.hourly_rate) ?? null,
         },
       });
     },
@@ -77,22 +77,6 @@ export function EditRoomForm(props: Props) {
               )}
             </form.Field>
 
-            <form.Field name="description">
-              {(field) => (
-                <div className="space-y-2">
-                  <Label htmlFor={field.name}>Description</Label>
-                  <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    type="text"
-                    name={field.name}
-                    id={field.name}
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </div>
-              )}
-            </form.Field>
-
             <form.Field name="max_capacity">
               {(field) => (
                 <div className="space-y-2">
@@ -113,9 +97,39 @@ export function EditRoomForm(props: Props) {
               {(field) => (
                 <div className="space-y-2">
                   <Label htmlFor={field.name}>Hourly Rate</Label>
-                  <input
+                  <div className="relative rounded-md shadow-sm">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                      <span className="text-gray-500 sm:text-sm">$</span>
+                    </div>
+                    <input
+                      type="text"
+                      className="block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      name={field.name}
+                      id={field.name}
+                      placeholder="0.00"
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-describedby="price-currency"
+                    />
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                      <span
+                        className="text-gray-500 sm:text-sm"
+                        id="price-currency"
+                      >
+                        CAD
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </form.Field>
+
+            <form.Field name="description">
+              {(field) => (
+                <div className="space-y-2">
+                  <Label htmlFor={field.name}>Description</Label>
+                  <textarea
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    type="text"
                     name={field.name}
                     id={field.name}
                     value={field.state.value}
@@ -125,7 +139,8 @@ export function EditRoomForm(props: Props) {
               )}
             </form.Field>
           </div>
-          <div className="pt-6 sm:pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+
+          <div className="pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <button
               type="submit"
               className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"

@@ -200,7 +200,7 @@ function RoomPicker(props: RoomPickerProps) {
                 Max {room.max_capacity} people
               </p>
               <p className="text-base font-medium text-gray-900">
-                {maskHourlyRate(room.hourly_cost)}
+                {maskHourlyRate(room.hourly_rate)}
               </p>
             </div>
           </div>
@@ -344,7 +344,7 @@ function Summary(
   const createBooking = useCreateBooking();
 
   const cost = ((selectedDuration?.minutes ?? 1) / 60 *
-    (selectedRoom.hourly_cost ?? 0)).toFixed(2);
+    (selectedRoom.hourly_rate ?? 0)).toFixed(2);
 
   const canSubmit = selectedRoom && selectedDay && selectedTime &&
     selectedDuration;
@@ -360,7 +360,7 @@ function Summary(
                   {selectedRoom.name}
                 </dt>
                 <dd className="mt-1 text-base text-gray-500">
-                  {maskHourlyRate(selectedRoom.hourly_cost)}
+                  {maskHourlyRate(selectedRoom.hourly_rate)}
                 </dd>
               </div>
             </div>

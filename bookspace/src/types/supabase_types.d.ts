@@ -43,7 +43,7 @@ export interface Database {
           address: string | null
           created_at: string
           description: string | null
-          hourly_cost: number | null
+          hourly_rate: number | null
           id: string
           max_capacity: number | null
           name: string
@@ -53,7 +53,7 @@ export interface Database {
           address?: string | null
           created_at?: string
           description?: string | null
-          hourly_cost?: number | null
+          hourly_rate?: number | null
           id?: string
           max_capacity?: number | null
           name: string
@@ -63,7 +63,7 @@ export interface Database {
           address?: string | null
           created_at?: string
           description?: string | null
-          hourly_cost?: number | null
+          hourly_rate?: number | null
           id?: string
           max_capacity?: number | null
           name?: string
@@ -258,3 +258,4 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
   ? Database["public"]["Enums"][PublicEnumNameOrOptions]
   : never
+

@@ -27,18 +27,18 @@ export function useRoom(roomId: string) {
 export function useAddRoom() {
   const queryClient = useQueryClient();
   const addRoom = useMutation({
-    mutationFn: async (args: { name: string; hourly_cost: number }) => {
-      const { error } = await supabase.from("room").insert({
-        name: args.name,
-        hourly_cost: args.hourly_cost ?? null,
-      });
+    mutationFn: async (args: TablesInsert<"room">) => {
+      const { data, error } = await supabase.from("room").insert(args).select()
+        .single();
 
-      if (error) {
+      if (error || !data) {
         alert(error.message);
         return;
       }
 
       queryClient.invalidateQueries({ queryKey: ["rooms"] });
+
+      return data;
     },
   });
   return addRoom;

@@ -85,10 +85,10 @@ function Room() {
             <dl className="grid grid-cols-1 sm:grid-cols-2">
               <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
                 <dt className="text-sm font-medium leading-6 text-gray-900">
-                  Cost
+                  Hourly Rate
                 </dt>
                 <dd className="leading-6 text-gray-700">
-                  {maskHourlyRate(room.hourly_cost)}
+                  {maskHourlyRate(room.hourly_rate)}
                 </dd>
               </div>
               <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
@@ -132,18 +132,19 @@ function Room() {
               </div>
             </div>
           </div>
-          <calendar.WeekView>
-            {availability.data && (
-              availability.data?.map((a, index) => (
+
+          {!!availability.data?.length && (
+            <calendar.WeekView>
+              {availability.data?.map((a, index) => (
                 <calendar.Event
                   key={index}
                   weekday={a.day_of_week}
                   start={Temporal.PlainTime.from(a.start)}
                   end={Temporal.PlainTime.from(a.end)}
                 />
-              ))
-            )}
-          </calendar.WeekView>
+              ))}
+            </calendar.WeekView>
+          )}
         </Card>
       </div>
       <editRoom.Modal />

@@ -2,7 +2,7 @@ import { Modal } from "../../components/modal";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import { useAddRoom, useRooms } from "./hooks";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Tables } from "../../types/supabase_types";
 import { maskHourlyRate } from "../../masks/masks";
 import { Card } from "@/src/components/card";
@@ -11,9 +11,15 @@ import { Label } from "@/src/components/form/label";
 export function Rooms() {
   const [open, setOpen] = useState(false);
   const rooms = useRooms();
+  const navigate = useNavigate();
 
   const openNewRoomForm = () => {
     setOpen(true);
+  };
+
+  const onRoomCreated = (roomId: string) => {
+    setOpen(false);
+    navigate({ to: "/dashboard/rooms/$roomId", params: { roomId } });
   };
 
   return (
@@ -53,7 +59,7 @@ export function Rooms() {
         >
           <NewRoomForm
             onCancel={() => setOpen(false)}
-            onSubmit={() => setOpen(false)}
+            onAfterSubmit={(id) => onRoomCreated(id)}
           />
         </Modal>
       </div>
@@ -71,7 +77,7 @@ function RoomCard(props: { room: Tables<"room"> }) {
               {props.room.name}
             </dt>
             <dd className="mt-1 text-base text-gray-500">
-              {maskHourlyRate(props.room.hourly_cost)}
+              {maskHourlyRate(props.room.hourly_rate)}
             </dd>
           </div>
           <div className="flex-none">
@@ -86,19 +92,33 @@ function RoomCard(props: { room: Tables<"room"> }) {
   );
 }
 
-function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
+function NewRoomForm(
+  props: { onCancel: () => void; onAfterSubmit: (roomId: string) => void },
+) {
   const addRoom = useAddRoom();
 
   const form = useForm({
     defaultValues: {
       name: "",
-      hourly_cost: "",
+      address: "",
+      description: "",
+      max_capacity: "",
+      hourly_rate: "",
     },
     onSubmit: async (values) => {
       await addRoom.mutateAsync(
         {
           name: values.value.name,
-          hourly_cost: Number(values.value.hourly_cost) ?? null,
+          address: values.value.address,
+          description: values.value.description,
+          max_capacity: Number(values.value.max_capacity) ?? null,
+          hourly_rate: Number(values.value.hourly_rate) ?? null,
+        },
+        {
+          onSuccess: (data) => {
+            if (!data?.id) return;
+            props.onAfterSubmit(data.id);
+          },
         },
       );
     },
@@ -108,37 +128,69 @@ function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
     e.preventDefault();
     e.stopPropagation();
     await form.handleSubmit();
-    props.onSubmit();
   };
 
   return (
-    <div>
-      <form.Provider>
-        <form onSubmit={submit}>
+    <form.Provider>
+      <form onSubmit={submit}>
+        <div className="space-y-6">
           <form.Field name="name">
             {(field) => (
-              <>
-                <Label htmlFor={field.name}>Room name</Label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    name={field.name}
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </div>
-              </>
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>
+                  Room name{" "}
+                  <span className="text-xs font-normal text-gray-500">
+                    (Required)
+                  </span>
+                </Label>
+                <input
+                  type="text"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  name={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              </div>
             )}
           </form.Field>
 
-          <form.Field name="hourly_cost">
+          <form.Field name="address">
             {(field) => (
-              <div className="mt-6">
-                <Label htmlFor={field.name}>
-                  Price
-                </Label>
-                <div className="relative mt-2 rounded-md shadow-sm">
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>Address</Label>
+                <input
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type="text"
+                  name={field.name}
+                  id={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              </div>
+            )}
+          </form.Field>
+
+          <form.Field name="max_capacity">
+            {(field) => (
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>Capacity</Label>
+                <input
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type="text"
+                  name={field.name}
+                  id={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              </div>
+            )}
+          </form.Field>
+
+          <form.Field name="hourly_rate">
+            {(field) => (
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>Hourly Rate</Label>
+                <div className="relative rounded-md shadow-sm">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                     <span className="text-gray-500 sm:text-sm">$</span>
                   </div>
@@ -165,23 +217,38 @@ function NewRoomForm(props: { onCancel: () => void; onSubmit: () => void }) {
             )}
           </form.Field>
 
-          <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-            <button
-              type="submit"
-              className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-            >
-              Create Room
-            </button>
-            <button
-              type="button"
-              className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
-              onClick={props.onCancel}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </form.Provider>
-    </div>
+          <form.Field name="description">
+            {(field) => (
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>Description</Label>
+                <textarea
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  name={field.name}
+                  id={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              </div>
+            )}
+          </form.Field>
+        </div>
+
+        <div className="pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+          <button
+            type="submit"
+            className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
+          >
+            Create Room
+          </button>
+          <button
+            type="button"
+            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
+            onClick={props.onCancel}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </form.Provider>
   );
 }
