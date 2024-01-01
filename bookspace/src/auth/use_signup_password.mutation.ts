@@ -1,13 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { supabase } from "../supabase";
-import { useNavigate } from "@tanstack/react-router";
 
 type UserMeta = {
   name: string;
 };
 
+/** @throws {AuthError} Signup failed */
 export function useSignupWithPassword() {
-  const navigate = useNavigate();
   return useMutation({
     mutationFn: async (
       args: { email: string; password: string; data: UserMeta },
@@ -24,13 +23,10 @@ export function useSignupWithPassword() {
 
       if (response.error) {
         alert(response.error.message);
-        return;
+        throw response.error;
       }
 
-      return navigate({
-        to: "/confirm-email/$email",
-        params: { email: args.email },
-      });
+      return args.email;
     },
   });
 }

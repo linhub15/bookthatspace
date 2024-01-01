@@ -1,11 +1,12 @@
 import { useForm } from "@tanstack/react-form";
 import { useSignupWithPassword } from "./use_signup_password.mutation";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { FormGroup } from "../components/form/form_group";
 import { Label } from "../components/form/label";
 
 export function Signup() {
   const signupMutation = useSignupWithPassword();
+  const navigate = useNavigate();
 
   const form = useForm({
     defaultValues: {
@@ -18,6 +19,13 @@ export function Signup() {
         email: values.value.email,
         password: values.value.password,
         data: { name: values.value.name },
+      }, {
+        onSuccess: (data) => {
+          navigate({
+            to: "/confirm-email/$email",
+            params: { email: data },
+          });
+        },
       });
     },
   });

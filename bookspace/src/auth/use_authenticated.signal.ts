@@ -7,6 +7,7 @@ export const authenticated = signal(false);
 export async function checkAuthenticated(): Promise<boolean> {
   const session = await supabase.auth.getSession();
   if (!session.data.session) {
+    authenticated.value = false;
     return false;
   }
 
