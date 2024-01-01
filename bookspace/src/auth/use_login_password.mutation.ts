@@ -14,10 +14,17 @@ export function useLoginWithPassword(redirect?: string) {
         options: {},
       });
 
-      if (response.error) {
-        alert(response.error.message);
-        return;
+      if (!response.error) return;
+
+      if (response.error.message.toLowerCase().includes("email")) {
+        return await navigate({
+          to: "/confirm-email/$email",
+          params: { email: params.email },
+        });
       }
+
+      alert(response.error.message);
+      throw response.error;
     },
     onSuccess: () => {
       authenticated.value = true;

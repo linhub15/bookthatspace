@@ -4,12 +4,14 @@ import { rootRoute } from "../app.router";
 import { supabase } from "../supabase";
 import { useEffect } from "react";
 
+/** @deprecated Be wary of using front end to trigger profile creation */
 export const registerRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/register",
   component: Register,
 });
 
+/** @deprecated Using db insert trigger instead */
 export function Register() {
   const mutation = useRegisterProfile();
   const navigate = useNavigate();

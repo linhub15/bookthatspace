@@ -11,7 +11,6 @@ import { Rooms } from "./rooms/rooms";
 import { z } from "zod";
 import { QueryClient } from "@tanstack/react-query";
 import { userQueryOptions } from "../auth/user_query_options";
-import { registeredGuard } from "../profile/registered.guard";
 
 export const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
@@ -19,7 +18,6 @@ export const dashboardRoute = new Route({
   component: Dashboard,
   beforeLoad: async (ctx) => {
     await authGuard(ctx.location.pathname);
-    await registeredGuard();
   },
 });
 

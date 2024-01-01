@@ -47,16 +47,6 @@ CREATE TYPE "public"."room_booking_status" AS ENUM (
 
 ALTER TYPE "public"."room_booking_status" OWNER TO "postgres";
 
-CREATE OR REPLACE FUNCTION "public"."create_profile_on_signup"() RETURNS "trigger"
-    LANGUAGE "plpgsql" SECURITY DEFINER
-    AS $$BEGIN
-  INSERT INTO public.profile (id,email)
-  VALUES (NEW.id,NEW.email);
-  RETURN NEW;
-END;$$;
-
-ALTER FUNCTION "public"."create_profile_on_signup"() OWNER TO "postgres";
-
 SET default_tablespace = '';
 
 SET default_table_access_method = "heap";
@@ -75,10 +65,10 @@ CREATE TABLE IF NOT EXISTS "public"."room" (
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "name" "text" NOT NULL,
     "description" "text",
-    "hourly_cost" numeric,
     "profile_id" "uuid" DEFAULT "auth"."uid"() NOT NULL,
     "max_capacity" numeric,
-    "address" "text"
+    "address" "text",
+    "hourly_rate" numeric
 );
 
 ALTER TABLE "public"."room" OWNER TO "postgres";
@@ -172,10 +162,6 @@ GRANT USAGE ON SCHEMA "public" TO "postgres";
 GRANT USAGE ON SCHEMA "public" TO "anon";
 GRANT USAGE ON SCHEMA "public" TO "authenticated";
 GRANT USAGE ON SCHEMA "public" TO "service_role";
-
-GRANT ALL ON FUNCTION "public"."create_profile_on_signup"() TO "anon";
-GRANT ALL ON FUNCTION "public"."create_profile_on_signup"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."create_profile_on_signup"() TO "service_role";
 
 GRANT ALL ON TABLE "public"."profile" TO "anon";
 GRANT ALL ON TABLE "public"."profile" TO "authenticated";

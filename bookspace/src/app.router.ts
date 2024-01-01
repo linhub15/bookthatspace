@@ -15,7 +15,6 @@ import {
 } from "./auth/auth.routes";
 import { dashboardRoutes } from "./dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
-import { registerRoute } from "./profile/register";
 
 const rootRoute = new RootRoute({
   component: Outlet,
@@ -41,7 +40,6 @@ const routeTree = rootRoute.addChildren([
   emailConfirmationRoute,
   forgotPasswordRoute,
   resetPasswordRoute,
-  registerRoute,
   dashboardRoutes,
 ]);
 
