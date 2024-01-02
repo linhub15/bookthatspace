@@ -1,7 +1,7 @@
 import { Route } from "@tanstack/react-router";
 import { rootRoute } from "../app.router";
 import { Profile } from "./profile/profile";
-import { roomRoute } from "./rooms/[roomId]";
+import { Room } from "./rooms/[roomId]";
 import { Bookings } from "./bookings/bookings";
 import { authGuard } from "../auth/auth.routes";
 import { Widget } from "./widget/widget";
@@ -25,6 +25,12 @@ const roomsRoute = new Route({
   getParentRoute: () => dashboardRoute,
   path: "rooms",
   component: Rooms,
+});
+
+export const roomRoute = new Route({
+  getParentRoute: () => dashboardRoute,
+  path: "rooms/$roomId",
+  component: Room,
 });
 
 export const bookingsRoute = new Route({

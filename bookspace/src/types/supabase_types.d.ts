@@ -158,6 +158,35 @@ export interface Database {
           }
         ]
       }
+      room_photo: {
+        Row: {
+          created_at: string
+          id: string
+          path: string
+          room_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          path: string
+          room_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          path?: string
+          room_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "room_photo_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "room"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never

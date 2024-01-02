@@ -105,6 +105,50 @@ export function useRoomAvailability(roomId: string) {
   return query;
 }
 
+export function useRoomPhotos() {
+  const query = useQuery({
+    queryKey: ["rooms", "photos"],
+    queryFn: async () => {
+      const { data } = await supabase.from("room_photo").select();
+
+      const url = data?.map((photo) =>
+        supabase.storage.from("room-photos").getPublicUrl(photo.path).data
+          .publicUrl
+      );
+
+      return url;
+    },
+  });
+
+  return query;
+}
+
+export function useUploadPhoto(args: { roomId: string }) {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: async (file: File) => {
+      const { data } = await supabase.auth.getUser();
+      const result = await supabase.storage.from("room-photos").upload(
+        `${data.user?.id}/${args.roomId}/${file.name}`,
+        file,
+      );
+
+      if (!result.data?.path) {
+        alert(result.error?.message);
+        throw result.error;
+      }
+
+      await supabase.from("room_photo").insert({
+        room_id: args.roomId,
+        path: result.data.path,
+      });
+
+      queryClient.invalidateQueries({ queryKey: ["rooms", "photos"] });
+    },
+  });
+  return mutation;
+}
+
 export function useChangeAvailability(args: { roomId: string }) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
@@ -156,7 +200,7 @@ export function useChangeAvailability(args: { roomId: string }) {
       }
 
       if (errors.length > 0) {
-        console.log(errors);
+        console.error(errors);
         alert("Error updating availability");
       }
     },
