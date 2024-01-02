@@ -32,7 +32,7 @@ export function Room() {
   });
 
   const availability = useRoomAvailability(roomId);
-  const photos = useRoomPhotos();
+  const photos = useRoomPhotos(roomId);
 
   const calendar = useWeekCalendar();
 
@@ -46,9 +46,18 @@ export function Room() {
   return (
     <>
       <div className="space-y-4">
-        <Link className="w-fit" to="/dashboard/rooms">
-          <BackButton />
-        </Link>
+        <div className="flex w-full justify-between">
+          <Link className="w-fit" to="/dashboard/rooms">
+            <BackButton />
+          </Link>
+          <button
+            className="relativeinline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-800 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-50"
+            type="button"
+            onClick={() => deleteRoom.open()}
+          >
+            Delete Room
+          </button>
+        </div>
 
         <div className="flex flex-col md:flex-row w-full gap-4">
           <Card>
@@ -73,13 +82,6 @@ export function Room() {
                       aria-hidden="true"
                     />
                     <span>Edit</span>
-                  </button>
-                  <button
-                    className="relativeinline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-800 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-50"
-                    type="button"
-                    onClick={() => deleteRoom.open()}
-                  >
-                    Delete
                   </button>
                 </div>
               </div>

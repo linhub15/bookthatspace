@@ -105,11 +105,14 @@ export function useRoomAvailability(roomId: string) {
   return query;
 }
 
-export function useRoomPhotos() {
+export function useRoomPhotos(roomId: string) {
   const query = useQuery({
-    queryKey: ["rooms", "photos"],
+    queryKey: ["rooms", "photos", roomId],
     queryFn: async () => {
-      const { data } = await supabase.from("room_photo").select();
+      const { data } = await supabase.from("room_photo").select().eq(
+        "room_id",
+        roomId,
+      );
 
       const url = data?.map((photo) =>
         supabase.storage.from("room-photos").getPublicUrl(photo.path).data
@@ -143,7 +146,9 @@ export function useUploadPhoto(args: { roomId: string }) {
         path: result.data.path,
       });
 
-      queryClient.invalidateQueries({ queryKey: ["rooms", "photos"] });
+      queryClient.invalidateQueries({
+        queryKey: ["rooms", "photos", args.roomId],
+      });
     },
   });
   return mutation;
