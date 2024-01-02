@@ -199,8 +199,8 @@ function AddImage(props: { roomId: string }) {
       onClick={() => input.current?.click()}
     >
       <PhotoIcon className="text-gray-500 w-8 mx-auto" />
-      <span className="mt-2 block text-sm font-semibold text-gray-900">
-        Add a Photo
+      <span className="mt-2 block text-sm font-semibold text-gray-800">
+        Add Photo
       </span>
       <input
         className="hidden"

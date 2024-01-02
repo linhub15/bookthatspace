@@ -1,5 +1,5 @@
 import { Enums, Tables, TablesInsert } from "@/src/types/supabase_types";
-import { MinusSmallIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Temporal } from "@js-temporal/polyfill";
 import { useForm } from "@tanstack/react-form";
 import { Fragment, memo } from "react";
@@ -155,7 +155,7 @@ export function AvailabilityForm(props: Props) {
                                 <TimeOptionsMemo />
                               </select>
                               <span className="my-auto px-1">
-                                <MinusSmallIcon className="w-4 h-4" />
+                                <ArrowRightIcon className="w-4 h-4" />
                               </span>
                               <select
                                 className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
