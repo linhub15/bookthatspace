@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { supabase } from "../supabase";
 import { useNavigate } from "@tanstack/react-router";
 import { authenticated } from "./use_authenticated.signal";
-import { AppPaths } from "../app.router";
+import { DashboardPaths } from "../app.router";
 
 export function useLoginWithPassword(redirect?: string) {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export function useLoginWithPassword(redirect?: string) {
     },
     onSuccess: () => {
       authenticated.value = true;
-      navigate({ to: redirect as AppPaths });
+      navigate({ to: redirect as DashboardPaths, params: {} });
     },
   });
   return mutation;

@@ -10,16 +10,10 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, Route } from "@tanstack/react-router";
-import { dashboardRoute } from "../dashboard.routes";
+import { Link } from "@tanstack/react-router";
+import { bookingRoute } from "../dashboard.routes";
 
-export const bookingRoute = new Route({
-  getParentRoute: () => dashboardRoute,
-  path: "bookings/$bookingId/view",
-  component: Booking,
-});
-
-function Booking() {
+export function Booking() {
   const { bookingId } = bookingRoute.useParams();
   const { data: booking } = useGetBooking(bookingId);
   return (

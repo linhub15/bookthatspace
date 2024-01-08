@@ -5,7 +5,7 @@ import { Confirmation } from "./confirmation";
 
 const anonBookingRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "/s/$profile_id",
+  path: "s/$profile_id",
 });
 
 const profileRoute = new Route({
@@ -16,7 +16,7 @@ const profileRoute = new Route({
 
 export const confirmationRoute = new Route({
   getParentRoute: () => anonBookingRoute,
-  path: "/confirmation",
+  path: "confirmation",
   component: Confirmation,
   validateSearch: (search: Record<string, unknown>): { booking_id: string } => {
     return { booking_id: search.booking_id as string || "" };

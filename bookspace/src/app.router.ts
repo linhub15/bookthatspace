@@ -47,11 +47,12 @@ const routeTree = rootRoute.addChildren([
 
 const router = new Router({ routeTree });
 
-type AppPaths = RoutePaths<typeof routeTree>;
+type AnonPaths = RoutePaths<typeof anonBookingRoutes>;
+type DashboardPaths = RoutePaths<typeof dashboardRoutes>;
 
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }
 }
-export { type AppPaths, rootRoute, router };
+export { type AnonPaths, type DashboardPaths, rootRoute, router };

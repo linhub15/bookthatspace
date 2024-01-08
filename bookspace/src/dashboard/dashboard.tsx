@@ -1,5 +1,4 @@
 import { Link, Outlet } from "@tanstack/react-router";
-import { type AppPaths } from "../app.router";
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -11,31 +10,31 @@ import {
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
 import { supabase } from "../supabase";
+import { bookingsRoute, roomsRoute, widgetRoute } from "./dashboard.routes";
 
-const navigation: {
-  name: string;
-  to: AppPaths;
-  icon: HeroIcon;
-}[] = [
-  {
-    name: "Bookings",
-    to: "/dashboard/bookings",
-    icon: CalendarIcon,
-  },
-  {
-    name: "Rooms",
-    to: "/dashboard/rooms",
-    icon: HomeIcon,
-  },
-  {
-    name: "Widget",
-    to: "/dashboard/widget",
-    icon: CodeBracketSquareIcon,
-  },
-];
+function useNavigation() {
+  return [
+    {
+      name: "Bookings",
+      to: bookingsRoute.to,
+      icon: CalendarIcon,
+    },
+    {
+      name: "Rooms",
+      to: roomsRoute.to,
+      icon: HomeIcon,
+    },
+    {
+      name: "Widget",
+      to: widgetRoute.to,
+      icon: CodeBracketSquareIcon,
+    },
+  ] as const;
+}
 
 export function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <>
@@ -108,8 +107,8 @@ export function Dashboard() {
                             {navigation.map((item) => (
                               <li key={item.name}>
                                 <Link
-                                  to={item.to}
                                   className="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                  to={item.to}
                                   activeProps={{
                                     className: cn(
                                       "bg-gray-50 text-indigo-600",
@@ -192,6 +191,8 @@ export function Dashboard() {
 
 function DesktopSidebar() {
   const [email, setEmail] = useState<string>();
+  const navigation = useNavigation();
+
   useEffect(() => {
     const email = async () => {
       const user = await supabase.auth.getUser();
@@ -216,8 +217,8 @@ function DesktopSidebar() {
               {navigation.map((item) => (
                 <li key={item.name}>
                   <Link
-                    to={item.to}
                     className="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                    to={item.to}
                     activeProps={{
                       className: cn("bg-gray-50 text-indigo-600"),
                     }}

@@ -409,10 +409,6 @@ function Summary(
                 duration: selectedDuration!,
                 email: email,
                 description: description,
-              }, {
-                onSuccess: () => {
-                  setSelectedRoom(undefined);
-                },
               })}
           >
             Reserve your booking

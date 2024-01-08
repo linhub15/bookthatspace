@@ -31,14 +31,16 @@ export function useCreateBooking() {
         minute: args.end.minute,
       }).toZonedDateTime(Temporal.Now.timeZoneId());
 
-      await supabase.from("room_booking").insert({
+      const response = await supabase.from("room_booking").insert({
         start: start.toString({ timeZoneName: "never" }),
         end: end.toString({ timeZoneName: "never" }),
         room_id: args.roomId,
         booked_by_name: args.name,
         booked_by_email: args.email,
         description: args.description,
-      });
+      }).select().single();
+
+      return response.data;
     },
   });
   return mutation;

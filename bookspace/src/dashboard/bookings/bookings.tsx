@@ -5,13 +5,14 @@ import { Fragment } from "react";
 import { maskDate, maskTimeRange } from "../../masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { Link, useSearch } from "@tanstack/react-router";
-import { bookingsRoute } from "../dashboard.routes";
 import { Card } from "@/src/components/card";
+import { bookingRoute, bookingsIndexRoute } from "../dashboard.routes";
 
 type Tabs = "upcoming" | "pending" | "past" | "all";
 
 export function Bookings() {
-  const tab = useSearch({ from: bookingsRoute.id }).tab as Tabs ?? "upcoming";
+  const tab = useSearch({ from: bookingsIndexRoute.id }).tab as Tabs ??
+    "upcoming";
   const { data: pending } = useBookings("pending");
   const tabOptions: {
     name: string;
@@ -107,14 +108,15 @@ function Tabs(props: TabsProps) {
         >
           {tabs.map((tab) => (
             <Link
-              search={{ tab: tab.value }}
-              key={tab.name}
               className={cn(
                 tab.value === props.value
                   ? "bg-gray-100 text-gray-700"
                   : "text-gray-500 hover:text-gray-700",
                 "rounded-md px-3 py-2 text-sm font-medium inline-flex",
               )}
+              search={{ tab: tab.value }}
+              key={tab.name}
+              from={bookingsIndexRoute.to}
             >
               {tab.name}
               {tab.count
@@ -165,7 +167,7 @@ function BookingList(props: { tab: Tabs }) {
           <h4>{maskDate(date)}</h4>
           {bookings?.map((booking) => (
             <Link
-              to="/dashboard/bookings/$bookingId/view"
+              to={bookingRoute.to}
               params={{ bookingId: booking.id }}
               className="max-w-xl rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none p"
               key={booking.id}

@@ -34,9 +34,7 @@ export function AnonBookingWidget() {
       description: "",
     },
     onSubmit: (form) => {
-      // todo: submit
       // todo: redirect to success page, send email to confirm. This does lots of things
-      console.log(form.value);
       mutation.mutateAsync({
         date: Temporal.PlainDate.from(form.value.date!.toLocaleDateString()),
         roomId: form.value.room!,
@@ -46,10 +44,12 @@ export function AnonBookingWidget() {
         email: form.value.email,
         description: form.value.description,
       }, {
-        onSuccess: async () => {
+        onSuccess: async (data) => {
+          if (!data) return;
           await navigate({
             to: "/s/$profile_id/confirmation",
             params: { profile_id: profile_id },
+            search: { booking_id: data.id },
           });
         },
       });
@@ -186,6 +186,9 @@ export function AnonBookingWidget() {
                 Save
               </button>
             </div>
+            <p className="pt-2 text-center text-xs text-gray-500">
+              Payment not required until booking is accepted
+            </p>
           </form>
         </form.Provider>
       </Card>
