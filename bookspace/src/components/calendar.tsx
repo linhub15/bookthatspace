@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { ComponentProps } from "react";
-
 import { DayPicker } from "react-day-picker";
+
 type CalendarProps = ComponentProps<typeof DayPicker>;
 export function Calendar({
   ...props
@@ -23,13 +23,13 @@ export function Calendar({
         head_cell: "text-gray-500 rounded-md w-9 font-normal text-[0.8rem]",
         row: "flex w-full mt-2",
         cell:
-          "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-blue-400/50 [&:has([aria-selected])]:bg-blue-900 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+          "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-blue-400/50 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
         day:
           "h-9 w-9 p-0 font-normal aria-selected:opacity-100 rounded-lg hover:bg-blue-300/50",
         day_range_end: "day-range-end",
         day_selected:
-          "bg-indigo-400 text-white hover:bg-indigo-300 hover:text-white",
-        day_today: "underline bg-blue-600 text-white",
+          "bg-indigo-600 text-white hover:bg-indigo-300 hover:text-white",
+        day_today: "underline bg-blue-400 text-white",
       }}
       components={{
         IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,

@@ -15,6 +15,7 @@ import {
 } from "./auth/auth.routes";
 import { dashboardRoutes } from "./dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
+import { anonBookingRoutes } from "./features/anon_booking/anon_booking.routes";
 
 const rootRoute = new RootRoute({
   component: Outlet,
@@ -41,6 +42,7 @@ const routeTree = rootRoute.addChildren([
   forgotPasswordRoute,
   resetPasswordRoute,
   dashboardRoutes,
+  anonBookingRoutes,
 ]);
 
 const router = new Router({ routeTree });

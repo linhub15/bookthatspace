@@ -140,6 +140,7 @@ export function AvailabilityForm(props: Props) {
                           </span>
                         </label>
                         <div className="min-w-[200px] w-0">
+                          {/* todo: extract time select to time picker */}
                           {field.state.value?.enabled && (
                             <div className="flex">
                               <select

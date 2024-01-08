@@ -96,20 +96,8 @@ export function Widget() {
   return (
     <div className="flex gap-4 max-w-screen-lg">
       <div id="steps" className="w-full">
-        {rooms.data && !selectedRoom && (
-          <Step heading="Select a room">
-            <RoomPicker
-              options={rooms.data}
-              value={selectedRoom!}
-              onChange={setSelectedRoom}
-            />
-          </Step>
-        )}
-        {selectedRoom && !selectedDay && (
-          <Step
-            heading="Select Day"
-            onBack={() => setSelectedRoom(undefined)}
-          >
+        {!selectedDay && (
+          <Step heading="Select Day">
             <Calendar
               mode="single"
               showOutsideDays={false}
@@ -118,11 +106,23 @@ export function Widget() {
             />
           </Step>
         )}
-        {selectedDay && (
+        {selectedDay && rooms.data && !selectedRoom && (
+          <Step
+            heading="Select a room"
+            onBack={() => setSelectedDay(undefined)}
+          >
+            <RoomPicker
+              options={rooms.data}
+              value={selectedRoom!}
+              onChange={setSelectedRoom}
+            />
+          </Step>
+        )}
+        {selectedRoom && (
           <Step
             heading="Start time & Duration"
             onBack={() => {
-              setSelectedDay(undefined);
+              setSelectedRoom(undefined);
               setSelectedTime(undefined);
             }}
           >
@@ -183,7 +183,7 @@ function RoomPicker(props: RoomPickerProps) {
           <div className="w-full overflow-hidden rounded-xl bg-gray-200 group-hover:opacity-75">
             <img
               src="https://placehold.co/400"
-              alt="placeholder"
+              alt="Photo of room"
               className="h-full w-full max-h-52 lg:max-h-72 object-cover object-center lg:h-full lg:w-full"
             />
           </div>
@@ -409,6 +409,10 @@ function Summary(
                 duration: selectedDuration!,
                 email: email,
                 description: description,
+              }, {
+                onSuccess: () => {
+                  setSelectedRoom(undefined);
+                },
               })}
           >
             Reserve your booking

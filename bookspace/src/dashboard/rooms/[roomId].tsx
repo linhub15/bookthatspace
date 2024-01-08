@@ -19,6 +19,11 @@ import { roomRoute } from "../dashboard.routes";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
 
+// todo(hubert): think about statuses
+// - accepting bookings
+// - not accepting bookings
+// - incomplete info (availability, photos)
+
 export function Room() {
   const { roomId } = roomRoute.useParams();
   const navigate = useNavigate();

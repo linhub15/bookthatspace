@@ -29,6 +29,10 @@ export function EditRoomForm(props: Props) {
           max_capacity: Number(values.value.max_capacity) ?? null,
           hourly_rate: Number(values.value.hourly_rate) ?? null,
         },
+      }, {
+        onSuccess: () => {
+          props.onAfterSubmit();
+        },
       });
     },
   });
@@ -37,7 +41,6 @@ export function EditRoomForm(props: Props) {
     e.preventDefault();
     e.stopPropagation();
     await form.handleSubmit();
-    props.onAfterSubmit();
   };
 
   return (
