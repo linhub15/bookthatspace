@@ -3,7 +3,7 @@ import { DatePicker } from "@/src/components/form/date_picker";
 import { Label } from "@/src/components/form/label";
 import { useForm } from "@tanstack/react-form";
 import { RoomPicker } from "./room_picker";
-import { anonBookingRoutes } from "./anon_booking.routes";
+import { anonBookingRoutes, confirmationRoute } from "./anon_booking.routes";
 import { useCreateBooking } from "./hooks";
 import { Temporal } from "@js-temporal/polyfill";
 import { useNavigate } from "@tanstack/react-router";
@@ -47,7 +47,7 @@ export function AnonBookingWidget() {
         onSuccess: async (data) => {
           if (!data) return;
           await navigate({
-            to: "/s/$profile_id/confirmation",
+            to: confirmationRoute.to,
             params: { profile_id: profile_id },
             search: { booking_id: data.id },
           });
@@ -183,7 +183,7 @@ export function AnonBookingWidget() {
                 type="submit"
                 className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
               >
-                Save
+                Request booking
               </button>
             </div>
             <p className="pt-2 text-center text-xs text-gray-500">

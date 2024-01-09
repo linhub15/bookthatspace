@@ -32,7 +32,7 @@ export function Room() {
   const deleteRoom = useDeleteRoomModal({
     roomId: room_id,
     onSuccess: () => {
-      navigate({ to: "/dashboard/rooms" });
+      navigate({ to: roomsRoute.to });
     },
   });
 

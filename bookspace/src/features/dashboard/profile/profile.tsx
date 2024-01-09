@@ -3,6 +3,7 @@ import { authenticated } from "../../../auth/use_authenticated.signal";
 import { useNavigate } from "@tanstack/react-router";
 import { Card } from "@/src/components/card";
 import { useProfile } from "@/src/profile/hooks";
+import { rootRoute } from "@/src/app.router";
 
 export function Profile() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ export function Profile() {
               onClick={async () => {
                 await supabase.auth.signOut();
                 authenticated.value = false;
-                navigate({ to: "/" });
+                navigate({ to: rootRoute.to });
               }}
             >
               Sign Out

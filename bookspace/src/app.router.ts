@@ -1,10 +1,4 @@
-import {
-  Outlet,
-  RootRoute,
-  Route,
-  RoutePaths,
-  Router,
-} from "@tanstack/react-router";
+import { RootRoute, Route, RoutePaths, Router } from "@tanstack/react-router";
 import { App } from "./app";
 import {
   emailConfirmationRoute,
@@ -17,9 +11,7 @@ import { dashboardRoutes } from "./features/dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
 import { anonBookingRoutes } from "./features/anon_booking/anon_booking.routes";
 
-const rootRoute = new RootRoute({
-  component: Outlet,
-});
+const rootRoute = new RootRoute();
 
 const appIndex = new Route({
   getParentRoute: () => rootRoute,

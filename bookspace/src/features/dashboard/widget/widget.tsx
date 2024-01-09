@@ -11,10 +11,15 @@ export function WidgetIndex() {
 
   if (!profile) return null;
 
+  const widgetLink = `${window.location.host}${
+    anonBookingRoutes.fullPath.replace(
+      "$profile_id",
+      profile.id,
+    )
+  }`;
+
   const copyLinkToClipboard = async () => {
-    await navigator.clipboard.writeText(
-      `${window.location.host}/s/${profile.id}`,
-    );
+    await navigator.clipboard.writeText(widgetLink);
   };
 
   return (
@@ -48,7 +53,7 @@ export function WidgetIndex() {
                 <input
                   className="block w-full min-w-0 flex-1 rounded-l-md rounded-none border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
-                  value={`${window.location.host}/s/${profile.id}`}
+                  value={widgetLink}
                   disabled
                 />
                 <button

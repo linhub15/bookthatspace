@@ -5,7 +5,7 @@ import { Confirmation } from "./confirmation";
 
 const anonBookingRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "s/$profile_id",
+  path: "book/$profile_id",
 });
 
 const anonBookingIndexRoute = new Route({
