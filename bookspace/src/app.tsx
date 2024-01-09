@@ -1,9 +1,10 @@
 import { Navigate } from "@tanstack/react-router";
+import { bookingsRoute } from "./features/dashboard/dashboard.routes";
 
 export function App() {
   return (
     <div>
-      <Navigate to="/dashboard/bookings" startTransition />
+      <Navigate to={bookingsRoute.to} startTransition />
     </div>
   );
 }

@@ -15,7 +15,7 @@ import { useWeekCalendar } from "./use_week_calendar";
 import { useChangeAvailabilityModal } from "./change_availability/use_change_availability_modal";
 import { useDeleteRoomModal } from "./use_delete_room_modal";
 import { useEditRoomModal } from "./edit_room/use_edit_room.modal";
-import { roomRoute } from "../dashboard.routes";
+import { roomRoute, roomsRoute } from "../dashboard.routes";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
 
@@ -25,34 +25,34 @@ import { useRef } from "react";
 // - incomplete info (availability, photos)
 
 export function Room() {
-  const { roomId } = roomRoute.useParams();
+  const { room_id } = roomRoute.useParams();
   const navigate = useNavigate();
 
-  const editRoom = useEditRoomModal({ roomId: roomId });
+  const editRoom = useEditRoomModal({ roomId: room_id });
   const deleteRoom = useDeleteRoomModal({
-    roomId: roomId,
+    roomId: room_id,
     onSuccess: () => {
       navigate({ to: "/dashboard/rooms" });
     },
   });
 
-  const availability = useRoomAvailability(roomId);
-  const photos = useRoomPhotos(roomId);
+  const availability = useRoomAvailability(room_id);
+  const photos = useRoomPhotos(room_id);
 
   const calendar = useWeekCalendar();
 
   const changeAvailability = useChangeAvailabilityModal({
-    roomId: roomId,
+    roomId: room_id,
   });
 
-  const { data: room } = useRoom(roomId);
+  const { data: room } = useRoom(room_id);
   if (!room) return <div>loading...</div>;
 
   return (
     <>
       <div className="space-y-4">
         <div className="flex w-full justify-between">
-          <Link className="w-fit" to="/dashboard/rooms">
+          <Link className="w-fit" to={roomsRoute.to}>
             <BackButton />
           </Link>
           <button

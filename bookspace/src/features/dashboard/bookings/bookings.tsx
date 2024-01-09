@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Temporal } from "@js-temporal/polyfill";
-import { supabase } from "../../supabase";
+import { supabase } from "../../../supabase";
 import { Fragment } from "react";
-import { maskDate, maskTimeRange } from "../../masks/masks";
+import { maskDate, maskTimeRange } from "../../../masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { Link, useSearch } from "@tanstack/react-router";
 import { Card } from "@/src/components/card";
@@ -168,7 +168,7 @@ function BookingList(props: { tab: Tabs }) {
           {bookings?.map((booking) => (
             <Link
               to={bookingRoute.to}
-              params={{ bookingId: booking.id }}
+              params={{ booking_id: booking.id }}
               className="max-w-xl rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none p"
               key={booking.id}
             >

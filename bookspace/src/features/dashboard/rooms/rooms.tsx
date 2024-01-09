@@ -1,12 +1,13 @@
-import { Modal } from "../../components/modal";
+import { Modal } from "../../../components/modal";
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
 import { useAddRoom, useRooms } from "./hooks";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Tables } from "../../types/supabase_types";
-import { maskHourlyRate } from "../../masks/masks";
+import { Tables } from "../../../types/supabase_types";
+import { maskHourlyRate } from "../../../masks/masks";
 import { Card } from "@/src/components/card";
 import { Label } from "@/src/components/form/label";
+import { roomRoute } from "../dashboard.routes";
 
 export function Rooms() {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ export function Rooms() {
 
   const onRoomCreated = (roomId: string) => {
     setOpen(false);
-    navigate({ to: "/dashboard/rooms/$roomId", params: { roomId } });
+    navigate({ to: roomRoute.to, params: { room_id: roomId } });
   };
 
   return (
@@ -69,7 +70,7 @@ export function Rooms() {
 
 function RoomCard(props: { room: Tables<"room"> }) {
   return (
-    <Link to={`/dashboard/rooms/$roomId`} params={{ roomId: props.room.id }}>
+    <Link to={roomRoute.to} params={{ room_id: props.room.id }}>
       <div className="rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none">
         <div className="flex w-full px-6 py-6 justify-between align-top">
           <div className="flex-auto">

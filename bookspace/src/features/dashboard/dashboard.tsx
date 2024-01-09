@@ -9,8 +9,13 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
-import { supabase } from "../supabase";
-import { bookingsRoute, roomsRoute, widgetRoute } from "./dashboard.routes";
+import { supabase } from "../../supabase";
+import {
+  bookingsRoute,
+  profileRoute,
+  roomsRoute,
+  widgetRoute,
+} from "./dashboard.routes";
 
 function useNavigation() {
   return [
@@ -25,7 +30,7 @@ function useNavigation() {
       icon: HomeIcon,
     },
     {
-      name: "Widget",
+      name: "Widget Link",
       to: widgetRoute.to,
       icon: CodeBracketSquareIcon,
     },
@@ -165,7 +170,7 @@ export function Dashboard() {
           <div className="flex-1 text-sm font-semibold leading-6 text-gray-900">
             Dashboard
           </div>
-          <Link to="/dashboard/profile">
+          <Link to={profileRoute.to}>
             <span className="sr-only">Your profile</span>
             <span className="border-2 border-gray-300 inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
               <svg
@@ -250,7 +255,7 @@ function DesktopSidebar() {
 
           <li className="-mx-6 mt-auto">
             <Link
-              to="/dashboard/profile"
+              to={profileRoute.to}
               className="flex items-center gap-x-4 px-6 py-4 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
             >
               <span className="border-2 border-gray-300 inline-block min-h-8 w-8 overflow-hidden rounded-full bg-gray-100">

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "../../supabase";
+import { supabase } from "../../../supabase";
 import { TablesInsert, TablesUpdate } from "@/src/types/supabase_types";
 
 export function useRooms() {

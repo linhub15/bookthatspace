@@ -13,7 +13,7 @@ import {
   resetPasswordRoute,
   signupRoute,
 } from "./auth/auth.routes";
-import { dashboardRoutes } from "./dashboard/dashboard.routes";
+import { dashboardRoutes } from "./features/dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
 import { anonBookingRoutes } from "./features/anon_booking/anon_booking.routes";
 

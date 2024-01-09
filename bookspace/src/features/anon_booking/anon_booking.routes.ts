@@ -8,7 +8,7 @@ const anonBookingRoute = new Route({
   path: "s/$profile_id",
 });
 
-const profileRoute = new Route({
+const anonBookingIndexRoute = new Route({
   getParentRoute: () => anonBookingRoute,
   path: "/",
   component: AnonBookingWidget,
@@ -24,6 +24,6 @@ export const confirmationRoute = new Route({
 });
 
 export const anonBookingRoutes = anonBookingRoute.addChildren([
-  profileRoute,
+  anonBookingIndexRoute,
   confirmationRoute,
 ]);

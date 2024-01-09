@@ -11,15 +11,15 @@ import {
 } from "@heroicons/react/24/outline";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { bookingRoute } from "../dashboard.routes";
+import { bookingRoute, bookingsRoute } from "../dashboard.routes";
 
 export function Booking() {
-  const { bookingId } = bookingRoute.useParams();
-  const { data: booking } = useGetBooking(bookingId);
+  const { booking_id } = bookingRoute.useParams();
+  const { data: booking } = useGetBooking(booking_id);
   return (
     <>
       <div className="py-4">
-        <Link className="w-fit" to="/dashboard/bookings">
+        <Link className="w-fit" to={bookingsRoute.to}>
           <BackButton />
         </Link>
       </div>
