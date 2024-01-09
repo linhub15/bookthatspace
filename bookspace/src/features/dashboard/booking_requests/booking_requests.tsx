@@ -48,7 +48,7 @@ function BookingRequestList() {
   const { data } = useBookingRequests();
 
   if (!data) {
-    return null;
+    return;
   }
 
   return (

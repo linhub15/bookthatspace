@@ -5,17 +5,19 @@ import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
 import { anonBookingRoutes } from "../../anon_booking/anon_booking.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+import { router } from "@/src/app.router";
 
 export function WidgetIndex() {
   const { data: profile } = useProfile();
 
-  if (!profile) return null;
+  if (!profile) return;
 
   const widgetLink = `${window.location.host}${
-    anonBookingRoutes.fullPath.replace(
-      "$profile_id",
-      profile.id,
-    )
+    router.buildLocation({
+      to: anonBookingRoutes.to,
+      params: { profile_id: profile.id },
+      search: {},
+    }).pathname
   }`;
 
   const copyLinkToClipboard = async () => {

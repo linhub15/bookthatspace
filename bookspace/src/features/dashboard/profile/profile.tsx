@@ -9,7 +9,7 @@ export function Profile() {
   const navigate = useNavigate();
   const { data: profile } = useProfile();
 
-  if (!profile) return null;
+  if (!profile) return;
 
   return (
     <Card>

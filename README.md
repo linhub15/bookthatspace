@@ -1,27 +1,23 @@
-Running the supabase cli
+# Book that space
+
+Space rental management software for dance studios and community centers.
+
+## Developer Setup
+
+- install node.js, pnpm, supabase cli, docker
+- read the [Style Guide](style_guide.md)
+- setup local supabase; verify with `supabase status`
+- create a dotenv file with the [example](bookspace/.env.example)
+- `cd bookspace && pnpm dev`
+
+### Running the supabase cli
+
+Most commonly used commands.
 
 ```
 supabase help
 supabase start
+supabase stop
+supabase db diff
+supabase migrations list
 ```
-
-## Conventions
-
-- pass arguments as objects (exception: only 1 argument)
-- pass optional arguments as `options` object as second parameter
-- files names are `snake_case` lowercase and use underscores
-- all variable names are `pascalCased`
-  - exception: database table columns are `snake_case`
-  - exception: search parameters use `snake_case`
-
-### Hooks
-
-- hooks are `camelCased`
-- hooks are prefixed with `use`
-- hooks are passsed `args`
-
-### Components
-
-- functional components are `PascalCased`
-- functional components are passed `props` with a type `Prop` that is not
-  exported

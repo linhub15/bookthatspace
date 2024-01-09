@@ -16,7 +16,7 @@ export function Feed(props: Props) {
   const { timeline } = props;
 
   if (!timeline) {
-    return null;
+    return;
   }
 
   const icon = {

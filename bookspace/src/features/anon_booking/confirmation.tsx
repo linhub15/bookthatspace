@@ -13,7 +13,8 @@ export function Confirmation() {
             Booking received!
           </p>
           <p className="mt-2 text-base text-gray-500">
-            You will receive an email once the booking has been reviewed.
+            An email was sent to <strong>email</strong>{" "}
+            with a confirmation link.
           </p>
 
           <dl className="mt-12 text-sm font-medium">
