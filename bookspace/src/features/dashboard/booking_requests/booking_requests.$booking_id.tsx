@@ -1,8 +1,7 @@
 import { BackButton } from "@/src/components/buttons/back_button";
 import { Card } from "@/src/components/card";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/src/masks/masks";
-import { supabase } from "@/src/supabase";
-import { Enums, Tables } from "@/src/types/supabase_types";
+import { Tables } from "@/src/types/supabase_types";
 import {
   CalendarDaysIcon,
   ClockIcon,
@@ -10,19 +9,21 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { bookingRoute, bookingsRoute } from "../dashboard.routes";
+import { bookingRequestRoute, bookingRequestsRoute } from "../dashboard.routes";
 import { useRoom } from "../rooms/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { useRoomBooking, useSetRoomBookingStatus } from "../bookings/hooks";
+import { Feed } from "@/src/components/feed";
+import { Temporal } from "@js-temporal/polyfill";
 
-export function Booking() {
-  const { booking_id } = bookingRoute.useParams();
-  const { data: booking } = useGetBooking(booking_id);
+export function BookingRequest() {
+  const { booking_id } = bookingRequestRoute.useParams();
+  const { data: booking } = useRoomBooking(booking_id);
   return (
     <>
       <div className="py-4">
-        <Link className="w-fit" to={bookingsRoute.to}>
+        <Link className="w-fit" to={bookingRequestsRoute.to}>
           <BackButton />
         </Link>
       </div>
@@ -35,11 +36,15 @@ export function Booking() {
 
 function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
   const { data: room } = useRoom(booking.room_id);
-  const approve = useSetBookingStatus(booking.id);
+  const setBookingStatus = useSetRoomBookingStatus(booking.id);
+
+  const approve = async () => {
+    await setBookingStatus.mutateAsync({ status: "active" });
+  };
 
   return (
     <>
-      <div className="lg:col-start-3 lg:row-end-1 max-w-xs">
+      <div className="lg:col-start-3 lg:row-end-1 w-full sm:max-w-sm">
         <h2 className="sr-only">Summary</h2>
         <Card>
           <dl className="flex flex-wrap">
@@ -137,28 +142,9 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
               <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                 <div className="flex w-0 flex-1 items-center">
                   <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
-
-                  <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span className="truncate font-medium">
-                      resume_back_end_developer.pdf
-                    </span>
-                  </div>
-                </div>
-                <div className="ml-4 flex-shrink-0">
-                  <button
-                    className="font-medium text-red-600 hover:text-red-500"
-                    type="button"
-                  >
-                    <TrashIcon className="w-4 h-4" />
-                  </button>
-                </div>
-              </li>
-              <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                <div className="flex w-0 flex-1 items-center">
-                  <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
                   <div className="ml-3 flex min-w-0 flex-1 gap-2">
                     <span className="truncate font-medium">
-                      coverletter_back_end_developer.pdf
+                      rental_contract.pdf
                     </span>
                   </div>
                 </div>
@@ -177,63 +163,52 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
             <div className="grid gap-4 border-t border-gray-900/5 px-6 py-6">
               <button
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => approve.mutate({ status: "active" })}
+                onClick={() => approve()}
               >
                 Approve
               </button>
 
               <button
                 className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => approve.mutate({ status: "rejected" })}
+                onClick={() => setBookingStatus.mutate({ status: "rejected" })}
               >
                 Reject
               </button>
+            </div>
+          )}
+
+          {booking.status === "active" && (
+            <div className="px-6 py-4">
+              <Feed
+                timeline={[{
+                  label: "Booking requested",
+                  date: Temporal.Instant.from(booking.created_at)
+                    .toLocaleString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    }),
+                  status: "done",
+                }, {
+                  label: "Approved",
+                  date: Temporal.Now.instant().toLocaleString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  }),
+                  status: "done",
+                }, {
+                  label: "Waiting payment",
+                  date: "",
+                  status: "in_progress",
+                }, {
+                  label: "Finalized",
+                  date: "",
+                  status: "not_started",
+                }]}
+              />
             </div>
           )}
         </Card>
       </div>
     </>
   );
-}
-
-function useGetBooking(bookingId: string) {
-  return useQuery({
-    queryKey: ["room_bookings", bookingId],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("room_booking").select("*")
-        .eq(
-          "id",
-          bookingId,
-        );
-
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      return data.at(0);
-    },
-  });
-}
-
-function useSetBookingStatus(bookingId: string) {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (
-      args: { status: Enums<"room_booking_status"> },
-    ) => {
-      const { error } = await supabase.from("room_booking").update({
-        status: args.status,
-      }).eq(
-        "id",
-        bookingId,
-      );
-
-      if (error) {
-        alert(error.message);
-      }
-
-      queryClient.invalidateQueries({ queryKey: ["room_bookings"] });
-    },
-  });
 }

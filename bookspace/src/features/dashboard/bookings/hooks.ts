@@ -1,7 +1,7 @@
 import { supabase } from "@/src/supabase";
-import { TablesInsert } from "@/src/types/supabase_types";
+import { Enums, TablesInsert } from "@/src/types/supabase_types";
 import { useForm } from "@tanstack/react-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useAddBooking() {
   const mutation = useMutation({
@@ -28,4 +28,46 @@ export function useAddBookingForm() {
   });
 
   return form;
+}
+
+export function useRoomBooking(bookingId: string) {
+  return useQuery({
+    queryKey: ["room_bookings", bookingId],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("room_booking").select("*")
+        .eq(
+          "id",
+          bookingId,
+        );
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      return data.at(0);
+    },
+  });
+}
+
+export function useSetRoomBookingStatus(bookingId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (
+      args: { status: Enums<"room_booking_status"> },
+    ) => {
+      const { error } = await supabase.from("room_booking").update({
+        status: args.status,
+      }).eq(
+        "id",
+        bookingId,
+      );
+
+      if (error) {
+        alert(error.message);
+      }
+
+      queryClient.invalidateQueries({ queryKey: ["room_bookings"] });
+    },
+  });
 }

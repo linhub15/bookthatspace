@@ -2,29 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import { Temporal } from "@js-temporal/polyfill";
 import { supabase } from "../../../supabase";
 import { Fragment } from "react";
-import { maskDate, maskTimeRange } from "../../../masks/masks";
+import { maskDate, maskDurationSince } from "../../../masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { Link, useSearch } from "@tanstack/react-router";
 import { Card } from "@/src/components/card";
 import { bookingRoute, bookingsIndexRoute } from "../dashboard.routes";
 
-type Tabs = "upcoming" | "pending" | "past" | "all";
+type Tabs = "upcoming" | "past" | "all";
 
 export function Bookings() {
   const tab = useSearch({ from: bookingsIndexRoute.id }).tab as Tabs ??
     "upcoming";
-  const { data: pending } = useBookings("pending");
   const tabOptions: {
     name: string;
     value: Tabs;
-    count?: number;
   }[] = [
     { name: "Upcoming", value: "upcoming" },
-    {
-      name: "Pending",
-      value: "pending",
-      count: pending?.length,
-    },
     { name: "Past", value: "past" },
   ];
 
@@ -36,7 +29,7 @@ export function Bookings() {
             Bookings
           </h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-            Room bookings
+            Scheduled bookings
           </p>
         </div>
       </div>
@@ -57,10 +50,6 @@ function useBookings(type: "upcoming" | "pending" | "past" | "all") {
       case type === "upcoming":
         return baseQuery()
           .eq("status", "active")
-          .filter("start", "gte", today);
-      case type === "pending":
-        return baseQuery()
-          .eq("status", "needs_approval")
           .filter("start", "gte", today);
       case type === "past":
         return baseQuery()
@@ -165,27 +154,57 @@ function BookingList(props: { tab: Tabs }) {
       {bookingGroups?.map(([date, bookings], idx) => (
         <Fragment key={idx}>
           <h4>{maskDate(date)}</h4>
-          {bookings?.map((booking) => (
-            <Link
-              to={bookingRoute.to}
-              params={{ booking_id: booking.id }}
-              className="max-w-xl rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none p"
-              key={booking.id}
-            >
-              <div className="flex px-6 py-6 justify-between align-top">
-                <div>
-                  <div>{maskTimeRange(booking?.start, booking?.end)}</div>
-                  <div>{booking?.room?.name}</div>
-                </div>
-                <div className="text-right">
-                  <div>{booking?.booked_by_email}</div>
-                  <div className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                    {booking.status}
+          <ul role="list" className="divide-y divide-gray-100">
+            {bookings?.map((booking) => (
+              <li
+                className="flex items-center justify-between gap-x-6 py-5"
+                key={booking.id}
+              >
+                <div className="min-w-0">
+                  <div className="flex items-start gap-x-3">
+                    <p className="text-sm font-semibold leading-6 text-gray-900">
+                      {booking.room?.name}
+                    </p>
+                    <p
+                      className={cn(
+                        "rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset",
+                      )}
+                    >
+                      {booking.status}
+                    </p>
+                  </div>
+                  <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+                    <p className="whitespace-nowrap">
+                      Booked for{" "}
+                      <time dateTime={booking.start}>
+                        {maskDate(booking.start)}
+                      </time>
+                    </p>
+                    <svg viewBox="0 0 2 2" className="h-0.5 w-0.5 fill-current">
+                      <circle cx={1} cy={1} r={1} />
+                    </svg>
+                    <p className="truncate">
+                      {booking.booked_by_name} ({booking.booked_by_email})
+                    </p>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="flex flex-col items-end gap-1">
+                  <Link
+                    to={bookingRoute.to}
+                    params={{ booking_id: booking.id }}
+                    className="hidden w-fit rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
+                    key={booking.id}
+                  >
+                    Review
+                  </Link>
+
+                  <span className="font-normal text-xs text-gray-700">
+                    Received {maskDurationSince(booking.created_at)}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
         </Fragment>
       ))}
     </div>

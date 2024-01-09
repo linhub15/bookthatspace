@@ -11,6 +11,8 @@ import { z } from "zod";
 import { QueryClient } from "@tanstack/react-query";
 import { userQueryOptions } from "../../auth/user_query_options";
 import { WidgetIndex } from "./widget/widget";
+import { BookingRequests } from "./booking_requests/booking_requests";
+import { BookingRequest } from "./booking_requests/booking_requests.$booking_id";
 
 export const dashboardRoute = new Route({
   getParentRoute: () => rootRoute,
@@ -36,6 +38,23 @@ export const roomRoute = new Route({
   getParentRoute: () => roomsRoute,
   path: "$room_id",
   component: Room,
+});
+
+export const bookingRequestsRoute = new Route({
+  getParentRoute: () => dashboardRoute,
+  path: "booking-requests",
+});
+
+export const bookingRequestsIndexRoute = new Route({
+  getParentRoute: () => bookingRequestsRoute,
+  path: "/",
+  component: BookingRequests,
+});
+
+export const bookingRequestRoute = new Route({
+  getParentRoute: () => bookingRequestsRoute,
+  path: "$booking_id/review",
+  component: BookingRequest,
 });
 
 export const bookingsRoute = new Route({
@@ -73,8 +92,12 @@ export const profileRoute = new Route({
 });
 
 export const dashboardRoutes = dashboardRoute.addChildren([
-  roomsRoute.addChildren([roomsIndexRoute, roomRoute]),
+  bookingRequestsRoute.addChildren([
+    bookingRequestsIndexRoute,
+    bookingRequestRoute,
+  ]),
   bookingsRoute.addChildren([bookingsIndexRoute, bookingRoute]),
+  roomsRoute.addChildren([roomsIndexRoute, roomRoute]),
   widgetRoute,
   profileRoute,
 ]);

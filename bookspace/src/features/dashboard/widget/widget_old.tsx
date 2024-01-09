@@ -19,6 +19,7 @@ const timeOptions = Array.from(Array(24 * 2), (_, i) => {
   });
 });
 
+/** @deprecated keep it as reference for the controls */
 function useCreateBooking() {
   const mutation = useMutation({
     // todo(hubert): limit the ability to update status (RLS)
@@ -46,6 +47,7 @@ function useCreateBooking() {
         start: start.toString({ timeZoneName: "never" }),
         end: end.toString({ timeZoneName: "never" }),
         room_id: args.roomId,
+        booked_by_name: "",
         booked_by_email: args.email,
         description: args.description,
       });
@@ -54,6 +56,7 @@ function useCreateBooking() {
   return mutation;
 }
 
+/** @deprecated only keep for the UI control */
 export function Widget() {
   const { data } = useQuery(userQueryOptions);
   const profileId = data?.data.user?.id;

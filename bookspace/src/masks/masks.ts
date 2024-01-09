@@ -40,3 +40,37 @@ export function maskHourlyRate(rate: number | null) {
   });
   return `${masked} / Hour`;
 }
+
+export function maskDurationSince(target: string) {
+  const duration = Temporal.Now.instant().since(target).round({
+    largestUnit: "month",
+    relativeTo: Temporal.Now.zonedDateTimeISO(),
+  });
+
+  if (duration.months > 0) {
+    return `${duration.months}mo ago`;
+  }
+
+  if (duration.weeks > 0) {
+    return `${duration.weeks}w ago`;
+  }
+
+  if (duration.days > 0) {
+    switch (duration.days) {
+      case 1:
+        return "yesterday";
+      default:
+        return `${duration.days}d ago`;
+    }
+  }
+
+  if (duration.hours > 0) {
+    return `${duration.hours}h ago`;
+  }
+
+  if (duration.minutes > 0) {
+    return `${duration.minutes}m ago`;
+  }
+
+  return "just now";
+}

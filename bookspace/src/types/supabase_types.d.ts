@@ -117,6 +117,7 @@ export interface Database {
       room_booking: {
         Row: {
           booked_by_email: string
+          booked_by_name: string
           created_at: string
           description: string | null
           end: string
@@ -128,6 +129,7 @@ export interface Database {
         }
         Insert: {
           booked_by_email: string
+          booked_by_name: string
           created_at?: string
           description?: string | null
           end: string
@@ -139,6 +141,7 @@ export interface Database {
         }
         Update: {
           booked_by_email?: string
+          booked_by_name?: string
           created_at?: string
           description?: string | null
           end?: string
@@ -201,6 +204,7 @@ export interface Database {
         | "cancelled"
         | "active"
         | "rejected"
+        | "scheduled"
     }
     CompositeTypes: {
       [_ in never]: never
