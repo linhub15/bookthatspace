@@ -66,7 +66,7 @@ export function Room() {
 
         <div className="flex flex-col md:flex-row w-full gap-4">
           <Card>
-            <div className="bg-white px-4 py-5 sm:px-6">
+            <div className="px-4 py-5 sm:px-6">
               <div className="flex flex-wrap items-center justify-between sm:flex-nowrap">
                 <div>
                   <h3 className="text-base font-semibold leading-6 text-gray-900">
@@ -122,7 +122,7 @@ export function Room() {
           </Card>
 
           <Card>
-            <div className="bg-white px-4 py-5 sm:px-6">
+            <div className="px-4 py-5 sm:px-6">
               <div className="flex flex-wrap items-center justify-between sm:flex-nowrap">
                 <h3 className="text-base font-semibold leading-6 text-gray-900">
                   Photos
@@ -144,7 +144,7 @@ export function Room() {
         </div>
 
         <Card>
-          <div className="bg-white px-4 py-5 sm:px-6 border-b border-b-gray-200">
+          <div className="px-4 py-5 sm:px-6 border-b border-b-gray-200">
             <div className="flex flex-wrap items-center justify-between sm:flex-nowrap">
               <h3 className="text-base font-semibold leading-6 text-gray-900">
                 Availability

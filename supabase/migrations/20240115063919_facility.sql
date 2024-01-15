@@ -72,6 +72,16 @@ SET default_tablespace = '';
 
 SET default_table_access_method = "heap";
 
+CREATE TABLE IF NOT EXISTS "public"."facility" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "profile_id" "uuid" NOT NULL,
+    "address" "jsonb",
+    "name" "text"
+);
+
+ALTER TABLE "public"."facility" OWNER TO "postgres";
+
 CREATE TABLE IF NOT EXISTS "public"."profile" (
     "id" "uuid" NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
@@ -86,10 +96,10 @@ CREATE TABLE IF NOT EXISTS "public"."room" (
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "name" "text" NOT NULL,
     "description" "text",
-    "profile_id" "uuid" DEFAULT "auth"."uid"() NOT NULL,
     "max_capacity" numeric,
     "address" "text",
-    "hourly_rate" numeric
+    "hourly_rate" numeric,
+    "facility_id" "uuid" NOT NULL
 );
 
 ALTER TABLE "public"."room" OWNER TO "postgres";
@@ -141,6 +151,9 @@ ALTER TABLE "supabase_migrations"."schema_migrations" OWNER TO "postgres";
 ALTER TABLE ONLY "public"."room_booking"
     ADD CONSTRAINT "calendar_event_pkey" PRIMARY KEY ("id");
 
+ALTER TABLE ONLY "public"."facility"
+    ADD CONSTRAINT "facility_pkey" PRIMARY KEY ("id");
+
 ALTER TABLE ONLY "public"."profile"
     ADD CONSTRAINT "profile_pkey" PRIMARY KEY ("id");
 
@@ -156,6 +169,9 @@ ALTER TABLE ONLY "public"."room"
 ALTER TABLE ONLY "supabase_migrations"."schema_migrations"
     ADD CONSTRAINT "schema_migrations_pkey" PRIMARY KEY ("version");
 
+ALTER TABLE ONLY "public"."facility"
+    ADD CONSTRAINT "facility_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "public"."profile"("id") ON DELETE CASCADE;
+
 ALTER TABLE ONLY "public"."profile"
     ADD CONSTRAINT "profile_id_fkey" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
@@ -165,45 +181,51 @@ ALTER TABLE ONLY "public"."room_availability"
 ALTER TABLE ONLY "public"."room_booking"
     ADD CONSTRAINT "room_booking_room_id_fkey" FOREIGN KEY ("room_id") REFERENCES "public"."room"("id") ON DELETE CASCADE;
 
+ALTER TABLE ONLY "public"."room"
+    ADD CONSTRAINT "room_facility_id_fkey" FOREIGN KEY ("facility_id") REFERENCES "public"."facility"("id") ON DELETE CASCADE;
+
 ALTER TABLE ONLY "public"."room_photo"
     ADD CONSTRAINT "room_photo_room_id_fkey" FOREIGN KEY ("room_id") REFERENCES "public"."room"("id") ON DELETE CASCADE;
 
-ALTER TABLE ONLY "public"."room"
-    ADD CONSTRAINT "room_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "public"."profile"("id") ON DELETE CASCADE;
-
 CREATE POLICY "Profile viewable by creator" ON "public"."profile" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "id"));
 
-CREATE POLICY "anon_can_create" ON "public"."room_booking" FOR INSERT TO "authenticated", "anon" WITH CHECK (("booked_by_email" IS NOT NULL));
+CREATE POLICY "anon_can_create" ON "public"."room_booking" FOR INSERT TO "anon" WITH CHECK (("booked_by_email" IS NOT NULL));
 
 CREATE POLICY "anon_can_select" ON "public"."room" FOR SELECT TO "anon" USING (true);
 
-CREATE POLICY "owner_can_all" ON "public"."room" TO "authenticated" USING (("auth"."uid"() = "profile_id")) WITH CHECK (true);
+ALTER TABLE "public"."facility" ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "owner_can_all" ON "public"."room_availability" TO "authenticated" USING (("auth"."uid"() IN ( SELECT "room"."profile_id"
-   FROM "public"."room"
-  WHERE ("room"."id" = "room_availability"."room_id")))) WITH CHECK (("auth"."uid"() IN ( SELECT "room"."profile_id"
-   FROM "public"."room"
+CREATE POLICY "owner_can_all" ON "public"."facility" TO "authenticated" USING (("auth"."uid"() = "profile_id")) WITH CHECK (("auth"."uid"() = "profile_id"));
+
+CREATE POLICY "owner_can_all" ON "public"."room" TO "authenticated" USING (("auth"."uid"() = ( SELECT "facility"."profile_id"
+   FROM "public"."facility"
+  WHERE ("facility"."id" = "room"."facility_id")))) WITH CHECK (true);
+
+CREATE POLICY "owner_can_all" ON "public"."room_availability" TO "authenticated" USING (("auth"."uid"() IN ( SELECT "facility"."profile_id"
+   FROM ("public"."facility"
+     JOIN "public"."room" ON (("room"."facility_id" = "facility"."id")))
+  WHERE ("room"."id" = "room_availability"."room_id")))) WITH CHECK (("auth"."uid"() IN ( SELECT "facility"."profile_id"
+   FROM ("public"."facility"
+     JOIN "public"."room" ON (("room"."facility_id" = "facility"."id")))
   WHERE ("room"."id" = "room_availability"."room_id"))));
 
-CREATE POLICY "owner_can_all" ON "public"."room_photo" TO "authenticated" USING (("auth"."uid"() IN ( SELECT "room"."profile_id"
-   FROM "public"."room"
-  WHERE ("room"."id" = "room_photo"."room_id")))) WITH CHECK (("auth"."uid"() IN ( SELECT "room"."profile_id"
-   FROM "public"."room"
+CREATE POLICY "owner_can_all" ON "public"."room_booking" TO "authenticated" USING (("auth"."uid"() IN ( SELECT "facility"."profile_id"
+   FROM ("public"."facility"
+     JOIN "public"."room" ON (("room"."facility_id" = "facility"."id")))
+  WHERE ("room"."id" = "room_booking"."room_id")))) WITH CHECK (("auth"."uid"() IN ( SELECT "facility"."profile_id"
+   FROM ("public"."facility"
+     JOIN "public"."room" ON (("room"."facility_id" = "facility"."id")))
+  WHERE ("room"."id" = "room_booking"."room_id"))));
+
+CREATE POLICY "owner_can_all" ON "public"."room_photo" TO "authenticated" USING (("auth"."uid"() IN ( SELECT "facility"."profile_id"
+   FROM ("public"."facility"
+     JOIN "public"."room" ON (("room"."facility_id" = "facility"."id")))
+  WHERE ("room"."id" = "room_photo"."room_id")))) WITH CHECK (("auth"."uid"() IN ( SELECT "facility"."profile_id"
+   FROM ("public"."facility"
+     JOIN "public"."room" ON (("room"."facility_id" = "facility"."id")))
   WHERE ("room"."id" = "room_photo"."room_id"))));
 
 CREATE POLICY "owner_can_create" ON "public"."profile" FOR INSERT TO "authenticated" WITH CHECK (("id" = "auth"."uid"()));
-
-CREATE POLICY "owner_can_read" ON "public"."room" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "profile_id"));
-
-CREATE POLICY "owner_can_read" ON "public"."room_booking" FOR SELECT TO "authenticated" USING (("auth"."uid"() IN ( SELECT "room"."profile_id"
-   FROM "public"."room"
-  WHERE ("room"."id" = "room_booking"."room_id"))));
-
-CREATE POLICY "owner_can_update" ON "public"."room_booking" FOR UPDATE USING (("auth"."uid"() IN ( SELECT "room"."profile_id"
-   FROM "public"."room"
-  WHERE ("room"."id" = "room_booking"."room_id")))) WITH CHECK (("auth"."uid"() IN ( SELECT "room"."profile_id"
-   FROM "public"."room"
-  WHERE ("room"."id" = "room_booking"."room_id"))));
 
 ALTER TABLE "public"."profile" ENABLE ROW LEVEL SECURITY;
 
@@ -224,6 +246,10 @@ GRANT USAGE ON SCHEMA "public" TO "service_role";
 GRANT ALL ON FUNCTION "public"."create_profile_on_signup"() TO "anon";
 GRANT ALL ON FUNCTION "public"."create_profile_on_signup"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."create_profile_on_signup"() TO "service_role";
+
+GRANT ALL ON TABLE "public"."facility" TO "anon";
+GRANT ALL ON TABLE "public"."facility" TO "authenticated";
+GRANT ALL ON TABLE "public"."facility" TO "service_role";
 
 GRANT ALL ON TABLE "public"."profile" TO "anon";
 GRANT ALL ON TABLE "public"."profile" TO "authenticated";

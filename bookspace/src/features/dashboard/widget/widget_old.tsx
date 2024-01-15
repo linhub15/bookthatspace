@@ -7,7 +7,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import { Tables } from "../../../types/supabase_types";
 import { maskHourlyRate, maskTime } from "../../../masks/masks";
 import { BackButton } from "@/src/components/buttons/back_button";
-import { FormGroup } from "@/src/components/form/form_group";
+import { FormField } from "@/src/components/form/form_field";
 import { Card } from "@/src/components/card";
 import { Label } from "@/src/components/form/label";
 import { userQueryOptions } from "@/src/auth/user_query_options";
@@ -278,7 +278,7 @@ type BookingFormProps = {
 function BookingForm(props: BookingFormProps) {
   return (
     <form className="space-y-4">
-      <FormGroup>
+      <FormField>
         <Label>Email</Label>
         <input
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -288,8 +288,8 @@ function BookingForm(props: BookingFormProps) {
           onChange={(e) =>
             props.onChange({ ...props.value, email: e.target.value })}
         />
-      </FormGroup>
-      <FormGroup>
+      </FormField>
+      <FormField>
         <Label>Additional Information</Label>
         <textarea
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -298,7 +298,7 @@ function BookingForm(props: BookingFormProps) {
           onChange={(e) =>
             props.onChange({ ...props.value, description: e.target.value })}
         />
-      </FormGroup>
+      </FormField>
     </form>
   );
 }

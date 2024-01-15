@@ -25,7 +25,7 @@ export function Rooms() {
 
   return (
     <Card>
-      <div className="px-4 py-6 sm:px-6 flex justify-between">
+      <div className="flex px-4 py-6 sm:px-6 justify-between">
         <div>
           <h3 className="text-base font-semibold leading-7 text-gray-900">
             Rooms

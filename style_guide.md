@@ -16,6 +16,8 @@ Follow these conventions for consistency.
 - hooks are `camelCased`
 - hooks are prefixed with `use`
 - hooks are passsed `args`
+- mutations must always throw `error` so consumers can handle handle them
+  `onError`
 
 ### Components
 

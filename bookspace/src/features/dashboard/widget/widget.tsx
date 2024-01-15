@@ -1,6 +1,6 @@
 import { Card } from "@/src/components/card";
 import { ToggleSwitch } from "@/src/components/form/toggle_switch";
-import { useProfile } from "@/src/profile/hooks";
+import { useProfile } from "@/src/features/hooks";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
 import { anonBookingRoutes } from "../../anon_booking/anon_booking.routes";

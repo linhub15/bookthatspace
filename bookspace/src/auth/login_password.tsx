@@ -2,7 +2,7 @@ import { useForm } from "@tanstack/react-form";
 import { useLoginWithPassword } from "./use_login_password.mutation";
 import { Link, useSearch } from "@tanstack/react-router";
 import { loginRoute } from "./auth.routes";
-import { FormGroup } from "../components/form/form_group";
+import { FormField } from "../components/form/form_field";
 import { Label } from "../components/form/label";
 
 export function LoginPassword() {
@@ -35,7 +35,7 @@ export function LoginPassword() {
               <form.Field name="email">
                 {(field) => (
                   (
-                    <FormGroup>
+                    <FormField>
                       <Label htmlFor={field.name}>Email</Label>
                       <input
                         className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -47,7 +47,7 @@ export function LoginPassword() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </FormGroup>
+                    </FormField>
                   )
                 )}
               </form.Field>
@@ -55,7 +55,7 @@ export function LoginPassword() {
               <form.Field name="password">
                 {(field) => (
                   (
-                    <FormGroup>
+                    <FormField>
                       <div className="flex justify-between">
                         <Label htmlFor={field.name}>Password</Label>
                         <Link
@@ -76,7 +76,7 @@ export function LoginPassword() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </FormGroup>
+                    </FormField>
                   )
                 )}
               </form.Field>

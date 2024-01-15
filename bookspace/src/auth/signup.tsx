@@ -1,7 +1,7 @@
 import { useForm } from "@tanstack/react-form";
 import { useSignupWithPassword } from "./use_signup_password.mutation";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { FormGroup } from "../components/form/form_group";
+import { FormField } from "../components/form/form_field";
 import { Label } from "../components/form/label";
 
 export function Signup() {
@@ -47,7 +47,7 @@ export function Signup() {
               <form.Field name="name">
                 {(field) => (field.state.value !== undefined &&
                   (
-                    <FormGroup>
+                    <FormField>
                       <Label>Name</Label>
                       <input
                         type="text"
@@ -57,14 +57,14 @@ export function Signup() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </FormGroup>
+                    </FormField>
                   ))}
               </form.Field>
 
               <form.Field name="email">
                 {(field) => (field.state.value !== undefined &&
                   (
-                    <FormGroup>
+                    <FormField>
                       <Label>Email</Label>
                       <input
                         type="email"
@@ -74,14 +74,14 @@ export function Signup() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </FormGroup>
+                    </FormField>
                   ))}
               </form.Field>
 
               <form.Field name="password">
                 {(field) => (field.state.value !== undefined &&
                   (
-                    <FormGroup>
+                    <FormField>
                       <Label>Password</Label>
                       <input
                         type="password"
@@ -91,7 +91,7 @@ export function Signup() {
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}
                       />
-                    </FormGroup>
+                    </FormField>
                   ))}
               </form.Field>
 
