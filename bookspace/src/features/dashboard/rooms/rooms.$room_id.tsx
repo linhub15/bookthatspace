@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import {
+  useDeletePhoto,
   useRoom,
   useRoomAvailability,
   useRoomPhotos,
@@ -18,6 +19,7 @@ import { useEditRoomModal } from "./use_edit_room_modal";
 import { roomRoute, roomsRoute } from "../dashboard.routes";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
+import { XCircleIcon } from "@heroicons/react/16/solid";
 
 // todo(hubert): think about statuses
 // - accepting bookings
@@ -38,6 +40,7 @@ export function Room() {
 
   const availability = useRoomAvailability(room_id);
   const photos = useRoomPhotos(room_id);
+  const deletePhoto = useDeletePhoto(room_id);
 
   const calendar = useWeekCalendar();
 
@@ -131,11 +134,21 @@ export function Room() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 px-4 py-5 sm:px-6 gap-4">
               {!!photos.data?.length &&
-                photos.data.map((url) => (
-                  <img
-                    className="w-full rounded-lg aspect-[1/1] object-cover"
-                    src={url}
-                  />
+                photos.data.map(({ photoId, url }) => (
+                  <div className="relative">
+                    <button
+                      className="absolute top-0 right-0 p-1 m-1"
+                      onClick={() =>
+                        deletePhoto.mutateAsync({ photoId: photoId })}
+                    >
+                      <XCircleIcon className="w-6 bg-white rounded-full">
+                      </XCircleIcon>
+                    </button>
+                    <img
+                      className="w-full rounded-lg aspect-[1/1] object-cover"
+                      src={url}
+                    />
+                  </div>
                 ))}
               {true &&
                 <AddImage roomId={room.id} />}
