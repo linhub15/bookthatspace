@@ -29,26 +29,6 @@ export function useRoom(roomId: string | undefined) {
   return { data: room };
 }
 
-export function useAddRoom() {
-  const queryClient = useQueryClient();
-  const addRoom = useMutation({
-    mutationFn: async (args: TablesInsert<"room">) => {
-      const { data, error } = await supabase.from("room").insert(args).select()
-        .single();
-
-      if (error || !data) {
-        alert(error.message);
-        return;
-      }
-
-      queryClient.invalidateQueries({ queryKey: ["rooms"] });
-
-      return data;
-    },
-  });
-  return addRoom;
-}
-
 export function useUpdateRoom() {
   const queryClient = useQueryClient();
   const updateRoom = useMutation({
