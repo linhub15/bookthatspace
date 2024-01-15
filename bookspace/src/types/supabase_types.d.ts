@@ -75,38 +75,38 @@ export interface Database {
           address: string | null
           created_at: string
           description: string | null
+          facility_id: string
           hourly_rate: number | null
           id: string
           max_capacity: number | null
           name: string
-          profile_id: string
         }
         Insert: {
           address?: string | null
           created_at?: string
           description?: string | null
+          facility_id: string
           hourly_rate?: number | null
           id?: string
           max_capacity?: number | null
           name: string
-          profile_id?: string
         }
         Update: {
           address?: string | null
           created_at?: string
           description?: string | null
+          facility_id?: string
           hourly_rate?: number | null
           id?: string
           max_capacity?: number | null
           name?: string
-          profile_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "room_profile_id_fkey"
-            columns: ["profile_id"]
+            foreignKeyName: "room_facility_id_fkey"
+            columns: ["facility_id"]
             isOneToOne: false
-            referencedRelation: "profile"
+            referencedRelation: "facility"
             referencedColumns: ["id"]
           }
         ]

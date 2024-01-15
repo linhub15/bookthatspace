@@ -1,5 +1,5 @@
 import { rootRoute } from "@/src/app.router";
-import { AnonBookingWidget } from "./[profile_id]";
+import { AnonBookingWidget } from "./$profile_id";
 import { Route } from "@tanstack/react-router";
 import { Confirmation } from "./confirmation";
 

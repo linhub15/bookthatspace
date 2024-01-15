@@ -14,7 +14,7 @@ import { useWeekCalendar } from "./use_week_calendar";
 
 import { useChangeAvailabilityModal } from "./change_availability/use_change_availability_modal";
 import { useDeleteRoomModal } from "./use_delete_room_modal";
-import { useEditRoomModal } from "./edit_room/use_edit_room.modal";
+import { useEditRoomModal } from "./use_edit_room_modal";
 import { roomRoute, roomsRoute } from "../dashboard.routes";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";

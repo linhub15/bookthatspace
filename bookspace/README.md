@@ -1,5 +1,6 @@
+# frontend - React Application
+
 ## Features
 
-- Manage multiple rooms available for rent
-- Appove bookings
-- Embeddable widget: to book hall
+- `anon_booking` public facing routes
+- `dashboard` authenticated only routes

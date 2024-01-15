@@ -1,6 +1,6 @@
 import { Modal } from "@/src/components/modal";
 import { useState } from "react";
-import { EditRoomForm } from "./edit_room_form";
+import { RoomForm } from "./room_form";
 
 type Props = {
   roomId: string;
@@ -12,8 +12,9 @@ export function useEditRoomModal(props: Props) {
   const modal = () => {
     return (
       <Modal open={open} onDismiss={() => {}}>
-        <EditRoomForm
+        <RoomForm
           roomId={props.roomId}
+          submitBtnText="Save"
           onAfterSubmit={() => setOpen(false)}
           onCancel={() => setOpen(false)}
         />

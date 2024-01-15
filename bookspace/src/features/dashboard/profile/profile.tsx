@@ -5,7 +5,7 @@ import { Card } from "@/src/components/card";
 import { useFacility, useProfile } from "@/src/features/hooks";
 import { rootRoute } from "@/src/app.router";
 import { HomeModernIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useFacilityModal } from "./use_facility.modal";
+import { useFacilityModal } from "./use_facility_modal";
 import { AddressDisplay } from "@/src/components/form/address_input";
 import { Address } from "@/src/types/address";
 
@@ -87,7 +87,7 @@ export function Profile() {
 
         {facility.isSuccess && facility.data && (
           <>
-            <div className="flex px-4 py-6 sm:px-6 justify-between">
+            <div className="px-4 py-6 space-y-4 sm:px-6 sm:flex sm:items-center sm:justify-between">
               <div>
                 <h3 className="text-base font-semibold leading-7 text-gray-900">
                   Facility
