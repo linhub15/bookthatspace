@@ -19,7 +19,7 @@ type Form = {
 };
 
 export function AnonBookingWidget() {
-  const { profile_id } = anonBookingRoutes.useParams();
+  const { facility_id } = anonBookingRoutes.useParams();
   const mutation = useCreateBooking();
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ export function AnonBookingWidget() {
           if (!data) return;
           await navigate({
             to: confirmationRoute.to,
-            params: { profile_id: profile_id },
+            params: { facility_id: facility_id },
             search: { booking_id: data.id },
           });
         },
@@ -83,7 +83,7 @@ export function AnonBookingWidget() {
                   <RoomPicker
                     name={field.name}
                     id={field.name}
-                    profileId={profile_id}
+                    facilityId={facility_id}
                     value={field.state.value}
                     onChange={(v) => field.handleChange(v)}
                   />

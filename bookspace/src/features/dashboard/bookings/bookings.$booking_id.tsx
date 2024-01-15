@@ -2,7 +2,7 @@ import { BackButton } from "@/src/components/buttons/back_button";
 import { Card } from "@/src/components/card";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/src/masks/masks";
 import { supabase } from "@/src/supabase";
-import { Enums, Tables } from "@/src/types/supabase_types";
+import { Tables } from "@/src/types/supabase_types";
 import {
   CalendarDaysIcon,
   ClockIcon,
@@ -10,7 +10,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { bookingRoute, bookingsRoute } from "../dashboard.routes";
 import { useRoom } from "../rooms/hooks";
@@ -35,7 +35,6 @@ export function Booking() {
 
 function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
   const { data: room } = useRoom(booking.room_id);
-  const approve = useSetBookingStatus(booking.id);
 
   return (
     <>
@@ -173,23 +172,6 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
               </li>
             </ul>
           </div>
-          {booking.status === "needs_approval" && (
-            <div className="grid gap-4 border-t border-gray-900/5 px-6 py-6">
-              <button
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => approve.mutate({ status: "active" })}
-              >
-                Approve
-              </button>
-
-              <button
-                className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => approve.mutate({ status: "rejected" })}
-              >
-                Reject
-              </button>
-            </div>
-          )}
         </Card>
       </div>
     </>
@@ -212,28 +194,6 @@ function useGetBooking(bookingId: string) {
       }
 
       return data.at(0);
-    },
-  });
-}
-
-function useSetBookingStatus(bookingId: string) {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (
-      args: { status: Enums<"room_booking_status"> },
-    ) => {
-      const { error } = await supabase.from("room_booking").update({
-        status: args.status,
-      }).eq(
-        "id",
-        bookingId,
-      );
-
-      if (error) {
-        alert(error.message);
-      }
-
-      queryClient.invalidateQueries({ queryKey: ["room_bookings"] });
     },
   });
 }

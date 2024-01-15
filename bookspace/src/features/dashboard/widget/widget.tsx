@@ -1,23 +1,25 @@
 import { Card } from "@/src/components/card";
 import { ToggleSwitch } from "@/src/components/form/toggle_switch";
-import { useProfile } from "@/src/features/hooks";
+import { useFacility } from "@/src/features/hooks";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
-import { Link } from "@tanstack/react-router";
-import { anonBookingRoutes } from "../../anon_booking/anon_booking.routes";
+import { Link, LinkProps } from "@tanstack/react-router";
+import { anonBookingWidgetRoute } from "../../anon_booking/anon_booking.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { router } from "@/src/app.router";
 
 export function WidgetIndex() {
-  const { data: profile } = useProfile();
+  const { data: facility } = useFacility();
 
-  if (!profile) return;
+  if (!facility) return;
+
+  const linkProps: LinkProps = {
+    to: anonBookingWidgetRoute.to,
+    params: { facility_id: facility.id },
+    search: {},
+  };
 
   const widgetLink = `${window.location.host}${
-    router.buildLocation({
-      to: anonBookingRoutes.to,
-      params: { profile_id: profile.id },
-      search: {},
-    }).pathname
+    router.buildLocation(linkProps).pathname
   }`;
 
   const copyLinkToClipboard = async () => {
@@ -43,9 +45,10 @@ export function WidgetIndex() {
               </label>
               <Link
                 className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
-                to={anonBookingRoutes.to}
                 target="_blank"
-                params={{ profile_id: profile.id }}
+                to={linkProps.to}
+                params={linkProps.params}
+                search={linkProps.search}
               >
                 Preview <ArrowTopRightOnSquareIcon className="h-4 w-4 ml-1" />
               </Link>
@@ -102,7 +105,7 @@ export function WidgetIndex() {
                   name="company-website"
                   id="company-website"
                   className="block w-full min-w-0 flex-1 rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder={profile.id}
+                  placeholder={facility.id}
                   disabled
                 />
               </div>

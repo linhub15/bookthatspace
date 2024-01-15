@@ -1,16 +1,23 @@
 import { rootRoute } from "@/src/app.router";
-import { AnonBookingWidget } from "./$profile_id";
+import { AnonBookingWidget } from "./anon_booking.$facility_id";
 import { Route } from "@tanstack/react-router";
 import { Confirmation } from "./confirmation";
+import { Fragment } from "react";
 
-const anonBookingRoute = new Route({
+export const anonBookingRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: "book/$profile_id",
+  path: "/s/$facility_id",
 });
 
-const anonBookingIndexRoute = new Route({
+export const anonBookingIndexRoute = new Route({
   getParentRoute: () => anonBookingRoute,
   path: "/",
+  component: Fragment,
+});
+
+export const anonBookingWidgetRoute = new Route({
+  getParentRoute: () => anonBookingRoute,
+  path: "book",
   component: AnonBookingWidget,
 });
 
@@ -25,5 +32,6 @@ export const confirmationRoute = new Route({
 
 export const anonBookingRoutes = anonBookingRoute.addChildren([
   anonBookingIndexRoute,
+  anonBookingWidgetRoute,
   confirmationRoute,
 ]);

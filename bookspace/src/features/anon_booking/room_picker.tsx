@@ -8,18 +8,18 @@ import { cn } from "@/lib/utils/cn";
 type Props = {
   id?: string;
   name?: string;
-  profileId: string;
+  facilityId: string;
   value: string | undefined;
   onChange: (value: string | undefined) => void;
 };
 
 export function RoomPicker(props: Props) {
   const rooms = useQuery({
-    queryKey: ["rooms", props.profileId],
+    queryKey: ["rooms", props.facilityId],
     queryFn: async () => {
       const { data, error } = await supabase.from("room").select().eq(
-        "profile_id",
-        props.profileId!,
+        "facility_id",
+        props.facilityId!,
       );
 
       if (error) {
@@ -29,7 +29,7 @@ export function RoomPicker(props: Props) {
 
       return data;
     },
-    enabled: !!props.profileId,
+    enabled: !!props.facilityId,
   });
 
   return (
