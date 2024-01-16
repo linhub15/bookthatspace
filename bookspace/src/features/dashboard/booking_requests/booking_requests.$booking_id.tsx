@@ -13,7 +13,11 @@ import { Link } from "@tanstack/react-router";
 import { bookingRequestRoute, bookingRequestsRoute } from "../dashboard.routes";
 import { useRoom } from "../rooms/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
-import { useRoomBooking, useSetRoomBookingStatus } from "../bookings/hooks";
+import {
+  useRejectBooking,
+  useRoomBooking,
+  useSetRoomBookingStatus,
+} from "../bookings/hooks";
 import { Feed } from "@/src/components/feed";
 import { Temporal } from "@js-temporal/polyfill";
 
@@ -36,10 +40,15 @@ export function BookingRequest() {
 
 function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
   const { data: room } = useRoom(booking.room_id);
+  const rejectBooking = useRejectBooking();
   const setBookingStatus = useSetRoomBookingStatus(booking.id);
 
   const approve = async () => {
     await setBookingStatus.mutateAsync({ status: "active" });
+  };
+
+  const reject = async (bookingId: string) => {
+    await rejectBooking.mutateAsync({ bookingId, reason: "" });
   };
 
   return (
@@ -170,7 +179,7 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
 
               <button
                 className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => setBookingStatus.mutate({ status: "rejected" })}
+                onClick={() => reject(booking.id)}
               >
                 Reject
               </button>

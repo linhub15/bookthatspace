@@ -1,3 +1,4 @@
+import { api } from "@/src/clients/api";
 import { Enums, supabase, TablesInsert } from "@/src/clients/supabase";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -45,6 +46,22 @@ export function useRoomBooking(bookingId: string) {
       }
 
       return data.at(0);
+    },
+  });
+}
+
+export function useRejectBooking() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (args: { bookingId: string; reason: string }) => {
+      await api.reject_booking({
+        booking_id: args.bookingId,
+        reason: args.reason,
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["room_bookings"] });
     },
   });
 }

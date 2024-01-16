@@ -21,7 +21,6 @@ const timeOptions = Array.from(Array(24 * 2), (_, i) => {
 /** @deprecated keep it as reference for the controls */
 function useCreateBooking() {
   const mutation = useMutation({
-    // todo(hubert): limit the ability to update status (RLS)
     mutationFn: async (
       args: {
         roomId: string;

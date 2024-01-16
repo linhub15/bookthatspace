@@ -7,13 +7,25 @@ Space rental management software for dance studios and community centers.
 - install node.js, pnpm, supabase cli, docker, deno
 - add VSCode plugins eslint, deno, tailwindcss
 - read the [Style Guide](style_guide.md)
-- setup local supabase; verify with `supabase status`
-- create a dotenv file with the [example](bookspace/.env.example)
-- `cd bookspace && pnpm dev`
+
+### Supabase db
+
+- `supabase start`; verify with `supabase status`
+
+### Supabase functions
+
+- create a dotenv file. [Example](supabase/functions/.env.example)
+- `deno task functions`
+
+### Frontend
+
+- create a dotenv file. [Example](bookspace/.env.example)
+- `deno task frontend` or `cd bookspace && pnpm dev`
 
 ### Running the supabase cli
 
-Most commonly used commands.
+Login and link to the remote project in order to diff and make changes. Most
+commonly used commands.
 
 ```
 supabase help
