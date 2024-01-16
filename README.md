@@ -4,7 +4,8 @@ Space rental management software for dance studios and community centers.
 
 ## Developer Setup
 
-- install node.js, pnpm, supabase cli, docker
+- install node.js, pnpm, supabase cli, docker, deno
+- add VSCode plugins eslint, deno, tailwindcss
 - read the [Style Guide](style_guide.md)
 - setup local supabase; verify with `supabase status`
 - create a dotenv file with the [example](bookspace/.env.example)

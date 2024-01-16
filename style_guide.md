@@ -10,6 +10,7 @@ Follow these conventions for consistency.
 - all variable names are `pascalCased`
   - exception: database table columns are `snake_case`
   - exception: search parameters use `snake_case`
+  - exception: url routes use `snake_case`
 
 ### Hooks
 

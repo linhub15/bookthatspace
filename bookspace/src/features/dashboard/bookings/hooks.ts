@@ -1,5 +1,4 @@
-import { supabase } from "@/src/supabase";
-import { Enums, TablesInsert } from "@/src/types/supabase_types";
+import { Enums, supabase, TablesInsert } from "@/src/clients/supabase";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 

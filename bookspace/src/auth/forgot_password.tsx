@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../supabase";
+import { supabase } from "../clients/supabase";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Label } from "../components/form/label";

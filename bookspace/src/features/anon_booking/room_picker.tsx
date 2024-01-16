@@ -1,5 +1,5 @@
 import { maskHourlyRate } from "@/src/masks/masks";
-import { supabase } from "@/src/supabase";
+import { supabase } from "@/src/clients/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";

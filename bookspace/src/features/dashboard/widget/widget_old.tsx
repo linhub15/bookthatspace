@@ -1,10 +1,9 @@
 import { PropsWithChildren, useState } from "react";
 import { Calendar } from "../../../components/calendar";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { supabase } from "../../../supabase";
+import { supabase, Tables } from "@/src/clients/supabase";
 import { DurationSlider } from "../../../components/duration_slider";
 import { Temporal } from "@js-temporal/polyfill";
-import { Tables } from "../../../types/supabase_types";
 import { maskHourlyRate, maskTime } from "../../../masks/masks";
 import { BackButton } from "@/src/components/buttons/back_button";
 import { FormField } from "@/src/components/form/form_field";

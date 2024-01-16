@@ -1,7 +1,7 @@
 import { BackButton } from "@/src/components/buttons/back_button";
 import { Card } from "@/src/components/card";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/src/masks/masks";
-import { Tables } from "@/src/types/supabase_types";
+import { Tables } from "@/src/clients/supabase";
 import {
   CalendarDaysIcon,
   ClockIcon,

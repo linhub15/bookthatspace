@@ -1,5 +1,5 @@
 import { signal } from "@preact/signals";
-import { supabase } from "../supabase";
+import { supabase } from "../clients/supabase";
 import { useEffect } from "react";
 
 export const authenticated = signal(false);

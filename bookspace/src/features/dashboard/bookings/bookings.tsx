@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Temporal } from "@js-temporal/polyfill";
-import { supabase } from "../../../supabase";
+import { supabase } from "../../../clients/supabase";
 import { Fragment } from "react";
 import { maskDate, maskDurationSince } from "../../../masks/masks";
 import { cn } from "@/lib/utils/cn";

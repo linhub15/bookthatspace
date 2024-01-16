@@ -1,6 +1,6 @@
 import { Card } from "@/src/components/card";
 import { maskDate, maskDurationSince } from "@/src/masks/masks";
-import { supabase } from "@/src/supabase";
+import { supabase } from "@/src/clients/supabase";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { bookingRequestRoute } from "../dashboard.routes";

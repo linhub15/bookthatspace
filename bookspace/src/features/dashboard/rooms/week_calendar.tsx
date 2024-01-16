@@ -1,7 +1,7 @@
 // Moved this into a separate file for Vite "fast refresh" warning
 
 import { cn } from "@/lib/utils/cn";
-import { Enums } from "@/src/types/supabase_types";
+import { Enums } from "@/src/clients/supabase";
 import { Temporal } from "@js-temporal/polyfill";
 import { Fragment, PropsWithChildren, useRef } from "react";
 

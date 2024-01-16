@@ -1,4 +1,4 @@
-import { Enums, Tables, TablesInsert } from "@/src/types/supabase_types";
+import { Enums, Tables, TablesInsert } from "@/src/clients/supabase";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Temporal } from "@js-temporal/polyfill";
 import { useForm } from "@tanstack/react-form";

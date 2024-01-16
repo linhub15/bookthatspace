@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../supabase";
+import { supabase } from "../clients/supabase";
 import { emailConfirmationRoute } from "./auth.routes";
 import { Link } from "@tanstack/react-router";
 

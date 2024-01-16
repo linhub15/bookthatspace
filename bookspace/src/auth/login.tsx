@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { supabase } from "../supabase";
+import { supabase } from "../clients/supabase";
 
 export function Login() {
   const [loading, setLoading] = useState(false);

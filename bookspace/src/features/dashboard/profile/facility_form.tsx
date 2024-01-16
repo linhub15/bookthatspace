@@ -2,8 +2,7 @@ import { useForm } from "@tanstack/react-form";
 import { useFacility } from "../../hooks";
 import { Label } from "@/src/components/form/label";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/src/supabase";
-import { TablesInsert } from "@/src/types/supabase_types";
+import { supabase, TablesInsert } from "@/src/clients/supabase";
 import { AddressInput } from "@/src/components/form/address_input";
 import { FormField } from "@/src/components/form/form_field";
 

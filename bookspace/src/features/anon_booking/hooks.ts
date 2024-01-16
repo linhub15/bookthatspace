@@ -1,4 +1,4 @@
-import { supabase } from "@/src/supabase";
+import { supabase } from "@/src/clients/supabase";
 import { Temporal } from "@js-temporal/polyfill";
 import { useMutation } from "@tanstack/react-query";
 

@@ -2,7 +2,7 @@ import { Modal } from "../../../components/modal";
 import { useState } from "react";
 import { useRooms } from "./hooks";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Tables } from "../../../types/supabase_types";
+import { Tables } from "@/src/clients/supabase";
 import { maskHourlyRate } from "../../../masks/masks";
 import { Card } from "@/src/components/card";
 import { roomRoute } from "../dashboard.routes";

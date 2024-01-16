@@ -10,7 +10,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
-import { supabase } from "../../supabase";
+import { supabase } from "../../clients/supabase";
 import {
   bookingRequestsRoute,
   bookingsRoute,

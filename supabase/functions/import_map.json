@@ -1,0 +1,9 @@
+{
+    "imports": {
+        "@/lib/": "../../lib/",
+        "std/": "https://deno.land/std@0.212.0/",
+        "hono": "https://deno.land/x/hono@v3.12.4/mod.ts",
+        "hono/": "https://deno.land/x/hono@v3.12.4/",
+        "zod": "https://deno.land/x/zod@v3.22.4/mod.ts"
+    }
+}

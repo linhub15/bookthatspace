@@ -1,4 +1,4 @@
-import { supabase } from "../../../supabase";
+import { supabase } from "../../../clients/supabase";
 import { authenticated } from "../../../auth/use_authenticated.signal";
 import { useNavigate } from "@tanstack/react-router";
 import { Card } from "@/src/components/card";
