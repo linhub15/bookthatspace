@@ -25,7 +25,7 @@ export function RoomForm(props: Props) {
       max_capacity: room?.max_capacity?.toString() ?? undefined,
       hourly_rate: room?.hourly_rate?.toString() ?? undefined,
     },
-    onSubmit: async (values) => {
+    onSubmit: async (form) => {
       if (!facility) {
         throw new Error("Facility is required to upsert room");
       }
@@ -34,11 +34,11 @@ export function RoomForm(props: Props) {
         room: {
           id: props.roomId,
           facility_id: facility.id,
-          name: values.value.name ?? "",
-          address: values.value.address,
-          description: values.value.description,
-          max_capacity: Number(values.value.max_capacity) ?? null,
-          hourly_rate: Number(values.value.hourly_rate) ?? null,
+          name: form.value.name ?? "",
+          address: form.value.address,
+          description: form.value.description,
+          max_capacity: Number(form.value.max_capacity) ?? null,
+          hourly_rate: Number(form.value.hourly_rate) ?? null,
         },
       }, {
         onSuccess: (data) => {

@@ -13,13 +13,10 @@ import { Link } from "@tanstack/react-router";
 import { bookingRequestRoute, bookingRequestsRoute } from "../dashboard.routes";
 import { useRoom } from "../rooms/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
-import {
-  useRejectBooking,
-  useRoomBooking,
-  useSetRoomBookingStatus,
-} from "../bookings/hooks";
+import { useRoomBooking, useSetRoomBookingStatus } from "../bookings/hooks";
 import { Feed } from "@/src/components/feed";
 import { Temporal } from "@js-temporal/polyfill";
+import { useRejectBookingModal } from "./use_reject_booking_modal";
 
 export function BookingRequest() {
   const { booking_id } = bookingRequestRoute.useParams();
@@ -40,19 +37,16 @@ export function BookingRequest() {
 
 function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
   const { data: room } = useRoom(booking.room_id);
-  const rejectBooking = useRejectBooking();
+  const rejectBookingModal = useRejectBookingModal(booking.id);
   const setBookingStatus = useSetRoomBookingStatus(booking.id);
 
   const approve = async () => {
     await setBookingStatus.mutateAsync({ status: "active" });
   };
 
-  const reject = async (bookingId: string) => {
-    await rejectBooking.mutateAsync({ bookingId, reason: "" });
-  };
-
   return (
     <>
+      <rejectBookingModal.Modal />
       <div className="lg:col-start-3 lg:row-end-1 w-full sm:max-w-sm">
         <h2 className="sr-only">Summary</h2>
         <Card>
@@ -179,7 +173,7 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
 
               <button
                 className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => reject(booking.id)}
+                onClick={rejectBookingModal.open}
               >
                 Reject
               </button>

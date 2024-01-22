@@ -12,7 +12,7 @@ export function supabaseAuth(): MiddlewareHandler<SupabaseEnv> {
 
     const client = createClient<Database>(
       Deno.env.get("SUPABASE_URL") || "",
-      Deno.env.get("ANON_KEY") || "",
+      Deno.env.get("SUPABASE_ANON_KEY") || "",
       { global: { headers: { Authorization: authHeader } } },
     );
 

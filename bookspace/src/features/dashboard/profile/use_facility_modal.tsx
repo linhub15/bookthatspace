@@ -1,9 +1,9 @@
-import { Modal } from "@/src/components/modal";
+import { Modal, type ModalHook } from "@/src/components/modal";
 import { useState } from "react";
 import { useProfile } from "../../hooks";
 import { FacilityForm } from "./facility_form";
 
-export function useFacilityModal() {
+export function useFacilityModal(): ModalHook {
   const [open, setOpen] = useState(false);
   const { data: profile } = useProfile();
 

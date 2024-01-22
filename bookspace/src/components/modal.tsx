@@ -1,6 +1,11 @@
 import { Fragment, PropsWithChildren } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
+export type ModalHook = {
+  Modal: () => JSX.Element;
+  open: () => void;
+};
+
 type Props = {
   open: boolean;
   /** Called when backdrop is clicked. Use `() => {}` to disable backdrop close */

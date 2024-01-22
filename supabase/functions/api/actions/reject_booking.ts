@@ -26,7 +26,9 @@ export async function rejectBooking(
   await sendEmail({
     to: data.booked_by_email,
     subject: "Booking rejected",
-    html:
-      html`<p>Hi ${data.booked_by_name}, your booking was rejected because of ${request.reason}</p>`,
+    html: html`
+      <p>Hi ${data.booked_by_name}, your booking was rejected.</p>
+      ${request.reason && html`<p>${request.reason}</p>`}
+    `,
   });
 }
