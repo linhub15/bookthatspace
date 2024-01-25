@@ -1,6 +1,7 @@
-import { Hono, validator } from "hono/mod.ts";
+import { Hono } from "hono/mod.ts";
 import { cors } from "hono/middleware.ts";
 import { supabaseAuth, SupabaseEnv } from "./middleware/supabase_auth.ts";
+import { zValidator } from "./middleware/z_validator.ts";
 import {
   rejectBooking,
   RejectBookingRequest,
@@ -18,13 +19,7 @@ app.get("/", (c) => c.text("alive"));
 
 app.post(
   "/accept_booking",
-  validator("json", (value, c) => {
-    const result = AcceptBookingRequest.safeParse(value);
-    if (!result.success) {
-      return c.text(result.error.message, 400);
-    }
-    return result.data;
-  }),
+  zValidator("json", AcceptBookingRequest),
   async (c) => {
     const request = c.req.valid("json");
     await acceptBooking(request, { supabase: c.var.supabase });
@@ -34,13 +29,7 @@ app.post(
 
 app.post(
   "/reject_booking",
-  validator("json", (value, c) => {
-    const result = RejectBookingRequest.safeParse(value);
-    if (!result.success) {
-      return c.text(result.error.message, 400);
-    }
-    return result.data;
-  }),
+  zValidator("json", RejectBookingRequest),
   async (c) => {
     const request = c.req.valid("json");
     await rejectBooking(request, { supabase: c.var.supabase });
