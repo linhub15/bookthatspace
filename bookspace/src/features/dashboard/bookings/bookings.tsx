@@ -49,7 +49,7 @@ function useBookings(type: "upcoming" | "pending" | "past" | "all") {
     switch (true) {
       case type === "upcoming":
         return baseQuery()
-          .eq("status", "active")
+          .eq("status", "scheduled")
           .filter("start", "gte", today);
       case type === "past":
         return baseQuery()
@@ -195,7 +195,7 @@ function BookingList(props: { tab: Tabs }) {
                     className="hidden w-fit rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
                     key={booking.id}
                   >
-                    Review
+                    Details
                   </Link>
 
                   <span className="font-normal text-xs text-gray-700">

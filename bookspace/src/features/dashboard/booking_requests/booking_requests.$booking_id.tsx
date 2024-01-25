@@ -13,10 +13,11 @@ import { Link } from "@tanstack/react-router";
 import { bookingRequestRoute, bookingRequestsRoute } from "../dashboard.routes";
 import { useRoom } from "../rooms/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
-import { useRoomBooking, useSetRoomBookingStatus } from "../bookings/hooks";
+import { useRoomBooking } from "../bookings/hooks";
 import { Feed } from "@/src/components/feed";
 import { Temporal } from "@js-temporal/polyfill";
 import { useRejectBookingModal } from "./use_reject_booking_modal";
+import { useAcceptBooking } from "./use_accept_booking";
 
 export function BookingRequest() {
   const { booking_id } = bookingRequestRoute.useParams();
@@ -38,10 +39,10 @@ export function BookingRequest() {
 function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
   const { data: room } = useRoom(booking.room_id);
   const rejectBookingModal = useRejectBookingModal(booking.id);
-  const setBookingStatus = useSetRoomBookingStatus(booking.id);
+  const acceptBooking = useAcceptBooking();
 
-  const approve = async () => {
-    await setBookingStatus.mutateAsync({ status: "active" });
+  const accept = async () => {
+    await acceptBooking.mutateAsync({ booking_id: booking.id });
   };
 
   return (
@@ -166,9 +167,9 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
             <div className="grid gap-4 border-t border-gray-900/5 px-6 py-6">
               <button
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={() => approve()}
+                onClick={() => accept()}
               >
-                Approve
+                Accept
               </button>
 
               <button

@@ -14,6 +14,7 @@ type Args = {
   html: string;
 };
 
+/** @throws Error */
 export async function sendEmail(args: Args) {
   const RESEND_FROM_EMAIL = Deno.env.get("RESEND_FROM_EMAIL");
 

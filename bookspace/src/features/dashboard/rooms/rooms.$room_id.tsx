@@ -22,8 +22,6 @@ import { useRef } from "react";
 import { XCircleIcon } from "@heroicons/react/16/solid";
 
 // todo(hubert): think about statuses
-// - accepting bookings
-// - not accepting bookings
 // - incomplete info (availability, photos)
 
 export function Room() {

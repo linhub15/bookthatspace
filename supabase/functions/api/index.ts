@@ -5,12 +5,32 @@ import {
   rejectBooking,
   RejectBookingRequest,
 } from "./actions/reject_booking.ts";
+import {
+  acceptBooking,
+  AcceptBookingRequest,
+} from "./actions/accept_booking.ts";
 
 // todo: replace basePath string with `import.meta.dirname` in Deno 1.40.0
 export const app = new Hono<SupabaseEnv>().basePath("/api");
 
 app.use("*", cors(), supabaseAuth());
 app.get("/", (c) => c.text("alive"));
+
+app.post(
+  "/accept_booking",
+  validator("json", (value, c) => {
+    const result = AcceptBookingRequest.safeParse(value);
+    if (!result.success) {
+      return c.text(result.error.message, 400);
+    }
+    return result.data;
+  }),
+  async (c) => {
+    const request = c.req.valid("json");
+    await acceptBooking(request, { supabase: c.var.supabase });
+    return c.text("booking accepted");
+  },
+);
 
 app.post(
   "/reject_booking",
@@ -24,7 +44,7 @@ app.post(
   async (c) => {
     const request = c.req.valid("json");
     await rejectBooking(request, { supabase: c.var.supabase });
-    return c.text("ok", 200);
+    return c.text("booking rejected");
   },
 );
 

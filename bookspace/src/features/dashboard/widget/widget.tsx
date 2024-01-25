@@ -10,7 +10,7 @@ import { router } from "@/src/app.router";
 export function WidgetIndex() {
   const { data: facility } = useFacility();
 
-  if (!facility) return;
+  if (!facility) return <NoFacility />;
 
   const linkProps = {
     to: anonBookingWidgetRoute.to,
@@ -112,6 +112,24 @@ export function WidgetIndex() {
             </dd>
           </div>
         </dl>
+      </div>
+    </Card>
+  );
+}
+
+function NoFacility() {
+  return (
+    <Card>
+      <div className="p-4 space-y-4">
+        <p className="text-center text-lg">
+          Create facility to enable widget
+        </p>
+        <Link
+          className="mx-auto w-fit block text-nowrap bg-blue-600 rounded text-white py-2 px-4"
+          to="/dashboard/profile"
+        >
+          Create Facility
+        </Link>
       </div>
     </Card>
   );

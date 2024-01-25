@@ -1,21 +1,20 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { html, sendEmail } from "../gateways/email.ts";
-import { z } from "zod";
 import { Database } from "@/lib/types/supabase_types.d.ts";
+import { z } from "zod";
+import { html, sendEmail } from "../gateways/email.ts";
 
-export const RejectBookingRequest = z.object({
+export const AcceptBookingRequest = z.object({
   booking_id: z.string(),
-  reason: z.string(),
 });
 
-type RejectBookingRequest = z.infer<typeof RejectBookingRequest>;
+type AcceptBookingRequest = z.infer<typeof AcceptBookingRequest>;
 
-export async function rejectBooking(
-  request: RejectBookingRequest,
+export async function acceptBooking(
+  request: AcceptBookingRequest,
   deps: { supabase: SupabaseClient<Database> },
 ) {
   const { data, error } = await deps.supabase.from("room_booking")
-    .update({ status: "rejected" })
+    .update({ status: "scheduled" })
     .eq("id", request.booking_id)
     .select("booked_by_email, booked_by_name")
     .single();
@@ -26,10 +25,9 @@ export async function rejectBooking(
 
   await sendEmail({
     to: data.booked_by_email,
-    subject: "Booking rejected",
+    subject: "Booking accepted",
     html: html`
-      <p>Hi ${data.booked_by_name}, your booking was rejected.</p>
-      ${request.reason && html`<p>${request.reason}</p>`}
+      <p>Hi ${data.booked_by_name}, your booking was accepted and has been scheduled in our system.</p>
     `,
   });
 }
