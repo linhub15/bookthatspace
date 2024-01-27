@@ -24,6 +24,7 @@ export function useGetBooking(bookingId: string) {
 }
 
 export function useCreateBooking() {
+  const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: async (
       args: {
@@ -67,6 +68,9 @@ export function useCreateBooking() {
         .single();
 
       return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["room_bookings"] });
     },
     onError: (error) => alert(error.message),
   });
