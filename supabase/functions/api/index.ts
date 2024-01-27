@@ -11,7 +11,6 @@ import {
   AcceptBookingRequest,
 } from "./actions/accept_booking.ts";
 
-// todo: replace basePath string with `import.meta.dirname` in Deno 1.40.0
 export const app = new Hono<SupabaseEnv>().basePath("/api");
 
 app.use("*", cors(), supabaseAuth());

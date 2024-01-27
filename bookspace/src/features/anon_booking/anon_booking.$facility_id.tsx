@@ -9,7 +9,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import { useNavigate } from "@tanstack/react-router";
 
 type Form = {
-  date: Date | undefined;
+  date: Temporal.PlainDate | undefined;
   room: string | undefined;
   start: string | undefined;
   end: string | undefined;
@@ -25,7 +25,7 @@ export function AnonBookingWidget() {
 
   const form = useForm<Form>({
     defaultValues: {
-      date: new Date(),
+      date: Temporal.Now.plainDateISO(),
       room: undefined,
       start: undefined,
       end: undefined,
@@ -36,7 +36,7 @@ export function AnonBookingWidget() {
     onSubmit: (form) => {
       // todo: redirect to success page, send email to confirm. This does lots of things
       mutation.mutateAsync({
-        date: Temporal.PlainDate.from(form.value.date!.toLocaleDateString()),
+        date: form.value.date!,
         roomId: form.value.room!,
         start: Temporal.PlainTime.from(form.value.start!),
         end: Temporal.PlainTime.from(form.value.end!),

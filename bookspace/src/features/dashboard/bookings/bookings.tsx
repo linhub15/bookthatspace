@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils/cn";
 import { Link, useSearch } from "@tanstack/react-router";
 import { Card } from "@/src/components/card";
 import { bookingRoute, bookingsIndexRoute } from "../dashboard.routes";
+import { useCreateBookingModal } from "./use_create_booking_modal";
 
 type Tabs = "upcoming" | "past" | "all";
 
@@ -21,21 +22,34 @@ export function Bookings() {
     { name: "Past", value: "past" },
   ];
 
+  const createBookingModal = useCreateBookingModal();
+
   return (
-    <Card>
-      <div className="px-4 py-6 sm:px-6 flex justify-between">
-        <div>
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
-            Bookings
-          </h3>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-            Scheduled bookings
-          </p>
+    <>
+      <Card>
+        <div className="px-4 py-6 sm:px-6 flex justify-between">
+          <div>
+            <h3 className="text-base font-semibold leading-7 text-gray-900">
+              Bookings
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+              Scheduled bookings
+            </p>
+          </div>
+          <div>
+            <button
+              className="block text-nowrap bg-blue-600 rounded text-white py-2 px-4 w-fit"
+              onClick={() => createBookingModal.open()}
+            >
+              Add Booking
+            </button>
+          </div>
         </div>
-      </div>
-      <Tabs options={tabOptions} value={tab} />
-      <BookingList tab={tab} />
-    </Card>
+        <Tabs options={tabOptions} value={tab} />
+        <BookingList tab={tab} />
+      </Card>
+      <createBookingModal.Modal />
+    </>
   );
 }
 

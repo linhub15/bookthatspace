@@ -1,7 +1,7 @@
 import { BackButton } from "@/src/components/buttons/back_button";
 import { Card } from "@/src/components/card";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/src/masks/masks";
-import { supabase, Tables } from "@/src/clients/supabase";
+import { Tables } from "@/src/clients/supabase";
 import {
   CalendarDaysIcon,
   ClockIcon,
@@ -9,11 +9,11 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { bookingRoute, bookingsRoute } from "../dashboard.routes";
 import { useRoom } from "../rooms/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { useGetBooking } from "./hooks";
 
 export function Booking() {
   const { booking_id } = bookingRoute.useParams();
@@ -175,24 +175,4 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
       </div>
     </>
   );
-}
-
-function useGetBooking(bookingId: string) {
-  return useQuery({
-    queryKey: ["room_bookings", bookingId],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("room_booking").select("*")
-        .eq(
-          "id",
-          bookingId,
-        );
-
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      return data.at(0);
-    },
-  });
 }
