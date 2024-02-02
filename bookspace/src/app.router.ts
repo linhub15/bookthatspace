@@ -1,4 +1,9 @@
-import { RootRoute, Route, RoutePaths, Router } from "@tanstack/react-router";
+import {
+  createRootRoute,
+  createRoute,
+  createRouter,
+  RoutePaths,
+} from "@tanstack/react-router";
 import { App } from "./app";
 import {
   emailConfirmationRoute,
@@ -11,15 +16,15 @@ import { dashboardRoutes } from "./features/dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
 import { anonBookingRoutes } from "./features/anon_booking/anon_booking.routes";
 
-const rootRoute = new RootRoute();
+const rootRoute = createRootRoute();
 
-const appIndex = new Route({
+const appIndex = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: App,
 });
 
-const splatRoute = new Route({
+const splatRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "$",
   component: NotFound,
@@ -37,7 +42,7 @@ const routeTree = rootRoute.addChildren([
   anonBookingRoutes,
 ]);
 
-const router = new Router({ routeTree });
+const router = createRouter({ routeTree });
 
 type AnonPaths = RoutePaths<typeof anonBookingRoutes>;
 type DashboardPaths = RoutePaths<typeof dashboardRoutes>;

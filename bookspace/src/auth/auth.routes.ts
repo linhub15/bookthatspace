@@ -1,4 +1,4 @@
-import { redirect, Route } from "@tanstack/react-router";
+import { createRoute, redirect } from "@tanstack/react-router";
 import { rootRoute } from "../app.router";
 import { LoginPassword } from "./login_password";
 import { checkAuthenticated } from "./use_authenticated.signal";
@@ -18,7 +18,7 @@ async function authGuard(redirectTo: string) {
   }
 }
 
-const loginRoute = new Route({
+const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "login",
   component: LoginPassword,
@@ -34,7 +34,7 @@ const loginRoute = new Route({
   },
 });
 
-const signupRoute = new Route({
+const signupRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "signup",
   component: Signup,
@@ -49,19 +49,19 @@ const signupRoute = new Route({
   },
 });
 
-const emailConfirmationRoute = new Route({
+const emailConfirmationRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "confirm-email/$email",
   component: EmailConfirmation,
 });
 
-const forgotPasswordRoute = new Route({
+const forgotPasswordRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "forgot-password",
   component: ForgotPassword,
 });
 
-const resetPasswordRoute = new Route({
+const resetPasswordRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "reset-password",
   component: ResetPassword,
