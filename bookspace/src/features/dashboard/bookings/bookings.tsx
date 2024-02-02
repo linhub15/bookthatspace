@@ -170,52 +170,49 @@ function BookingList(props: { tab: Tabs }) {
           <h4>{maskDate(date)}</h4>
           <ul role="list" className="divide-y divide-gray-100">
             {bookings?.map((booking) => (
-              <li
-                className="flex items-center justify-between gap-x-6 py-5"
-                key={booking.id}
-              >
-                <div className="min-w-0">
-                  <div className="flex items-start gap-x-3">
-                    <p className="text-sm font-semibold leading-6 text-gray-900">
-                      {booking.room?.name}
-                    </p>
-                    <p
-                      className={cn(
-                        "rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset",
-                      )}
-                    >
-                      {booking.status}
-                    </p>
+              <li key={booking.id}>
+                <Link
+                  className="flex items-center justify-between gap-x-6 p-5 rounded-lg shadow-sm ring-1 ring-gray-900/5 hover:bg-gray-50"
+                  to={bookingRoute.to}
+                  params={{ booking_id: booking.id }}
+                >
+                  <div className="min-w-0">
+                    <div className="flex items-start gap-x-3">
+                      <p className="text-sm font-semibold leading-6 text-gray-900">
+                        {booking.room?.name}
+                      </p>
+                      <p
+                        className={cn(
+                          "rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset",
+                        )}
+                      >
+                        {booking.status}
+                      </p>
+                    </div>
+                    <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+                      <p className="whitespace-nowrap">
+                        Booked for{" "}
+                        <time dateTime={booking.start}>
+                          {maskDate(booking.start)}
+                        </time>
+                      </p>
+                      <svg
+                        viewBox="0 0 2 2"
+                        className="h-0.5 w-0.5 fill-current"
+                      >
+                        <circle cx={1} cy={1} r={1} />
+                      </svg>
+                      <p className="truncate">
+                        {booking.booked_by_name} ({booking.booked_by_email})
+                      </p>
+                    </div>
                   </div>
-                  <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                    <p className="whitespace-nowrap">
-                      Booked for{" "}
-                      <time dateTime={booking.start}>
-                        {maskDate(booking.start)}
-                      </time>
-                    </p>
-                    <svg viewBox="0 0 2 2" className="h-0.5 w-0.5 fill-current">
-                      <circle cx={1} cy={1} r={1} />
-                    </svg>
-                    <p className="truncate">
-                      {booking.booked_by_name} ({booking.booked_by_email})
-                    </p>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="font-normal text-xs text-gray-700">
+                      Received {maskDurationSince(booking.created_at)}
+                    </span>
                   </div>
-                </div>
-                <div className="flex flex-col items-end gap-1">
-                  <Link
-                    to={bookingRoute.to}
-                    params={{ booking_id: booking.id }}
-                    className="hidden w-fit rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:block"
-                    key={booking.id}
-                  >
-                    Details
-                  </Link>
-
-                  <span className="font-normal text-xs text-gray-700">
-                    Received {maskDurationSince(booking.created_at)}
-                  </span>
-                </div>
+                </Link>
               </li>
             ))}
           </ul>
