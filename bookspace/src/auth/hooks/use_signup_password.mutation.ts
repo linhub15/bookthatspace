@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../clients/supabase";
+import { supabase } from "../../clients/supabase";
 
 type UserMeta = {
   name: string;

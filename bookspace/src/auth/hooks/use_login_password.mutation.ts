@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { supabase } from "../clients/supabase";
+import { supabase } from "../../clients/supabase";
 import { useNavigate } from "@tanstack/react-router";
 import { authenticated } from "./use_authenticated.signal";
-import { DashboardPaths } from "../app.router";
+import { DashboardPaths } from "../../app.router";
 
 export function useLoginWithPassword(redirect?: string) {
   const navigate = useNavigate();

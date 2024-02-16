@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { useSignupWithPassword } from "./use_signup_password.mutation";
+import { useSignupWithPassword } from "./hooks/use_signup_password.mutation";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { FormField } from "../components/form/form_field";
 import { Label } from "../components/form/label";

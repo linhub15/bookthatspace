@@ -1,5 +1,5 @@
 import { supabase } from "../../../clients/supabase";
-import { authenticated } from "../../../auth/use_authenticated.signal";
+import { authenticated } from "../../../auth/hooks/use_authenticated.signal";
 import { useNavigate } from "@tanstack/react-router";
 import { Card } from "@/src/components/card";
 import { useFacility, useProfile } from "@/src/features/hooks";
