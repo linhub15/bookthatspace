@@ -35,7 +35,7 @@ function useNavigation() {
       icon: InboxIcon,
     },
     {
-      name: "Rooms",
+      name: "Facility & Rooms",
       to: roomsRoute.to,
       icon: HomeIcon,
     },
@@ -181,7 +181,7 @@ function HeaderBar(props: { openSidebar: () => void }) {
   const profile = useProfile();
   const signOut = useSignOut();
   const navigationOptions = [
-    { name: "Your profile", to: profileRoute.to, icon: undefined },
+    { name: "My profile", to: profileRoute.to, icon: undefined },
   ] as const;
 
   return (
@@ -260,7 +260,7 @@ function HeaderBar(props: { openSidebar: () => void }) {
                         )}
                         onClick={() => signOut.mutateAsync()}
                       >
-                        <span>Sign Out</span>
+                        <span>Sign out</span>
                       </button>
                     )}
                   </Menu.Item>
