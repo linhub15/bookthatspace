@@ -159,7 +159,8 @@ function OAuthSection() {
           </span>
         </button>
 
-        <button className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
+        {
+          /* <button className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
           <svg className="h-5 w-5" aria-hidden="true">
             <path fill="#f25022" d="M1 1h9v9H1z" />
             <path fill="#00a4ef" d="M1 11h9v9H1z" />
@@ -169,7 +170,8 @@ function OAuthSection() {
           <span className="text-sm font-semibold leading-6">
             Continue with Microsoft
           </span>
-        </button>
+        </button> */
+        }
       </div>
     </div>
   );
