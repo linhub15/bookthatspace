@@ -8,6 +8,7 @@ import {
   CodeBracketSquareIcon,
   HomeIcon,
   InboxIcon,
+  InformationCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
@@ -323,15 +324,23 @@ function DesktopSidebar() {
             </ul>
           </li>
 
-          <li className="-mx-6 mt-auto">
-            <Link
-              className="flex items-center gap-x-4 px-6 py-4 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
-              to="/"
-            >
+          <li className="-mx-6 mt-auto py-4">
+            <div className="flex justify-center gap-x-2 px-6 py-2 text-sm leading-6 text-gray-800">
+              <InformationCircleIcon
+                className="w-6 h-6 text-blue-600"
+                aria-hidden="true"
+              />
               <span className="truncate" aria-hidden="true">
                 Need some help?
               </span>
-            </Link>
+            </div>
+
+            <div
+              className="text-gray-500 italic text-xs text-center"
+              data-version="0.0.0-alpha"
+            >
+              Version 0.0.0-alpha
+            </div>
           </li>
         </ul>
       </nav>
