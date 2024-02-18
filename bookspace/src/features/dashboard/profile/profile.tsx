@@ -1,16 +1,11 @@
-import { supabase } from "../../../clients/supabase";
-import { authenticated } from "../../../auth/hooks/use_authenticated.signal";
-import { useNavigate } from "@tanstack/react-router";
 import { Card } from "@/src/components/card";
 import { useFacility, useProfile } from "@/src/features/hooks";
-import { rootRoute } from "@/src/app.router";
 import { HomeModernIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useFacilityModal } from "./use_facility_modal";
 import { AddressDisplay } from "@/src/components/form/address_input";
 import { Address } from "@/src/types/address";
 
 export function Profile() {
-  const navigate = useNavigate();
   const { data: profile } = useProfile();
   const facility = useFacility();
   const facilityModal = useFacilityModal();
@@ -45,22 +40,6 @@ export function Profile() {
               </dd>
             </div>
           </dl>
-        </div>
-        <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          {authenticated.value &&
-            (
-              <button
-                className="bg-red-600 rounded text-white py-2 px-4 w-fit"
-                type="button"
-                onClick={async () => {
-                  await supabase.auth.signOut();
-                  authenticated.value = false;
-                  navigate({ to: rootRoute.to });
-                }}
-              >
-                Sign Out
-              </button>
-            )}
         </div>
       </Card>
 
