@@ -337,9 +337,9 @@ function DesktopSidebar() {
 
             <div
               className="text-gray-500 italic text-xs text-center"
-              data-version="0.0.0-alpha"
+              data-version={VITE_APP_VERSION}
             >
-              Version 0.0.0-alpha
+              Version {VITE_APP_VERSION}
             </div>
           </li>
         </ul>
