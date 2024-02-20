@@ -4,6 +4,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import { Label } from "@/src/components/form/label";
 import { RoomPicker } from "../../anon_booking/room_picker";
 import { DatePicker } from "@/src/components/form/date_picker";
+import { TimePicker } from "@/src/components/form/time_picker";
 
 type Props = {
   facilityId: string;
@@ -16,8 +17,8 @@ type Props = {
 type Form = {
   date: Temporal.PlainDate | undefined;
   roomId: string | undefined;
-  start: string | undefined;
-  end: string | undefined;
+  start: Temporal.PlainTime | undefined;
+  end: Temporal.PlainTime | undefined;
   description: string;
 };
 
@@ -27,8 +28,8 @@ export function InternalBookingForm(props: Props) {
     defaultValues: {
       roomId: undefined,
       date: Temporal.Now.plainDateISO(),
-      start: "",
-      end: "",
+      start: undefined,
+      end: undefined,
       description: "",
     },
     onSubmit: async (form) => {
@@ -37,8 +38,8 @@ export function InternalBookingForm(props: Props) {
         name: props.userName,
         email: props.userEmail,
         date: form.value.date!,
-        start: Temporal.PlainTime.from(form.value.start!),
-        end: Temporal.PlainTime.from(form.value.end!),
+        start: form.value.start!,
+        end: form.value.end!,
         description: form.value.description,
       }, { onSuccess: props.onAfterSubmit });
     },
@@ -87,11 +88,9 @@ export function InternalBookingForm(props: Props) {
             {(field) => (
               <div className="space-y-2">
                 <Label htmlFor={field.name}>Start</Label>
-                <input
-                  className="block w-full max-w-28 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  type="time"
+                <TimePicker
                   value={field.state.value}
-                  onChange={(v) => field.handleChange(v.target.value)}
+                  onChange={(v) => field.handleChange(v)}
                 />
               </div>
             )}
@@ -101,11 +100,9 @@ export function InternalBookingForm(props: Props) {
             {(field) => (
               <div className="space-y-2">
                 <Label htmlFor={field.name}>End</Label>
-                <input
-                  className="block w-full max-w-28 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  type="time"
+                <TimePicker
                   value={field.state.value}
-                  onChange={(v) => field.handleChange(v.target.value)}
+                  onChange={(v) => field.handleChange(v)}
                 />
               </div>
             )}

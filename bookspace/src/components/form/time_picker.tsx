@@ -1,5 +1,5 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { memo } from "react";
+import { ComponentProps, memo } from "react";
 
 const options: Intl.DateTimeFormatOptions = {
   hour: "numeric",
@@ -10,24 +10,23 @@ const options: Intl.DateTimeFormatOptions = {
 type Props = {
   value: Temporal.PlainTime | undefined;
   onChange: (value: Temporal.PlainTime) => void;
-};
+} & Omit<ComponentProps<"select">, "value" | "onChange">;
 
 export function TimePicker(props: Props) {
   return (
-    <div className="flex">
-      <select
-        className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        value={props.value?.toJSON()}
-        onChange={(e) => {
-          const plainTime = Temporal.PlainTime.from(
-            e.currentTarget.value,
-          );
-          props.onChange(plainTime);
-        }}
-      >
-        <TimeOptionsMemo />
-      </select>
-    </div>
+    <select
+      {...props}
+      className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      value={props.value?.toJSON()}
+      onChange={(e) => {
+        const plainTime = Temporal.PlainTime.from(
+          e.currentTarget.value,
+        );
+        props.onChange(plainTime);
+      }}
+    >
+      <TimeOptionsMemo />
+    </select>
   );
 }
 
