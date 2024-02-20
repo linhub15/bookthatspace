@@ -7,12 +7,13 @@ import { anonBookingRoutes, confirmationRoute } from "./anon_booking.routes";
 import { useCreateBooking } from "./hooks";
 import { Temporal } from "@js-temporal/polyfill";
 import { useNavigate } from "@tanstack/react-router";
+import { TimePicker } from "@/src/components/form/time_picker";
 
 type Form = {
   date: Temporal.PlainDate | undefined;
   room: string | undefined;
-  start: string | undefined;
-  end: string | undefined;
+  start: Temporal.PlainTime | undefined;
+  end: Temporal.PlainTime | undefined;
   name: string;
   email: string;
   description: string;
@@ -34,12 +35,11 @@ export function AnonBookingWidget() {
       description: "",
     },
     onSubmit: (form) => {
-      // todo: redirect to success page, send email to confirm. This does lots of things
       mutation.mutateAsync({
         date: form.value.date!,
         roomId: form.value.room!,
-        start: Temporal.PlainTime.from(form.value.start!),
-        end: Temporal.PlainTime.from(form.value.end!),
+        start: form.value.start!,
+        end: form.value.end!,
         name: form.value.name,
         email: form.value.email,
         description: form.value.description,
@@ -108,11 +108,9 @@ export function AnonBookingWidget() {
                 {(field) => (
                   <div className="space-y-2">
                     <Label htmlFor={field.name}>Start</Label>
-                    <input
-                      className="block w-full max-w-28 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      type="time"
+                    <TimePicker
                       value={field.state.value}
-                      onChange={(v) => field.handleChange(v.target.value)}
+                      onChange={(v) => field.handleChange(v)}
                     />
                   </div>
                 )}
@@ -122,11 +120,9 @@ export function AnonBookingWidget() {
                 {(field) => (
                   <div className="space-y-2">
                     <Label htmlFor={field.name}>End</Label>
-                    <input
-                      className="block w-full max-w-28 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      type="time"
+                    <TimePicker
                       value={field.state.value}
-                      onChange={(v) => field.handleChange(v.target.value)}
+                      onChange={(v) => field.handleChange(v)}
                     />
                   </div>
                 )}

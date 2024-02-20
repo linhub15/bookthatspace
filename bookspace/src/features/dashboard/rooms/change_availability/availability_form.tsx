@@ -1,8 +1,9 @@
 import { Enums, Tables, TablesInsert } from "@/src/clients/supabase";
+import { TimePicker } from "@/src/components/form/time_picker";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Temporal } from "@js-temporal/polyfill";
 import { useForm } from "@tanstack/react-form";
-import { Fragment, memo } from "react";
+import { Fragment } from "react";
 
 type Props = {
   roomId: string;
@@ -140,36 +141,36 @@ export function AvailabilityForm(props: Props) {
                           </span>
                         </label>
                         <div className="min-w-[200px] w-0">
-                          {/* todo: extract time select to time picker */}
                           {field.state.value?.enabled && (
                             <div className="flex">
-                              <select
-                                className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                value={field.state.value?.start}
-                                onChange={(e) =>
+                              <TimePicker
+                                value={Temporal.PlainTime.from(
+                                  field.state.value?.start,
+                                )}
+                                onChange={(v) => {
                                   field.handleChange((old) => ({
                                     ...old,
                                     touched: true,
-                                    start: e.target.value,
-                                  }))}
-                              >
-                                <TimeOptionsMemo />
-                              </select>
+                                    start: v.toJSON(),
+                                  }));
+                                }}
+                              />
+
                               <span className="my-auto px-1">
                                 <ArrowRightIcon className="w-4 h-4" />
                               </span>
-                              <select
-                                className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                value={field.state.value?.end}
-                                onChange={(e) =>
+                              <TimePicker
+                                value={Temporal.PlainTime.from(
+                                  field.state.value?.end,
+                                )}
+                                onChange={(v) => {
                                   field.handleChange((old) => ({
                                     ...old,
                                     touched: true,
-                                    end: e.target.value,
-                                  }))}
-                              >
-                                <TimeOptionsMemo />
-                              </select>
+                                    end: v.toJSON(),
+                                  }));
+                                }}
+                              />
                             </div>
                           )}
                           {!field.state.value?.enabled && (
@@ -209,37 +210,3 @@ export function AvailabilityForm(props: Props) {
     </div>
   );
 }
-
-const timeOptions = [...Array(24).keys()].map((hour) => {
-  const hourStart = Temporal.PlainTime.from({ hour: hour });
-  const hourHalf = hourStart.add({ minutes: 30 });
-
-  const times = [
-    hourStart.toJSON(),
-    hourHalf.toJSON(),
-  ];
-
-  return times;
-}).flat();
-
-const options: Intl.DateTimeFormatOptions = {
-  hour: "numeric",
-  minute: "2-digit",
-  hourCycle: "h23",
-};
-
-const maskTimeOption = (time: string) => {
-  return Temporal.PlainTime.from(time).toLocaleString(undefined, options);
-};
-
-const optionLabels = new Map(
-  timeOptions.map((option) => [option, maskTimeOption(option)]),
-);
-
-const TimeOptionsMemo = memo(function TimeOptions() {
-  return timeOptions.map((time, index) => (
-    <option value={time} key={index}>
-      {optionLabels.get(time)}
-    </option>
-  ));
-});
