@@ -67,7 +67,7 @@ function useBookings(type: "upcoming" | "pending" | "past" | "all") {
           .filter("start", "gte", today);
       case type === "past":
         return baseQuery()
-          .eq("status", "active")
+          .eq("status", "scheduled")
           .filter("start", "lt", today);
       default:
         return baseQuery();
