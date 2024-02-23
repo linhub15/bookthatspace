@@ -1,6 +1,6 @@
-# frontend - React Application
-
 ## User Stories
+
+Booking venues on one day, at hourly rates.
 
 ### Facility manager
 
@@ -26,9 +26,11 @@
 - view booking review status
 - receive booking confirmation
 - confirm booking
-- send payment
+- send payment confirmation
 
 ## Roadmap
 
 - credit card payment
 - reccuring bookings
+- daily rates
+- flat rates
