@@ -1,17 +1,18 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { html, sendEmail } from "../gateways/email.ts";
+import { sendEmail } from "../gateways/email.ts";
 import { z } from "zod";
 import { Database } from "@/lib/types/supabase_types.d.ts";
+import { html } from "../utils.ts";
 
 export const RejectBookingRequest = z.object({
   booking_id: z.string(),
   reason: z.string(),
 });
 
-type RejectBookingRequest = z.infer<typeof RejectBookingRequest>;
+type Request = z.infer<typeof RejectBookingRequest>;
 
 export async function rejectBooking(
-  request: RejectBookingRequest,
+  request: Request,
   deps: { supabase: SupabaseClient<Database> },
 ) {
   const { data, error } = await deps.supabase.from("room_booking")

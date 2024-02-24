@@ -20,7 +20,6 @@ export function RoomForm(props: Props) {
   const form = useForm({
     defaultValues: {
       name: room?.name,
-      address: room?.address ?? undefined,
       description: room?.description ?? undefined,
       max_capacity: room?.max_capacity?.toString() ?? undefined,
       hourly_rate: room?.hourly_rate?.toString() ?? undefined,
@@ -35,7 +34,6 @@ export function RoomForm(props: Props) {
           id: props.roomId,
           facility_id: facility.id,
           name: form.value.name ?? "",
-          address: form.value.address,
           description: form.value.description,
           max_capacity: Number(form.value.max_capacity) ?? null,
           hourly_rate: Number(form.value.hourly_rate) ?? null,
@@ -63,22 +61,6 @@ export function RoomForm(props: Props) {
             {(field) => (
               <FormField>
                 <Label htmlFor={field.name}>Room name</Label>
-                <input
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  type="text"
-                  name={field.name}
-                  id={field.name}
-                  value={field.state.value}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                />
-              </FormField>
-            )}
-          </form.Field>
-
-          <form.Field name="address">
-            {(field) => (
-              <FormField>
-                <Label htmlFor={field.name}>Address</Label>
                 <input
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"

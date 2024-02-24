@@ -32,5 +32,6 @@ supabase help
 supabase start
 supabase stop
 supabase db diff
+supabase db diff -f name_of_migration_file
 supabase migrations list
 ```

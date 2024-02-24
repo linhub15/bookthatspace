@@ -72,7 +72,6 @@ export interface Database {
       }
       room: {
         Row: {
-          address: string | null
           created_at: string
           description: string | null
           facility_id: string
@@ -82,7 +81,6 @@ export interface Database {
           name: string
         }
         Insert: {
-          address?: string | null
           created_at?: string
           description?: string | null
           facility_id: string
@@ -92,7 +90,6 @@ export interface Database {
           name: string
         }
         Update: {
-          address?: string | null
           created_at?: string
           description?: string | null
           facility_id?: string
@@ -152,6 +149,7 @@ export interface Database {
           booked_by_name: string
           created_at: string
           description: string | null
+          email_confirmed_at: string | null
           end: string
           id: string
           room_id: string
@@ -164,6 +162,7 @@ export interface Database {
           booked_by_name: string
           created_at?: string
           description?: string | null
+          email_confirmed_at?: string | null
           end: string
           id?: string
           room_id: string
@@ -176,6 +175,7 @@ export interface Database {
           booked_by_name?: string
           created_at?: string
           description?: string | null
+          email_confirmed_at?: string | null
           end?: string
           id?: string
           room_id?: string

@@ -1,9 +1,13 @@
 import { Card } from "@/src/components/card";
 import { confirmationRoute } from "./anon_booking.routes";
 import { Feed } from "@/src/components/feed";
+import { Link } from "@tanstack/react-router";
+import { useGetBooking } from "../dashboard/bookings/hooks";
+import { viewBookingRoute } from "../renter_portal/renter_portal.routes";
 
 export function Confirmation() {
   const { booking_id } = confirmationRoute.useSearch();
+  const booking = useGetBooking(booking_id);
   return (
     <div className="max-w-xl mx-2 sm:mx-auto space-y-4">
       <Card>
@@ -13,14 +17,20 @@ export function Confirmation() {
             Booking received!
           </p>
           <p className="mt-2 text-base text-gray-500">
-            An email was sent to <strong>email</strong>{" "}
-            with a confirmation link.
+            An email will be sent to{" "}
+            <strong>{booking.data?.booked_by_email}</strong>{" "}
+            when the booking is reviewed.
           </p>
 
-          <dl className="mt-12 text-sm font-medium">
-            <dt className="text-gray-900">Tracking link</dt>
-            <dd className="mt-2 text-indigo-600">{booking_id}</dd>
-          </dl>
+          <div className="pt-10">
+            <Link
+              className="text-indigo-600 underline"
+              to={viewBookingRoute.to}
+              params={{ booking_id }}
+            >
+              Review booking
+            </Link>
+          </div>
         </div>
       </Card>
 

@@ -15,6 +15,7 @@ import {
 import { dashboardRoutes } from "./features/dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
 import { anonBookingRoutes } from "./features/anon_booking/anon_booking.routes";
+import { renterPortalRoutes } from "./features/renter_portal/renter_portal.routes";
 
 const rootRoute = createRootRoute();
 
@@ -40,6 +41,7 @@ const routeTree = rootRoute.addChildren([
   resetPasswordRoute,
   dashboardRoutes,
   anonBookingRoutes,
+  renterPortalRoutes,
 ]);
 
 const router = createRouter({ routeTree });

@@ -73,9 +73,6 @@ export function Room() {
                   <h3 className="text-base font-semibold leading-6 text-gray-900">
                     {room.name}
                   </h3>
-                  <p className="text-sm text-gray-500">
-                    {room.address}
-                  </p>
                 </div>
                 <div className="flex flex-shrink-0 gap-4">
                   <button

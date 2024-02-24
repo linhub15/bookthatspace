@@ -28,7 +28,7 @@ export function AnonBookingWidget() {
     defaultValues: {
       date: Temporal.Now.plainDateISO(),
       room: undefined,
-      start: undefined,
+      start: Temporal.PlainTime.from("00:00"),
       end: undefined,
       name: "",
       email: "",

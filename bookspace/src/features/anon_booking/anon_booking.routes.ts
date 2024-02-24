@@ -6,7 +6,7 @@ import { Fragment } from "react";
 
 export const anonBookingRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/s/$facility_id",
+  path: "/widget/$facility_id",
 });
 
 export const anonBookingIndexRoute = createRoute({

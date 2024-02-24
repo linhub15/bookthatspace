@@ -1,11 +1,7 @@
 import { Resend } from "https://esm.sh/resend@2.1.0";
+import { getEnv } from "../utils.ts";
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-
-if (!RESEND_API_KEY) {
-  throw new Error("RESEND_API_KEY is not defined");
-}
-
+const RESEND_API_KEY = getEnv("RESEND_API_KEY");
 const resend = new Resend(RESEND_API_KEY);
 
 type Args = {
@@ -16,11 +12,7 @@ type Args = {
 
 /** @throws Error */
 export async function sendEmail(args: Args) {
-  const RESEND_FROM_EMAIL = Deno.env.get("RESEND_FROM_EMAIL");
-
-  if (!RESEND_FROM_EMAIL) {
-    throw new Error("RESEND_FROM_EMAIL is not defined");
-  }
+  const RESEND_FROM_EMAIL = getEnv("RESEND_FROM_EMAIL");
 
   const response = await resend.emails.send({
     from: RESEND_FROM_EMAIL,
@@ -31,6 +23,3 @@ export async function sendEmail(args: Args) {
 
   return response;
 }
-
-export const html = (strings: TemplateStringsArray, ...values: string[]) =>
-  String.raw({ raw: strings }, ...values);
