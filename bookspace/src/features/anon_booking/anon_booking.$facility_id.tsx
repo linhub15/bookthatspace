@@ -8,6 +8,7 @@ import { useCreateBooking } from "./hooks";
 import { Temporal } from "@js-temporal/polyfill";
 import { useNavigate } from "@tanstack/react-router";
 import { TimePicker } from "@/src/components/form/time_picker";
+import { SubmitButton } from "@/src/components/buttons/submit_button";
 
 type Form = {
   date: Temporal.PlainDate | undefined;
@@ -174,13 +175,14 @@ export function AnonBookingWidget() {
                 </div>
               )}
             </form.Field>
-            <div className="pt-10">
-              <button
-                type="submit"
-                className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-              >
-                Request booking
-              </button>
+            <div className="pt-10 max-w-sm mx-auto">
+              <form.Subscribe>
+                {(state) => (
+                  <SubmitButton pending={state.isSubmitting}>
+                    Request Booking
+                  </SubmitButton>
+                )}
+              </form.Subscribe>
             </div>
             <p className="pt-2 text-center text-xs text-gray-500">
               Payment not required until booking is accepted

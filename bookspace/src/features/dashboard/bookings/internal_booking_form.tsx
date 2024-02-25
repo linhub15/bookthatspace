@@ -5,6 +5,7 @@ import { Label } from "@/src/components/form/label";
 import { RoomPicker } from "../../anon_booking/room_picker";
 import { DatePicker } from "@/src/components/form/date_picker";
 import { TimePicker } from "@/src/components/form/time_picker";
+import { SubmitButton } from "@/src/components/buttons/submit_button";
 
 type Props = {
   facilityId: string;
@@ -125,19 +126,23 @@ export function InternalBookingForm(props: Props) {
         </form.Field>
 
         <div className="pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-          <button
-            className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
-            type="submit"
-          >
-            Create Booking
-          </button>
-          <button
-            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
-            type="button"
-            onClick={props.onCancel}
-          >
-            Cancel
-          </button>
+          <form.Subscribe>
+            {(state) => (
+              <>
+                <SubmitButton pending={state.isSubmitting}>
+                  Create Booking
+                </SubmitButton>
+                <button
+                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
+                  type="button"
+                  onClick={props.onCancel}
+                  disabled={state.isSubmitting}
+                >
+                  Cancel
+                </button>
+              </>
+            )}
+          </form.Subscribe>
         </div>
       </form>
     </form.Provider>
