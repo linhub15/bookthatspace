@@ -26,6 +26,7 @@ export async function confirmBooking(
     .eq("booked_by_email", request.email);
 
   // todo: email the staff member that it is confirmed
+  // todo: hide the booking from the view until the email is confirmed
 
   return new URL(`/p/${request.id}`, getEnv("FRONTEND_URL"));
 }

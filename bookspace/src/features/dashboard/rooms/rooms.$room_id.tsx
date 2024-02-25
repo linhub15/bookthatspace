@@ -21,9 +21,6 @@ import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
 import { XCircleIcon } from "@heroicons/react/16/solid";
 
-// todo(hubert): think about statuses
-// - incomplete info (availability, photos)
-
 export function Room() {
   const { room_id } = roomRoute.useParams();
   const navigate = useNavigate();
@@ -111,7 +108,7 @@ export function Room() {
                   <dt className="text-sm font-medium leading-6 text-gray-900">
                     Description
                   </dt>
-                  <dd className="leading-6 text-gray-700">
+                  <dd className="leading-6 text-gray-700 whitespace-pre-line">
                     {room.description}
                   </dd>
                 </div>
