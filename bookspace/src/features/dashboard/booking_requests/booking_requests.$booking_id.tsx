@@ -18,6 +18,7 @@ import { Feed } from "@/src/components/feed";
 import { Temporal } from "@js-temporal/polyfill";
 import { useRejectBookingModal } from "./use_reject_booking_modal";
 import { useAcceptBooking } from "./use_accept_booking";
+import { SubmitButton } from "@/src/components/buttons/submit_button";
 
 export function BookingRequest() {
   const { booking_id } = bookingRequestRoute.useParams();
@@ -48,7 +49,7 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
   return (
     <>
       <rejectBookingModal.Modal />
-      <div className="lg:col-start-3 lg:row-end-1 w-full sm:max-w-sm">
+      <div className="lg:col-start-3 lg:row-end-1 w-full sm:max-w-lg">
         <h2 className="sr-only">Summary</h2>
         <Card>
           <dl className="flex flex-wrap">
@@ -164,16 +165,16 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
             </ul>
           </div>
           {booking.status === "needs_approval" && (
-            <div className="grid gap-4 border-t border-gray-900/5 px-6 py-6">
-              <button
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            <div className="pt-10 grid sm:grid-flow-row-dense sm:grid-cols-2 gap-3 border-t border-gray-900/5 px-6 py-6">
+              <SubmitButton
+                type="button"
                 onClick={() => accept()}
+                pending={acceptBooking.isPending}
               >
                 Accept
-              </button>
-
+              </SubmitButton>
               <button
-                className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6  shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={rejectBookingModal.open}
               >
                 Reject

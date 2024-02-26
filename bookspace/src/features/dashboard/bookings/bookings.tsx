@@ -176,7 +176,7 @@ function BookingList(props: { tab: Tabs }) {
                   to={bookingRoute.to}
                   params={{ booking_id: booking.id }}
                 >
-                  <div className="min-w-0">
+                  <div className="min-w-0 space-y-1">
                     <div className="flex items-start gap-x-3">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
                         {booking.room?.name}
@@ -189,7 +189,7 @@ function BookingList(props: { tab: Tabs }) {
                         {booking.status}
                       </p>
                     </div>
-                    <div className="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
+                    <div className="flex items-center gap-x-2 text-xs leading-5 text-gray-500">
                       <p className="whitespace-nowrap">
                         Booked for{" "}
                         <time dateTime={booking.start}>
