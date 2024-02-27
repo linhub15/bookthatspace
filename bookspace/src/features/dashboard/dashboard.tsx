@@ -40,7 +40,7 @@ function useNavigation() {
       icon: HomeIcon,
     },
     {
-      name: "Widget Link",
+      name: "Widgets",
       to: widgetRoute.to,
       icon: CodeBracketSquareIcon,
     },

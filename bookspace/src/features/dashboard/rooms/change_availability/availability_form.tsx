@@ -91,10 +91,10 @@ export function AvailabilityForm(props: Props) {
     <div>
       <form.Provider>
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
             e.stopPropagation();
-            void form.handleSubmit();
+            void await form.handleSubmit();
           }}
         >
           <div className="">

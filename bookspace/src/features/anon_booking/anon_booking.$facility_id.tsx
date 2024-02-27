@@ -35,8 +35,8 @@ export function AnonBookingWidget() {
       email: "",
       description: "",
     },
-    onSubmit: (form) => {
-      mutation.mutateAsync({
+    onSubmit: async (form) => {
+      await mutation.mutateAsync({
         date: form.value.date!,
         roomId: form.value.room!,
         start: form.value.start!,

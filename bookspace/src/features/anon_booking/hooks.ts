@@ -1,6 +1,6 @@
-import { supabase, Tables } from "@/src/clients/supabase";
 import { Temporal } from "@js-temporal/polyfill";
 import { useMutation } from "@tanstack/react-query";
+import { api } from "../../clients/api";
 
 export function useCreateBooking() {
   const mutation = useMutation({
@@ -31,22 +31,16 @@ export function useCreateBooking() {
         minute: args.end.minute,
       }).toZonedDateTime(Temporal.Now.timeZoneId());
 
-      const response = await supabase.functions.invoke("api/request_booking", {
-        method: "POST",
-        body: {
-          room_booking: {
-            room_id: args.roomId,
-            start: start.toString({ timeZoneName: "never" }),
-            end: end.toString({ timeZoneName: "never" }),
-            booked_by_name: args.name,
-            booked_by_email: args.email,
-            description: args.description,
-            status: "needs_approval",
-          },
-        },
+      const response = await api.request_booking({
+        room_id: args.roomId,
+        start: start.toString({ timeZoneName: "never" }),
+        end: end.toString({ timeZoneName: "never" }),
+        name: args.name,
+        email: args.email,
+        description: args.description,
       });
 
-      return response.data as Tables<"room_booking">;
+      return response;
     },
   });
   return mutation;
