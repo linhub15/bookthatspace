@@ -1,22 +1,42 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { ComponentProps, memo } from "react";
+import { useEffect, useMemo } from "react";
 
-const options: Intl.DateTimeFormatOptions = {
-  hour: "numeric",
-  minute: "2-digit",
-  hourCycle: "h23",
-};
+/** Minutes between 0 and 60 exclusive */
+const INTERVAL = 30;
 
 type Props = {
   value: Temporal.PlainTime | undefined;
+  min?: Temporal.PlainTime | undefined;
   onChange: (value: Temporal.PlainTime) => void;
-} & Omit<ComponentProps<"select">, "value" | "onChange">;
+};
 
 export function TimePicker(props: Props) {
+  const timeOptions = useMemo(() =>
+    [...Array(24).keys()]
+      .map((hour) => {
+        const hourStart = Temporal.PlainTime.from({ hour: hour });
+        const hourHalf = hourStart.add({ minutes: INTERVAL });
+        return [
+          hourStart,
+          hourHalf,
+        ];
+      })
+      .flat()
+      .toSpliced(Infinity, 0, Temporal.PlainTime.from({ hour: 23, minute: 59 }))
+      .filter((time) => isValid({ time, min: props.min })), [props.min]);
+
+  // this is ugly, but used to update the time when min changes
+  useEffect(() => {
+    if (!props.min || !props.value) return; // prevent infinite loop
+    if (isValid({ time: props.value, min: props.min })) return;
+    const optionIdx = timeOptions.findIndex((o) => o.equals(props.min!)) + 1;
+    props.onChange(timeOptions.at(optionIdx) || props.min);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.min]);
+
   return (
     <select
-      {...props}
-      className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      className="block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-60 text-sm sm:leading-6"
       value={props.value?.toJSON()}
       onChange={(e) => {
         const plainTime = Temporal.PlainTime.from(
@@ -25,35 +45,30 @@ export function TimePicker(props: Props) {
         props.onChange(plainTime);
       }}
     >
-      <TimeOptionsMemo />
+      {timeOptions.map((time, index) => (
+        <option value={time.toJSON()} key={index}>
+          {maskTimeOption(time)}
+        </option>
+      ))}
     </select>
   );
 }
 
-const TimeOptionsMemo = memo(function TimeOptions() {
-  const timeOptions = [...Array(24).keys()].map((hour) => {
-    const hourStart = Temporal.PlainTime.from({ hour: hour });
-    const hourHalf = hourStart.add({ minutes: 30 });
+/** Temporal .toLocaleString() is really slow >400ms, so we do this manually. */
+const maskTimeOption = (time: Temporal.PlainTime) => {
+  return `${time.hour.toString().padStart(2, "0")}:${
+    time.minute.toString().padStart(2, "0")
+  }`;
+};
 
-    const times = [
-      hourStart.toJSON(),
-      hourHalf.toJSON(),
-    ];
-
-    return times;
-  }).flat();
-
-  const maskTimeOption = (time: string) => {
-    return Temporal.PlainTime.from(time).toLocaleString(undefined, options);
-  };
-
-  const optionLabels = new Map(
-    timeOptions.map((option) => [option, maskTimeOption(option)]),
-  );
-
-  return timeOptions.map((time, index) => (
-    <option value={time} key={index}>
-      {optionLabels.get(time)}
-    </option>
-  ));
-});
+/** Time follows the constraints of min, without overlapping */
+function isValid(
+  args: { time: Temporal.PlainTime; min?: Temporal.PlainTime },
+) {
+  if (!args.min) return true; // No min constraint, so time is always valid
+  // https://tc39.es/proposal-temporal/docs/plaintime.html#static-method
+  // -1 means min is earlier than time -> valid
+  // 0 means min is same as time -> invalid
+  // 1 means min is later than time -> invalid
+  return Temporal.PlainTime.compare(args.min, args.time) === -1;
+}

@@ -23,12 +23,12 @@ type Availability = {
   touched: boolean;
   availabilityId?: string;
   day_of_week: Enums<"day_of_week">;
-  start: string;
-  end: string;
+  start: Temporal.PlainTime;
+  end: Temporal.PlainTime;
 };
 
-const midnight = Temporal.PlainTime.from({ hour: 0 }).toJSON();
-const oneOClock = Temporal.PlainTime.from({ hour: 1 }).toJSON();
+const defaultStart = Temporal.PlainTime.from({ hour: 0 });
+const defaultEnd = Temporal.PlainTime.from({ hour: 23 });
 
 export function AvailabilityForm(props: Props) {
   const { values: blocks } = props;
@@ -41,27 +41,27 @@ export function AvailabilityForm(props: Props) {
         enabled: true,
         availabilityId: found.id,
         day_of_week: weekday,
-        start: found.start,
-        end: found.end,
+        start: Temporal.PlainTime.from(found.start),
+        end: Temporal.PlainTime.from(found.end),
       }
       : {
         touched: false,
         enabled: false,
         availabilityId: undefined,
         day_of_week: weekday,
-        start: midnight,
-        end: oneOClock,
+        start: defaultStart,
+        end: defaultEnd,
       };
   };
 
   const values = {
-    Mon: get("mon"),
-    Tue: get("tue"),
-    Wed: get("wed"),
-    Thu: get("thu"),
-    Fri: get("fri"),
-    Sat: get("sat"),
-    Sun: get("sun"),
+    Monday: get("mon"),
+    Tuesday: get("tue"),
+    Wednesday: get("wed"),
+    Thursday: get("thu"),
+    Friday: get("fri"),
+    Saturday: get("sat"),
+    Sunday: get("sun"),
   };
 
   const fieldNames = Object.keys(values) as [keyof typeof values];
@@ -78,8 +78,8 @@ export function AvailabilityForm(props: Props) {
               id: value.availabilityId,
               room_id: props.roomId,
               day_of_week: value.day_of_week,
-              start: value.start,
-              end: value.end,
+              start: value.start.toJSON(),
+              end: value.end.toJSON(),
             },
           } as const;
         });
@@ -97,7 +97,7 @@ export function AvailabilityForm(props: Props) {
             void await form.handleSubmit();
           }}
         >
-          <div className="">
+          <div className="space-y-3">
             {fieldNames.map((weekday, index) => (
               <Fragment key={index}>
                 <form.Field
@@ -109,8 +109,8 @@ export function AvailabilityForm(props: Props) {
                       }
 
                       const result = Temporal.PlainTime.compare(
-                        Temporal.PlainTime.from(field.value?.start),
-                        Temporal.PlainTime.from(field.value?.end),
+                        field.value?.start,
+                        field.value?.end,
                       );
 
                       if (result >= 0) {
@@ -120,70 +120,62 @@ export function AvailabilityForm(props: Props) {
                   }}
                 >
                   {(field) => (
-                    <div className="relative pb-4 mb-3">
-                      <div
-                        className="flex justify-between"
-                        key={index}
-                      >
-                        <label className="flex py-1.5 pr-2 w-20 items-center gap-4">
-                          <input
-                            type="checkbox"
-                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                            checked={field.state.value?.enabled}
-                            onChange={(e) =>
-                              field.handleChange((old) => ({
-                                ...old,
-                                touched: true,
-                                enabled: e.target.checked,
-                              }))}
-                          />
-                          <span className="text-sm font-medium leading-6 text-gray-900 select-none">
-                            {weekday}
+                    <div
+                      className="grid grid-cols-4 min-h-12"
+                      key={index}
+                    >
+                      <label className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                          checked={field.state.value?.enabled}
+                          onChange={(e) =>
+                            field.handleChange((old) => ({
+                              ...old,
+                              touched: true,
+                              enabled: e.target.checked,
+                            }))}
+                        />
+                        <span className="text-sm font-medium leading-6 text-gray-900 select-none">
+                          <span className="hidden sm:inline">{weekday}</span>
+                          <span className="sm:hidden">
+                            {weekday.slice(0, 3)}
                           </span>
-                        </label>
-                        <div className="min-w-[200px] w-0">
-                          {field.state.value?.enabled && (
-                            <div className="flex">
-                              <TimePicker
-                                value={Temporal.PlainTime.from(
-                                  field.state.value?.start,
-                                )}
-                                onChange={(v) => {
-                                  field.handleChange((old) => ({
-                                    ...old,
-                                    touched: true,
-                                    start: v.toJSON(),
-                                  }));
-                                }}
-                              />
-
-                              <span className="my-auto px-1">
-                                <ArrowRightIcon className="w-4 h-4" />
-                              </span>
-                              <TimePicker
-                                value={Temporal.PlainTime.from(
-                                  field.state.value?.end,
-                                )}
-                                onChange={(v) => {
-                                  field.handleChange((old) => ({
-                                    ...old,
-                                    touched: true,
-                                    end: v.toJSON(),
-                                  }));
-                                }}
-                              />
-                            </div>
-                          )}
-                          {!field.state.value?.enabled && (
-                            <div className="py-1.5 w-full text-center text-gray-500">
-                              No availability
-                            </div>
-                          )}
+                        </span>
+                      </label>
+                      {field.state.value?.enabled && (
+                        <div className="flex flex-col justify-center space-y-1 col-span-2">
+                          <div className="flex">
+                            <TimePicker
+                              value={field.state.value?.start}
+                              onChange={(v) => {
+                                field.handleChange((old) => ({
+                                  ...old,
+                                  touched: true,
+                                  start: v,
+                                }));
+                              }}
+                            />
+                            <span className="my-auto px-1">
+                              <ArrowRightIcon className="w-4 h-4" />
+                            </span>
+                            <TimePicker
+                              value={field.state.value?.end}
+                              min={field.state.value?.start}
+                              onChange={(v) => {
+                                field.handleChange((old) => ({
+                                  ...old,
+                                  touched: true,
+                                  end: v,
+                                }));
+                              }}
+                            />
+                          </div>
+                          <div className="text-xs text-red-900 pl-1">
+                            {field.state?.meta?.errors[0] ?? ""}
+                          </div>
                         </div>
-                      </div>
-                      <p className="absolute bottom-0 w-full text-xs text-red-900 text-right">
-                        {field.state?.meta?.errors[0] ?? ""}
-                      </p>
+                      )}
                     </div>
                   )}
                 </form.Field>
