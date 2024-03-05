@@ -1,5 +1,5 @@
 import { Card } from "@/src/components/card";
-import { confirmationRoute } from "./anon_booking.routes";
+import { confirmationRoute } from "./public.routes";
 import { Feed } from "@/src/components/feed";
 import { Link } from "@tanstack/react-router";
 import { useGetBooking } from "../dashboard/bookings/hooks";

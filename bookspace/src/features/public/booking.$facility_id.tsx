@@ -3,10 +3,10 @@ import { DatePicker } from "@/src/components/form/date_picker";
 import { Label } from "@/src/components/form/label";
 import { useForm } from "@tanstack/react-form";
 import { RoomPicker } from "./room_picker";
-import { anonBookingRoutes, confirmationRoute } from "./anon_booking.routes";
+import { confirmationRoute, publicBookingRoutes } from "./public.routes";
 import { useCreateBooking } from "./hooks";
 import { Temporal } from "@js-temporal/polyfill";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { TimePicker } from "@/src/components/form/time_picker";
 import { SubmitButton } from "@/src/components/buttons/submit_button";
 
@@ -20,8 +20,8 @@ type Form = {
   description: string;
 };
 
-export function AnonBookingWidget() {
-  const { facility_id } = anonBookingRoutes.useParams();
+export function BookingWidget() {
+  const { facility_id } = publicBookingRoutes.useParams();
   const mutation = useCreateBooking();
   const navigate = useNavigate();
 
@@ -74,12 +74,13 @@ export function AnonBookingWidget() {
                 <div className="space-y-2">
                   <div className="space-x-4">
                     <Label htmlFor={field.name}>Choose a room</Label>
-                    <a
+                    <Link
                       className="text-xs leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
-                      href="#"
+                      to="/widget/$facility_id"
+                      params={{ facility_id: facility_id }}
                     >
-                      Browse room details
-                    </a>
+                      View room details
+                    </Link>
                   </div>
                   <RoomPicker
                     name={field.name}
@@ -121,10 +122,15 @@ export function AnonBookingWidget() {
                 {(field) => (
                   <div className="space-y-2">
                     <Label htmlFor={field.name}>End</Label>
-                    <TimePicker
-                      value={field.state.value}
-                      onChange={(v) => field.handleChange(v)}
-                    />
+                    <form.Subscribe>
+                      {(state) => (
+                        <TimePicker
+                          value={field.state.value}
+                          min={state.values.start}
+                          onChange={(v) => field.handleChange(v)}
+                        />
+                      )}
+                    </form.Subscribe>
                   </div>
                 )}
               </form.Field>
@@ -179,7 +185,7 @@ export function AnonBookingWidget() {
               <form.Subscribe>
                 {(state) => (
                   <SubmitButton pending={state.isSubmitting}>
-                    Request Booking
+                    Submit Booking Request
                   </SubmitButton>
                 )}
               </form.Subscribe>

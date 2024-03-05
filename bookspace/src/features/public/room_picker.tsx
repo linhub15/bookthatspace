@@ -1,9 +1,9 @@
 import { maskHourlyRate } from "@/src/masks/masks";
-import { supabase } from "@/src/clients/supabase";
-import { useQuery } from "@tanstack/react-query";
+
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { cn } from "@/lib/utils/cn";
+import { useRooms } from "./hooks";
 
 type Props = {
   id?: string;
@@ -14,24 +14,7 @@ type Props = {
 };
 
 export function RoomPicker(props: Props) {
-  const rooms = useQuery({
-    queryKey: ["rooms", props.facilityId],
-    queryFn: async () => {
-      const { data, error } = await supabase.from("room").select().eq(
-        "facility_id",
-        props.facilityId!,
-      );
-
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      return data;
-    },
-    enabled: !!props.facilityId,
-  });
-
+  const rooms = useRooms(props.facilityId);
   return (
     <RadioGroup
       id={props.id}

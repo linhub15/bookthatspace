@@ -103,7 +103,7 @@ export function useRoomPhotos(roomId: string) {
       );
 
       const photos = data?.map((photo) => ({
-        photoId: photo.id,
+        id: photo.id,
         url: supabase.storage
           .from("room-photos")
           .getPublicUrl(photo.path).data.publicUrl,

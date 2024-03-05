@@ -23,19 +23,19 @@ export const dashboardRoute = createRoute({
   },
 });
 
-export const roomsRoute = createRoute({
+export const roomsOutlet = createRoute({
   getParentRoute: () => dashboardRoute,
   path: "rooms",
 });
 
 export const roomsIndexRoute = createRoute({
-  getParentRoute: () => roomsRoute,
+  getParentRoute: () => roomsOutlet,
   path: "/",
   component: Rooms,
 });
 
 export const roomRoute = createRoute({
-  getParentRoute: () => roomsRoute,
+  getParentRoute: () => roomsOutlet,
   path: "$room_id",
   component: Room,
 });
@@ -97,7 +97,7 @@ export const dashboardRoutes = dashboardRoute.addChildren([
     bookingRequestRoute,
   ]),
   bookingsRoute.addChildren([bookingsIndexRoute, bookingRoute]),
-  roomsRoute.addChildren([roomsIndexRoute, roomRoute]),
+  roomsOutlet.addChildren([roomsIndexRoute, roomRoute]),
   widgetRoute,
   profileRoute,
 ]);

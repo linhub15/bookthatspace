@@ -16,7 +16,7 @@ import { useWeekCalendar } from "./use_week_calendar";
 import { useChangeAvailabilityModal } from "./change_availability/use_change_availability_modal";
 import { useDeleteRoomModal } from "./use_delete_room_modal";
 import { useEditRoomModal } from "./use_edit_room_modal";
-import { roomRoute, roomsRoute } from "../dashboard.routes";
+import { roomRoute, roomsOutlet } from "../dashboard.routes";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { useRef } from "react";
 import { XCircleIcon } from "@heroicons/react/16/solid";
@@ -29,7 +29,7 @@ export function Room() {
   const deleteRoom = useDeleteRoomModal({
     roomId: room_id,
     onSuccess: () => {
-      navigate({ to: roomsRoute.to });
+      navigate({ to: roomsOutlet.to });
     },
   });
 
@@ -50,7 +50,7 @@ export function Room() {
     <>
       <div className="space-y-4">
         <div className="flex w-full justify-between">
-          <Link className="w-fit" to={roomsRoute.to}>
+          <Link className="w-fit" to={roomsOutlet.to}>
             <BackButton />
           </Link>
           <button
@@ -126,12 +126,11 @@ export function Room() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 px-4 py-5 sm:px-6 gap-4">
               {!!photos.data?.length &&
-                photos.data.map(({ photoId, url }) => (
+                photos.data.map(({ id, url }) => (
                   <div className="relative">
                     <button
                       className="absolute top-0 right-0 p-1 m-1"
-                      onClick={() =>
-                        deletePhoto.mutateAsync({ photoId: photoId })}
+                      onClick={() => deletePhoto.mutateAsync({ photoId: id })}
                     >
                       <XCircleIcon className="w-6 bg-white rounded-full">
                       </XCircleIcon>

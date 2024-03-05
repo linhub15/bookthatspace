@@ -1,7 +1,28 @@
 import { Temporal } from "@js-temporal/polyfill";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "../../clients/api";
+import { supabase } from "@/src/clients/supabase";
 
+export function useFacility(facilityId: string) {
+  return useQuery({
+    queryKey: ["facility", facilityId],
+    enabled: !!facilityId,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("facility")
+        .select()
+        .eq("id", facilityId)
+        .single();
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      return data;
+    },
+  });
+}
 export function useCreateBooking() {
   const mutation = useMutation({
     mutationFn: async (
@@ -44,4 +65,35 @@ export function useCreateBooking() {
     },
   });
   return mutation;
+}
+
+export function useRooms(facilityId: string) {
+  const rooms = useQuery({
+    queryKey: ["rooms", facilityId],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("room").select(
+        `*, room_photo(*)`,
+      ).eq(
+        "facility_id",
+        facilityId,
+      );
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      return data.map((room) => ({
+        ...room,
+        images: room.room_photo.map((photo) => ({
+          id: photo.id,
+          url: supabase.storage
+            .from("room-photos")
+            .getPublicUrl(photo.path).data.publicUrl,
+        })),
+      }));
+    },
+    enabled: !!facilityId,
+  });
+  return rooms;
 }

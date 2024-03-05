@@ -35,6 +35,14 @@ function OAuthSection(props: { redirect?: string }) {
             "https://www.googleapis.com/auth/calendar.events",
             "https://www.googleapis.com/auth/calendar.readonly",
           ].join(" "),
+          /**
+           * Get's refresh tokens can expire, that can expire.
+           * https://developers.google.com/identity/protocols/oauth2#expiration
+           */
+          queryParams: {
+            access_type: "offline",
+            prompt: "consent",
+          },
         },
       });
     },
@@ -52,20 +60,6 @@ function OAuthSection(props: { redirect?: string }) {
             Continue with Google
           </span>
         </button>
-
-        {
-          /* <button className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
-          <svg className="h-5 w-5" aria-hidden="true">
-            <path fill="#f25022" d="M1 1h9v9H1z" />
-            <path fill="#00a4ef" d="M1 11h9v9H1z" />
-            <path fill="#7fba00" d="M11 1h9v9h-9z" />
-            <path fill="#ffb900" d="M11 11h9v9h-9z" />
-          </svg>
-          <span className="text-sm font-semibold leading-6">
-            Continue with Microsoft
-          </span>
-        </button> */
-        }
       </div>
     </div>
   );

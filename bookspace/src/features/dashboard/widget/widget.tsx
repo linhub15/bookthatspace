@@ -2,7 +2,7 @@ import { Card } from "@/src/components/card";
 import { useFacility } from "@/src/features/hooks";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
-import { anonBookingWidgetRoute } from "../../anon_booking/anon_booking.routes";
+import { publicBookingRoute } from "../../public/public.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { router } from "@/src/app.router";
 
@@ -12,7 +12,7 @@ export function WidgetIndex() {
   if (!facility) return <NoFacility />;
 
   const linkProps = {
-    to: anonBookingWidgetRoute.to,
+    to: publicBookingRoute.to,
     params: { facility_id: facility.id },
     search: {},
   };

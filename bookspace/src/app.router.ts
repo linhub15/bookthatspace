@@ -14,7 +14,7 @@ import {
 } from "./auth/auth.routes";
 import { dashboardRoutes } from "./features/dashboard/dashboard.routes";
 import { NotFound } from "./components/not_found";
-import { anonBookingRoutes } from "./features/anon_booking/anon_booking.routes";
+import { publicBookingRoutes } from "./features/public/public.routes";
 import { renterPortalRoutes } from "./features/renter_portal/renter_portal.routes";
 
 const rootRoute = createRootRoute();
@@ -40,13 +40,13 @@ const routeTree = rootRoute.addChildren([
   forgotPasswordRoute,
   resetPasswordRoute,
   dashboardRoutes,
-  anonBookingRoutes,
+  publicBookingRoutes,
   renterPortalRoutes,
 ]);
 
 const router = createRouter({ routeTree });
 
-type AnonPaths = RoutePaths<typeof anonBookingRoutes>;
+type AnonPaths = RoutePaths<typeof publicBookingRoutes>;
 type DashboardPaths = RoutePaths<typeof dashboardRoutes>;
 
 declare module "@tanstack/react-router" {

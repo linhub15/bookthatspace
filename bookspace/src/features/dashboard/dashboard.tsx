@@ -16,7 +16,7 @@ import {
   bookingRequestsRoute,
   bookingsRoute,
   profileRoute,
-  roomsRoute,
+  roomsOutlet,
   widgetRoute,
 } from "./dashboard.routes";
 import { useProfile } from "../hooks";
@@ -36,7 +36,7 @@ function useNavigation() {
     },
     {
       name: "Facility & Rooms",
-      to: roomsRoute.to,
+      to: roomsOutlet.to,
       icon: HomeIcon,
     },
     {
