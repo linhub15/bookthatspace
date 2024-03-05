@@ -65,7 +65,9 @@ export function AvailabilityWidget() {
                 <div className="text-sm">
                   Max Capacity: {room.max_capacity}
                 </div>
-                <div className="py-2">{room.description}</div>
+                <div className="py-2 whitespace-pre-line">
+                  {room.description}
+                </div>
               </div>
             </div>
           ))}

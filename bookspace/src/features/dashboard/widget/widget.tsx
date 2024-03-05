@@ -2,7 +2,10 @@ import { Card } from "@/src/components/card";
 import { useFacility } from "@/src/features/hooks";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
-import { publicBookingRoute } from "../../public/public.routes";
+import {
+  publicAvailabilityRoute,
+  publicBookingRoute,
+} from "../../public/public.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { router } from "@/src/app.router";
 
@@ -11,18 +14,26 @@ export function WidgetIndex() {
 
   if (!facility) return <NoFacility />;
 
-  const linkProps = {
+  const bookingLinkProps = {
     to: publicBookingRoute.to,
     params: { facility_id: facility.id },
-    search: {},
   };
 
-  const widgetLink = `${window.location.host}${
-    router.buildLocation(linkProps).pathname
+  const availabilityLinkProps = {
+    to: publicAvailabilityRoute.to,
+    params: { facility_id: facility.id },
+  };
+
+  const bookingWidget = `${window.location.host}${
+    router.buildLocation(bookingLinkProps).pathname
   }`;
 
-  const copyLinkToClipboard = async () => {
-    await navigator.clipboard.writeText(widgetLink);
+  const availabilityWidget = `${window.location.host}${
+    router.buildLocation(availabilityLinkProps).pathname
+  }`;
+
+  const copyLinkToClipboard = async (link: string) => {
+    await navigator.clipboard.writeText(link);
   };
 
   return (
@@ -45,11 +56,10 @@ export function WidgetIndex() {
               <Link
                 className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 target="_blank"
-                to={linkProps.to}
-                params={linkProps.params}
-                search={linkProps.search}
+                to={bookingLinkProps.to}
+                params={bookingLinkProps.params}
               >
-                Preview <ArrowTopRightOnSquareIcon className="h-4 w-4 ml-1" />
+                View <ArrowTopRightOnSquareIcon className="h-4 w-4 ml-1" />
               </Link>
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
@@ -57,13 +67,13 @@ export function WidgetIndex() {
                 <input
                   className="block w-full min-w-0 flex-1 rounded-l-md rounded-none border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
-                  value={widgetLink}
+                  value={bookingWidget}
                   disabled
                 />
                 <button
                   className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                   type="button"
-                  onClick={copyLinkToClipboard}
+                  onClick={() => copyLinkToClipboard(bookingWidget)}
                   title="Copy to clipboard"
                 >
                   <ClipboardDocumentListIcon
@@ -77,16 +87,15 @@ export function WidgetIndex() {
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="space-x-4">
               <label className="text-sm font-medium text-gray-900">
-                Availability
+                Rooms and availability
               </label>
               <Link
                 className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
                 target="_blank"
-                to={linkProps.to}
-                params={linkProps.params}
-                search={linkProps.search}
+                to={availabilityLinkProps.to}
+                params={availabilityLinkProps.params}
               >
-                Preview <ArrowTopRightOnSquareIcon className="h-4 w-4 ml-1" />
+                View <ArrowTopRightOnSquareIcon className="h-4 w-4 ml-1" />
               </Link>
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
@@ -94,13 +103,13 @@ export function WidgetIndex() {
                 <input
                   className="block w-full min-w-0 flex-1 rounded-l-md rounded-none border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
-                  value={widgetLink}
+                  value={availabilityWidget}
                   disabled
                 />
                 <button
                   className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                   type="button"
-                  onClick={copyLinkToClipboard}
+                  onClick={() => copyLinkToClipboard(availabilityWidget)}
                   title="Copy to clipboard"
                 >
                   <ClipboardDocumentListIcon
