@@ -1,17 +1,24 @@
 import { rootRoute } from "@/src/app.router";
 import { createRoute } from "@tanstack/react-router";
 import { BookingWidget } from "./booking.$facility_id";
-import { AvailabilityWidget } from "./availability.$facility_id";
+import { FacilityWidget } from "./$facility_id";
 import { Confirmation } from "./confirmation.$booking_id";
+import { AvailabilityWidget } from "./$facility_id.availability";
 
 export const publicOutlet = createRoute({
   getParentRoute: () => rootRoute,
   path: "/widget/$facility_id",
 });
 
-export const publicAvailabilityRoute = createRoute({
+export const facilityRoute = createRoute({
   getParentRoute: () => publicOutlet,
   path: "/",
+  component: FacilityWidget,
+});
+
+export const availabilityRoute = createRoute({
+  getParentRoute: () => publicOutlet,
+  path: "availability",
   component: AvailabilityWidget,
 });
 
@@ -31,7 +38,8 @@ export const confirmationRoute = createRoute({
 });
 
 export const publicBookingRoutes = publicOutlet.addChildren([
-  publicAvailabilityRoute,
+  facilityRoute,
+  availabilityRoute,
   publicBookingRoute,
   confirmationRoute,
 ]);

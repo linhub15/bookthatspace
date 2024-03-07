@@ -2,10 +2,7 @@ import { Card } from "@/src/components/card";
 import { useFacility } from "@/src/features/hooks";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
-import {
-  publicAvailabilityRoute,
-  publicBookingRoute,
-} from "../../public/public.routes";
+import { facilityRoute, publicBookingRoute } from "../../public/public.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { router } from "@/src/app.router";
 
@@ -20,7 +17,7 @@ export function WidgetIndex() {
   };
 
   const availabilityLinkProps = {
-    to: publicAvailabilityRoute.to,
+    to: facilityRoute.to,
     params: { facility_id: facility.id },
   };
 

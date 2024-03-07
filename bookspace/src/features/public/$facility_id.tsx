@@ -1,5 +1,9 @@
 import { Card } from "@/src/components/card";
-import { publicBookingRoute, publicOutlet } from "./public.routes";
+import {
+  availabilityRoute,
+  publicBookingRoute,
+  publicOutlet,
+} from "./public.routes";
 import { useFacility, useRooms } from "./hooks";
 import { AddressDisplay } from "@/src/components/form/address_input";
 import { Address } from "@/src/types/address";
@@ -9,7 +13,7 @@ import { maskHourlyRate } from "@/src/masks/masks";
 import { Link } from "@tanstack/react-router";
 import { SubmitButton } from "@/src/components/buttons/submit_button";
 
-export function AvailabilityWidget() {
+export function FacilityWidget() {
   const { facility_id } = publicOutlet.useParams();
   const facility = useFacility(facility_id);
   const rooms = useRooms(facility_id);
@@ -43,7 +47,7 @@ export function AvailabilityWidget() {
             Rooms
           </h3>
         </div>
-        <div className="px-4 py-6 sm:px-6">
+        <div className="px-4 py-6 sm:px-6 space-y-4">
           {rooms.data?.map((room) => (
             <div className="flex flex-col sm:flex-row gap-4" key={room.id}>
               <ImageSlider images={room.images} />
@@ -55,12 +59,13 @@ export function AvailabilityWidget() {
                       ({maskHourlyRate(room.hourly_rate)})
                     </span>
                   </span>
-                  <a
+                  <Link
                     className="text-xs leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
-                    href="#"
+                    to={availabilityRoute.to}
+                    params={{ facility_id: facility_id }}
                   >
                     View availability
-                  </a>
+                  </Link>
                 </div>
                 <div className="text-sm">
                   Max Capacity: {room.max_capacity}

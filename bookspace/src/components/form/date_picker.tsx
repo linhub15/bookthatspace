@@ -28,7 +28,12 @@ export function DatePicker(props: Props) {
           <Calendar
             mode="single"
             showOutsideDays={false}
-            selected={new Date(props.value!.toString())}
+            selected={new Date(
+              props.value!.toZonedDateTime({
+                timeZone: Temporal.Now.timeZoneId(),
+                plainTime: "00:00:00",
+              }).toInstant().toJSON(),
+            )}
             onSelect={(value) => {
               if (!value) return;
               const plainDate = Temporal.PlainDate.from(
