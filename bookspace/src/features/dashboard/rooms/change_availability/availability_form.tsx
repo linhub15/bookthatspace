@@ -89,119 +89,117 @@ export function AvailabilityForm(props: Props) {
 
   return (
     <div>
-      <form.Provider>
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            void await form.handleSubmit();
-          }}
-        >
-          <div className="space-y-3">
-            {fieldNames.map((weekday, index) => (
-              <Fragment key={index}>
-                <form.Field
-                  name={weekday}
-                  validators={{
-                    onChange: (field) => {
-                      if (!field.value?.enabled) {
-                        return;
-                      }
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          void await form.handleSubmit();
+        }}
+      >
+        <div className="space-y-3">
+          {fieldNames.map((weekday, index) => (
+            <Fragment key={index}>
+              <form.Field
+                name={weekday}
+                validators={{
+                  onChange: (field) => {
+                    if (!field.value?.enabled) {
+                      return;
+                    }
 
-                      const result = Temporal.PlainTime.compare(
-                        field.value?.start,
-                        field.value?.end,
-                      );
+                    const result = Temporal.PlainTime.compare(
+                      field.value?.start,
+                      field.value?.end,
+                    );
 
-                      if (result >= 0) {
-                        return "Start time must be before end time";
-                      }
-                    },
-                  }}
-                >
-                  {(field) => (
-                    <div
-                      className="grid grid-cols-4 min-h-12"
-                      key={index}
-                    >
-                      <label className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                          checked={field.state.value?.enabled}
-                          onChange={(e) =>
-                            field.handleChange((old) => ({
-                              ...old,
-                              touched: true,
-                              enabled: e.target.checked,
-                            }))}
-                        />
-                        <span className="text-sm font-medium leading-6 text-gray-900 select-none">
-                          <span className="hidden sm:inline">{weekday}</span>
-                          <span className="sm:hidden">
-                            {weekday.slice(0, 3)}
-                          </span>
-                        </span>
-                      </label>
-                      {field.state.value?.enabled && (
-                        <div className="flex flex-col justify-center space-y-1 col-span-2">
-                          <div className="flex">
-                            <TimePicker
-                              value={field.state.value?.start}
-                              onChange={(v) => {
-                                field.handleChange((old) => ({
-                                  ...old,
-                                  touched: true,
-                                  start: v,
-                                }));
-                              }}
-                            />
-                            <span className="my-auto px-1">
-                              <ArrowRightIcon className="w-4 h-4" />
-                            </span>
-                            <TimePicker
-                              value={field.state.value?.end}
-                              min={field.state.value?.start}
-                              onChange={(v) => {
-                                field.handleChange((old) => ({
-                                  ...old,
-                                  touched: true,
-                                  end: v,
-                                }));
-                              }}
-                            />
-                          </div>
-                          <div className="text-xs text-red-900 pl-1">
-                            {field.state?.meta?.errors[0] ?? ""}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </form.Field>
-              </Fragment>
-            ))}
-          </div>
-
-          <div className="pt-6 sm:pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-            <form.Subscribe>
-              {(state) => (
-                <>
-                  <SubmitButton pending={state.isSubmitting}>Save</SubmitButton>
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
-                    onClick={props.onCancel}
-                    disabled={state.isSubmitting}
+                    if (result >= 0) {
+                      return "Start time must be before end time";
+                    }
+                  },
+                }}
+              >
+                {(field) => (
+                  <div
+                    className="grid grid-cols-4 min-h-12"
+                    key={index}
                   >
-                    Cancel
-                  </button>
-                </>
-              )}
-            </form.Subscribe>
-          </div>
-        </form>
-      </form.Provider>
+                    <label className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        checked={field.state.value?.enabled}
+                        onChange={(e) =>
+                          field.handleChange((old) => ({
+                            ...old,
+                            touched: true,
+                            enabled: e.target.checked,
+                          }))}
+                      />
+                      <span className="text-sm font-medium leading-6 text-gray-900 select-none">
+                        <span className="hidden sm:inline">{weekday}</span>
+                        <span className="sm:hidden">
+                          {weekday.slice(0, 3)}
+                        </span>
+                      </span>
+                    </label>
+                    {field.state.value?.enabled && (
+                      <div className="flex flex-col justify-center space-y-1 col-span-2">
+                        <div className="flex">
+                          <TimePicker
+                            value={field.state.value?.start}
+                            onChange={(v) => {
+                              field.handleChange((old) => ({
+                                ...old,
+                                touched: true,
+                                start: v,
+                              }));
+                            }}
+                          />
+                          <span className="my-auto px-1">
+                            <ArrowRightIcon className="w-4 h-4" />
+                          </span>
+                          <TimePicker
+                            value={field.state.value?.end}
+                            min={field.state.value?.start}
+                            onChange={(v) => {
+                              field.handleChange((old) => ({
+                                ...old,
+                                touched: true,
+                                end: v,
+                              }));
+                            }}
+                          />
+                        </div>
+                        <div className="text-xs text-red-900 pl-1">
+                          {field.state?.meta?.errors[0] ?? ""}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </form.Field>
+            </Fragment>
+          ))}
+        </div>
+
+        <div className="pt-6 sm:pt-10 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+          <form.Subscribe>
+            {(state) => (
+              <>
+                <SubmitButton pending={state.isSubmitting}>Save</SubmitButton>
+                <button
+                  type="button"
+                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:col-start-1 sm:mt-0"
+                  onClick={props.onCancel}
+                  disabled={state.isSubmitting}
+                >
+                  Cancel
+                </button>
+              </>
+            )}
+          </form.Subscribe>
+        </div>
+      </form>
     </div>
   );
 }

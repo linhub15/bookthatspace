@@ -60,32 +60,44 @@ export function BookingWidget() {
   return (
     <div className="flex gap-4 max-w-screen-lg w-full px-2 sm:mx-auto pt-8">
       <Card>
-        <form.Provider>
-          <form
-            className="space-y-8 px-4 py-5"
-            onSubmit={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              form.handleSubmit();
-            }}
-          >
-            <form.Field name="room">
+        <form
+          className="space-y-8 px-4 py-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            form.handleSubmit();
+          }}
+        >
+          <form.Field name="room">
+            {(field) => (
+              <div className="space-y-2">
+                <div className="space-x-4">
+                  <Label htmlFor={field.name}>Choose a room</Label>
+                  <Link
+                    className="text-xs leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
+                    to="/widget/$facility_id"
+                    params={{ facility_id: facility_id }}
+                  >
+                    View room details
+                  </Link>
+                </div>
+                <RoomPicker
+                  name={field.name}
+                  id={field.name}
+                  facilityId={facility_id}
+                  value={field.state.value}
+                  onChange={(v) => field.handleChange(v)}
+                />
+              </div>
+            )}
+          </form.Field>
+
+          <div className="flex space-x-4">
+            <form.Field name="date">
               {(field) => (
                 <div className="space-y-2">
-                  <div className="space-x-4">
-                    <Label htmlFor={field.name}>Choose a room</Label>
-                    <Link
-                      className="text-xs leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
-                      to="/widget/$facility_id"
-                      params={{ facility_id: facility_id }}
-                    >
-                      View room details
-                    </Link>
-                  </div>
-                  <RoomPicker
-                    name={field.name}
-                    id={field.name}
-                    facilityId={facility_id}
+                  <Label htmlFor={field.name}>Date</Label>
+                  <DatePicker
                     value={field.state.value}
                     onChange={(v) => field.handleChange(v)}
                   />
@@ -93,108 +105,94 @@ export function BookingWidget() {
               )}
             </form.Field>
 
-            <div className="flex space-x-4">
-              <form.Field name="date">
-                {(field) => (
-                  <div className="space-y-2">
-                    <Label htmlFor={field.name}>Date</Label>
-                    <DatePicker
-                      value={field.state.value}
-                      onChange={(v) => field.handleChange(v)}
-                    />
-                  </div>
-                )}
-              </form.Field>
-
-              <form.Field name="start">
-                {(field) => (
-                  <div className="space-y-2">
-                    <Label htmlFor={field.name}>Start</Label>
-                    <TimePicker
-                      value={field.state.value}
-                      onChange={(v) => field.handleChange(v)}
-                    />
-                  </div>
-                )}
-              </form.Field>
-
-              <form.Field name="end">
-                {(field) => (
-                  <div className="space-y-2">
-                    <Label htmlFor={field.name}>End</Label>
-                    <form.Subscribe>
-                      {(state) => (
-                        <TimePicker
-                          value={field.state.value}
-                          min={state.values.start}
-                          onChange={(v) => field.handleChange(v)}
-                        />
-                      )}
-                    </form.Subscribe>
-                  </div>
-                )}
-              </form.Field>
-            </div>
-
-            <form.Field name="name">
+            <form.Field name="start">
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Name</Label>
-                  <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    type="text"
-                    name={field.name}
-                    id={field.name}
+                  <Label htmlFor={field.name}>Start</Label>
+                  <TimePicker
                     value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
+                    onChange={(v) => field.handleChange(v)}
                   />
                 </div>
               )}
             </form.Field>
 
-            <form.Field name="email">
+            <form.Field name="end">
               {(field) => (
                 <div className="space-y-2">
-                  <Label htmlFor={field.name}>Email</Label>
-                  <input
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    type="text"
-                    name={field.name}
-                    id={field.name}
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
+                  <Label htmlFor={field.name}>End</Label>
+                  <form.Subscribe>
+                    {(state) => (
+                      <TimePicker
+                        value={field.state.value}
+                        min={state.values.start}
+                        onChange={(v) => field.handleChange(v)}
+                      />
+                    )}
+                  </form.Subscribe>
                 </div>
               )}
             </form.Field>
-            <form.Field name="description">
-              {(field) => (
-                <div className="space-y-2">
-                  <Label htmlFor={field.name}>Additional Information</Label>
-                  <textarea
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    name={field.name}
-                    id={field.name}
-                    value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </div>
+          </div>
+
+          <form.Field name="name">
+            {(field) => (
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>Name</Label>
+                <input
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type="text"
+                  name={field.name}
+                  id={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              </div>
+            )}
+          </form.Field>
+
+          <form.Field name="email">
+            {(field) => (
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>Email</Label>
+                <input
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type="text"
+                  name={field.name}
+                  id={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              </div>
+            )}
+          </form.Field>
+          <form.Field name="description">
+            {(field) => (
+              <div className="space-y-2">
+                <Label htmlFor={field.name}>Additional Information</Label>
+                <textarea
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  name={field.name}
+                  id={field.name}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+              </div>
+            )}
+          </form.Field>
+          <div className="pt-10 max-w-sm mx-auto">
+            <form.Subscribe>
+              {(state) => (
+                <SubmitButton pending={state.isSubmitting}>
+                  Submit Booking Request
+                </SubmitButton>
               )}
-            </form.Field>
-            <div className="pt-10 max-w-sm mx-auto">
-              <form.Subscribe>
-                {(state) => (
-                  <SubmitButton pending={state.isSubmitting}>
-                    Submit Booking Request
-                  </SubmitButton>
-                )}
-              </form.Subscribe>
-            </div>
-            <p className="pt-2 text-center text-xs text-gray-500">
-              Payment not required until booking is accepted
-            </p>
-          </form>
-        </form.Provider>
+            </form.Subscribe>
+          </div>
+          <p className="pt-2 text-center text-xs text-gray-500">
+            Payment not required until booking is accepted
+          </p>
+        </form>
       </Card>
     </div>
   );
