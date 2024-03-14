@@ -8,10 +8,16 @@ import { useFacility, useRooms } from "./hooks";
 import { AddressDisplay } from "@/components/form/address_input";
 import { Address } from "@/lib/types/address";
 import { type Image } from "@/lib/types/image.type";
-import { MouseEvent, useRef, useState } from "react";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { Link } from "@tanstack/react-router";
 import { SubmitButton } from "@/components/buttons/submit_button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export function FacilityWidget() {
   const { facility_id } = publicOutlet.useParams();
@@ -50,7 +56,8 @@ export function FacilityWidget() {
         <div className="px-4 py-6 sm:px-6 space-y-4">
           {rooms.data?.map((room) => (
             <div className="flex flex-col sm:flex-row gap-4" key={room.id}>
-              <ImageSlider images={room.images} />
+              <ImageCarousel images={room.images} />
+              {/* <ImageSlider images={room.images} /> */}
               <div className="w-full">
                 <div className="flex justify-between items-center">
                   <span className="text-lg">
@@ -83,62 +90,22 @@ export function FacilityWidget() {
   );
 }
 
-function ImageSlider(props: { images: Image[] }) {
-  const [isMouseDown, setIsMouseDown] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const mouseCoords = useRef({
-    startX: 0,
-    scrollLeft: 0,
-  });
-
-  const dragStart = (
-    event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
-  ) => {
-    if (!ref.current) return;
-    const slider = ref.current.children.item(0) as HTMLImageElement;
-    if (!slider) return;
-    const startX = event.pageX - slider.offsetLeft;
-    const scrollLeft = slider.scrollLeft;
-    mouseCoords.current = { startX, scrollLeft };
-    setIsMouseDown(true);
-    document.body.style.cursor = "grabbing";
-  };
-
-  const dragEnd = () => {
-    setIsMouseDown(false);
-    document.body.style.cursor = "default";
-  };
-
-  const scrollX = (
-    event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
-  ) => {
-    if (!ref.current || !isMouseDown) return;
-    event.preventDefault();
-
-    const slider = ref.current.children.item(0) as HTMLImageElement;
-    if (!slider) return;
-    const x = event.pageX - slider.offsetLeft;
-    const walkX = x - mouseCoords.current.startX;
-    slider.scrollLeft = mouseCoords.current.scrollLeft - walkX;
-  };
-
+function ImageCarousel(props: { images: Image[] }) {
   return (
-    <div
-      className="flex overflow-x-scroll sm:w-[40em] sm:h-64"
-      ref={ref}
-      onMouseDown={dragStart}
-      onMouseUp={dragEnd}
-      onMouseMove={scrollX}
-    >
-      <div className="flex overflow-x-scroll rounded-xl snap-x snap-mandatory space-x-2 active:cursor-grabbing md:active:snap-none">
-        {props.images.map((image) => (
-          <img
-            className="snap-center object-cover rounded-xl pointer-events-none select-none"
-            src={image.url}
-            key={image.id}
-          />
+    <Carousel className="w-full max-w-sm mx-auto group">
+      <CarouselContent>
+        {props.images.map((image, index) => (
+          <CarouselItem key={index}>
+            <img
+              className="snap-center object-cover rounded-xl pointer-events-none select-none"
+              src={image.url}
+              key={image.id}
+            />
+          </CarouselItem>
         ))}
-      </div>
-    </div>
+      </CarouselContent>
+      <CarouselPrevious className="opacity-0 group-hover:opacity-95 transition-opacity" />
+      <CarouselNext className="opacity-0 group-hover:opacity-95 transition-opacity" />
+    </Carousel>
   );
 }
