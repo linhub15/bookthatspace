@@ -8,7 +8,7 @@ import {
 } from "./hooks";
 import { BackButton } from "@/components/buttons/back_button";
 import { Card } from "@/components/card";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon, UserIcon } from "@heroicons/react/24/outline";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { Temporal } from "@js-temporal/polyfill";
 import { useWeekCalendar } from "./use_week_calendar";
@@ -97,8 +97,11 @@ export function Room() {
                   </dd>
                 </div>
                 <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
-                  <dt className="text-sm font-medium leading-6 text-gray-900">
-                    Room Capacity
+                  <dt className="space-x-1">
+                    <UserIcon className="inline w-4 text-gray-500 stroke-2" />
+                    <span className="text-sm font-medium leading-6 text-gray-900">
+                      Maximum Capacity
+                    </span>
                   </dt>
                   <dd className="leading-6 text-gray-700">
                     {room.max_capacity}

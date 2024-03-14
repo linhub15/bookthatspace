@@ -51,10 +51,11 @@ export function maskHourlyRate(rate: number | null) {
   const masked = rate.toLocaleString("en-US", {
     style: "currency",
     currency: "CAD",
+    currencyDisplay: "symbol",
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   });
-  return `${masked} / Hour`;
+  return `${masked} hourly`;
 }
 
 export function maskDurationSince(target: string) {

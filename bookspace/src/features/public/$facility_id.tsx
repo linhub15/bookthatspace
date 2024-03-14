@@ -18,6 +18,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 
 export function FacilityWidget() {
   const { facility_id } = publicOutlet.useParams();
@@ -48,23 +49,17 @@ export function FacilityWidget() {
       </Card>
 
       <Card>
-        <div className="px-4 py-6 sm:px-6" id="rooms">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
-            Rooms
-          </h3>
-        </div>
-        <div className="px-4 py-6 sm:px-6 space-y-4">
+        <div className="flex flex-col p-4 sm:p-6 sm:gap-6 lg:p-10 lg:gap-10 sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {rooms.data?.map((room) => (
-            <div className="flex flex-col sm:flex-row gap-4" key={room.id}>
+            <div
+              className="flex flex-col gap-4 rounded-xl overflow-hidden"
+              key={room.id}
+            >
               <ImageCarousel images={room.images} />
-              {/* <ImageSlider images={room.images} /> */}
               <div className="w-full">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg">
-                    {room.name}{" "}
-                    <span className="text-base text-gray-500">
-                      ({maskHourlyRate(room.hourly_rate)})
-                    </span>
+                  <span className="font-semibold">
+                    {room.name}
                   </span>
                   <Link
                     className="text-xs leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
@@ -72,15 +67,20 @@ export function FacilityWidget() {
                     search={{ room_id: room.id }}
                     params={{ facility_id: facility_id }}
                   >
-                    View availability
+                    Availability
                   </Link>
                 </div>
+                <div className="text-sm text-gray-600">
+                  Maximum {room.max_capacity} people
+                </div>
                 <div className="text-sm">
-                  Max Capacity: {room.max_capacity}
+                  {maskHourlyRate(room.hourly_rate)}
                 </div>
-                <div className="py-2 whitespace-pre-line">
+                {
+                  /* <div className="py-2 whitespace-pre-line">
                   {room.description}
-                </div>
+                </div> */
+                }
               </div>
             </div>
           ))}
@@ -92,12 +92,19 @@ export function FacilityWidget() {
 
 function ImageCarousel(props: { images: Image[] }) {
   return (
-    <Carousel className="w-full max-w-sm mx-auto group">
+    <Carousel className="group">
       <CarouselContent>
+        {props.images.length === 0 && (
+          <CarouselItem>
+            <div className="grid bg-slate-100 snap-center object-cover object-center mx-auto w-full h-60 lg:h-72 rounded-xl pointer-events-none select-none">
+              <PhotoIcon className="size-20 place-self-center text-slate-300" />
+            </div>
+          </CarouselItem>
+        )}
         {props.images.map((image, index) => (
           <CarouselItem key={index}>
             <img
-              className="snap-center object-cover rounded-xl pointer-events-none select-none"
+              className="snap-center object-cover object-center mx-auto w-full h-72 rounded-xl pointer-events-none select-none"
               src={image.url}
               key={image.id}
             />
