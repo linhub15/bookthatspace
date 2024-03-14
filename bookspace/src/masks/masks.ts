@@ -22,6 +22,22 @@ export function maskTimeRange(start: string, end: string) {
   return `${s} - ${e}`;
 }
 
+export function maskPlainTimeRange(
+  start: Temporal.PlainTime,
+  end: Temporal.PlainTime,
+) {
+  const s = start.toLocaleString(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+  const e = end.toLocaleString(undefined, {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+
+  return `${s} - ${e}`;
+}
+
 export function maskTime(value: Temporal.PlainTime) {
   const time = value.toLocaleString(undefined, {
     hour: "numeric",

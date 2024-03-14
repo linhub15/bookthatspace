@@ -62,6 +62,7 @@ export function FacilityWidget() {
                   <Link
                     className="text-xs leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
                     to={availabilityRoute.to}
+                    search={{ room_id: room.id }}
                     params={{ facility_id: facility_id }}
                   >
                     View availability

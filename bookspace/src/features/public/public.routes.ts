@@ -4,6 +4,7 @@ import { BookingWidget } from "./booking.$facility_id";
 import { FacilityWidget } from "./$facility_id";
 import { Confirmation } from "./confirmation.$booking_id";
 import { AvailabilityWidget } from "./$facility_id.availability";
+import { z } from "zod";
 
 export const publicOutlet = createRoute({
   getParentRoute: () => rootRoute,
@@ -19,6 +20,7 @@ export const facilityRoute = createRoute({
 export const availabilityRoute = createRoute({
   getParentRoute: () => publicOutlet,
   path: "availability",
+  validateSearch: z.object({ room_id: z.string() }),
   component: AvailabilityWidget,
 });
 

@@ -6,12 +6,24 @@ import { Temporal } from "@js-temporal/polyfill";
 import { Card } from "@/src/components/card";
 import { useQuery } from "@tanstack/react-query";
 import { Enums, supabase } from "@/src/clients/supabase";
+import { useNavigate } from "@tanstack/react-router";
+import { maskPlainTimeRange } from "@/src/masks/masks";
 
 export function AvailabilityWidget() {
+  const navigate = useNavigate();
   const { facility_id } = availabilityRoute.useParams();
+  const { room_id } = availabilityRoute.useSearch();
   const rooms = useRooms(facility_id);
-  const [roomId, setRoomId] = useState(rooms.data?.at(0)?.id);
   const [date, setDate] = useState(Temporal.Now.plainDateISO());
+
+  const selectRoom = (value: string) => {
+    return navigate({
+      params: { facility_id: facility_id },
+      search: () => ({
+        room_id: value,
+      }),
+    });
+  };
 
   return (
     <div className="max-w-screen-lg space-y-4 px-2 sm:mx-auto pt-8">
@@ -19,10 +31,9 @@ export function AvailabilityWidget() {
         <div className="p-4 flex flex-row gap-4">
           <select
             className="block rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            value={roomId}
-            onChange={(e) => setRoomId(e.currentTarget.value)}
+            value={room_id ?? rooms.data?.at(0)?.id}
+            onChange={(e) => selectRoom(e.currentTarget.value)}
           >
-            <option>Select an option</option>
             {rooms.data?.map((room) => (
               <option key={room.id} value={room.id}>
                 {room.name}
@@ -32,7 +43,7 @@ export function AvailabilityWidget() {
           <DatePicker value={date} onChange={(v) => setDate(v!)} />
         </div>
         <div className="p-4">
-          <AvailabilityDisplay roomId={roomId} date={date} />
+          <AvailabilityDisplay roomId={room_id} date={date} />
         </div>
       </Card>
     </div>
@@ -55,7 +66,9 @@ function AvailabilityDisplay(
           weekday: "long",
         })}
       </h1>
-      {JSON.stringify(availability.data, null, 2)}
+      {availability.data.map((range) => (
+        <div>{maskPlainTimeRange(range[0], range[1])}</div>
+      ))}
     </div>
   );
 }
