@@ -1,11 +1,11 @@
 import { useForm } from "@tanstack/react-form";
 import { useCreateBooking } from "./hooks";
 import { Temporal } from "@js-temporal/polyfill";
-import { Label } from "@/src/components/form/label";
+import { Label } from "@/components/form/label";
 import { RoomPicker } from "../../public/room_picker";
-import { DatePicker } from "@/src/components/form/date_picker";
-import { TimePicker } from "@/src/components/form/time_picker";
-import { SubmitButton } from "@/src/components/buttons/submit_button";
+import { DatePicker } from "@/components/form/date_picker";
+import { TimePicker } from "@/components/form/time_picker";
+import { SubmitButton } from "@/components/buttons/submit_button";
 
 type Props = {
   facilityId: string;

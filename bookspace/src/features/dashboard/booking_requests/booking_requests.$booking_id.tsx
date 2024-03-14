@@ -1,7 +1,7 @@
-import { BackButton } from "@/src/components/buttons/back_button";
-import { Card } from "@/src/components/card";
-import { maskDate, maskDurationSince, maskTimeRange } from "@/src/masks/masks";
-import { Tables } from "@/src/clients/supabase";
+import { BackButton } from "@/components/buttons/back_button";
+import { Card } from "@/components/card";
+import { maskDate, maskDurationSince, maskTimeRange } from "@/lib/masks/masks";
+import { Tables } from "@/clients/supabase";
 import {
   CalendarDaysIcon,
   ClockIcon,
@@ -14,11 +14,11 @@ import { bookingRequestRoute, bookingRequestsRoute } from "../dashboard.routes";
 import { useRoom } from "../rooms/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { useRoomBooking } from "../bookings/hooks";
-import { Feed } from "@/src/components/feed";
+import { Feed } from "@/components/feed";
 import { Temporal } from "@js-temporal/polyfill";
 import { useRejectBookingModal } from "./use_reject_booking_modal";
 import { useAcceptBooking } from "./use_accept_booking";
-import { SubmitButton } from "@/src/components/buttons/submit_button";
+import { SubmitButton } from "@/components/buttons/submit_button";
 
 export function BookingRequest() {
   const { booking_id } = bookingRequestRoute.useParams();

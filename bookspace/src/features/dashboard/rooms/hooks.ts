@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../../../clients/supabase";
-import { TablesInsert } from "@/src/clients/supabase";
+import { TablesInsert } from "@/clients/supabase";
 
 export function useRooms() {
   const rooms = useQuery({

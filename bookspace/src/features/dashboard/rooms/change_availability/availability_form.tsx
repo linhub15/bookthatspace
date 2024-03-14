@@ -1,6 +1,6 @@
-import { Enums, Tables, TablesInsert } from "@/src/clients/supabase";
-import { SubmitButton } from "@/src/components/buttons/submit_button";
-import { TimePicker } from "@/src/components/form/time_picker";
+import { Enums, Tables, TablesInsert } from "@/clients/supabase";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { TimePicker } from "@/components/form/time_picker";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Temporal } from "@js-temporal/polyfill";
 import { useForm } from "@tanstack/react-form";

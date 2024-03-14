@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Temporal } from "@js-temporal/polyfill";
 import { supabase } from "../../../clients/supabase";
 import { Fragment } from "react";
-import { maskDate, maskDurationSince } from "../../../masks/masks";
+import { maskDate, maskDurationSince } from "../../../lib/masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { Link, useSearch } from "@tanstack/react-router";
-import { Card } from "@/src/components/card";
+import { Card } from "@/components/card";
 import { bookingRoute, bookingsIndexRoute } from "../dashboard.routes";
 import { useCreateBookingModal } from "./use_create_booking_modal";
 

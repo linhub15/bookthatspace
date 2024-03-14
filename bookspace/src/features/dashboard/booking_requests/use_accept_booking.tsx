@@ -1,4 +1,4 @@
-import { api } from "@/src/clients/api";
+import { api } from "@/clients/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export function useAcceptBooking() {

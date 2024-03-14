@@ -1,4 +1,4 @@
-import { Modal } from "@/src/components/modal";
+import { Modal } from "@/components/modal";
 import { useState } from "react";
 import { AvailabilityForm } from "./availability_form";
 import { useChangeAvailability, useRoom, useRoomAvailability } from "../hooks";

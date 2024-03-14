@@ -1,5 +1,5 @@
-import { api } from "@/src/clients/api";
-import { Enums, supabase } from "@/src/clients/supabase";
+import { api } from "@/clients/api";
+import { Enums, supabase } from "@/clients/supabase";
 import { Temporal } from "@js-temporal/polyfill";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 

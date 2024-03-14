@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useRooms } from "./hooks";
 import { availabilityRoute } from "./public.routes";
-import { DatePicker } from "@/src/components/form/date_picker";
+import { DatePicker } from "@/components/form/date_picker";
 import { Temporal } from "@js-temporal/polyfill";
-import { Card } from "@/src/components/card";
+import { Card } from "@/components/card";
 import { useQuery } from "@tanstack/react-query";
-import { Enums, supabase } from "@/src/clients/supabase";
+import { Enums, supabase } from "@/clients/supabase";
 import { useNavigate } from "@tanstack/react-router";
-import { maskPlainTimeRange } from "@/src/masks/masks";
+import { maskPlainTimeRange } from "@/lib/masks/masks";
 
 export function AvailabilityWidget() {
   const navigate = useNavigate();

@@ -1,15 +1,15 @@
 import { PropsWithChildren, useState } from "react";
 import { Calendar } from "../../../components/calendar";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { supabase, Tables } from "@/src/clients/supabase";
+import { supabase, Tables } from "@/clients/supabase";
 import { DurationSlider } from "../../../components/duration_slider";
 import { Temporal } from "@js-temporal/polyfill";
-import { maskHourlyRate, maskTime } from "../../../masks/masks";
-import { BackButton } from "@/src/components/buttons/back_button";
-import { FormField } from "@/src/components/form/form_field";
-import { Card } from "@/src/components/card";
-import { Label } from "@/src/components/form/label";
-import { userQueryOptions } from "@/src/auth/user_query_options";
+import { maskHourlyRate, maskTime } from "../../../lib/masks/masks";
+import { BackButton } from "@/components/buttons/back_button";
+import { FormField } from "@/components/form/form_field";
+import { Card } from "@/components/card";
+import { Label } from "@/components/form/label";
+import { userQueryOptions } from "@/auth/user_query_options";
 
 const timeOptions = Array.from(Array(24 * 2), (_, i) => {
   return Temporal.PlainTime.from({

@@ -6,10 +6,10 @@ import {
   useRoomPhotos,
   useUploadPhoto,
 } from "./hooks";
-import { BackButton } from "@/src/components/buttons/back_button";
-import { Card } from "@/src/components/card";
+import { BackButton } from "@/components/buttons/back_button";
+import { Card } from "@/components/card";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
-import { maskHourlyRate } from "@/src/masks/masks";
+import { maskHourlyRate } from "@/lib/masks/masks";
 import { Temporal } from "@js-temporal/polyfill";
 import { useWeekCalendar } from "./use_week_calendar";
 

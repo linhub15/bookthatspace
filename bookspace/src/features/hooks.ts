@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { supabase, TablesInsert, TablesUpdate } from "@/src/clients/supabase";
+import { supabase, TablesInsert, TablesUpdate } from "@/clients/supabase";
 import { signal } from "@preact/signals";
 
 export const registered = signal(false);

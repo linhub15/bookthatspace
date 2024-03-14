@@ -1,14 +1,14 @@
-import { Card } from "@/src/components/card";
-import { DatePicker } from "@/src/components/form/date_picker";
-import { Label } from "@/src/components/form/label";
+import { Card } from "@/components/card";
+import { DatePicker } from "@/components/form/date_picker";
+import { Label } from "@/components/form/label";
 import { useForm } from "@tanstack/react-form";
 import { RoomPicker } from "./room_picker";
 import { confirmationRoute, publicBookingRoutes } from "./public.routes";
 import { useCreateBooking } from "./hooks";
 import { Temporal } from "@js-temporal/polyfill";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { TimePicker } from "@/src/components/form/time_picker";
-import { SubmitButton } from "@/src/components/buttons/submit_button";
+import { TimePicker } from "@/components/form/time_picker";
+import { SubmitButton } from "@/components/buttons/submit_button";
 
 type Form = {
   date: Temporal.PlainDate | undefined;

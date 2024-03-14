@@ -1,4 +1,4 @@
-import { Modal } from "@/src/components/modal";
+import { Modal } from "@/components/modal";
 import { useState } from "react";
 import { RoomForm } from "./room_form";
 

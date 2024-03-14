@@ -20,7 +20,7 @@ import {
   widgetRoute,
 } from "./dashboard.routes";
 import { useProfile } from "../hooks";
-import { useSignOut } from "@/src/auth/hooks/use_sign_out";
+import { useSignOut } from "@/auth/hooks/use_sign_out";
 
 function useNavigation() {
   return [

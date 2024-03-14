@@ -1,5 +1,5 @@
-import { Address } from "@/src/types/address";
-import { Json } from "@/src/clients/supabase";
+import { Address } from "@/lib/types/address";
+import { Json } from "@/clients/supabase";
 import { Label } from "./label";
 import { cn } from "@/lib/utils/cn";
 import { FormField } from "./form_field";

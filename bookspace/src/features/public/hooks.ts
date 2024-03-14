@@ -1,7 +1,7 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "../../clients/api";
-import { supabase } from "@/src/clients/supabase";
+import { supabase } from "@/clients/supabase";
 
 export function useFacility(facilityId: string) {
   return useQuery({

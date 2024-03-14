@@ -1,10 +1,10 @@
-import { Card } from "@/src/components/card";
-import { useFacility } from "@/src/features/hooks";
+import { Card } from "@/components/card";
+import { useFacility } from "@/features/hooks";
 import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
 import { facilityRoute, publicBookingRoute } from "../../public/public.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
-import { router } from "@/src/app.router";
+import { router } from "@/app.router";
 
 export function WidgetIndex() {
   const { data: facility } = useFacility();

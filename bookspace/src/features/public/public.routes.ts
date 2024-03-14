@@ -1,4 +1,4 @@
-import { rootRoute } from "@/src/app.router";
+import { rootRoute } from "@/app.router";
 import { createRoute } from "@tanstack/react-router";
 import { BookingWidget } from "./booking.$facility_id";
 import { FacilityWidget } from "./$facility_id";

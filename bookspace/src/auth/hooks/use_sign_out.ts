@@ -1,8 +1,8 @@
-import { supabase } from "@/src/clients/supabase";
+import { supabase } from "@/clients/supabase";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { authenticated } from "./use_authenticated.signal";
-import { rootRoute } from "@/src/app.router";
+import { rootRoute } from "@/app.router";
 
 export function useSignOut() {
   const navigate = useNavigate();

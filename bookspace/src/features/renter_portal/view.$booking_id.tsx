@@ -1,7 +1,7 @@
-import { Card } from "@/src/components/card";
+import { Card } from "@/components/card";
 import { useGetBooking } from "../dashboard/bookings/hooks";
 import { viewBookingRoute } from "./renter_portal.routes";
-import { Feed } from "@/src/components/feed";
+import { Feed } from "@/components/feed";
 
 export function ViewBooking() {
   const { booking_id } = viewBookingRoute.useParams();

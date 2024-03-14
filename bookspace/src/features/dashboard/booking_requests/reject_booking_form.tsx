@@ -1,8 +1,8 @@
 import { useForm } from "@tanstack/react-form";
 import { useRejectBooking } from "../bookings/hooks";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { FormField } from "@/src/components/form/form_field";
-import { Label } from "@/src/components/form/label";
+import { FormField } from "@/components/form/form_field";
+import { Label } from "@/components/form/label";
 
 export function RejectBookingForm(
   props: { bookingId: string; onAfterSubmit: () => void; onCancel: () => void },

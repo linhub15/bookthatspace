@@ -1,17 +1,17 @@
-import { Card } from "@/src/components/card";
+import { Card } from "@/components/card";
 import {
   availabilityRoute,
   publicBookingRoute,
   publicOutlet,
 } from "./public.routes";
 import { useFacility, useRooms } from "./hooks";
-import { AddressDisplay } from "@/src/components/form/address_input";
-import { Address } from "@/src/types/address";
-import { type Image } from "@/src/types/image.type";
+import { AddressDisplay } from "@/components/form/address_input";
+import { Address } from "@/lib/types/address";
+import { type Image } from "@/lib/types/image.type";
 import { MouseEvent, useRef, useState } from "react";
-import { maskHourlyRate } from "@/src/masks/masks";
+import { maskHourlyRate } from "@/lib/masks/masks";
 import { Link } from "@tanstack/react-router";
-import { SubmitButton } from "@/src/components/buttons/submit_button";
+import { SubmitButton } from "@/components/buttons/submit_button";
 
 export function FacilityWidget() {
   const { facility_id } = publicOutlet.useParams();

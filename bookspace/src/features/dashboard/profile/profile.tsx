@@ -1,7 +1,7 @@
-import { calendar } from "@/src/clients/googleapis";
-import { supabase } from "@/src/clients/supabase";
-import { Card } from "@/src/components/card";
-import { useProfile } from "@/src/features/hooks";
+import { calendar } from "@/clients/googleapis";
+import { supabase } from "@/clients/supabase";
+import { Card } from "@/components/card";
+import { useProfile } from "@/features/hooks";
 import { useQuery } from "@tanstack/react-query";
 
 export function Profile() {

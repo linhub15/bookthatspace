@@ -1,4 +1,4 @@
-import { Modal } from "@/src/components/modal";
+import { Modal } from "@/components/modal";
 import { useState } from "react";
 import { InternalBookingForm } from "./internal_booking_form";
 import { useFacility, useProfile } from "../../hooks";

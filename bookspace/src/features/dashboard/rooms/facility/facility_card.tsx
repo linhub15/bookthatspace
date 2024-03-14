@@ -1,9 +1,9 @@
-import { Card } from "@/src/components/card";
+import { Card } from "@/components/card";
 import { useFacility } from "../../../hooks";
 import { useFacilityModal } from "./use_facility_modal";
 import { HomeModernIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { AddressDisplay } from "@/src/components/form/address_input";
-import { Address } from "@/src/types/address";
+import { AddressDisplay } from "@/components/form/address_input";
+import { Address } from "@/lib/types/address";
 
 export function FacilityCard() {
   const facility = useFacility();

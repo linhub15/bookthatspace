@@ -1,4 +1,4 @@
-import { Modal, type ModalHook } from "@/src/components/modal";
+import { Modal, type ModalHook } from "@/components/modal";
 import { useState } from "react";
 import { useProfile } from "../../../hooks";
 import { FacilityForm } from "./facility_form";

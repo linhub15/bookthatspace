@@ -1,12 +1,12 @@
 import { useForm } from "@tanstack/react-form";
 import { useFacility } from "../../../hooks";
-import { Label } from "@/src/components/form/label";
+import { Label } from "@/components/form/label";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase, TablesInsert } from "@/src/clients/supabase";
-import { AddressInput } from "@/src/components/form/address_input";
-import { FormField } from "@/src/components/form/form_field";
-import { SubmitButton } from "@/src/components/buttons/submit_button";
-import { Address } from "@/src/types/address";
+import { supabase, TablesInsert } from "@/clients/supabase";
+import { AddressInput } from "@/components/form/address_input";
+import { FormField } from "@/components/form/form_field";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { Address } from "@/lib/types/address";
 
 type Props = {
   profileId: string;
