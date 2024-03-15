@@ -6,44 +6,33 @@ import { Temporal } from "@js-temporal/polyfill";
 import { Card } from "@/components/card";
 import { useQuery } from "@tanstack/react-query";
 import { Enums, supabase } from "@/clients/supabase";
-import { useNavigate } from "@tanstack/react-router";
 import { maskPlainTimeRange } from "@/lib/masks/masks";
+import { RoomCard } from "./$facility_id";
+import { Label } from "@/components/form/label";
 
 export function AvailabilityWidget() {
-  const navigate = useNavigate();
   const { facility_id } = availabilityRoute.useParams();
   const { room_id } = availabilityRoute.useSearch();
   const rooms = useRooms(facility_id);
   const [date, setDate] = useState(Temporal.Now.plainDateISO());
 
-  const selectRoom = (value: string) => {
-    return navigate({
-      params: { facility_id: facility_id },
-      search: () => ({
-        room_id: value,
-      }),
-    });
-  };
+  const room = rooms.data?.find((r) => r.id === room_id);
+  if (!room) return;
 
   return (
     <div className="max-w-screen-lg space-y-4 px-2 sm:mx-auto pt-8">
       <Card>
-        <div className="p-4 flex flex-row gap-4">
-          <select
-            className="block rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            value={room_id ?? rooms.data?.at(0)?.id}
-            onChange={(e) => selectRoom(e.currentTarget.value)}
-          >
-            {rooms.data?.map((room) => (
-              <option key={room.id} value={room.id}>
-                {room.name}
-              </option>
-            ))}
-          </select>
-          <DatePicker value={date} onChange={(v) => setDate(v!)} />
-        </div>
-        <div className="p-4">
-          <AvailabilityDisplay roomId={room_id} date={date} />
+        <div className="flex flex-col md:grid md:grid-cols-3 p-4 gap-6">
+          <div className="">
+            <RoomCard room={room} photos={room?.images} />
+          </div>
+          <div>
+            <Label>Date</Label>
+            <DatePicker value={date} onChange={(v) => setDate(v!)} />
+          </div>
+          <div>
+            <AvailabilityDisplay roomId={room_id} date={date} />
+          </div>
         </div>
       </Card>
     </div>

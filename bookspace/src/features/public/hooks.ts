@@ -71,12 +71,14 @@ export function useRooms(facilityId: string) {
   const rooms = useQuery({
     queryKey: ["rooms", facilityId],
     queryFn: async () => {
-      const { data, error } = await supabase.from("room").select(
-        `*, room_photo(*)`,
-      ).eq(
-        "facility_id",
-        facilityId,
-      );
+      const { data, error } = await supabase
+        .from("room")
+        .select(
+          `*, room_photo(*)`,
+        ).eq(
+          "facility_id",
+          facilityId,
+        ).order("name");
 
       if (error) {
         alert(error.message);

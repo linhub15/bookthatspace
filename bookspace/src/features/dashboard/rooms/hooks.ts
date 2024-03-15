@@ -6,8 +6,11 @@ export function useRooms() {
   const rooms = useQuery({
     queryKey: ["rooms"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("room")
-        .select();
+      const { data, error } = await supabase
+        .from("room")
+        .select()
+        .order("name");
+
       if (error) {
         alert(error.message);
       }

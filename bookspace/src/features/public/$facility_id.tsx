@@ -19,6 +19,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { PhotoIcon } from "@heroicons/react/24/outline";
+import { cn } from "@/lib/utils/cn";
+import { Tables } from "@/clients/supabase";
 
 export function FacilityWidget() {
   const { facility_id } = publicOutlet.useParams();
@@ -49,40 +51,9 @@ export function FacilityWidget() {
       </Card>
 
       <Card>
-        <div className="flex flex-col p-4 sm:p-6 sm:gap-6 lg:p-10 lg:gap-10 sm:grid sm:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-col p-4 gap-6 sm:p-6 lg:p-8 lg:gap-8 sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {rooms.data?.map((room) => (
-            <div
-              className="flex flex-col gap-4 rounded-xl overflow-hidden"
-              key={room.id}
-            >
-              <ImageCarousel images={room.images} />
-              <div className="w-full">
-                <div className="flex justify-between items-center">
-                  <span className="font-semibold">
-                    {room.name}
-                  </span>
-                  <Link
-                    className="text-xs leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
-                    to={availabilityRoute.to}
-                    search={{ room_id: room.id }}
-                    params={{ facility_id: facility_id }}
-                  >
-                    Availability
-                  </Link>
-                </div>
-                <div className="text-sm text-gray-600">
-                  Maximum {room.max_capacity} people
-                </div>
-                <div className="text-sm">
-                  {maskHourlyRate(room.hourly_rate)}
-                </div>
-                {
-                  /* <div className="py-2 whitespace-pre-line">
-                  {room.description}
-                </div> */
-                }
-              </div>
-            </div>
+            <RoomCard room={room} photos={room.images} key={room.id} />
           ))}
         </div>
       </Card>
@@ -90,13 +61,47 @@ export function FacilityWidget() {
   );
 }
 
+export function RoomCard(
+  { room, photos }: { room: Tables<"room">; photos: Image[] },
+) {
+  return (
+    <div className="flex flex-col gap-2 rounded-xl overflow-hidden">
+      <ImageCarousel images={photos} />
+      <div className="w-full">
+        <div className="flex justify-between items-center">
+          <span className="font-semibold">
+            {room.name}
+          </span>
+          <Link
+            className="text-xs leading-6 font-medium text-indigo-600 hover:text-indigo-500"
+            to={availabilityRoute.to}
+            search={{ room_id: room.id }}
+            params={{ facility_id: room.facility_id }}
+          >
+            Availability
+          </Link>
+        </div>
+        <div className="text-sm text-gray-600">
+          Maximum {room.max_capacity} people
+        </div>
+        <div className="text-sm">
+          {maskHourlyRate(room.hourly_rate)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ImageCarousel(props: { images: Image[] }) {
+  const styles = cn(
+    "w-full h-72 mx-auto rounded-xl pointer-events-none select-none",
+  );
   return (
     <Carousel className="group">
       <CarouselContent>
         {props.images.length === 0 && (
           <CarouselItem>
-            <div className="grid bg-slate-100 snap-center object-cover object-center mx-auto w-full h-60 lg:h-72 rounded-xl pointer-events-none select-none">
+            <div className={cn("grid bg-slate-100", styles)}>
               <PhotoIcon className="size-20 place-self-center text-slate-300" />
             </div>
           </CarouselItem>
@@ -104,7 +109,7 @@ function ImageCarousel(props: { images: Image[] }) {
         {props.images.map((image, index) => (
           <CarouselItem key={index}>
             <img
-              className="snap-center object-cover object-center mx-auto w-full h-72 rounded-xl pointer-events-none select-none"
+              className={cn("snap-center object-cover object-center", styles)}
               src={image.url}
               key={image.id}
             />
