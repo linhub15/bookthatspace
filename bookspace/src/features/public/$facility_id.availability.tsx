@@ -46,14 +46,16 @@ function AvailabilityDisplay(
 
   if (!props.roomId) return <div>Select a room</div>;
   if (availability.isLoading) return <div>Loading...</div>;
-  if (!availability.data) return <div>No availability found that day</div>;
+  if (!availability.data || availability.data.length === 0) {
+    return <div>Not available</div>;
+  }
 
   return (
     <div>
       <h1>
         {props.date.toLocaleString(undefined, {
           weekday: "long",
-        })}
+        })}'s availability
       </h1>
       {availability.data.map((range) => (
         <div>{maskPlainTimeRange(range[0], range[1])}</div>
