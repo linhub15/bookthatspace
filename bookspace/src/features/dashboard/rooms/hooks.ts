@@ -176,52 +176,32 @@ export function useDeletePhoto(roomId: string) {
 export function useChangeAvailability(args: { roomId: string }) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: async (
-      availabilities: {
-        action: "upsert" | "delete";
-        payload: TablesInsert<"room_availability">;
-      }[],
-    ) => {
-      const toDelete = availabilities
-        .filter((a) => a.action === "delete" && a.payload.id)
-        .map((a) => a.payload.id);
-      const toInsert = availabilities
-        .filter((a) => a.action === "upsert" && !a.payload.id)
-        .map((a) => {
-          delete a.payload.id;
-          return a.payload;
-        });
-      const toUpdate = availabilities
-        .filter((a) => a.action === "upsert" && a.payload.id)
-        .map((a) => a.payload);
-
+    mutationFn: async ({ prev, next }: {
+      prev?: TablesInsert<"room_availability">[];
+      next: TablesInsert<"room_availability">[];
+    }) => {
       const errors = [];
 
-      if (toUpdate.length > 0) {
-        const { error } = await supabase
-          .from("room_availability")
-          .upsert([...toUpdate])
-          .eq("room_id", args.roomId);
+      if (prev) {
+        const toDelete = prev.filter((old) =>
+          !next.map((n) => n.id).includes(old.id)
+        ).map((p) => p.id);
 
-        !!error && errors.push(error);
-      }
-
-      if (toInsert.length > 0) {
-        const { error } = await supabase
-          .from("room_availability")
-          .insert([...toInsert]);
-
-        !!error && errors.push(error);
-      }
-
-      if (toDelete.length > 0) {
-        const { error } = await supabase
+        const deleteResponse = await supabase
           .from("room_availability")
           .delete()
+          .eq("room_id", args.roomId)
           .in("id", toDelete);
 
-        !!error && errors.push(error);
+        !!deleteResponse.error && errors.push(deleteResponse.error);
       }
+
+      const upsertResponse = await supabase
+        .from("room_availability")
+        .upsert([...next])
+        .eq("room_id", args.roomId);
+
+      !!upsertResponse.error && errors.push(upsertResponse.error);
 
       if (errors.length > 0) {
         console.error(errors);

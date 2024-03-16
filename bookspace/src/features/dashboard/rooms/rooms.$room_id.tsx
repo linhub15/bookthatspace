@@ -130,10 +130,11 @@ export function Room() {
             <div className="grid grid-cols-2 sm:grid-cols-3 px-4 py-5 sm:px-6 gap-4">
               {!!photos.data?.length &&
                 photos.data.map(({ id, url }) => (
-                  <div className="relative">
+                  <div className="relative" key={id}>
                     <button
                       className="absolute top-0 right-0 p-1 m-1"
-                      onClick={() => deletePhoto.mutateAsync({ photoId: id })}
+                      onClick={() =>
+                        deletePhoto.mutateAsync({ photoId: id })}
                     >
                       <XCircleIcon className="w-6 bg-white rounded-full">
                       </XCircleIcon>

@@ -1,7 +1,9 @@
 import { Enums, Tables, TablesInsert } from "@/clients/supabase";
 import { SubmitButton } from "@/components/buttons/submit_button";
 import { TimePicker } from "@/components/form/time_picker";
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { ToggleSwitch } from "@/components/form/toggle_switch";
+import { Button } from "@/components/ui/button";
+import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Temporal } from "@js-temporal/polyfill";
 import { useForm } from "@tanstack/react-form";
 import { Fragment } from "react";
@@ -10,19 +12,19 @@ type Props = {
   roomId: string;
   values: Tables<"room_availability">[];
   onSubmit: (
-    availabilities: {
-      action: "upsert" | "delete";
-      payload: TablesInsert<"room_availability">;
-    }[],
+    availabilities: TablesInsert<"room_availability">[],
   ) => void | Promise<void>;
   onCancel: () => void;
 };
 
 type Availability = {
   enabled: boolean;
-  touched: boolean;
-  availabilityId?: string;
   day_of_week: Enums<"day_of_week">;
+  intervals: Interval[];
+};
+
+type Interval = {
+  id: string;
   start: Temporal.PlainTime;
   end: Temporal.PlainTime;
 };
@@ -34,24 +36,28 @@ export function AvailabilityForm(props: Props) {
   const { values: blocks } = props;
 
   const get = (weekday: Enums<"day_of_week">): Availability => {
-    const found = blocks.find((block) => block.day_of_week === weekday);
-    return found
-      ? {
-        touched: false,
-        enabled: true,
-        availabilityId: found.id,
-        day_of_week: weekday,
-        start: Temporal.PlainTime.from(found.start),
-        end: Temporal.PlainTime.from(found.end),
-      }
-      : {
-        touched: false,
+    const found = blocks.filter((block) => block.day_of_week === weekday);
+    const availability = found.reduce(
+      (prev, curr) => {
+        const interval = {
+          id: curr.id,
+          start: Temporal.PlainTime.from(curr.start),
+          end: Temporal.PlainTime.from(curr.end),
+        };
+        return {
+          ...prev,
+          enabled: true,
+          intervals: [...prev.intervals, interval],
+        };
+      },
+      {
         enabled: false,
-        availabilityId: undefined,
         day_of_week: weekday,
-        start: defaultStart,
-        end: defaultEnd,
-      };
+        intervals: [],
+      } as Availability,
+    );
+
+    return availability;
   };
 
   const values = {
@@ -70,20 +76,17 @@ export function AvailabilityForm(props: Props) {
     defaultValues: values,
     onSubmit: async ({ value }) => {
       const output = Object.values(value)
-        .filter((value) => value.touched)
         .map((value) => {
-          return {
-            action: value.enabled ? "upsert" : "delete",
-            payload: {
-              id: value.availabilityId,
-              room_id: props.roomId,
-              day_of_week: value.day_of_week,
-              start: value.start.toJSON(),
-              end: value.end.toJSON(),
-            },
-          } as const;
+          return value.intervals.map((interval) => ({
+            room_id: props.roomId,
+            day_of_week: value.day_of_week,
+            id: interval.id,
+            start: interval.start.toJSON(),
+            end: interval.end.toJSON(),
+          }));
         });
-      props.onSubmit(output);
+      const flattened = output.flat();
+      props.onSubmit(flattened);
     },
   });
 
@@ -99,41 +102,29 @@ export function AvailabilityForm(props: Props) {
         <div className="space-y-3">
           {fieldNames.map((weekday, index) => (
             <Fragment key={index}>
-              <form.Field
-                name={weekday}
-                validators={{
-                  onChange: (field) => {
-                    if (!field.value?.enabled) {
-                      return;
-                    }
-
-                    const result = Temporal.PlainTime.compare(
-                      field.value?.start,
-                      field.value?.end,
-                    );
-
-                    if (result >= 0) {
-                      return "Start time must be before end time";
-                    }
-                  },
-                }}
-              >
+              <form.Field name={weekday}>
                 {(field) => (
                   <div
                     className="grid grid-cols-4 min-h-12"
                     key={index}
                   >
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                        checked={field.state.value?.enabled}
-                        onChange={(e) =>
-                          field.handleChange((old) => ({
-                            ...old,
-                            touched: true,
-                            enabled: e.target.checked,
-                          }))}
+                    <label className="flex items-center space-x-2 self-start pt-2">
+                      <ToggleSwitch
+                        value={field.state.value.enabled}
+                        onChange={(value) =>
+                          field.handleChange((old) => {
+                            return {
+                              ...old,
+                              enabled: value,
+                              intervals: value
+                                ? [{
+                                  id: self.crypto.randomUUID(),
+                                  start: defaultStart,
+                                  end: defaultEnd,
+                                }]
+                                : [],
+                            };
+                          })}
                       />
                       <span className="text-sm font-medium leading-6 text-gray-900 select-none">
                         <span className="hidden sm:inline">{weekday}</span>
@@ -143,34 +134,87 @@ export function AvailabilityForm(props: Props) {
                       </span>
                     </label>
                     {field.state.value?.enabled && (
-                      <div className="flex flex-col justify-center space-y-1 col-span-2">
-                        <div className="flex">
-                          <TimePicker
-                            value={field.state.value?.start}
-                            onChange={(v) => {
-                              field.handleChange((old) => ({
-                                ...old,
-                                touched: true,
-                                start: v,
-                              }));
-                            }}
-                          />
-                          <span className="my-auto px-1">
-                            <ArrowRightIcon className="w-4 h-4" />
-                          </span>
-                          <TimePicker
-                            value={field.state.value?.end}
-                            min={field.state.value?.start}
-                            onChange={(v) => {
-                              field.handleChange((old) => ({
-                                ...old,
-                                touched: true,
-                                end: v,
-                              }));
-                            }}
-                          />
-                        </div>
-                        <div className="text-xs text-red-900 pl-1">
+                      <div className="flex flex-col justify-center space-y-1 col-span-3">
+                        {field.state.value.intervals.map((interval, index) => (
+                          <div className="flex gap-2">
+                            <div className="flex gap-1">
+                              <TimePicker
+                                value={interval.start}
+                                onChange={(v) => {
+                                  field.handleChange((old) => ({
+                                    ...old,
+                                    intervals: old.intervals.toSpliced(
+                                      index,
+                                      1,
+                                      {
+                                        ...interval,
+                                        start: v,
+                                      },
+                                    ),
+                                  }));
+                                }}
+                              />
+                              <span className="my-auto">
+                                <MinusIcon className="w-4 h-4" />
+                              </span>
+                              <TimePicker
+                                value={interval.end}
+                                min={interval.start}
+                                onChange={(v) => {
+                                  field.handleChange((old) => ({
+                                    ...old,
+                                    intervals: old.intervals.toSpliced(
+                                      index,
+                                      1,
+                                      {
+                                        ...interval,
+                                        end: v,
+                                      },
+                                    ),
+                                  }));
+                                }}
+                              />
+                            </div>
+                            {index === 0 &&
+                              (
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size={"icon"}
+                                  onClick={() =>
+                                    field.handleChange((old) => ({
+                                      ...old,
+                                      intervals: [...old.intervals, {
+                                        id: self.crypto.randomUUID(),
+                                        start: defaultStart,
+                                        end: defaultEnd,
+                                      }],
+                                    }))}
+                                >
+                                  <PlusIcon className="w-4 h-4" />
+                                </Button>
+                              )}
+                            {index !== 0 &&
+                              (
+                                <Button
+                                  type="button"
+                                  variant="destructive"
+                                  size="icon"
+                                  onClick={() =>
+                                    field.handleChange((old) => ({
+                                      ...old,
+                                      intervals: old.intervals.toSpliced(
+                                        index,
+                                        1,
+                                      ),
+                                    }))}
+                                >
+                                  <TrashIcon className="w-4 h-4" />
+                                </Button>
+                              )}
+                          </div>
+                        ))}
+                        <div className="hidden sm:block text-xs text-red-900 pl-1">
                           {field.state?.meta?.errors[0] ?? ""}
                         </div>
                       </div>

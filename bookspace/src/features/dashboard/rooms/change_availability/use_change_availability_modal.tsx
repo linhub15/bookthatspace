@@ -28,7 +28,10 @@ export function useChangeAvailabilityModal(props: Props) {
           roomId={props.roomId}
           values={availability.data || []}
           onSubmit={async (value) => {
-            await changeAvailability.mutateAsync(value, {
+            await changeAvailability.mutateAsync({
+              prev: availability.data,
+              next: value,
+            }, {
               onSuccess: () => setOpen(false),
             });
           }}
