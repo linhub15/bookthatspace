@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRooms } from "./hooks";
-import { availabilityRoute } from "./public.routes";
+import { availabilityRoute, facilityRoute } from "./public.routes";
 import { DatePicker } from "@/components/form/date_picker";
 import { Temporal } from "@js-temporal/polyfill";
 import { Card } from "@/components/card";
@@ -9,6 +9,8 @@ import { Enums, supabase } from "@/clients/supabase";
 import { maskPlainTimeRange } from "@/lib/masks/masks";
 import { RoomCard } from "./$facility_id";
 import { Label } from "@/components/form/label";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { Link } from "@tanstack/react-router";
 
 export function AvailabilityWidget() {
   const { facility_id } = availabilityRoute.useParams();
@@ -20,9 +22,9 @@ export function AvailabilityWidget() {
   if (!room) return;
 
   return (
-    <div className="max-w-screen-lg space-y-4 px-2 sm:mx-auto pt-8">
+    <div className="flex flex-col sm:h-full sm:items-center sm:justify-center min-h-[calc(100dvh)] max-w-screen-lg space-y-6 px-2 sm:mx-auto">
       <Card>
-        <div className="flex flex-col md:grid md:grid-cols-3 p-4 gap-6">
+        <div className="flex h-fit flex-col md:grid md:grid-cols-3 p-4 gap-6">
           <div className="">
             <RoomCard room={room} photos={room?.images} />
           </div>
@@ -35,6 +37,12 @@ export function AvailabilityWidget() {
           </div>
         </div>
       </Card>
+      <Link to={facilityRoute.to} params={{ facility_id: facility_id }}>
+        <div className="p-4 text-center">
+          <ArrowLeftIcon className="inline w-4 h-4 stroke-2" />{" "}
+          View facility & rooms
+        </div>
+      </Link>
     </div>
   );
 }
