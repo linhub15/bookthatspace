@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { useRooms } from "./hooks";
 import { availabilityRoute, facilityRoute } from "./public.routes";
-import { DatePicker } from "@/components/form/date_picker";
 import { Temporal } from "@js-temporal/polyfill";
 import { Card } from "@/components/card";
 import { useQuery } from "@tanstack/react-query";
-import { Enums, supabase } from "@/clients/supabase";
+import { supabase } from "@/clients/supabase";
 import { maskPlainTimeRange } from "@/lib/masks/masks";
 import { RoomCard } from "./$facility_id";
-import { Label } from "@/components/form/label";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
+import { AvailabilityCalendar } from "@/components/ui/availability_calendar";
+import { mapNumberToDayOfWeek } from "@/lib/maps/day_of_week";
 
 export function AvailabilityWidget() {
   const { facility_id } = availabilityRoute.useParams();
   const { room_id } = availabilityRoute.useSearch();
   const rooms = useRooms(facility_id);
-  const [date, setDate] = useState(Temporal.Now.plainDateISO());
+  const [date, setDate] = useState<Temporal.PlainDate | undefined>();
 
   const room = rooms.data?.find((r) => r.id === room_id);
   if (!room) return;
@@ -24,23 +24,27 @@ export function AvailabilityWidget() {
   return (
     <div className="flex flex-col sm:h-full sm:items-center sm:justify-center min-h-[calc(100dvh)] max-w-screen-lg space-y-6 px-2 sm:mx-auto">
       <Card>
-        <div className="flex h-fit flex-col md:grid md:grid-cols-3 p-4 gap-6">
-          <div className="">
+        <div className="flex h-fit flex-col md:grid md:grid-cols-5 p-4 gap-6">
+          <div className="col-span-2">
             <RoomCard room={room} photos={room?.images} />
           </div>
-          <div>
-            <Label>Date</Label>
-            <DatePicker value={date} onChange={(v) => setDate(v!)} />
+          <div className="col-span-2">
+            <AvailabilityCalendar
+              value={date}
+              onChange={(value) => setDate(value)}
+              roomId={room_id}
+            />
           </div>
           <div>
-            <AvailabilityDisplay roomId={room_id} date={date} />
+            {date &&
+              <AvailabilityDisplay roomId={room_id} date={date} />}
           </div>
         </div>
       </Card>
       <Link to={facilityRoute.to} params={{ facility_id: facility_id }}>
-        <div className="p-4 text-center">
-          <ArrowLeftIcon className="inline w-4 h-4 stroke-2" />{" "}
-          View facility & rooms
+        <div className="flex p-4 text-center items-center gap-2">
+          <ArrowLeftIcon className="inline w-4 h-4 stroke-2" />
+          <span>View facility & rooms</span>
         </div>
       </Link>
     </div>
@@ -73,15 +77,6 @@ function AvailabilityDisplay(
 }
 
 function useAvailability(roomId?: string, date?: Temporal.PlainDate) {
-  const daysOfWeek: Record<number, Enums<"day_of_week">> = {
-    1: "mon",
-    2: "tue",
-    3: "wed",
-    4: "thu",
-    5: "fri",
-    6: "sat",
-    7: "sun",
-  };
   const listRoomAvailability = async (
     roomId: string,
     date: Temporal.PlainDate,
@@ -90,7 +85,7 @@ function useAvailability(roomId?: string, date?: Temporal.PlainDate) {
       .from("room_availability")
       .select()
       .eq("room_id", roomId)
-      .eq("day_of_week", daysOfWeek[date.dayOfWeek]);
+      .eq("day_of_week", mapNumberToDayOfWeek[date.dayOfWeek]);
 
     if (error) throw error;
     return data;
