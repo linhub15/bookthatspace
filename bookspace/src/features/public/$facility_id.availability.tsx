@@ -5,37 +5,71 @@ import { Temporal } from "@js-temporal/polyfill";
 import { Card } from "@/components/card";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/clients/supabase";
-import { maskPlainTimeRange } from "@/lib/masks/masks";
-import { RoomCard } from "./$facility_id";
+import { maskHourlyRate, maskPlainTimeRange } from "@/lib/masks/masks";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
 import { AvailabilityCalendar } from "@/components/ui/availability_calendar";
 import { mapNumberToDayOfWeek } from "@/lib/maps/day_of_week";
+import { cn } from "@/lib/utils/cn";
 
 export function AvailabilityWidget() {
   const { facility_id } = availabilityRoute.useParams();
   const { room_id } = availabilityRoute.useSearch();
   const rooms = useRooms(facility_id);
   const [date, setDate] = useState<Temporal.PlainDate | undefined>();
+  const [showDescription, setShowDescription] = useState(false);
 
   const room = rooms.data?.find((r) => r.id === room_id);
   if (!room) return;
 
   return (
-    <div className="flex flex-col sm:h-full sm:items-center sm:justify-center min-h-[calc(100dvh)] max-w-screen-lg space-y-6 px-2 sm:mx-auto">
-      <Card>
-        <div className="flex h-fit flex-col md:grid md:grid-cols-5 p-4 gap-6">
-          <div className="col-span-2">
-            <RoomCard room={room} photos={room?.images} />
+    <div className="flex flex-col sm:min-h-full sm:items-center sm:justify-center min-h-[calc(100dvh)] max-w-screen-lg space-y-6 py-2 px-2 sm:mx-auto">
+      <Card className="flex flex-col max-w-xl p-6 gap-6">
+        <div className="flex gap-6 items-center">
+          <img className="size-28 rounded-xl" src={room.images.at(0)?.url} />
+          <div className="flex flex-col">
+            <div className="font-medium">{room.name}</div>
+            <div className="text-sm text-muted">
+              Maximum {room.max_capacity} people
+            </div>
+            <div className="text-sm">
+              {maskHourlyRate(room.hourly_rate)}
+            </div>
           </div>
-          <div className="col-span-2">
+        </div>
+        <div>
+          <p
+            className={cn(
+              "whitespace-pre-line",
+              showDescription ? "" : "line-clamp-2 sm:line-clamp-4",
+            )}
+          >
+            {room.description}
+          </p>
+          <button
+            className="text-sm text-primary"
+            type="button"
+            onClick={() => setShowDescription((o) => !o)}
+          >
+            {showDescription ? "Show less" : "Show more"}
+          </button>
+        </div>
+      </Card>
+      <Card className="max-w-xl">
+        <div className="flex h-fit flex-col md:grid md:grid-cols-5 p-6 gap-6">
+          <div className="col-span-3">
             <AvailabilityCalendar
               value={date}
               onChange={(value) => setDate(value)}
               roomId={room_id}
             />
           </div>
-          <div>
+          <div className="col-span-2">
+            {!date && (
+              <div className="w-full h-full flex items-center justify-center text-muted text-center">
+                Select a date
+              </div>
+            )}
             {date &&
               <AvailabilityDisplay roomId={room_id} date={date} />}
           </div>
@@ -64,14 +98,23 @@ function AvailabilityDisplay(
 
   return (
     <div>
-      <h1>
-        {props.date.toLocaleString(undefined, {
-          weekday: "long",
-        })}'s availability
-      </h1>
-      {availability.data.map((range) => (
-        <div>{maskPlainTimeRange(range[0], range[1])}</div>
-      ))}
+      <h3 className="flex gap-x-2 h-9 items-center">
+        <span className="font-medium">
+          {props.date.toLocaleString(undefined, {
+            weekday: "short",
+          })}
+        </span>
+        <span className="text-muted">
+          {props.date.toLocaleString(undefined, {
+            day: "numeric",
+          })}
+        </span>
+      </h3>
+      <div className="py-3 space-y-2">
+        {availability.data.map((range, index) => (
+          <div key={index}>{maskPlainTimeRange(range[0], range[1])}</div>
+        ))}
+      </div>
     </div>
   );
 }

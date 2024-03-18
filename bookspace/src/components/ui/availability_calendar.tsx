@@ -99,7 +99,7 @@ export function AvailabilityCalendar(props: Props) {
         {days.map((day, index) => (
           <button
             className={cn(
-              "relative place-self-center text-center size-10 sm:size-12 rounded-lg",
+              "relative place-self-center text-center size-10 rounded-lg",
               "select-none",
               day?.isAvailable && !day.isSelected
                 ? "bg-gray-200 border-2 border-gray-200 hover:border-gray-400"
