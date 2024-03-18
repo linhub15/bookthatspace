@@ -331,7 +331,7 @@ function DesktopSidebar() {
                 aria-hidden="true"
               />
               <span className="truncate" aria-hidden="true">
-                Need some help?
+                Contact Hubert for support
               </span>
             </div>
 

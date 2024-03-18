@@ -5,18 +5,17 @@ export function maskDate(date: string) {
     weekday: "short",
     month: "short",
     day: "numeric",
-    year: "numeric",
   });
 }
 
 export function maskTimeRange(start: string, end: string) {
   const s = Temporal.Instant.from(start).toLocaleString(
     undefined,
-    { hourCycle: "h23", hour: "numeric", minute: "2-digit" },
+    { hourCycle: "h12", hour: "numeric", minute: "2-digit" },
   );
   const e = Temporal.Instant.from(end).toLocaleString(
     undefined,
-    { hourCycle: "h23", hour: "numeric", minute: "2-digit" },
+    { hourCycle: "h12", hour: "numeric", minute: "2-digit" },
   );
 
   return `${s} - ${e}`;

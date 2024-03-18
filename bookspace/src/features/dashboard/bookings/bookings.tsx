@@ -2,7 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Temporal } from "@js-temporal/polyfill";
 import { supabase } from "../../../clients/supabase";
 import { Fragment } from "react";
-import { maskDate, maskDurationSince } from "../../../lib/masks/masks";
+import {
+  maskDate,
+  maskDurationSince,
+  maskTimeRange,
+} from "../../../lib/masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { Link, useSearch } from "@tanstack/react-router";
 import { Card } from "@/components/card";
@@ -165,47 +169,38 @@ function BookingList(props: { tab: Tabs }) {
   const bookingGroups = Array.from(grouped);
   return (
     <div className="flex flex-col gap-6 px-4 py-6 sm:px-6">
-      {bookingGroups?.map(([date, bookings], idx) => (
-        <Fragment key={idx}>
-          <h4>{maskDate(date)}</h4>
-          <ul role="list" className="divide-y divide-gray-100">
+      {bookingGroups?.map(([group, bookings]) => (
+        <Fragment key={group}>
+          <ul role="list" className="space-y-6">
             {bookings?.map((booking) => (
               <li key={booking.id}>
                 <Link
-                  className="flex items-center justify-between gap-x-6 p-5 rounded-lg shadow-sm ring-1 ring-gray-900/5 hover:bg-gray-50"
+                  className="flex flex-col sm:flex-row gap-x-6 px-5 py-3 rounded-lg shadow-sm ring-1 ring-gray-900/5 hover:bg-gray-50"
                   to={bookingRoute.to}
                   params={{ booking_id: booking.id }}
                 >
-                  <div className="min-w-0 space-y-1">
-                    <div className="flex items-start gap-x-3">
-                      <p className="text-sm font-semibold leading-6 text-gray-900">
-                        {booking.room?.name}
-                      </p>
-                      <p
-                        className={cn(
-                          "rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset",
-                        )}
-                      >
-                        {booking.status}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-                      <p className="whitespace-nowrap">
-                        Booked for{" "}
+                  <div className="w-full sm:w-52 flex sm:flex-col justify-between">
+                    <div className="space-x-2 sm:space-x-0">
+                      <span className="text-sm font-medium leading-6 text-gray-900">
+                        {maskDate(booking.start)}
+                      </span>
+                      <span className="sm:block text-sm text-muted whitespace-nowrap">
                         <time dateTime={booking.start}>
-                          {maskDate(booking.start)}
+                          {maskTimeRange(booking.start, booking.end)}
                         </time>
-                      </p>
-                      <svg
-                        viewBox="0 0 2 2"
-                        className="h-0.5 w-0.5 fill-current"
-                      >
-                        <circle cx={1} cy={1} r={1} />
-                      </svg>
-                      <p className="truncate">
-                        {booking.booked_by_name} ({booking.booked_by_email})
-                      </p>
+                      </span>
                     </div>
+                    <span className="block text-sm text-muted">
+                      {booking.room?.name}
+                    </span>
+                  </div>
+                  <div className="w-full">
+                    <p className="truncate">
+                      {booking.booked_by_name}{" "}
+                      <span className="text-sm text-muted">
+                        ({booking.booked_by_email})
+                      </span>
+                    </p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
                     <span className="font-normal text-xs text-gray-700">

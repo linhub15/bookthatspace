@@ -1,6 +1,4 @@
 // Moved this into a separate file for Vite "fast refresh" warning
-
-import { cn } from "@/lib/utils/cn";
 import { Enums } from "@/clients/supabase";
 import { Temporal } from "@js-temporal/polyfill";
 import { Fragment, PropsWithChildren, useRef } from "react";
@@ -143,10 +141,11 @@ export function TimeBlock(props: TimeBlockProps) {
 
   return (
     <li
-      className={cn(
-        `relative mt-px flex flex-col sm:col-start-${weekday}`,
-      )}
-      style={{ gridRow: `${start} / span ${span}` }}
+      className="relative mt-px flex flex-col"
+      style={{
+        gridColumnStart: weekday,
+        gridRow: `${start} / span ${span}`,
+      }}
     >
       <div className="sm:hidden text-xs absolute -top-[1.15rem] self-center z-10">
         {props.start.toLocaleString(undefined, {
