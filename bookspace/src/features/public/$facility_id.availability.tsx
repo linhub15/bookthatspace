@@ -26,7 +26,11 @@ export function AvailabilityWidget() {
     <div className="flex flex-col sm:min-h-full sm:items-center sm:justify-center min-h-[calc(100dvh)] max-w-screen-lg space-y-6 py-2 px-2 sm:mx-auto">
       <Card className="flex flex-col max-w-xl p-6 gap-6">
         <div className="flex gap-6 items-center">
-          <img className="size-28 rounded-xl" src={room.images.at(0)?.url} />
+          <img
+            className="size-28 rounded-xl"
+            src={room.images.at(0)?.url}
+            alt="default room photo"
+          />
           <div className="flex flex-col">
             <div className="font-medium">{room.name}</div>
             <div className="text-sm text-muted">

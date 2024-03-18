@@ -183,9 +183,9 @@ function RoomPicker(props: RoomPickerProps) {
         <div key={room.id} className="group relative">
           <div className="w-full overflow-hidden rounded-xl bg-gray-200 group-hover:opacity-75">
             <img
+              className="h-full w-full max-h-52 lg:max-h-72 object-cover object-center lg:h-full lg:w-full"
               src="https://placehold.co/400"
               alt="Photo of room"
-              className="h-full w-full max-h-52 lg:max-h-72 object-cover object-center lg:h-full lg:w-full"
             />
           </div>
           <div className="flex flex-1 flex-col space-y-2 p-4">

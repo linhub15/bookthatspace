@@ -2,13 +2,13 @@ import { Link, Outlet } from "@tanstack/react-router";
 import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
+  ArrowTopRightOnSquareIcon,
   Bars3Icon,
   CalendarIcon,
   ChevronDownIcon,
   CodeBracketSquareIcon,
   HomeIcon,
   InboxIcon,
-  InformationCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
@@ -19,8 +19,9 @@ import {
   roomsOutlet,
   widgetRoute,
 } from "./dashboard.routes";
-import { useProfile } from "../hooks";
+import { useFacility, useProfile } from "../hooks";
 import { useSignOut } from "@/auth/hooks/use_sign_out";
+import { publicBookingRoutes } from "../public/public.routes";
 
 function useNavigation() {
   return [
@@ -47,9 +48,19 @@ function useNavigation() {
   ] as const;
 }
 
+function usePublicPageLink() {
+  return {
+    name: "View public page",
+    to: publicBookingRoutes.to,
+    icon: ArrowTopRightOnSquareIcon,
+  } as const;
+}
+
 export function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { data } = useFacility();
   const navigation = useNavigation();
+  const publicPageLink = usePublicPageLink();
 
   return (
     <div>
@@ -156,6 +167,33 @@ export function Dashboard() {
                         </ul>
                       </li>
                     </ul>
+                    <div className="mt-auto space-y-4">
+                      {data?.id &&
+                        (
+                          <Link
+                            className="group flex gap-x-3 rounded-md p-2 items-center text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
+                            to={publicPageLink.to}
+                            params={{ facility_id: data.id }}
+                            key={publicPageLink.name}
+                          >
+                            <publicPageLink.icon
+                              className={cn(
+                                "h-5 w-5 shrink-0 stroke-2",
+                                "text-gray-400",
+                                "group-hover:text-indigo-600",
+                              )}
+                              aria-hidden="true"
+                            />
+                            {publicPageLink.name}
+                          </Link>
+                        )}
+                      <div
+                        className="text-muted italic text-xs text-center"
+                        data-version={VITE_APP_VERSION}
+                      >
+                        Version {VITE_APP_VERSION}
+                      </div>
+                    </div>
                   </nav>
                 </div>
               </Dialog.Panel>
@@ -275,7 +313,9 @@ function HeaderBar(props: { openSidebar: () => void }) {
 }
 
 function DesktopSidebar() {
+  const { data } = useFacility();
   const navigation = useNavigation();
+  const publicPageLink = usePublicPageLink();
 
   return (
     <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
@@ -293,7 +333,7 @@ function DesktopSidebar() {
               {navigation.map((item) => (
                 <li key={item.name}>
                   <Link
-                    className="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                    className="group flex gap-x-3 items-center rounded-md p-2 text-sm leading-6 font-medium"
                     to={item.to}
                     activeProps={{
                       className: cn("bg-gray-50 text-indigo-600"),
@@ -324,19 +364,28 @@ function DesktopSidebar() {
             </ul>
           </li>
 
-          <li className="-mx-6 mt-auto py-4">
-            <div className="flex justify-center gap-x-2 px-6 py-2 text-sm leading-6 text-gray-800">
-              <InformationCircleIcon
-                className="w-6 h-6 text-blue-600"
-                aria-hidden="true"
-              />
-              <span className="truncate" aria-hidden="true">
-                Contact Hubert for support
-              </span>
-            </div>
-
+          <li className="-mx-6 mt-auto py-4 px-6 space-y-4">
+            {data?.id &&
+              (
+                <Link
+                  className="group flex gap-x-3 rounded-md p-2 items-center text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
+                  to={publicPageLink.to}
+                  params={{ facility_id: data.id }}
+                  key={publicPageLink.name}
+                >
+                  <publicPageLink.icon
+                    className={cn(
+                      "h-5 w-5 shrink-0 stroke-2",
+                      "text-gray-400",
+                      "group-hover:text-indigo-600",
+                    )}
+                    aria-hidden="true"
+                  />
+                  {publicPageLink.name}
+                </Link>
+              )}
             <div
-              className="text-gray-500 italic text-xs text-center"
+              className="text-muted italic text-xs text-center"
               data-version={VITE_APP_VERSION}
             >
               Version {VITE_APP_VERSION}

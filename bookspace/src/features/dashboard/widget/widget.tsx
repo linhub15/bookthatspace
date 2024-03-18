@@ -1,10 +1,15 @@
 import { Card } from "@/components/card";
 import { useFacility } from "@/features/hooks";
-import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
+import {
+  CheckIcon,
+  ClipboardDocumentListIcon,
+} from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
 import { facilityRoute, publicBookingRoute } from "../../public/public.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { router } from "@/app.router";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils/cn";
 
 export function WidgetIndex() {
   const { data: facility } = useFacility();
@@ -28,10 +33,6 @@ export function WidgetIndex() {
   const availabilityWidget = `${window.location.host}${
     router.buildLocation(availabilityLinkProps).pathname
   }`;
-
-  const copyLinkToClipboard = async (link: string) => {
-    await navigator.clipboard.writeText(link);
-  };
 
   return (
     <Card>
@@ -67,17 +68,7 @@ export function WidgetIndex() {
                   value={bookingWidget}
                   disabled
                 />
-                <button
-                  className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  type="button"
-                  onClick={() => copyLinkToClipboard(bookingWidget)}
-                  title="Copy to clipboard"
-                >
-                  <ClipboardDocumentListIcon
-                    className="-ml-0.5 h-5 w-5 text-gray-700"
-                    aria-hidden="true"
-                  />
-                </button>
+                <CopyToClipboardBtn value={bookingWidget} />
               </div>
             </dd>
           </div>
@@ -103,17 +94,7 @@ export function WidgetIndex() {
                   value={availabilityWidget}
                   disabled
                 />
-                <button
-                  className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                  type="button"
-                  onClick={() => copyLinkToClipboard(availabilityWidget)}
-                  title="Copy to clipboard"
-                >
-                  <ClipboardDocumentListIcon
-                    className="-ml-0.5 h-5 w-5 text-gray-700"
-                    aria-hidden="true"
-                  />
-                </button>
+                <CopyToClipboardBtn value={availabilityWidget} />
               </div>
             </dd>
           </div>
@@ -176,5 +157,51 @@ function NoFacility() {
         </Link>
       </div>
     </Card>
+  );
+}
+
+function CopyToClipboardBtn(props: { value: string }) {
+  const [copied, setCopied] = useState(false);
+  const copyLinkToClipboard = async () => {
+    await navigator.clipboard.writeText(props.value);
+    setCopied(true);
+  };
+
+  useEffect(() => {
+    if (!copied) return;
+
+    const timeout = setTimeout(() => {
+      setCopied(false);
+    }, 1200);
+
+    return () => clearTimeout(timeout);
+  }, [copied]);
+
+  return (
+    <button
+      className={cn(
+        "relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300",
+        copied
+          ? "bg-green-500 text-gray-100"
+          : "text-gray-700 hover:bg-gray-50",
+      )}
+      type="button"
+      onClick={copyLinkToClipboard}
+      title="Copy to clipboard"
+    >
+      {copied
+        ? (
+          <CheckIcon
+            className="-ml-0.5 h-4 w-4 stroke-2"
+            aria-hidden="true"
+          />
+        )
+        : (
+          <ClipboardDocumentListIcon
+            className="-ml-0.5 h-5 w-5"
+            aria-hidden="true"
+          />
+        )}
+    </button>
   );
 }
