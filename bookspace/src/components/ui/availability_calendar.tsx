@@ -54,7 +54,7 @@ export function AvailabilityCalendar(props: Props) {
       0;
 
   return (
-    <div className="sm:min-h-[400px]">
+    <div className="sm:min-h-[350px]">
       {/* Month heading */}
       <div className="flex place-items-center justify-between">
         <span className="space-x-1.5">

@@ -8,10 +8,12 @@ import { Card } from "@/components/card";
 import { roomRoute } from "../dashboard.routes";
 import { RoomForm } from "./room_form";
 import { FacilityCard } from "./facility/facility_card";
+import { useFacility } from "@/features/hooks";
 
 export function Rooms() {
   const [open, setOpen] = useState(false);
-  const rooms = useRooms();
+  const facility = useFacility();
+  const rooms = useRooms(facility.data?.id);
   const navigate = useNavigate();
 
   const openNewRoomForm = () => {

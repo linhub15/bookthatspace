@@ -1,8 +1,9 @@
-import { PropsWithChildren } from "react";
+import { cn } from "@/lib/utils/cn";
+import { ComponentProps } from "react";
 
-export function FormField(props: PropsWithChildren) {
+export function FormField(props: ComponentProps<"div">) {
   return (
-    <div className="space-y-2">
+    <div className={cn("space-y-2", props.className)}>
       {props.children}
     </div>
   );

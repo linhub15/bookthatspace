@@ -2,10 +2,11 @@ import { useForm } from "@tanstack/react-form";
 import { useCreateBooking } from "./hooks";
 import { Temporal } from "@js-temporal/polyfill";
 import { Label } from "@/components/form/label";
-import { RoomPicker } from "../../public/room_picker";
 import { DatePicker } from "@/components/form/date_picker";
 import { TimePicker } from "@/components/form/time_picker";
 import { SubmitButton } from "@/components/buttons/submit_button";
+import { useRooms } from "../rooms/hooks";
+import { FormField } from "@/components/form/form_field";
 
 type Props = {
   facilityId: string;
@@ -54,59 +55,69 @@ export function InternalBookingForm(props: Props) {
         form.handleSubmit();
       }}
     >
-      <form.Field name="roomId">
+      <form.Field
+        name="roomId"
+        validators={{
+          onChange: ({ value }) => !value ? "Required" : undefined,
+        }}
+      >
         {(field) => (
           <div className="space-y-2">
             <div className="space-x-4">
-              <Label htmlFor={field.name}>Choose a room</Label>
+              <Label htmlFor={field.name}>Book a Room</Label>
             </div>
-            <RoomPicker
-              name={field.name}
-              id={field.name}
+            <RoomSelect
               facilityId={props.facilityId}
               value={field.state.value}
-              onChange={(v) => field.handleChange(v)}
+              onChange={field.handleChange}
             />
+            {field.state.meta.errors
+              ? (
+                <span className="text-xs text-red-600 italic" role="alert">
+                  {field.state.meta.errors.join(", ")}
+                </span>
+              )
+              : null}
           </div>
         )}
       </form.Field>
 
-      <div className="flex space-x-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <form.Field name="date">
           {(field) => (
-            <div className="space-y-2">
+            <FormField>
               <Label htmlFor={field.name}>Date</Label>
               <DatePicker
                 value={field.state.value}
                 onChange={(v) => field.handleChange(v)}
               />
-            </div>
+            </FormField>
           )}
         </form.Field>
-
-        <form.Field name="start">
-          {(field) => (
-            <div className="space-y-2">
-              <Label htmlFor={field.name}>Start</Label>
-              <TimePicker
-                value={field.state.value}
-                onChange={(v) => field.handleChange(v)}
-              />
-            </div>
-          )}
-        </form.Field>
-
-        <form.Field name="end">
-          {(field) => (
-            <div className="space-y-2">
-              <Label htmlFor={field.name}>End</Label>
-              <TimePicker
-                value={field.state.value}
-                onChange={(v) => field.handleChange(v)}
-              />
-            </div>
-          )}
-        </form.Field>
+        <div className="flex gap-2">
+          <form.Field name="start">
+            {(field) => (
+              <FormField>
+                <Label htmlFor={field.name}>Start</Label>
+                <TimePicker
+                  value={field.state.value}
+                  onChange={(v) => field.handleChange(v)}
+                />
+              </FormField>
+            )}
+          </form.Field>
+          <form.Field name="end">
+            {(field) => (
+              <FormField>
+                <Label htmlFor={field.name}>End</Label>
+                <TimePicker
+                  value={field.state.value}
+                  onChange={(v) => field.handleChange(v)}
+                />
+              </FormField>
+            )}
+          </form.Field>
+        </div>
       </div>
 
       <form.Field name="description">
@@ -144,5 +155,27 @@ export function InternalBookingForm(props: Props) {
         </form.Subscribe>
       </div>
     </form>
+  );
+}
+
+function RoomSelect(
+  props: {
+    facilityId: string;
+    value?: string;
+    onChange: (value: string) => void;
+  },
+) {
+  const rooms = useRooms(props.facilityId);
+  return (
+    <select
+      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      value={props.value}
+      onChange={(e) => props.onChange(e.currentTarget.value)}
+    >
+      <option></option>
+      {rooms.data?.map((room) => (
+        <option key={room.id} value={room.id}>{room.name}</option>
+      ))}
+    </select>
   );
 }

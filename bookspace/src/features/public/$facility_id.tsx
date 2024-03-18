@@ -6,7 +6,6 @@ import {
 } from "./public.routes";
 import { useFacility, useRooms } from "./hooks";
 import { AddressDisplay } from "@/components/form/address_input";
-import { Address } from "@/lib/types/address";
 import { type Image } from "@/lib/types/image.type";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { Link } from "@tanstack/react-router";
@@ -21,6 +20,7 @@ import {
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
 import { Tables } from "@/clients/supabase";
+import { GoogleMapImg } from "@/components/google_map";
 
 export function FacilityWidget() {
   const { facility_id } = publicOutlet.useParams();
@@ -31,21 +31,27 @@ export function FacilityWidget() {
 
   return (
     <div className="max-w-screen-lg space-y-4 px-2 sm:mx-auto pt-8">
-      <Card>
-        <div className="px-4 py-6 sm:px-6">
-          <h3 className="text-base font-semibold leading-7 text-gray-900">
-            {facility.data.name}
-          </h3>
-          <div className="max-w-2xl text-sm leading-6 text-gray-500">
-            <AddressDisplay value={facility.data.address as Address} />
-          </div>
-          <div className="pt-8 max-w-lg mx-auto">
+      <Card className="max-w-screen-md mx-auto">
+        <div className="flex justify-between w-full px-4 py-6 sm:px-6 gap-8">
+          <div className="flex flex-col w-full justify-between">
+            <div>
+              <h3 className="text-base font-semibold leading-7 text-gray-900">
+                {facility.data.name}
+              </h3>
+              <div className="text-sm leading-6 text-gray-500">
+                <AddressDisplay value={facility.data.address} />
+              </div>
+            </div>
             <Link
+              className="max-w-xs"
               to={publicBookingRoute.to}
               params={{ facility_id: facility_id }}
             >
               <SubmitButton>Book a Room</SubmitButton>
             </Link>
+          </div>
+          <div className="w-96 rounded-xl overflow-hidden">
+            <GoogleMapImg address={facility.data.address} />
           </div>
         </div>
       </Card>

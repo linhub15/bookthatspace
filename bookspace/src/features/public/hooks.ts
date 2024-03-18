@@ -1,7 +1,8 @@
 import { Temporal } from "@js-temporal/polyfill";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "../../clients/api";
-import { supabase } from "@/clients/supabase";
+import { supabase, Tables } from "@/clients/supabase";
+import { Address } from "@/lib/types/address";
 
 export function useFacility(facilityId: string) {
   return useQuery({
@@ -12,6 +13,7 @@ export function useFacility(facilityId: string) {
         .from("facility")
         .select()
         .eq("id", facilityId)
+        .returns<(Tables<"facility"> & { address: Address })[]>()
         .single();
 
       if (error) {

@@ -2,10 +2,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "../../../clients/supabase";
 import { TablesInsert } from "@/clients/supabase";
 
-export function useRooms() {
+export function useRooms(facilityId?: string) {
   const rooms = useQuery({
     queryKey: ["rooms"],
     queryFn: async () => {
+      if (!facilityId) return null;
       const { data, error } = await supabase
         .from("room")
         .select()
@@ -16,6 +17,7 @@ export function useRooms() {
       }
       return data;
     },
+    enabled: !!facilityId,
   });
 
   return rooms;

@@ -3,11 +3,11 @@ import { useFacility } from "../../../hooks";
 import { useFacilityModal } from "./use_facility_modal";
 import { HomeModernIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { AddressDisplay } from "@/components/form/address_input";
-import { Address } from "@/lib/types/address";
 
 export function FacilityCard() {
   const facility = useFacility();
   const facilityModal = useFacilityModal();
+
   return (
     <>
       <Card>
@@ -66,7 +66,7 @@ export function FacilityCard() {
                     Address
                   </dt>
                   <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                    <AddressDisplay value={facility.data.address as Address} />
+                    <AddressDisplay value={facility.data.address} />
                   </dd>
                 </div>
               </dl>

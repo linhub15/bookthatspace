@@ -6,7 +6,6 @@ import {
   Bars3Icon,
   CalendarIcon,
   ChevronDownIcon,
-  CodeBracketSquareIcon,
   HomeIcon,
   InboxIcon,
   XMarkIcon,
@@ -17,7 +16,6 @@ import {
   bookingsRoute,
   profileRoute,
   roomsOutlet,
-  widgetRoute,
 } from "./dashboard.routes";
 import { useFacility, useProfile } from "../hooks";
 import { useSignOut } from "@/auth/hooks/use_sign_out";
@@ -40,11 +38,11 @@ function useNavigation() {
       to: roomsOutlet.to,
       icon: HomeIcon,
     },
-    {
-      name: "Widgets",
-      to: widgetRoute.to,
-      icon: CodeBracketSquareIcon,
-    },
+    // {
+    //   name: "Widgets",
+    //   to: widgetRoute.to,
+    //   icon: CodeBracketSquareIcon,
+    // },
   ] as const;
 }
 
@@ -174,6 +172,7 @@ export function Dashboard() {
                             className="group flex gap-x-3 rounded-md p-2 items-center text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                             to={publicPageLink.to}
                             params={{ facility_id: data.id }}
+                            target="_blank"
                             key={publicPageLink.name}
                           >
                             <publicPageLink.icon
@@ -371,6 +370,7 @@ function DesktopSidebar() {
                   className="group flex gap-x-3 rounded-md p-2 items-center text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                   to={publicPageLink.to}
                   params={{ facility_id: data.id }}
+                  target="_blank"
                   key={publicPageLink.name}
                 >
                   <publicPageLink.icon

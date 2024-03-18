@@ -45,7 +45,7 @@ export function AvailabilityWidget() {
           <p
             className={cn(
               "whitespace-pre-line",
-              showDescription ? "" : "line-clamp-2 sm:line-clamp-4",
+              showDescription ? "" : "line-clamp-2 sm:line-clamp-3",
             )}
           >
             {room.description}
@@ -114,7 +114,10 @@ function AvailabilityDisplay(
           })}
         </span>
       </h3>
-      <div className="py-3 space-y-2">
+      <div className="py-3 text-sm text-muted">
+        Available times
+      </div>
+      <div className="py-2 space-y-2">
         {availability.data.map((range, index) => (
           <div key={index}>{maskPlainTimeRange(range[0], range[1])}</div>
         ))}

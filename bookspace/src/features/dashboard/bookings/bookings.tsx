@@ -124,6 +124,7 @@ function Tabs(props: TabsProps) {
               search={{ tab: tab.value }}
               key={tab.name}
               from={bookingsIndexRoute.to}
+              replace
             >
               {tab.name}
               {tab.count
