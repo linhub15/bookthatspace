@@ -115,7 +115,7 @@ export function AvailabilityCalendar(props: Props) {
             {day?.isToday && (
               <span
                 className={cn(
-                  "absolute left-1/2 top-1/2 flex h-[5px] w-[5px] -translate-x-1/2 translate-y-[8px] items-center justify-center rounded-full align-middle sm:translate-y-[12px]",
+                  "absolute left-1/2 top-1/2 flex h-[5px] w-[5px] -translate-x-1/2 translate-y-[10px] items-center justify-center rounded-full align-middle sm:translate-y-[12px]",
                   day?.isSelected ? "bg-white" : "bg-gray-500",
                 )}
               >

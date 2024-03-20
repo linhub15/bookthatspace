@@ -13,6 +13,7 @@ import { SubmitButton } from "@/components/buttons/submit_button";
 import {
   Carousel,
   CarouselContent,
+  CarouselIndicatorDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
@@ -124,6 +125,7 @@ function ImageCarousel(props: { images: Image[] }) {
       </CarouselContent>
       <CarouselPrevious className="opacity-0 group-hover:opacity-95 transition-opacity" />
       <CarouselNext className="opacity-0 group-hover:opacity-95 transition-opacity" />
+      <CarouselIndicatorDots />
     </Carousel>
   );
 }

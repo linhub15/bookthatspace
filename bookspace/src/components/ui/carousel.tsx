@@ -251,12 +251,70 @@ const CarouselNext = React.forwardRef<
     </Button>
   );
 });
+
+const CarouselIndicatorDots = (props: React.ComponentProps<"div">) => {
+  const { api } = useCarousel();
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
+
+  const onDotButtonClick = React.useCallback(
+    (index: number) => {
+      if (!api) return;
+      api.scrollTo(index);
+    },
+    [api],
+  );
+
+  const onInit = React.useCallback((api: CarouselApi) => {
+    if (!api) return;
+    setScrollSnaps(api.scrollSnapList());
+  }, []);
+
+  const onSelect = React.useCallback((api: CarouselApi) => {
+    if (!api) return;
+    setSelectedIndex(api.selectedScrollSnap());
+  }, []);
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    onInit(api);
+    onSelect(api);
+    api.on("reInit", onInit);
+    api.on("reInit", onSelect);
+    api.on("select", onSelect);
+  }, [api, onInit, onSelect]);
+
+  if (scrollSnaps.length <= 1) return;
+
+  return (
+    <div
+      className={cn(
+        "absolute bottom-0 space-x-1 w-full flex px-10 overflow-scroll pb-3 justify-center",
+        props.className,
+      )}
+    >
+      {scrollSnaps.map((_, index) => (
+        <button
+          className={cn(
+            "rounded-full size-2 border-2 border-white shadow",
+            selectedIndex === index ? "bg-gray-100" : "bg-gray-400/20",
+          )}
+          onClick={() => onDotButtonClick(index)}
+          key={index}
+        >
+        </button>
+      ))}
+    </div>
+  );
+};
 CarouselNext.displayName = "CarouselNext";
 
 export {
   Carousel,
   type CarouselApi,
   CarouselContent,
+  CarouselIndicatorDots,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
