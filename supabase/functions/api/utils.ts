@@ -11,7 +11,9 @@ type EnvOptions =
   | "RESEND_FROM_EMAIL"
   | "HASH_SALT"
   | "API_EXTERNAL_URL"
-  | "FRONTEND_URL";
+  | "FRONTEND_URL"
+  | "GOOGLE_CLIENT_ID"
+  | "GOOGLE_CLIENT_SECRET";
 
 /** @throws Error when environment value is falsey */
 export function getEnv(

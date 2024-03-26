@@ -1,14 +1,14 @@
-import {
+import type {
   Context,
   Env,
+  Input,
   MiddlewareHandler,
   TypedResponse,
   ValidationTargets,
-  validator,
 } from "hono/mod.ts";
-import { z, ZodError, ZodSchema } from "zod";
+import { validator } from "hono/validator/validator.ts";
+import type { z, ZodError, ZodSchema } from "zod";
 
-// deno-lint-ignore ban-types
 export type Hook<T, E extends Env, P extends string, O = {}> = (
   result: { success: true; data: T } | {
     success: false;
@@ -25,34 +25,36 @@ export type Hook<T, E extends Env, P extends string, O = {}> = (
 
 type HasUndefined<T> = undefined extends T ? true : false;
 
-/**
- * Imported directly because easier to debug and less dependencies
- *
- * @link
- * https://github.com/honojs/middleware/blob/main/packages/zod-validator/src/index.ts
- */
-export function zValidator<
+export const zValidator = <
   T extends ZodSchema,
   Target extends keyof ValidationTargets,
   E extends Env,
   P extends string,
-  I = z.input<T>,
-  O = z.output<T>,
-  V extends {
-    in: HasUndefined<I> extends true ? { [K in Target]?: I }
-      : { [K in Target]: I };
-    out: { [K in Target]: O };
-  } = {
-    in: HasUndefined<I> extends true ? { [K in Target]?: I }
-      : { [K in Target]: I };
-    out: { [K in Target]: O };
+  In = z.input<T>,
+  Out = z.output<T>,
+  I extends Input = {
+    in: HasUndefined<In> extends true ? {
+        [K in Target]?: K extends "json" ? In
+          : HasUndefined<keyof ValidationTargets[K]> extends true
+            ? { [K2 in keyof In]?: ValidationTargets[K][K2] }
+          : { [K2 in keyof In]: ValidationTargets[K][K2] };
+      }
+      : {
+        [K in Target]: K extends "json" ? In
+          : HasUndefined<keyof ValidationTargets[K]> extends true
+            ? { [K2 in keyof In]?: ValidationTargets[K][K2] }
+          : { [K2 in keyof In]: ValidationTargets[K][K2] };
+      };
+    out: { [K in Target]: Out };
   },
+  V extends I = I,
 >(
   target: Target,
   schema: T,
   hook?: Hook<z.infer<T>, E, P>,
-): MiddlewareHandler<E, P, V> {
-  return validator(target, async (value, c) => {
+): MiddlewareHandler<E, P, V> =>
+  // @ts-expect-error not typed well
+  validator(target, async (value, c) => {
     const result = await schema.safeParseAsync(value);
 
     if (hook) {
@@ -74,4 +76,3 @@ export function zValidator<
     const data = result.data as z.infer<T>;
     return data;
   });
-}

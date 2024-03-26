@@ -1,5 +1,5 @@
+import { api } from "@/clients/api";
 import { calendar } from "@/clients/googleapis";
-import { supabase } from "@/clients/supabase";
 import { Card } from "@/components/card";
 import { useProfile } from "@/features/hooks";
 import { useQuery } from "@tanstack/react-query";
@@ -87,10 +87,16 @@ export function Profile() {
 function useCalendars() {
   return useQuery({
     queryKey: ["google", "calendars"],
+    refetchOnWindowFocus: false,
     queryFn: async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      const token = session?.provider_token;
-      const response = await calendar.calendarList.list(token);
+      const { access_token } = await api.google.token.get();
+
+      if (!access_token) {
+        alert("Missing access token");
+        return;
+      }
+
+      const response = await calendar.calendarList.list(access_token);
       return response.items;
     },
   });

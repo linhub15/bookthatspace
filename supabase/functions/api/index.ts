@@ -2,6 +2,7 @@ import { Hono } from "hono/mod.ts";
 import { cors } from "hono/middleware.ts";
 import { supabase, SupabaseEnv } from "./middleware/supabase.ts";
 import { zValidator } from "./middleware/z_validator.ts";
+import { notificationReveiver } from "./calendar_notifications.ts";
 
 import {
   rejectBooking,
@@ -19,6 +20,7 @@ import {
   confirmBooking,
   ConfirmBookingRequest,
 } from "./actions/confirm_booking.ts";
+import { getAccessToken } from "./actions/google_calendar/get_access_token.ts";
 
 export const app = new Hono<SupabaseEnv>().basePath("/api");
 
@@ -73,5 +75,14 @@ app.get(
     return c.redirect(response.toString());
   },
 );
+
+app.get("/google/token", supabase(), async (c) => {
+  const response = await getAccessToken(undefined, {
+    supabase: c.var.supabase,
+  });
+  return c.json(response);
+});
+
+app.route("/notifications", notificationReveiver);
 
 Deno.serve(app.fetch);

@@ -55,8 +55,25 @@ async function request_booking(
   return data as Tables<"room_booking">;
 }
 
+async function get_google_token() {
+  const { data, error } = await supabase.functions.invoke(
+    "api/google/token",
+    { method: "GET" },
+  );
+
+  if (error) throw error;
+
+  return data as {
+    access_token: string;
+    expires_in: number;
+    scope: string;
+    token_type: "Bearer";
+  };
+}
+
 export const api = {
   accept_booking,
   reject_booking,
   request_booking,
+  google: { token: { get: get_google_token } },
 };

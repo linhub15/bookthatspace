@@ -7,6 +7,7 @@ import { MiddlewareHandler } from "hono/types.ts";
 import { Database } from "@/lib/types/supabase_types.d.ts";
 import { getEnv } from "../utils.ts";
 
+/** @default {mode} "auth"  */
 export function supabase(
   mode: "auth" | "anon" = "auth",
 ): MiddlewareHandler<SupabaseEnv> {
@@ -36,6 +37,6 @@ export function supabase(
 
 export type SupabaseEnv = {
   Variables: {
-    supabase: SupabaseClient;
+    supabase: SupabaseClient<Database>;
   };
 };
