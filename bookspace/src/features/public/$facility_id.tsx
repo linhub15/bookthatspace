@@ -56,7 +56,7 @@ export function FacilityWidget() {
         </div>
       </Card>
 
-      <div className="flex flex-col sm:flex-row gap-2 py-8 sm:justify-center">
+      <div className="flex flex-col sm:flex-row gap-3 py-8 sm:justify-center flex-wrap">
         {rooms.data?.map((room) => (
           <RoomCard room={room} photos={room.images} key={room.id} />
         ))}
@@ -69,7 +69,7 @@ export function RoomCard(
   { room, photos }: { room: Tables<"room">; photos: Image[] },
 ) {
   return (
-    <Card className="flex flex-col gap-2 p-4 sm:rounded-xl overflow-hidden md:max-w-[330px]">
+    <Card className="flex flex-col gap-2 p-4 sm:rounded-xl overflow-hidden md:max-w-[328px]">
       <ImageCarousel images={photos} />
       <div className="w-full">
         <div className="flex justify-between items-center">
