@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { useRoom, useUpdateRoom as useUpsertRoom } from "./hooks";
+import { useRoom, useUpsertRoom } from "./hooks";
 import { Label } from "@/components/form/label";
 import { FormField } from "@/components/form/form_field";
 import { UserIcon } from "@heroicons/react/24/outline";

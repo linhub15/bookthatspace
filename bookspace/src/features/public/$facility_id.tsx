@@ -22,7 +22,6 @@ import { PhotoIcon } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
 import { Tables } from "@/clients/supabase";
 import { GoogleMapImg } from "@/components/google_map";
-
 export function FacilityWidget() {
   const { facility_id } = publicOutlet.useParams();
   const facility = useFacility(facility_id);
@@ -57,13 +56,11 @@ export function FacilityWidget() {
         </div>
       </Card>
 
-      <Card>
-        <div className="flex flex-col p-4 gap-6 sm:p-6 lg:p-8 lg:gap-8 sm:grid sm:grid-cols-2 lg:grid-cols-3">
-          {rooms.data?.map((room) => (
-            <RoomCard room={room} photos={room.images} key={room.id} />
-          ))}
-        </div>
-      </Card>
+      <div className="flex flex-col sm:flex-row gap-2 py-8 sm:justify-center">
+        {rooms.data?.map((room) => (
+          <RoomCard room={room} photos={room.images} key={room.id} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -72,7 +69,7 @@ export function RoomCard(
   { room, photos }: { room: Tables<"room">; photos: Image[] },
 ) {
   return (
-    <div className="flex flex-col gap-2 rounded-xl overflow-hidden">
+    <Card className="flex flex-col gap-2 p-4 sm:rounded-xl overflow-hidden md:max-w-[330px]">
       <ImageCarousel images={photos} />
       <div className="w-full">
         <div className="flex justify-between items-center">
@@ -95,7 +92,7 @@ export function RoomCard(
           {maskHourlyRate(room.hourly_rate)}
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 

@@ -9,7 +9,6 @@ import { useRooms } from "../rooms/hooks";
 import { FormField } from "@/components/form/form_field";
 
 type Props = {
-  facilityId: string;
   userName: string;
   userEmail: string;
   onAfterSubmit: () => void;
@@ -67,7 +66,6 @@ export function InternalBookingForm(props: Props) {
               <Label htmlFor={field.name}>Book a Room</Label>
             </div>
             <RoomSelect
-              facilityId={props.facilityId}
               value={field.state.value}
               onChange={field.handleChange}
             />
@@ -160,12 +158,11 @@ export function InternalBookingForm(props: Props) {
 
 function RoomSelect(
   props: {
-    facilityId: string;
     value?: string;
     onChange: (value: string) => void;
   },
 ) {
-  const rooms = useRooms(props.facilityId);
+  const rooms = useRooms();
   return (
     <select
       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
