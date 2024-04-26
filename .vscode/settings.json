@@ -10,5 +10,8 @@
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "editor.detectIndentation": true
+  "editor.detectIndentation": true,
+  "[json]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
+  }
 }

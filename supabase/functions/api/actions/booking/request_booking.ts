@@ -1,9 +1,8 @@
-import { SupabaseClient } from "@supabase/supabase-js";
-import { Database } from "@/lib/types/supabase_types.d.ts";
 import { z } from "zod";
-import { sendEmail } from "../gateways/email.ts";
-import { getEnv, html } from "../utils.ts";
-import { hasher } from "../gateways/hasher.ts";
+import type { Supabase } from "../../middleware/supabase.ts";
+import { sendEmail } from "../../gateways/email.ts";
+import { getEnv, html } from "../../utils.ts";
+import { hasher } from "../../gateways/hasher.ts";
 import { ConfirmBookingRequest } from "./confirm_booking.ts";
 
 export const RequestBookingRequest = z.object({
@@ -23,7 +22,7 @@ type Request = z.infer<typeof RequestBookingRequest>;
 
 export async function requestBooking(
   request: Request,
-  deps: { supabase: SupabaseClient<Database> },
+  deps: { supabase: Supabase },
 ) {
   const response = await deps.supabase
     .from("room_booking")

@@ -1,8 +1,7 @@
-import { SupabaseClient } from "@supabase/supabase-js";
-import { Database } from "@/lib/types/supabase_types.d.ts";
 import { z } from "zod";
-import { sendEmail } from "../gateways/email.ts";
-import { html } from "../utils.ts";
+import type { Supabase } from "../../middleware/supabase.ts";
+import { sendEmail } from "../../gateways/email.ts";
+import { html } from "../../utils.ts";
 
 export const AcceptBookingRequest = z.object({
   booking_id: z.string(),
@@ -12,7 +11,7 @@ type Request = z.infer<typeof AcceptBookingRequest>;
 
 export async function acceptBooking(
   request: Request,
-  deps: { supabase: SupabaseClient<Database> },
+  deps: { supabase: Supabase },
 ) {
   const { data, error } = await deps.supabase.from("room_booking")
     .update({ status: "scheduled" })

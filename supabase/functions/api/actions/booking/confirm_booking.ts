@@ -1,8 +1,7 @@
-import { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
-import { Database } from "@/lib/types/supabase_types.d.ts";
-import { hasher } from "../gateways/hasher.ts";
-import { getEnv } from "../utils.ts";
+import type { Supabase } from "../../middleware/supabase.ts";
+import { hasher } from "../../gateways/hasher.ts";
+import { getEnv } from "../../utils.ts";
 
 export const ConfirmBookingRequest = z.object({
   id: z.string(),
@@ -16,7 +15,7 @@ type Request = z.infer<typeof ConfirmBookingRequest>;
 
 export async function confirmBooking(
   request: Request,
-  deps: { supabase: SupabaseClient<Database> },
+  deps: { supabase: Supabase },
 ) {
   await deps.supabase.from("room_booking")
     .update({

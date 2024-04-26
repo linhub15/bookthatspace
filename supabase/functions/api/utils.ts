@@ -15,9 +15,11 @@ type EnvOptions =
   | "GOOGLE_CLIENT_ID"
   | "GOOGLE_CLIENT_SECRET";
 
-/** @throws Error when environment value is falsey */
+type DevEnvOptions = "DEV_WEBHOOK_PROXY_URL";
+
+/** @throws {Error} when environment value is falsey */
 export function getEnv(
-  key: EnvOptions | SupabaseEnvOptions,
+  key: EnvOptions | SupabaseEnvOptions | DevEnvOptions,
   defaultValue?: string,
 ): string {
   const env = Deno.env.get(key);

@@ -1,8 +1,7 @@
-import { SupabaseClient } from "@supabase/supabase-js";
-import { sendEmail } from "../gateways/email.ts";
+import type { Supabase } from "../../middleware/supabase.ts";
+import { sendEmail } from "../../gateways/email.ts";
 import { z } from "zod";
-import { Database } from "@/lib/types/supabase_types.d.ts";
-import { html } from "../utils.ts";
+import { html } from "../../utils.ts";
 
 export const RejectBookingRequest = z.object({
   booking_id: z.string(),
@@ -13,7 +12,7 @@ type Request = z.infer<typeof RejectBookingRequest>;
 
 export async function rejectBooking(
   request: Request,
-  deps: { supabase: SupabaseClient<Database> },
+  deps: { supabase: Supabase },
 ) {
   const { data, error } = await deps.supabase.from("room_booking")
     .update({ status: "rejected" })

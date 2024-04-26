@@ -7,7 +7,7 @@ export function useGetBooking(bookingId: string) {
   return useQuery({
     queryKey: ["room_bookings", bookingId],
     queryFn: async () => {
-      const { data, error } = await supabase.from("room_booking").select("*")
+      const { data, error } = await supabase.from("room_booking").select()
         .eq(
           "id",
           bookingId,
@@ -81,7 +81,7 @@ export function useRoomBooking(bookingId: string) {
   return useQuery({
     queryKey: ["room_bookings", bookingId],
     queryFn: async () => {
-      const { data, error } = await supabase.from("room_booking").select("*")
+      const { data, error } = await supabase.from("room_booking").select()
         .eq(
           "id",
           bookingId,

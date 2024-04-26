@@ -1,11 +1,10 @@
-import { SupabaseClient } from "@supabase/supabase-js";
+import type { Supabase } from "../../middleware/supabase.ts";
 import { getEnv } from "../../utils.ts";
-import { Database } from "@/lib/types/supabase_types.d.ts";
 
 /** https://developers.google.com/identity/protocols/oauth2/web-server#offline */
 export async function getAccessToken(
   _request: undefined,
-  deps: { supabase: SupabaseClient<Database> },
+  deps: { supabase: Supabase },
 ) {
   const { data, error } = await deps.supabase
     .from("user_provider")

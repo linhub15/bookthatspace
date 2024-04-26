@@ -1,12 +1,12 @@
 import { createRoute } from "@tanstack/react-router";
 import { rootRoute } from "../../app.router";
 import { Profile } from "./profile/profile";
-import { Room } from "./rooms/rooms.$room_id";
+import { Room } from "./rooms/rooms/rooms.$room_id";
 import { Bookings } from "./bookings/bookings";
 import { authGuard } from "../../auth/auth.routes";
 import { Booking } from "./bookings/bookings.$booking_id";
 import { Dashboard } from "./dashboard";
-import { Rooms } from "./rooms/rooms";
+import { Rooms } from "./rooms/rooms/rooms";
 import { z } from "zod";
 import { QueryClient } from "@tanstack/react-query";
 import { userQueryOptions } from "../../auth/user_query_options";

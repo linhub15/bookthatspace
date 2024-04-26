@@ -1,28 +1,43 @@
 // Moved this into a separate file for Vite "fast refresh" warning
 import { Enums } from "@/clients/supabase";
 import { Temporal } from "@js-temporal/polyfill";
-import { Fragment, PropsWithChildren, useRef } from "react";
+import { Fragment, PropsWithChildren, useMemo, useRef } from "react";
 
 const weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-const hours = [...Array(24).keys()].map((hour) => {
-  const time = Temporal.PlainTime.from({ hour: hour }).toLocaleString(
-    "en-CA",
-    { hour: "numeric", hour12: true },
-  );
-  return time;
-});
-
 type Props = {
   interval: number;
+  earliestHour: number;
+  latestHour: number;
 } & PropsWithChildren;
 
 export function AvailabilityCalendar(props: Props) {
-  const rowCount = 24 * (60 / props.interval);
-
   const container = useRef(null);
   const containerNav = useRef(null);
   const containerOffset = useRef(null);
+
+  const hours = useMemo(() => {
+    const { earliestHour } = props;
+    let { latestHour } = props;
+    if (latestHour < 24) {
+      // add 1 hour spacing under it, but not more than 24
+      latestHour = Math.min(latestHour + 1, 24);
+    }
+    const hourRange = latestHour - earliestHour;
+    const hrs = Array.from(
+      { length: hourRange },
+      (_, i) => i + (earliestHour ?? 0),
+    );
+
+    return hrs.map((hour) =>
+      Temporal.PlainTime.from({ hour: hour }).toLocaleString(
+        "en-CA",
+        { hour: "numeric", hour12: true },
+      )
+    );
+  }, [props]);
+
+  const rowCount = hours.length * (60 / props.interval);
 
   return (
     <div className="h-0 min-h-[765px]">
@@ -72,7 +87,9 @@ export function AvailabilityCalendar(props: Props) {
                 <div
                   className="col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100"
                   style={{
-                    gridTemplateRows: "repeat(48, minmax(1.5rem, 1fr))",
+                    gridTemplateRows: `repeat(${
+                      2 * hours.length
+                    }, minmax(1.5rem, 1fr))`,
                   }}
                 >
                   <div ref={containerOffset} className="row-end-1 h-7"></div>
@@ -124,11 +141,12 @@ export type TimeBlockProps = {
   end: Temporal.PlainTime;
   weekday: Enums<"day_of_week">;
   interval: Minutes;
+  startOffset: number;
 };
 
 export function TimeBlock(props: TimeBlockProps) {
   const blockSize = 60 / props.interval;
-  const start = (props.start.hour * blockSize) + 2;
+  const start = ((props.start.hour - props.startOffset) * blockSize) + 2;
   const duration = props.start.until(props.end, { largestUnit: "minutes" });
   const span = duration.round({
     roundingIncrement: props.interval,

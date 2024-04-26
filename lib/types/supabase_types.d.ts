@@ -41,6 +41,44 @@ export type Database = {
           },
         ]
       }
+      google_calendar: {
+        Row: {
+          created_at: string
+          events: Json
+          id: string
+          profile_id: string
+          sync_channel_expiry: string | null
+          sync_channel_id: string | null
+          sync_enabled: boolean
+        }
+        Insert: {
+          created_at?: string
+          events: Json
+          id: string
+          profile_id?: string
+          sync_channel_expiry?: string | null
+          sync_channel_id?: string | null
+          sync_enabled?: boolean
+        }
+        Update: {
+          created_at?: string
+          events?: Json
+          id?: string
+          profile_id?: string
+          sync_channel_expiry?: string | null
+          sync_channel_id?: string | null
+          sync_enabled?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "google_calendar_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile: {
         Row: {
           created_at: string
@@ -75,6 +113,7 @@ export type Database = {
           created_at: string
           description: string | null
           facility_id: string
+          google_calendar_id: string | null
           hourly_rate: number | null
           id: string
           max_capacity: number | null
@@ -84,6 +123,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           facility_id: string
+          google_calendar_id?: string | null
           hourly_rate?: number | null
           id?: string
           max_capacity?: number | null
@@ -93,6 +133,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           facility_id?: string
+          google_calendar_id?: string | null
           hourly_rate?: number | null
           id?: string
           max_capacity?: number | null
@@ -104,6 +145,13 @@ export type Database = {
             columns: ["facility_id"]
             isOneToOne: false
             referencedRelation: "facility"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "room_google_calendar_id_fkey"
+            columns: ["google_calendar_id"]
+            isOneToOne: false
+            referencedRelation: "google_calendar"
             referencedColumns: ["id"]
           },
         ]

@@ -35,8 +35,10 @@ export function supabase(
   };
 }
 
+export type { Json } from "@/lib/types/supabase_types.d.ts";
+export type Supabase = SupabaseClient<Database>;
 export type SupabaseEnv = {
   Variables: {
-    supabase: SupabaseClient<Database>;
+    supabase: Supabase;
   };
 };

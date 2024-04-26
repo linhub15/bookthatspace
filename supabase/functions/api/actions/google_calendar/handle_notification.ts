@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const NotificationHeaderSchema = z.object({
+export const NotificationHeader = z.object({
   /** UUID or other unique string you provided to identify this
    * notification channel. */
   "X-Goog-Channel-ID": z.string(),
@@ -36,7 +36,7 @@ export const NotificationHeaderSchema = z.object({
   messageNumber: data["X-Goog-Message-Number"],
 }));
 
-type NotificationHeader = z.infer<typeof NotificationHeaderSchema>;
+type NotificationHeader = z.infer<typeof NotificationHeader>;
 
 type Request = {
   header: NotificationHeader;
@@ -44,7 +44,7 @@ type Request = {
 };
 export async function handleNotification(request: Request) {
   if (request.header.resourceState === "sync") {
-    // skip
+    // skip deliberately
     return; // https://developers.google.com/calendar/api/guides/push#sync-message
   }
 
@@ -58,6 +58,7 @@ export async function handleNotification(request: Request) {
   if (request.header.resourceState === "not_exists") {
     // not exists
     // delete it from our db
+    // todo
     return;
   }
 

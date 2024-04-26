@@ -1,13 +1,13 @@
-import { Modal } from "../../../components/modal";
+import { Modal } from "../../../../components/modal";
 import { useState } from "react";
-import { useRooms } from "./hooks";
+import { useRooms } from "../hooks";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Tables } from "@/clients/supabase";
-import { maskHourlyRate } from "../../../lib/masks/masks";
+import { maskHourlyRate } from "../../../../lib/masks/masks";
 import { Card } from "@/components/card";
-import { roomRoute } from "../dashboard.routes";
+import { roomRoute } from "../../dashboard.routes";
 import { RoomForm } from "./room_form";
-import { FacilityCard } from "./facility/facility_card";
+import { FacilityCard } from "../facility/facility_card";
 
 export function Rooms() {
   const [open, setOpen] = useState(false);
