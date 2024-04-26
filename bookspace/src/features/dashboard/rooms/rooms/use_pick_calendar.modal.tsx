@@ -18,12 +18,13 @@ export function usePickCalendarModal(props: Props) {
       return;
     }
 
-    const pauseCalendarSync = async () => {
-      // todo: take all the steps to unlink the calendar
-    };
+    // const pauseCalendarSync = async () => {
+    //   // todo: take all the steps to unlink the calendar
+    // };
 
-    const resumeCalendarSync = async () => {
-    };
+    // const resumeCalendarSync = async () => {
+    //   // todo: continue a calendar sync
+    // };
 
     const pickCalendar = async (calendarId: string) => {
       await enableCalendar.mutateAsync({

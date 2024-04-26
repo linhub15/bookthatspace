@@ -114,7 +114,7 @@ function useEnableCalendar() {
       const enable = () =>
         supabase
           .from("google_calendar")
-          .upsert({ id: args.calendarId, sync_enabled: true });
+          .upsert({ id: args.calendarId, sync_enabled: true, events: [] });
 
       const response = args.enabled ? await enable() : await disable();
       await queryClient.invalidateQueries({
