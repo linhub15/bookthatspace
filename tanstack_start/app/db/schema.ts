@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   jsonb,
@@ -8,6 +9,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
+import { user } from "./auth-schema";
 
 export const day_of_week = pgEnum("day_of_week", [
   "mon",
@@ -27,20 +29,35 @@ export const room_booking_status = pgEnum("room_booking_status", [
   "scheduled",
 ]);
 
+export const profile = pgTable("profile", {
+  id: uuid().primaryKey().defaultRandom(),
+  created_at: timestamp().defaultNow().notNull(),
+  user_id: text().references(() => user.id).notNull(),
+});
+
+export const profile_relations = relations(profile, ({ one, many }) => ({
+  user: one(user, {
+    fields: [profile.user_id],
+    references: [user.id],
+  }),
+  facilities: many(facility),
+}));
+
 export const facility = pgTable("facility", {
   id: uuid().primaryKey().defaultRandom(),
   created_at: timestamp().defaultNow().notNull(),
-  profile_id: uuid(),
+  profile_id: uuid().references(() => profile.id),
   address: jsonb(),
   name: text(),
 });
 
-export const profile = pgTable("profile", {
-  id: uuid().primaryKey().defaultRandom(),
-  created_at: timestamp().defaultNow().notNull(),
-  name: text(),
-  email: text().notNull(),
-});
+export const facility_relations = relations(facility, ({ one, many }) => ({
+  profile: one(profile, {
+    fields: [facility.profile_id],
+    references: [profile.id],
+  }),
+  rooms: many(room),
+}));
 
 export const room = pgTable("room", {
   id: uuid().primaryKey().defaultRandom(),
@@ -53,6 +70,14 @@ export const room = pgTable("room", {
   facility_id: uuid().notNull().references(() => facility.id),
 });
 
+export const room_relations = relations(room, ({ one, many }) => ({
+  facility: one(facility, {
+    fields: [room.facility_id],
+    references: [facility.id],
+  }),
+  availabilities: many(room_availability),
+}));
+
 export const room_availability = pgTable("room_availability", {
   id: uuid().primaryKey().defaultRandom(),
   created_at: timestamp().defaultNow().notNull(),
@@ -61,6 +86,16 @@ export const room_availability = pgTable("room_availability", {
   start: timestamp(),
   end: timestamp(),
 });
+
+export const room_availability_relations = relations(
+  room_availability,
+  ({ one }) => ({
+    room: one(room, {
+      fields: [room_availability.room_id],
+      references: [room.id],
+    }),
+  }),
+);
 
 export const room_booking = pgTable("room_booking", {
   id: uuid().primaryKey().defaultRandom(),

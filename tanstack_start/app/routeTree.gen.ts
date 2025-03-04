@@ -11,10 +11,11 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as LoginImport } from './routes/login'
+import { Route as DashboardRouteImport } from './routes/dashboard/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as DashboardProfileImport } from './routes/dashboard/profile'
+import { Route as AuthSignupImport } from './routes/_auth/signup'
+import { Route as AuthLoginImport } from './routes/_auth/login'
 import { Route as DashboardRoomsIndexImport } from './routes/dashboard/rooms/index'
 import { Route as DashboardBookingsIndexImport } from './routes/dashboard/bookings/index'
 import { Route as DashboardBookingRequestsIndexImport } from './routes/dashboard/booking-requests/index'
@@ -24,9 +25,9 @@ import { Route as DashboardBookingRequestsBookingIdReviewImport } from './routes
 
 // Create/Update Routes
 
-const LoginRoute = LoginImport.update({
-  id: '/login',
-  path: '/login',
+const DashboardRouteRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -36,55 +37,61 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardIndexRoute = DashboardIndexImport.update({
-  id: '/dashboard/',
-  path: '/dashboard/',
+const DashboardProfileRoute = DashboardProfileImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+
+const AuthSignupRoute = AuthSignupImport.update({
+  id: '/_auth/signup',
+  path: '/signup',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardProfileRoute = DashboardProfileImport.update({
-  id: '/dashboard/profile',
-  path: '/dashboard/profile',
+const AuthLoginRoute = AuthLoginImport.update({
+  id: '/_auth/login',
+  path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
 const DashboardRoomsIndexRoute = DashboardRoomsIndexImport.update({
-  id: '/dashboard/rooms/',
-  path: '/dashboard/rooms/',
-  getParentRoute: () => rootRoute,
+  id: '/rooms/',
+  path: '/rooms/',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 
 const DashboardBookingsIndexRoute = DashboardBookingsIndexImport.update({
-  id: '/dashboard/bookings/',
-  path: '/dashboard/bookings/',
-  getParentRoute: () => rootRoute,
+  id: '/bookings/',
+  path: '/bookings/',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 
 const DashboardBookingRequestsIndexRoute =
   DashboardBookingRequestsIndexImport.update({
-    id: '/dashboard/booking-requests/',
-    path: '/dashboard/booking-requests/',
-    getParentRoute: () => rootRoute,
+    id: '/booking-requests/',
+    path: '/booking-requests/',
+    getParentRoute: () => DashboardRouteRoute,
   } as any)
 
 const DashboardRoomsRoomIdRoute = DashboardRoomsRoomIdImport.update({
-  id: '/dashboard/rooms/$roomId',
-  path: '/dashboard/rooms/$roomId',
-  getParentRoute: () => rootRoute,
+  id: '/rooms/$roomId',
+  path: '/rooms/$roomId',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 
 const DashboardBookingsBookingIdViewRoute =
   DashboardBookingsBookingIdViewImport.update({
-    id: '/dashboard/bookings/$bookingId/view',
-    path: '/dashboard/bookings/$bookingId/view',
-    getParentRoute: () => rootRoute,
+    id: '/bookings/$bookingId/view',
+    path: '/bookings/$bookingId/view',
+    getParentRoute: () => DashboardRouteRoute,
   } as any)
 
 const DashboardBookingRequestsBookingIdReviewRoute =
   DashboardBookingRequestsBookingIdReviewImport.update({
-    id: '/dashboard/booking-requests/$bookingId/review',
-    path: '/dashboard/booking-requests/$bookingId/review',
-    getParentRoute: () => rootRoute,
+    id: '/booking-requests/$bookingId/review',
+    path: '/booking-requests/$bookingId/review',
+    getParentRoute: () => DashboardRouteRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -98,79 +105,112 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      id: '/login'
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth/login': {
+      id: '/_auth/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
+      preLoaderRoute: typeof AuthLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth/signup': {
+      id: '/_auth/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof AuthSignupImport
       parentRoute: typeof rootRoute
     }
     '/dashboard/profile': {
       id: '/dashboard/profile'
-      path: '/dashboard/profile'
+      path: '/profile'
       fullPath: '/dashboard/profile'
       preLoaderRoute: typeof DashboardProfileImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
     '/dashboard/rooms/$roomId': {
       id: '/dashboard/rooms/$roomId'
-      path: '/dashboard/rooms/$roomId'
+      path: '/rooms/$roomId'
       fullPath: '/dashboard/rooms/$roomId'
       preLoaderRoute: typeof DashboardRoomsRoomIdImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
     '/dashboard/booking-requests/': {
       id: '/dashboard/booking-requests/'
-      path: '/dashboard/booking-requests'
+      path: '/booking-requests'
       fullPath: '/dashboard/booking-requests'
       preLoaderRoute: typeof DashboardBookingRequestsIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
     '/dashboard/bookings/': {
       id: '/dashboard/bookings/'
-      path: '/dashboard/bookings'
+      path: '/bookings'
       fullPath: '/dashboard/bookings'
       preLoaderRoute: typeof DashboardBookingsIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
     '/dashboard/rooms/': {
       id: '/dashboard/rooms/'
-      path: '/dashboard/rooms'
+      path: '/rooms'
       fullPath: '/dashboard/rooms'
       preLoaderRoute: typeof DashboardRoomsIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
     '/dashboard/booking-requests/$bookingId/review': {
       id: '/dashboard/booking-requests/$bookingId/review'
-      path: '/dashboard/booking-requests/$bookingId/review'
+      path: '/booking-requests/$bookingId/review'
       fullPath: '/dashboard/booking-requests/$bookingId/review'
       preLoaderRoute: typeof DashboardBookingRequestsBookingIdReviewImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
     '/dashboard/bookings/$bookingId/view': {
       id: '/dashboard/bookings/$bookingId/view'
-      path: '/dashboard/bookings/$bookingId/view'
+      path: '/bookings/$bookingId/view'
       fullPath: '/dashboard/bookings/$bookingId/view'
       preLoaderRoute: typeof DashboardBookingsBookingIdViewImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof DashboardRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface DashboardRouteRouteChildren {
+  DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardRoomsRoomIdRoute: typeof DashboardRoomsRoomIdRoute
+  DashboardBookingRequestsIndexRoute: typeof DashboardBookingRequestsIndexRoute
+  DashboardBookingsIndexRoute: typeof DashboardBookingsIndexRoute
+  DashboardRoomsIndexRoute: typeof DashboardRoomsIndexRoute
+  DashboardBookingRequestsBookingIdReviewRoute: typeof DashboardBookingRequestsBookingIdReviewRoute
+  DashboardBookingsBookingIdViewRoute: typeof DashboardBookingsBookingIdViewRoute
+}
+
+const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardProfileRoute: DashboardProfileRoute,
+  DashboardRoomsRoomIdRoute: DashboardRoomsRoomIdRoute,
+  DashboardBookingRequestsIndexRoute: DashboardBookingRequestsIndexRoute,
+  DashboardBookingsIndexRoute: DashboardBookingsIndexRoute,
+  DashboardRoomsIndexRoute: DashboardRoomsIndexRoute,
+  DashboardBookingRequestsBookingIdReviewRoute:
+    DashboardBookingRequestsBookingIdReviewRoute,
+  DashboardBookingsBookingIdViewRoute: DashboardBookingsBookingIdViewRoute,
+}
+
+const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
+  DashboardRouteRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/login': typeof AuthLoginRoute
+  '/signup': typeof AuthSignupRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard': typeof DashboardIndexRoute
   '/dashboard/rooms/$roomId': typeof DashboardRoomsRoomIdRoute
   '/dashboard/booking-requests': typeof DashboardBookingRequestsIndexRoute
   '/dashboard/bookings': typeof DashboardBookingsIndexRoute
@@ -181,9 +221,10 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/login': typeof AuthLoginRoute
+  '/signup': typeof AuthSignupRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard': typeof DashboardIndexRoute
   '/dashboard/rooms/$roomId': typeof DashboardRoomsRoomIdRoute
   '/dashboard/booking-requests': typeof DashboardBookingRequestsIndexRoute
   '/dashboard/bookings': typeof DashboardBookingsIndexRoute
@@ -195,9 +236,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/_auth/login': typeof AuthLoginRoute
+  '/_auth/signup': typeof AuthSignupRoute
   '/dashboard/profile': typeof DashboardProfileRoute
-  '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/rooms/$roomId': typeof DashboardRoomsRoomIdRoute
   '/dashboard/booking-requests/': typeof DashboardBookingRequestsIndexRoute
   '/dashboard/bookings/': typeof DashboardBookingsIndexRoute
@@ -210,9 +252,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/login'
-    | '/dashboard/profile'
     | '/dashboard'
+    | '/login'
+    | '/signup'
+    | '/dashboard/profile'
     | '/dashboard/rooms/$roomId'
     | '/dashboard/booking-requests'
     | '/dashboard/bookings'
@@ -222,9 +265,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/login'
-    | '/dashboard/profile'
     | '/dashboard'
+    | '/login'
+    | '/signup'
+    | '/dashboard/profile'
     | '/dashboard/rooms/$roomId'
     | '/dashboard/booking-requests'
     | '/dashboard/bookings'
@@ -234,9 +278,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/login'
+    | '/dashboard'
+    | '/_auth/login'
+    | '/_auth/signup'
     | '/dashboard/profile'
-    | '/dashboard/'
     | '/dashboard/rooms/$roomId'
     | '/dashboard/booking-requests/'
     | '/dashboard/bookings/'
@@ -248,29 +293,16 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LoginRoute: typeof LoginRoute
-  DashboardProfileRoute: typeof DashboardProfileRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
-  DashboardRoomsRoomIdRoute: typeof DashboardRoomsRoomIdRoute
-  DashboardBookingRequestsIndexRoute: typeof DashboardBookingRequestsIndexRoute
-  DashboardBookingsIndexRoute: typeof DashboardBookingsIndexRoute
-  DashboardRoomsIndexRoute: typeof DashboardRoomsIndexRoute
-  DashboardBookingRequestsBookingIdReviewRoute: typeof DashboardBookingRequestsBookingIdReviewRoute
-  DashboardBookingsBookingIdViewRoute: typeof DashboardBookingsBookingIdViewRoute
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthSignupRoute: typeof AuthSignupRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LoginRoute: LoginRoute,
-  DashboardProfileRoute: DashboardProfileRoute,
-  DashboardIndexRoute: DashboardIndexRoute,
-  DashboardRoomsRoomIdRoute: DashboardRoomsRoomIdRoute,
-  DashboardBookingRequestsIndexRoute: DashboardBookingRequestsIndexRoute,
-  DashboardBookingsIndexRoute: DashboardBookingsIndexRoute,
-  DashboardRoomsIndexRoute: DashboardRoomsIndexRoute,
-  DashboardBookingRequestsBookingIdReviewRoute:
-    DashboardBookingRequestsBookingIdReviewRoute,
-  DashboardBookingsBookingIdViewRoute: DashboardBookingsBookingIdViewRoute,
+  DashboardRouteRoute: DashboardRouteRouteWithChildren,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthSignupRoute: AuthSignupRoute,
 }
 
 export const routeTree = rootRoute
@@ -284,9 +316,18 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/login",
+        "/dashboard",
+        "/_auth/login",
+        "/_auth/signup"
+      ]
+    },
+    "/": {
+      "filePath": "index.tsx"
+    },
+    "/dashboard": {
+      "filePath": "dashboard/route.tsx",
+      "children": [
         "/dashboard/profile",
-        "/dashboard/",
         "/dashboard/rooms/$roomId",
         "/dashboard/booking-requests/",
         "/dashboard/bookings/",
@@ -295,35 +336,39 @@ export const routeTree = rootRoute
         "/dashboard/bookings/$bookingId/view"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_auth/login": {
+      "filePath": "_auth/login.tsx"
     },
-    "/login": {
-      "filePath": "login.tsx"
+    "/_auth/signup": {
+      "filePath": "_auth/signup.tsx"
     },
     "/dashboard/profile": {
-      "filePath": "dashboard/profile.tsx"
-    },
-    "/dashboard/": {
-      "filePath": "dashboard/index.tsx"
+      "filePath": "dashboard/profile.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/rooms/$roomId": {
-      "filePath": "dashboard/rooms/$roomId.tsx"
+      "filePath": "dashboard/rooms/$roomId.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/booking-requests/": {
-      "filePath": "dashboard/booking-requests/index.tsx"
+      "filePath": "dashboard/booking-requests/index.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/bookings/": {
-      "filePath": "dashboard/bookings/index.tsx"
+      "filePath": "dashboard/bookings/index.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/rooms/": {
-      "filePath": "dashboard/rooms/index.tsx"
+      "filePath": "dashboard/rooms/index.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/booking-requests/$bookingId/review": {
-      "filePath": "dashboard/booking-requests/$bookingId.review.tsx"
+      "filePath": "dashboard/booking-requests/$bookingId.review.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/bookings/$bookingId/view": {
-      "filePath": "dashboard/bookings/$bookingId.view.tsx"
+      "filePath": "dashboard/bookings/$bookingId.view.tsx",
+      "parent": "/dashboard"
     }
   }
 }

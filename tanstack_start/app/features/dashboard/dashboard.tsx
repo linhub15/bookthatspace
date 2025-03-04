@@ -226,8 +226,8 @@ function HeaderBar(props: { openSidebar: () => void }) {
   const profile = useProfile();
   const signOut = useSignOut();
   const navigationOptions = [
-    { name: "My profile", to: "/", icon: undefined },
-  ] as const;
+    { name: "My profile", to: "/dashboard/profile" },
+  ] satisfies Partial<NavItem>[];
 
   return (
     <div className="lg:pl-72">
@@ -281,27 +281,19 @@ function HeaderBar(props: { openSidebar: () => void }) {
                   <div>
                     {navigationOptions.map((item) => (
                       <MenuItem key={item.name}>
-                        {({ active }) => (
-                          <Link
-                            className={cn(
-                              active ? "bg-gray-50" : "",
-                              "block px-5 py-3 text-sm leading-6 text-gray-900",
-                            )}
-                            to={item.to}
-                          >
-                            {item.name}
-                          </Link>
-                        )}
+                        <Link
+                          className="data-[active]:bg-gray-50 block px-5 py-3 text-sm leading-6 text-gray-900"
+                          to={item.to}
+                        >
+                          {item.name}
+                        </Link>
                       </MenuItem>
                     ))}
                   </div>
 
                   <MenuItem>
                     <button
-                      className={cn(
-                        "data-[active]:bg-gray-50",
-                        "block px-5 py-3 text-sm leading-6 text-gray-900 w-full text-left",
-                      )}
+                      className="data-[active]:bg-gray-50 block px-5 py-3 text-sm leading-6 text-gray-900 w-full text-left"
                       type="button"
                       onClick={() => signOut.mutateAsync()}
                     >

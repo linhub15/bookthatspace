@@ -5,8 +5,6 @@
 // access this by using the exported `api` object and calling the appropriate function.
 // e.g. `api.accept_booking(...)` or `api.google.calendar.sync(...)`
 
-import { supabase, Tables } from "./supabase";
-
 async function accept_booking(request: { booking_id: string }) {
   await supabase.functions.invoke("api/accept_booking", {
     method: "POST",
@@ -57,22 +55,6 @@ async function request_booking(
   if (error) throw error;
 
   return data as Tables<"room_booking">;
-}
-
-async function get_google_token() {
-  const { data, error } = await supabase.functions.invoke(
-    "api/google/token",
-    { method: "GET" },
-  );
-
-  if (error) throw error;
-
-  return data as {
-    access_token: string;
-    expires_in: number;
-    scope: string;
-    token_type: "Bearer";
-  };
 }
 
 async function sync_google_calendar(request: {

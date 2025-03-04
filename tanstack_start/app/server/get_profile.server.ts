@@ -1,17 +1,18 @@
+import { authMiddleware } from "@/lib/auth/auth_middleware";
+import { notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import { db } from "../db/database";
 
-type Profile = {
-  created_at: string;
-  email: string;
-  id: string;
-  name: string | null;
-} | null;
+export const getProfile = createServerFn()
+  .middleware([authMiddleware])
+  .handler(async ({ context }) => {
+    const user = await db.query.user.findFirst({
+      where: (user, { eq }) => eq(user.id, context.session.user.id),
+    });
 
-export const getProfile = createServerFn().handler(async () => {
-  return {
-    created_at: "2021-07-09T17:00:00Z",
-    email: "",
-    id: "",
-    name: "",
-  } satisfies Profile;
-});
+    if (!user) {
+      throw notFound();
+    }
+
+    return user;
+  });
