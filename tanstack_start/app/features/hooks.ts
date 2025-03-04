@@ -1,10 +1,7 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { signal } from "@preact/signals";
+import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { getProfile } from "../server/get_profile.server";
 import { getFacility } from "../server/get_facility.server";
-
-export const registered = signal(false);
 
 export function useProfile() {
   const fn = useServerFn(getProfile);

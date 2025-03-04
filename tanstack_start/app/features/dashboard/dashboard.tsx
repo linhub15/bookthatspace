@@ -21,7 +21,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
 import { useFacility, useProfile } from "../hooks";
-import { useSignOut } from "@/app/auth/hooks/use_sign_out";
+import { useSignOut } from "@/lib/auth/use_sign_out";
 
 type NavItem = {
   name: string;

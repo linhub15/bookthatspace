@@ -1,11 +1,16 @@
-import { authClient } from "@/lib/auth/auth-client";
+import { authClient } from "@/lib/auth/auth.client";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { GoogleIcon } from "../../components/icons/google_icon";
+import { z } from "zod";
+
+const searchParams = z.object({
+  redirect: z.string().optional(),
+});
 
 export const Route = createFileRoute("/_auth/login")({
   component: RouteComponent,
-  validateSearch: (search) => ({ redirect: search.redirect as string ?? "" }),
+  validateSearch: (search) => searchParams.parse(search),
 });
 
 function RouteComponent() {

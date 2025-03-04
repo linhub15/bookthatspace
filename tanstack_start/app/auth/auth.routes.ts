@@ -1,6 +1,5 @@
 import { createRoute, redirect } from "@tanstack/react-router";
 import { Login } from "./login";
-import { checkAuthenticated } from "./hooks/use_authenticated.signal";
 import { Signup } from "./signup";
 import { EmailConfirmation } from "./email_confirmation";
 import { ForgotPassword } from "./forgot_password";

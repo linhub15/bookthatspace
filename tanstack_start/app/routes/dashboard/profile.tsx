@@ -5,9 +5,9 @@ import { useProfile } from "@/app/features/hooks";
 import {
   disableCalendar,
   enableCalendar,
-} from "@/app/server/google_calendar/enable_calendar.server";
-import { getAccessToken } from "@/app/server/google_calendar/get_access_token";
-import { listCalendars } from "@/app/server/google_calendar/list_calendars.server";
+} from "@/lib/google_calendar/enable_calendar.server";
+import { getAccessToken } from "@/lib/google_calendar/get_access_token.server";
+import { listCalendars } from "@/lib/google_calendar/list_calendars.server";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 
