@@ -1,3 +1,5 @@
+/** @deprecated replaced with file-routing */
+
 import { createRoute } from "@tanstack/react-router";
 import { Profile } from "./profile/profile";
 import { Room } from "./rooms/rooms/rooms.$room_id";

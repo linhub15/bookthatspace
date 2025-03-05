@@ -1,7 +1,7 @@
 import { calendar } from "@/app/clients/googleapis";
 import { Card } from "@/app/components/card";
 import { ToggleSwitch } from "@/app/components/form/toggle_switch";
-import { useProfile } from "@/app/features/hooks";
+import { useProfile } from "@/app/features/use_profile";
 import {
   disableCalendar,
   enableCalendar,
@@ -35,7 +35,7 @@ function RouteComponent() {
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-900">Name</dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {profile.name}
+                {profile.user.name}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -43,7 +43,7 @@ function RouteComponent() {
                 Email address
               </dt>
               <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {profile.email}
+                {profile.user.email}
               </dd>
             </div>
           </dl>

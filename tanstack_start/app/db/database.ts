@@ -1,5 +1,5 @@
 import * as schema from "./schema";
-import * as authSchema from "./auth-schema";
+import * as authSchema from "./auth_schema";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 

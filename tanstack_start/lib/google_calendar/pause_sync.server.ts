@@ -13,8 +13,8 @@ export const PauseSyncRequest = z.object({
 /** https://developers.google.com/calendar/api/guides/push#stopping */
 export const pauseCalendarSync = createServerFn()
   .middleware([authMiddleware, googleCalendarMiddleware])
-  .validator((request: z.infer<typeof PauseSyncRequest>) =>
-    PauseSyncRequest.parse(request)
+  .validator((data: z.infer<typeof PauseSyncRequest>) =>
+    PauseSyncRequest.parse(data)
   )
   .handler(async ({ data, context }) => {
     const updated = await db.update(google_calendar)

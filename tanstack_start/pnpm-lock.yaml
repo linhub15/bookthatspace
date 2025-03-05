@@ -47,6 +47,9 @@ importers:
       drizzle-orm:
         specifier: ^0.40.0
         version: 0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.0)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)
+      drizzle-zod:
+        specifier: ^0.7.0
+        version: 0.7.0(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.0)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(zod@3.24.2)
       embla-carousel-react:
         specifier: ^8.5.2
         version: 8.5.2(react@19.0.0)
@@ -81,6 +84,9 @@ importers:
       '@tailwindcss/forms':
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@3.4.17)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.67.1
+        version: 5.67.1(@tanstack/react-query@5.67.1(react@19.0.0))(react@19.0.0)
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.10
@@ -1621,6 +1627,9 @@ packages:
   '@tanstack/query-core@5.67.1':
     resolution: {integrity: sha512-AkFmuukVejyqVIjEQoFhLb3q+xHl7JG8G9cANWTMe3s8iKzD9j1VBSYXgCjy6vm6xM8cUCR9zP2yqWxY9pTWOA==}
 
+  '@tanstack/query-devtools@5.65.0':
+    resolution: {integrity: sha512-g5y7zc07U9D3esMdqUfTEVu9kMHoIaVBsD0+M3LPdAdD710RpTcLiNvJY1JkYXqkq9+NV+CQoemVNpQPBXVsJg==}
+
   '@tanstack/react-form@1.0.0':
     resolution: {integrity: sha512-8vhhpfdWlLfO92DF70dIzi/tKIbtVb0mJkixXPKUzfxgp/s0fpILNHeLePs5xjBlRmm35xt6PmNXwcGKM1Ofkg==}
     peerDependencies:
@@ -1632,6 +1641,12 @@ packages:
         optional: true
       vinxi:
         optional: true
+
+  '@tanstack/react-query-devtools@5.67.1':
+    resolution: {integrity: sha512-a/2I8ORNalh+ek6Nyb9mEiq2u7vydjVMvaQz5ZieGq7r7DxgIFcPiMs4Ay0qkQvHfptESgXR5nImGTHmmt19yQ==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.67.1
+      react: ^18 || ^19
 
   '@tanstack/react-query@5.67.1':
     resolution: {integrity: sha512-fH5u4JLwB6A+wLFdi8wWBWAYoJV5deYif2OveJ26ktAWjU499uvVFS1wPWnyEyq5LvZX1MZInvv9QRaIZANRaQ==}
@@ -2400,6 +2415,12 @@ packages:
         optional: true
       sqlite3:
         optional: true
+
+  drizzle-zod@0.7.0:
+    resolution: {integrity: sha512-xgCRYYVEzRkeXTS33GSMgoowe3vKsMNBjSI+cwG1oLQVEhAWWbqtb/AAMlm7tkmV4fG/uJjEmWzdzlEmTgWOoQ==}
+    peerDependencies:
+      drizzle-orm: '>=0.36.0'
+      zod: '>=3.0.0'
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -5322,6 +5343,8 @@ snapshots:
 
   '@tanstack/query-core@5.67.1': {}
 
+  '@tanstack/query-devtools@5.65.0': {}
+
   '@tanstack/react-form@1.0.0(a003a874c91212e660ad72dba133e620)':
     dependencies:
       '@remix-run/node': 2.16.0(typescript@5.8.2)
@@ -5335,6 +5358,12 @@ snapshots:
     transitivePeerDependencies:
       - react-dom
       - typescript
+
+  '@tanstack/react-query-devtools@5.67.1(@tanstack/react-query@5.67.1(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@tanstack/query-devtools': 5.65.0
+      '@tanstack/react-query': 5.67.1(react@19.0.0)
+      react: 19.0.0
 
   '@tanstack/react-query@5.67.1(react@19.0.0)':
     dependencies:
@@ -6590,6 +6619,11 @@ snapshots:
       kysely: 0.27.6
       postgres: 3.4.5
       prisma: 5.22.0
+
+  drizzle-zod@0.7.0(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.0)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(zod@3.24.2):
+    dependencies:
+      drizzle-orm: 0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.0)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)
+      zod: 3.24.2
 
   dunder-proto@1.0.1:
     dependencies:

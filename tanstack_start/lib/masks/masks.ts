@@ -45,9 +45,11 @@ export function maskTime(value: Temporal.PlainTime) {
   return `${time}`;
 }
 
-export function maskHourlyRate(rate: number | null) {
+export function maskHourlyRate(rate: string | null) {
   if (!rate) return "Free";
-  const masked = rate.toLocaleString("en-US", {
+
+  const asNumber = +rate;
+  const masked = asNumber.toLocaleString("en-US", {
     style: "currency",
     currency: "CAD",
     currencyDisplay: "symbol",

@@ -20,8 +20,9 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils/cn";
-import { useFacility, useProfile } from "../hooks";
+import { useProfile } from "../use_profile";
 import { useSignOut } from "@/lib/auth/use_sign_out";
+import { useFacility } from "./rooms/facility/use_facility";
 
 type NavItem = {
   name: string;
@@ -223,7 +224,7 @@ export function Dashboard() {
 }
 
 function HeaderBar(props: { openSidebar: () => void }) {
-  const profile = useProfile();
+  const { data: profile } = useProfile();
   const signOut = useSignOut();
   const navigationOptions = [
     { name: "My profile", to: "/dashboard/profile" },
@@ -260,7 +261,7 @@ function HeaderBar(props: { openSidebar: () => void }) {
                     className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                     aria-hidden="true"
                   >
-                    {profile.data?.name}
+                    {profile?.user.name}
                   </span>
                   <ChevronDownIcon
                     className="ml-2 h-5 w-5 text-gray-400"

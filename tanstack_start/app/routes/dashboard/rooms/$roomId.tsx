@@ -5,5 +5,6 @@ export const Route = createFileRoute("/dashboard/rooms/$roomId")({
 });
 
 function RouteComponent() {
-  return <div>RoomId</div>;
+  const { roomId } = Route.useParams();
+  return <div>{roomId}</div>;
 }

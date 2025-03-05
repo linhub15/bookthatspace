@@ -1,8 +1,8 @@
 import { Card } from "@/app/components/card";
-import { useFacility } from "../../../hooks";
-import { useFacilityModal } from "./use_facility_modal";
-import { HomeModernIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { AddressDisplay } from "@/app/components/form/address_input";
+import { HomeModernIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useFacility } from "./use_facility";
+import { useFacilityModal } from "./use_facility_modal";
 
 export function FacilityCard() {
   const facility = useFacility();
@@ -46,6 +46,7 @@ export function FacilityCard() {
                 <button
                   className="bg-blue-600 rounded text-white py-2 px-4 w-fit"
                   onClick={facilityModal.open}
+                  type="button"
                 >
                   Edit Facility
                 </button>

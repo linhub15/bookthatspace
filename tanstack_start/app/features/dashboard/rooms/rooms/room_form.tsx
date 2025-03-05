@@ -3,8 +3,8 @@ import { useRoom, useUpsertRoom } from "../hooks";
 import { Label } from "@/app/components/form/label";
 import { FormField } from "@/app/components/form/form_field";
 import { UserIcon } from "@heroicons/react/24/outline";
-import { useFacility } from "../../../hooks";
 import { SubmitButton } from "@/app/components/buttons/submit_button";
+import { useFacility } from "../facility/use_facility";
 
 type Props = {
   roomId?: string;
@@ -22,8 +22,8 @@ export function RoomForm(props: Props) {
     defaultValues: {
       name: room?.name,
       description: room?.description ?? undefined,
-      max_capacity: room?.max_capacity?.toString() ?? undefined,
-      hourly_rate: room?.hourly_rate?.toString() ?? undefined,
+      maxCapacity: room?.maxCapacity ?? undefined,
+      hourlyRate: room?.hourlyRate ?? undefined,
     },
     onSubmit: async (form) => {
       if (!facility) {
@@ -31,14 +31,12 @@ export function RoomForm(props: Props) {
       }
 
       await upsertRoom.mutateAsync({
-        room: {
-          id: props.roomId,
-          facility_id: facility.id,
-          name: form.value.name ?? "",
-          description: form.value.description,
-          max_capacity: Number(form.value.max_capacity) ?? null,
-          hourly_rate: Number(form.value.hourly_rate) ?? null,
-        },
+        id: props.roomId,
+        facilityId: facility.id,
+        name: form.value.name ?? "",
+        description: form.value.description,
+        maxCapacity: form.value.maxCapacity ?? null,
+        hourlyRate: form.value.hourlyRate ?? null,
       }, {
         onSuccess: (data) => {
           if (!data?.id) return;
@@ -74,7 +72,7 @@ export function RoomForm(props: Props) {
         </form.Field>
 
         <div className="grid grid-cols-2 gap-4">
-          <form.Field name="hourly_rate">
+          <form.Field name="hourlyRate">
             {(field) => (
               <FormField>
                 <Label htmlFor={field.name}>Hourly Rate</Label>
@@ -105,7 +103,7 @@ export function RoomForm(props: Props) {
             )}
           </form.Field>
 
-          <form.Field name="max_capacity">
+          <form.Field name="maxCapacity">
             {(field) => (
               <FormField>
                 <Label htmlFor={field.name}>Maximum Capacity</Label>

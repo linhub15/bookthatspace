@@ -4,6 +4,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/dashboard")({
   beforeLoad: async ({ location }) => {
+    // todo: consider optimizing this by using a cache to reduce web requests
     const session = await getSessionFn();
     if (!session) {
       throw redirect({

@@ -2,10 +2,8 @@ import { Modal } from "../../../../components/modal";
 import { useState } from "react";
 import { useRooms } from "../hooks";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Tables } from "@/app/clients/supabase";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { Card } from "@/app/components/card";
-import { roomRoute } from "../../dashboard.routes";
 import { RoomForm } from "./room_form";
 import { FacilityCard } from "../facility/facility_card";
 
@@ -20,7 +18,7 @@ export function Rooms() {
 
   const onRoomCreated = (roomId: string) => {
     setOpen(false);
-    navigate({ to: roomRoute.to, params: { room_id: roomId } });
+    navigate({ to: "/dashboard/rooms/$roomId", params: { roomId: roomId } });
   };
 
   return (
@@ -41,6 +39,7 @@ export function Rooms() {
             <button
               className="block text-nowrap bg-blue-600 rounded text-white py-2 px-4 w-fit"
               onClick={openNewRoomForm}
+              type="button"
               disabled={rooms.isLoading}
             >
               Add Room
@@ -49,12 +48,7 @@ export function Rooms() {
         </div>
         <div className="px-4 py-6 sm:px-6">
           <dl className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {rooms.data?.map((room, index) => (
-              <RoomCard
-                key={index}
-                room={room}
-              />
-            ))}
+            {rooms.data?.map((room) => <RoomCard key={room.id} room={room} />)}
           </dl>
           <Modal
             open={open}
@@ -72,9 +66,11 @@ export function Rooms() {
   );
 }
 
-function RoomCard(props: { room: Tables<"room"> }) {
+function RoomCard(
+  props: { room: { id: string; name: string; hourlyRate: string | null } },
+) {
   return (
-    <Link to={roomRoute.to} params={{ room_id: props.room.id }}>
+    <Link to="/dashboard/rooms/$roomId" params={{ roomId: props.room.id }}>
       <div className="rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none">
         <div className="flex w-full px-6 py-6 justify-between align-top">
           <div className="flex-auto">
@@ -82,7 +78,7 @@ function RoomCard(props: { room: Tables<"room"> }) {
               {props.room.name}
             </dt>
             <dd className="mt-1 text-base text-gray-500">
-              {maskHourlyRate(props.room.hourly_rate)}
+              {maskHourlyRate(props.room.hourlyRate)}
             </dd>
           </div>
           <div className="flex-none">

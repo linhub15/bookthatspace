@@ -1,7 +1,7 @@
 import { Modal } from "@/app/components/modal";
 import { useState } from "react";
 import { InternalBookingForm } from "./internal_booking_form";
-import { useProfile } from "../../hooks";
+import { useProfile } from "../../use_profile";
 
 export function useCreateBookingModal() {
   const [open, setOpen] = useState(false);

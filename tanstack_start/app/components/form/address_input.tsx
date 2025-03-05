@@ -1,5 +1,4 @@
-import { Address } from "@/lib/types/address";
-import { Json } from "@/app/clients/supabase";
+import type { Address } from "@/lib/types/address";
 import { Label } from "./label";
 import { cn } from "@/lib/utils/cn";
 import { FormField } from "./form_field";
@@ -21,12 +20,12 @@ const administrative_divisions: { [key: string]: string[] } = {
 };
 
 type Props = {
-  value: Json;
-  onChange: (value: Address) => void;
+  value?: Partial<Address>;
+  onChange: (value: Partial<Address>) => void;
 };
 
 export function AddressInput(props: Props) {
-  const address = props.value as Address;
+  const address = props.value;
 
   const change = (value: Partial<Address>) => {
     const changed = { ...address, ...value };
@@ -40,7 +39,7 @@ export function AddressInput(props: Props) {
         <input
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           type="text"
-          value={address.address}
+          value={address?.address}
           onChange={(e) => change({ address: e.target.value })}
         />
       </FormField>
@@ -51,7 +50,7 @@ export function AddressInput(props: Props) {
           <input
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             type="text"
-            value={address.city}
+            value={address?.city}
             onChange={(e) => change({ city: e.target.value })}
           />
         </FormField>
@@ -60,15 +59,14 @@ export function AddressInput(props: Props) {
           <Label>Country</Label>
           <select
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            value={address.country}
+            value={address?.country}
             onChange={(e) => change({ country: e.target.value })}
           >
-            <option value=""></option>
+            <option value="" />
             {countries.map((country) => (
               <option
                 key={country}
                 value={country}
-                selected={country === address.country}
               >
                 {country}
               </option>
@@ -84,23 +82,22 @@ export function AddressInput(props: Props) {
             className={cn(
               {
                 "disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200":
-                  !address.country,
+                  !address?.country,
               },
               "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6",
             )}
-            value={address.administrative_division}
+            value={address?.administrative_division}
             onChange={(e) =>
               change({ administrative_division: e.currentTarget.value })}
-            disabled={!address.country}
+            disabled={!address?.country}
           >
-            {address.country && (
+            {address?.country && (
               <>
-                <option value=""></option>
+                <option value="" />
                 {administrative_divisions[address.country]?.map((division) => (
                   <option
                     key={division}
                     value={division}
-                    selected={division === address.administrative_division}
                   >
                     {division}
                   </option>
@@ -115,7 +112,7 @@ export function AddressInput(props: Props) {
           <input
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             type="text"
-            value={address.postal_code?.toUpperCase()}
+            value={address?.postal_code?.toUpperCase()}
             maxLength={7}
             onChange={(e) =>
               change({

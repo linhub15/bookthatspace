@@ -1,33 +1,43 @@
-import { useForm } from "@tanstack/react-form";
-import { useFacility } from "../../../hooks";
-import { Label } from "@/app/components/form/label";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase, TablesInsert } from "@/app/clients/supabase";
+import { SubmitButton } from "@/app/components/buttons/submit_button";
 import { AddressInput } from "@/app/components/form/address_input";
 import { FormField } from "@/app/components/form/form_field";
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { Address } from "@/lib/types/address";
+import { Label } from "@/app/components/form/label";
+import { useProfile } from "@/app/features/use_profile";
+import { type Address, zAddress } from "@/lib/types/address";
+import { useForm } from "@tanstack/react-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import {
+  upsertFacilityFn,
+  type UpsertFacilityRequest,
+} from "./upsert_facility.fn";
+import { useFacility } from "./use_facility";
 
 type Props = {
-  profileId: string;
   onAfterSubmit: () => void;
   onCancel: () => void;
 };
 
+type FacilityForm = {
+  name: string;
+  address: Partial<Address>;
+};
+
 export function FacilityForm(props: Props) {
+  const { data: profile } = useProfile();
   const { data: facility } = useFacility();
   const upsertFacility = useUpsertFacility();
   const form = useForm({
     defaultValues: {
-      name: facility?.name ?? undefined,
-      address: facility?.address as Address ?? undefined,
-    },
+      name: facility?.name,
+      address: facility?.address,
+    } as FacilityForm,
     onSubmit: async (form) => {
       await upsertFacility.mutateAsync({
-        profile_id: props.profileId,
+        profileId: profile?.id,
         id: facility?.id ?? undefined,
         name: form.value.name,
-        address: form.value.address,
+        address: zAddress.parse(form.value.address),
       }, {
         onSuccess: () => {
           props.onAfterSubmit();
@@ -65,8 +75,8 @@ export function FacilityForm(props: Props) {
           <FormField>
             <Label className="sr-only" htmlFor={field.name}>Address</Label>
             <AddressInput
-              value={field.state.value ?? ""}
-              onChange={(e) => field.handleChange(e ?? "")}
+              value={field.state.value}
+              onChange={(e) => field.handleChange(e)}
             />
           </FormField>
         )}
@@ -95,18 +105,15 @@ export function FacilityForm(props: Props) {
 
 function useUpsertFacility() {
   const queryClient = useQueryClient();
+  const upsertFacility = useServerFn(upsertFacilityFn);
+
   const mutation = useMutation({
-    mutationFn: async (value: TablesInsert<"facility">) => {
-      const { data, error } = await supabase.from("facility")
-        .upsert(value)
-        .select()
-        .single();
+    mutationFn: async (value: UpsertFacilityRequest) => {
+      const upserted = await upsertFacility({ data: value });
 
-      if (error) throw error;
+      queryClient.setQueryData(["facility"], upserted);
 
-      queryClient.setQueryData(["facility"], data);
-
-      return data;
+      return upserted;
     },
   });
 

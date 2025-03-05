@@ -6,7 +6,7 @@ import {
 } from "./public.routes";
 import { useFacility, useRooms } from "./hooks";
 import { AddressDisplay } from "@/app/components/form/address_input";
-import { type Image } from "@/lib/types/image.type";
+import type { Image } from "@/lib/types/image.type";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { Link } from "@tanstack/react-router";
 import { SubmitButton } from "@/app/components/buttons/submit_button";

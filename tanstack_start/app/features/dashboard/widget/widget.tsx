@@ -1,5 +1,4 @@
 import { Card } from "@/app/components/card";
-import { useFacility } from "@/app/features/hooks";
 import {
   CheckIcon,
   ClipboardDocumentListIcon,
@@ -10,6 +9,7 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { router } from "@/app.router";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils/cn";
+import { useFacility } from "../rooms/facility/use_facility";
 
 export function WidgetIndex() {
   const { data: facility } = useFacility();

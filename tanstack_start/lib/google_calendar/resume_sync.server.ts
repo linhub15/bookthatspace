@@ -10,8 +10,8 @@ export const ResumeSyncRequest = z.object({
 
 export const resumeCalendarSync = createServerFn()
   .middleware([authMiddleware, googleCalendarMiddleware])
-  .validator((request: z.infer<typeof ResumeSyncRequest>) =>
-    ResumeSyncRequest.parse(request)
+  .validator((data: z.infer<typeof ResumeSyncRequest>) =>
+    ResumeSyncRequest.parse(data)
   )
   .handler(async ({ data, context }) => {
     throw new Error("Not implemented");

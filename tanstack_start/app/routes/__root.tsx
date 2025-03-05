@@ -1,4 +1,5 @@
 import type { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import tailwind from "@/app/index.css?url";
 import {
   createRootRouteWithContext,
@@ -35,6 +36,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       </head>
       <body>
         {children}
+        <ReactQueryDevtools buttonPosition="bottom-right" />
         <Scripts />
       </body>
     </html>

@@ -5,7 +5,8 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "drizzle": "drizzle-kit"
+    "drizzle": "drizzle-kit",
+    "better-auth:gen": "pnpx @better-auth/cli@latest generate --config ./lib/auth/better_auth.ts --output ./app/db/auth_schema.ts"
   },
   "dependencies": {
     "@googleapis/calendar": "^9.8.0",
@@ -21,6 +22,7 @@
     "better-auth": "^1.2.3",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.40.0",
+    "drizzle-zod": "^0.7.0",
     "embla-carousel-react": "^8.5.2",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
@@ -34,6 +36,7 @@
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
+    "@tanstack/react-query-devtools": "^5.67.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "autoprefixer": "^10.4.20",
