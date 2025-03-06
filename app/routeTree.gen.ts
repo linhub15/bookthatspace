@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard/route'
 import { Route as IndexImport } from './routes/index'
+import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as DashboardProfileImport } from './routes/dashboard/profile'
 import { Route as AuthSignupImport } from './routes/_auth/signup'
 import { Route as AuthLoginImport } from './routes/_auth/login'
@@ -38,6 +39,12 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardIndexRoute = DashboardIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRouteRoute,
 } as any)
 
 const DashboardProfileRoute = DashboardProfileImport.update({
@@ -154,6 +161,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardProfileImport
       parentRoute: typeof DashboardRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
     '/@/$facilityId/availability': {
       id: '/@/$facilityId/availability'
       path: '/@/$facilityId/availability'
@@ -224,6 +238,7 @@ declare module '@tanstack/react-router' {
 
 interface DashboardRouteRouteChildren {
   DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
   DashboardFacilityRoomIdRoute: typeof DashboardFacilityRoomIdRoute
   DashboardBookingRequestsIndexRoute: typeof DashboardBookingRequestsIndexRoute
   DashboardBookingsIndexRoute: typeof DashboardBookingsIndexRoute
@@ -234,6 +249,7 @@ interface DashboardRouteRouteChildren {
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardProfileRoute: DashboardProfileRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
   DashboardFacilityRoomIdRoute: DashboardFacilityRoomIdRoute,
   DashboardBookingRequestsIndexRoute: DashboardBookingRequestsIndexRoute,
   DashboardBookingsIndexRoute: DashboardBookingsIndexRoute,
@@ -253,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/@/$facilityId/availability': typeof FacilityIdAvailabilityRoute
   '/@/$facilityId/book': typeof FacilityIdBookRoute
   '/dashboard/facility/$roomId': typeof DashboardFacilityRoomIdRoute
@@ -266,10 +283,10 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRouteRouteWithChildren
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/@/$facilityId/availability': typeof FacilityIdAvailabilityRoute
   '/@/$facilityId/book': typeof FacilityIdBookRoute
   '/dashboard/facility/$roomId': typeof DashboardFacilityRoomIdRoute
@@ -288,6 +305,7 @@ export interface FileRoutesById {
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
   '/dashboard/profile': typeof DashboardProfileRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/@/$facilityId/availability': typeof FacilityIdAvailabilityRoute
   '/@/$facilityId/book': typeof FacilityIdBookRoute
   '/dashboard/facility/$roomId': typeof DashboardFacilityRoomIdRoute
@@ -307,6 +325,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/dashboard/profile'
+    | '/dashboard/'
     | '/@/$facilityId/availability'
     | '/@/$facilityId/book'
     | '/dashboard/facility/$roomId'
@@ -319,10 +338,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/dashboard'
     | '/login'
     | '/signup'
     | '/dashboard/profile'
+    | '/dashboard'
     | '/@/$facilityId/availability'
     | '/@/$facilityId/book'
     | '/dashboard/facility/$roomId'
@@ -339,6 +358,7 @@ export interface FileRouteTypes {
     | '/_auth/login'
     | '/_auth/signup'
     | '/dashboard/profile'
+    | '/dashboard/'
     | '/@/$facilityId/availability'
     | '/@/$facilityId/book'
     | '/dashboard/facility/$roomId'
@@ -397,6 +417,7 @@ export const routeTree = rootRoute
       "filePath": "dashboard/route.tsx",
       "children": [
         "/dashboard/profile",
+        "/dashboard/",
         "/dashboard/facility/$roomId",
         "/dashboard/booking-requests/",
         "/dashboard/bookings/",
@@ -413,6 +434,10 @@ export const routeTree = rootRoute
     },
     "/dashboard/profile": {
       "filePath": "dashboard/profile.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/": {
+      "filePath": "dashboard/index.tsx",
       "parent": "/dashboard"
     },
     "/@/$facilityId/availability": {

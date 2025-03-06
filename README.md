@@ -2,36 +2,23 @@
 
 Space rental management software for community centers.
 
-## Developer Setup
-
-- install node.js, pnpm, supabase cli, docker, deno
-- add VSCode plugins eslint, deno, tailwindcss
-- read the [Style Guide](style_guide.md)
-
-### Supabase db
-
-- `supabase start`; verify with `supabase status`
-
-### Supabase functions
-
-- create a dotenv file. [Example](supabase/functions/.env.example)
-- `deno task functions`
-
-### Frontend
-
-- create a dotenv file. [Example](bookspace/.env.example)
-- `deno task frontend` or `cd bookspace && pnpm dev`
-
-### Running the supabase cli
-
-Login and link to the remote project in order to diff and make changes. Most
-commonly used commands.
+## Quick Start
 
 ```
-supabase help
-supabase start
-supabase stop
-supabase db diff
-supabase db diff -f name_of_migration_file
-supabase migrations list
+pnpm install
+pnpm dev
 ```
+
+- requires `node.js`, `pnpm`
+- create your `.env` file. [Example](.env.example)
+- read the [Style Guide](docs/style_guide.md)
+
+### Dabase (Drizzle ORM)
+
+```
+pnpm drizzle check
+```
+
+## Roadmap
+
+- upgrade to Tailwind v4
