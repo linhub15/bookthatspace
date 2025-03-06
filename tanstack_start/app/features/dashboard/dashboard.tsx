@@ -22,7 +22,7 @@ import {
 import { cn } from "@/lib/utils/cn";
 import { useProfile } from "../use_profile";
 import { useSignOut } from "@/lib/auth/use_sign_out";
-import { useFacility } from "./rooms/facility/use_facility";
+import { useFacility } from "./facility_management/facility/use_facility";
 
 type NavItem = {
   name: string;

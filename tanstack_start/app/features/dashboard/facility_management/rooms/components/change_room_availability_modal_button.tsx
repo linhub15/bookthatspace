@@ -1,20 +1,34 @@
 import { Modal } from "@/app/components/modal";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { AvailabilityForm } from "./availability_form";
-import { useChangeAvailability, useRoom, useRoomAvailability } from "../hooks";
+import { RoomAvailabilityForm } from "./room_availability_form";
+import { useRoomAvailability } from "../hooks/use_room_availability";
+import { useRoom } from "../hooks/use_rooms";
+import { useChangeAvailability } from "../hooks/use_update_room_availability";
 
 type Props = {
   roomId: string;
 };
 
-export function useChangeAvailabilityModal(props: Props) {
+export function ChangeRoomAvailabilityModalButton(props: Props) {
   const [open, setOpen] = useState(false);
   const { data: room } = useRoom(props.roomId);
   const availability = useRoomAvailability(props.roomId);
   const changeAvailability = useChangeAvailability({ roomId: props.roomId });
 
-  const modal = () => {
-    return (
+  return (
+    <div className="flex flex-shrink-0 gap-4">
+      <button
+        className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        type="button"
+        onClick={() => setOpen(true)}
+      >
+        <PencilSquareIcon
+          className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+          aria-hidden="true"
+        />
+        <span>Edit</span>
+      </button>
       <Modal open={open} onDismiss={() => {}}>
         <div className="pb-8">
           <h3 className="text-base font-semibold leading-6 text-gray-900">
@@ -24,12 +38,12 @@ export function useChangeAvailabilityModal(props: Props) {
             {room?.name}
           </p>
         </div>
-        <AvailabilityForm
+        <RoomAvailabilityForm
           roomId={props.roomId}
           values={availability.data || []}
           onSubmit={async (value) => {
             await changeAvailability.mutateAsync({
-              prev: availability.data,
+              roomId: props.roomId,
               next: value,
             }, {
               onSuccess: () => setOpen(false),
@@ -38,10 +52,6 @@ export function useChangeAvailabilityModal(props: Props) {
           onCancel={() => setOpen(false)}
         />
       </Modal>
-    );
-  };
-
-  const openModal = () => setOpen(true);
-
-  return { Modal: modal, open: openModal };
+    </div>
+  );
 }

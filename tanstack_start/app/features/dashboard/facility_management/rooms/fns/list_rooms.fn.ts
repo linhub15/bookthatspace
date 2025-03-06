@@ -13,8 +13,7 @@ export const listRoomsFn = createServerFn({ method: "GET" })
       .innerJoin(facility, eq(room.facilityId, facility.id))
       .innerJoin(profile, eq(facility.profileId, profile.id))
       .innerJoin(user, eq(profile.userId, context.session.user.id))
-      .where(eq(user.id, context.session.user.id))
-      .limit(1);
+      .where(eq(user.id, context.session.user.id));
 
     return result.flatMap((r) => r.room);
   });

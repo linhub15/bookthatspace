@@ -9,7 +9,7 @@ import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { router } from "@/app.router";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils/cn";
-import { useFacility } from "../rooms/facility/use_facility";
+import { useFacility } from "../facility_management/facility/use_facility";
 
 export function WidgetIndex() {
   const { data: facility } = useFacility();

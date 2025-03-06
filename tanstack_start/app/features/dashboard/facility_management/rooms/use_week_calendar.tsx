@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import {
   AvailabilityCalendar,
   TimeBlock,
-  TimeBlockProps,
+  type TimeBlockProps,
 } from "./week_calendar";
 
 type Options = {

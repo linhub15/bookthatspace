@@ -6,7 +6,7 @@ import { MapPinIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 
 import { Link } from "@tanstack/react-router";
 import { bookingRoute, bookingsRoute } from "../dashboard.routes";
-import { useRoom } from "../rooms/hooks";
+import { useRoom } from "../facility_management/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { useGetBooking } from "./hooks";
 

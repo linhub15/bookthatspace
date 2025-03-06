@@ -5,7 +5,7 @@ import { Label } from "@/app/components/form/label";
 import { DatePicker } from "@/app/components/form/date_picker";
 import { TimePicker } from "@/app/components/form/time_picker";
 import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { useRooms } from "../rooms/hooks";
+import { useRooms } from "../facility_management/hooks";
 import { FormField } from "@/app/components/form/form_field";
 
 type Props = {

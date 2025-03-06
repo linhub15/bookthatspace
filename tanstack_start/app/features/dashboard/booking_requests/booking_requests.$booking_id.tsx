@@ -11,7 +11,7 @@ import {
 
 import { Link } from "@tanstack/react-router";
 import { bookingRequestRoute, bookingRequestsRoute } from "../dashboard.routes";
-import { useRoom } from "../rooms/hooks";
+import { useRoom } from "../facility_management/hooks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
 import { useRoomBooking } from "../bookings/hooks";
 import { Feed } from "@/app/components/feed";

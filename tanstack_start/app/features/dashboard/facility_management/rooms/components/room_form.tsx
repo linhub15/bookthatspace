@@ -1,15 +1,16 @@
-import { useForm } from "@tanstack/react-form";
-import { useRoom, useUpsertRoom } from "../hooks";
-import { Label } from "@/app/components/form/label";
-import { FormField } from "@/app/components/form/form_field";
-import { UserIcon } from "@heroicons/react/24/outline";
 import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { useFacility } from "../facility/use_facility";
+import { FormField } from "@/app/components/form/form_field";
+import { Label } from "@/app/components/form/label";
+import { UserIcon } from "@heroicons/react/24/outline";
+import { useForm } from "@tanstack/react-form";
+import { useFacility } from "../../facility/use_facility";
+import { useUpsertRoom } from "../hooks/use_upsert_room";
+import { useRoom } from "../hooks/use_rooms";
 
 type Props = {
   roomId?: string;
   submitBtnText: string;
-  onAfterSubmit: (roomId: string) => void;
+  onAfterSubmit: (roomId: string) => void | Promise<void>;
   onCancel: () => void;
 };
 
@@ -38,9 +39,9 @@ export function RoomForm(props: Props) {
         maxCapacity: form.value.maxCapacity ?? null,
         hourlyRate: form.value.hourlyRate ?? null,
       }, {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
           if (!data?.id) return;
-          props.onAfterSubmit(data.id);
+          await props.onAfterSubmit(data.id);
         },
       });
     },

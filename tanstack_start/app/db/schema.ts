@@ -6,6 +6,7 @@ import {
   pgEnum,
   pgTable,
   text,
+  time,
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
@@ -69,6 +70,7 @@ export const room = pgTable("room", {
   address: text("address"),
   hourlyRate: numeric("hourly_rate"),
   facilityId: uuid("facility_id").notNull().references(() => facility.id),
+  googleCalendarId: text("google_calendar_id"),
   ...defaultColumns,
 });
 
@@ -83,9 +85,9 @@ export const room_relations = relations(room, ({ one, many }) => ({
 export const room_availability = pgTable("room_availability", {
   id: uuid("id").primaryKey().defaultRandom(),
   roomId: uuid("room_id").notNull().references(() => room.id),
-  dayOfWeek: day_of_week("day_of_week"),
-  start: timestamp("start"),
-  end: timestamp("end"),
+  dayOfWeek: day_of_week("day_of_week").notNull(),
+  start: time("start").notNull(),
+  end: time("end").notNull(),
   ...defaultColumns,
 });
 

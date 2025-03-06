@@ -1,7 +1,7 @@
 // Moved this into a separate file for Vite "fast refresh" warning
-import { Enums } from "@/app/clients/supabase";
+import type { DayOfWeekEnum } from "@/app/db/types";
+import { Fragment, type PropsWithChildren, useMemo, useRef } from "react";
 import { Temporal } from "temporal-polyfill";
-import { Fragment, PropsWithChildren, useMemo, useRef } from "react";
 
 const weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -53,10 +53,10 @@ export function AvailabilityCalendar(props: Props) {
             >
               {/* Weekday heading mobile */}
               <div className="grid grid-cols-7 text-sm leading-6 text-gray-600 sm:hidden">
-                {weekdayLabels.map((weekday, index) => (
+                {weekdayLabels.map((weekday) => (
                   <div
                     className="flex flex-col items-center pb-3 pt-2"
-                    key={index}
+                    key={weekday}
                   >
                     {weekday.charAt(0)}
                   </div>
@@ -64,11 +64,11 @@ export function AvailabilityCalendar(props: Props) {
               </div>
               {/* Weekday heading desktop */}
               <div className="-mr-px hidden grid-cols-7 divide-x divide-gray-100 border-r border-gray-100 text-sm leading-6 text-gray-600 sm:grid">
-                <div className="col-end-1 w-14"></div>
-                {weekdayLabels.map((weekday, index) => (
+                <div className="col-end-1 w-14" />
+                {weekdayLabels.map((weekday) => (
                   <div
                     className="flex items-center justify-center py-3"
-                    key={index}
+                    key={weekday}
                   >
                     <span>
                       {weekday}
@@ -92,9 +92,9 @@ export function AvailabilityCalendar(props: Props) {
                     }, minmax(1.5rem, 1fr))`,
                   }}
                 >
-                  <div ref={containerOffset} className="row-end-1 h-7"></div>
-                  {hours.map((hour, index) => (
-                    <Fragment key={index}>
+                  <div ref={containerOffset} className="row-end-1 h-7" />
+                  {hours.map((hour) => (
+                    <Fragment key={hour}>
                       <div className="invisible sm:visible">
                         <div className="sticky left-0 z-20 -ml-14 -mt-2.5 w-14 pr-2 text-right text-xs leading-5 text-gray-500">
                           {hour}
@@ -139,7 +139,7 @@ export function AvailabilityCalendar(props: Props) {
 export type TimeBlockProps = {
   start: Temporal.PlainTime;
   end: Temporal.PlainTime;
-  weekday: Enums<"day_of_week">;
+  weekday: DayOfWeekEnum;
   interval: Minutes;
   startOffset: number;
 };

@@ -1,14 +1,14 @@
 import { Modal } from "@/app/components/modal";
 import { useState } from "react";
-import { useDeleteRoom } from "../hooks";
+import { useDeleteRoom } from "../hooks/use_delete_room";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 type Props = {
   roomId: string;
-  onSuccess: () => void;
+  onSuccess: () => void | Promise<void>;
 };
 
-export function useDeleteRoomModal(props: Props) {
+export function DeleteRoomModalButton(props: Props) {
   const [open, setOpen] = useState(false);
   const mutation = useDeleteRoom();
 
@@ -21,8 +21,15 @@ export function useDeleteRoomModal(props: Props) {
     });
   };
 
-  const modal = () => {
-    return (
+  return (
+    <>
+      <button
+        className="relativeinline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-800 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-50"
+        type="button"
+        onClick={() => setOpen(true)}
+      >
+        Delete Room
+      </button>
       <Modal open={open} onDismiss={() => setOpen(false)}>
         <div className="sm:flex sm:items-start">
           <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -62,8 +69,6 @@ export function useDeleteRoomModal(props: Props) {
           </button>
         </div>
       </Modal>
-    );
-  };
-
-  return { Modal: modal, open: () => setOpen(true) };
+    </>
+  );
 }

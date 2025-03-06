@@ -1,39 +1,27 @@
-import { Link, useNavigate } from "@tanstack/react-router";
-import {
-  useDeletePhoto,
-  useRoom,
-  useRoomAvailability,
-  useRoomPhotos,
-  useUploadPhoto,
-} from "../hooks";
 import { BackButton } from "@/app/components/buttons/back_button";
 import { Card } from "@/app/components/card";
-import { PencilSquareIcon, UserIcon } from "@heroicons/react/24/outline";
 import { maskHourlyRate } from "@/lib/masks/masks";
+import {
+  PencilSquareIcon,
+  PhotoIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Temporal } from "temporal-polyfill";
+import { useDeletePhoto, useRoomPhotos, useUploadPhoto } from "../hooks";
 import { useWeekCalendar } from "./use_week_calendar";
 
-import { useChangeAvailabilityModal } from "../change_availability/use_change_availability_modal";
-import { useDeleteRoomModal } from "./use_delete_room_modal";
-import { useEditRoomModal } from "./use_edit_room_modal";
-import { roomRoute, roomsOutlet } from "../../dashboard.routes";
-import { PhotoIcon } from "@heroicons/react/24/outline";
-import { useMemo, useRef } from "react";
 import { XCircleIcon } from "@heroicons/react/16/solid";
-import { usePickCalendarModal } from "./use_pick_calendar.modal";
+import { useMemo, useRef } from "react";
+import { roomRoute, roomsOutlet } from "../../dashboard.routes";
+import { useRoom } from "./hooks/use_rooms";
 import { useCalendars } from "./use_calendars";
+import { usePickCalendarModal } from "./use_pick_calendar.modal";
 
+/** @deprecated migrated to /routes/rooms/$roomId instead */
 export function Room() {
   const { room_id } = roomRoute.useParams();
   const navigate = useNavigate();
-
-  const editRoom = useEditRoomModal({ roomId: room_id });
-  const deleteRoom = useDeleteRoomModal({
-    roomId: room_id,
-    onSuccess: () => {
-      navigate({ to: roomsOutlet.to });
-    },
-  });
 
   const photos = useRoomPhotos(room_id);
   const deletePhoto = useDeletePhoto(room_id);
@@ -52,19 +40,13 @@ export function Room() {
     latestHour: maxHours,
   });
 
-  const changeAvailability = useChangeAvailabilityModal({
-    roomId: room_id,
-  });
-
   const pickCalendar = usePickCalendarModal({ roomId: room_id });
   const calendars = useCalendars();
   const { data: room } = useRoom(room_id);
   const linkedCalendar = useMemo(
     () =>
-      calendars.data?.find((cal) =>
-        cal.calendar.id === room?.google_calendar_id
-      ),
-    [calendars.data, room?.google_calendar_id],
+      calendars.data?.find((cal) => cal.calendar.id === room?.googleCalendarId),
+    [calendars.data, room?.googleCalendarId],
   );
 
   if (!room) return <div>loading...</div>;
@@ -116,7 +98,7 @@ export function Room() {
                     Hourly Rate
                   </dt>
                   <dd className="leading-6 text-gray-700">
-                    {maskHourlyRate(room.hourly_rate)}
+                    {maskHourlyRate(room.hourlyRate)}
                   </dd>
                 </div>
                 <div className="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
@@ -127,7 +109,7 @@ export function Room() {
                     </span>
                   </dt>
                   <dd className="leading-6 text-gray-700">
-                    {room.max_capacity}
+                    {room.maxCapacity}
                   </dd>
                 </div>
                 <div className="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
@@ -158,6 +140,7 @@ export function Room() {
                       className="absolute top-0 right-0 p-1 m-1"
                       onClick={() =>
                         deletePhoto.mutateAsync({ photoId: id })}
+                      type="button"
                     >
                       <XCircleIcon className="w-6 bg-white rounded-full">
                       </XCircleIcon>
@@ -165,6 +148,7 @@ export function Room() {
                     <img
                       className="w-full rounded-lg aspect-[1/1] object-cover"
                       src={url}
+                      alt=""
                     />
                   </div>
                 ))}
@@ -241,7 +225,7 @@ export function Room() {
               {availability.data?.map((a) => (
                 <calendar.Event
                   key={a.id}
-                  weekday={a.day_of_week}
+                  weekday={a.dayOfWeek}
                   start={Temporal.PlainTime.from(a.start)}
                   end={Temporal.PlainTime.from(a.end)}
                 />
@@ -250,8 +234,6 @@ export function Room() {
           )}
         </Card>
       </div>
-      <editRoom.Modal />
-      <deleteRoom.Modal />
       <changeAvailability.Modal />
       <pickCalendar.Modal />
     </>

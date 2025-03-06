@@ -44,6 +44,7 @@ export function usePickCalendarModal(props: Props) {
             <a
               className="underline text-blue-600"
               target="_blank"
+              rel="noreferrer"
               href="https://calendar.google.com"
             >
               Google Calendars
@@ -57,6 +58,7 @@ export function usePickCalendarModal(props: Props) {
                 <button
                   className="space-x-2"
                   onClick={() => pickCalendar(d.calendar.id)}
+                  type="button"
                 >
                   <div
                     className="inline-block w-3 h-3 rounded-full"
