@@ -4,7 +4,6 @@ import { availabilityRoute, facilityRoute } from "./public.routes";
 import { Temporal } from "temporal-polyfill";
 import { Card } from "@/app/components/card";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/app/clients/supabase";
 import { maskHourlyRate, maskPlainTimeRange } from "@/lib/masks/masks";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-router";
@@ -29,7 +28,7 @@ export function AvailabilityWidget() {
           <img
             className="size-28 rounded-xl"
             src={room.images.at(0)?.url}
-            alt="default room photo"
+            alt="default room"
           />
           <div className="flex flex-col">
             <div className="font-medium">{room.name}</div>

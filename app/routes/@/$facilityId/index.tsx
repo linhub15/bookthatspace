@@ -2,11 +2,12 @@ import { SubmitButton } from "@/app/components/buttons/submit_button";
 import { Card } from "@/app/components/card";
 import { AddressDisplay } from "@/app/components/form/address_input";
 import { GoogleMapImg } from "@/app/components/google_map";
-import { usePublicFacility } from "@/app/features/public/hooks/use_facility.public";
+import { useFacilityPublic } from "@/app/features/public/hooks/use_facility.public";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import type { Image } from "@/lib/types/image.type";
 import { cn } from "@/lib/utils/cn";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Route as availabilityRoute } from "./availability";
 import { Route as makeBookingRoute } from "./book";
 import { PhotoIcon } from "@heroicons/react/24/outline";
 import {
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/@/$facilityId/")({
 
 function RouteComponent() {
   const { facilityId } = Route.useParams();
-  const facility = usePublicFacility(facilityId);
+  const facility = useFacilityPublic(facilityId);
 
   if (!facility.data) return;
 
@@ -80,8 +81,8 @@ export function RoomCard(
           </span>
           <Link
             className="text-xs leading-6 font-medium text-indigo-600 hover:text-indigo-500"
-            to={makeBookingRoute.to}
-            search={{ room_id: room.id }}
+            to={availabilityRoute.to}
+            search={{ roomId: room.id }}
             params={{ facilityId: room.facilityId }}
           >
             Availability

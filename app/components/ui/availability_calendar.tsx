@@ -1,11 +1,12 @@
+import { asDayOfWeek } from "@/app/db/types";
 import { cn } from "@/lib/utils/cn";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Temporal } from "temporal-polyfill";
 import { Button } from "./button";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Enums, supabase } from "@/app/clients/supabase";
-import { mapDayOfWeekToNumber } from "@/lib/maps/day_of_week";
+import { useServerFn } from "@tanstack/react-start";
+import { listRoomAvailableDaysPublicFn } from "@/app/features/public/functions/list_room_available_days.public.fn";
 
 type Props = {
   value: Temporal.PlainDate | undefined;
@@ -18,7 +19,7 @@ export function AvailabilityCalendar(props: Props) {
   const today = Temporal.Now.plainDateISO();
   const [month, setMonth] = useState(today.toPlainYearMonth());
 
-  const availability = useAvailability(props.roomId);
+  const availableDays = useAvailability(props.roomId);
 
   const monthText = month.toLocaleString("en-CA", {
     month: "long",
@@ -34,16 +35,12 @@ export function AvailabilityCalendar(props: Props) {
     .map((day) => {
       if (day === null) return null;
 
-      const availableWeekDays = availability.data?.map((availableDay) =>
-        mapDayOfWeekToNumber[availableDay]
-      );
-
       const date = {
         value: day,
         isToday: today.equals(day),
         isSelected: props.value?.equals(day),
         isAvailable: Temporal.PlainDate.compare(day, today) > 0 &&
-          availableWeekDays?.includes(day.dayOfWeek),
+          availableDays.data?.includes(day.dayOfWeek),
       };
 
       return date;
@@ -107,9 +104,10 @@ export function AvailabilityCalendar(props: Props) {
               day?.isSelected && "bg-blue-700 text-white",
               !day && "invisible",
             )}
-            key={index}
-            disabled={!day?.isAvailable}
+            type="button"
+            key={day?.value.toString() || index}
             onClick={() => props.onChange(day?.value)}
+            disabled={!day?.isAvailable}
           >
             <span className="text-sm">{day?.value.day}</span>
             {day?.isToday && (
@@ -146,23 +144,17 @@ function calendarDays(month: Temporal.PlainYearMonth) {
 }
 
 function useAvailability(roomId?: string) {
+  const listDays = useServerFn(listRoomAvailableDaysPublicFn);
   const query = useQuery({
     queryKey: ["room", roomId, "availability", "list"],
+    enabled: !!roomId,
     queryFn: async () => {
       if (!roomId) return;
 
-      const { data, error } = await supabase
-        .from("room_availability")
-        .select("day_of_week")
-        .eq("room_id", roomId);
+      const days = await listDays({ data: { roomId } });
 
-      if (error) {
-        alert(error);
-      }
-
-      return data?.map((day) => day.day_of_week as Enums<"day_of_week">);
+      return days.map((d) => asDayOfWeek[d]);
     },
-    enabled: !!roomId,
   });
 
   return query;
