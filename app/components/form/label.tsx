@@ -5,6 +5,7 @@ export function Label(
   props: LabelHTMLAttributes<HTMLLabelElement>,
 ) {
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: <explanation>
     <label
       {...props}
       className={cn(

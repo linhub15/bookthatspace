@@ -13,13 +13,13 @@ export const enableCalendar = createServerFn()
       .insert(google_calendar)
       .values({
         id: data.id,
-        profile_id: context.session.user.id,
-        sync_enabled: true,
+        profileId: context.session.user.id,
+        syncEnabled: true,
         events: [],
       })
       .onConflictDoUpdate({
         target: google_calendar.id,
-        set: { sync_enabled: true, events: [] },
+        set: { syncEnabled: true, events: [] },
       });
   });
 

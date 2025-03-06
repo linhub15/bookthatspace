@@ -1,6 +1,7 @@
 import { Card } from "@/app/components/card";
 import { AvailabilityCalendar } from "@/app/components/ui/availability_calendar";
 import { useFacilityPublic } from "@/app/features/public/hooks/use_facility.public";
+import { useRoomAvailabilityPublic } from "@/app/features/public/hooks/use_room_availability.public";
 import { maskHourlyRate, maskPlainTimeRange } from "@/lib/masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
@@ -8,7 +9,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import type { Temporal } from "temporal-polyfill";
 import { Route as indexRoute } from "./index";
-import { useRoomAvailabilityPublic } from "@/app/features/public/hooks/use_room_availability.public";
 
 export const Route = createFileRoute("/@/$facilityId/availability")({
   component: RouteComponent,
@@ -29,16 +29,7 @@ function RouteComponent() {
   const room = rooms?.find((r) => r.id === roomId);
 
   if (!room) {
-    return (
-      <>
-        Room not found!
-        {roomId}
-        <pre>
-
-        {JSON.stringify(rooms, null, 2)}
-        </pre>
-      </>
-    );
+    return <>Room not found!</>;
   }
 
   return (

@@ -25,7 +25,6 @@ export const listRoomAvailabilityPublicFn = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const roomId = data.roomId;
 
-    console.log(data.date);
     const date = asPlainDate(data.date);
 
     const availability = await db

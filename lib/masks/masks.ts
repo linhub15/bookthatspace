@@ -45,7 +45,7 @@ export function maskTime(value: Temporal.PlainTime) {
   return `${time}`;
 }
 
-export function maskHourlyRate(rate: string | null) {
+export function maskHourlyRate(rate: string | number | null) {
   if (!rate) return "Free";
 
   const asNumber = +rate;

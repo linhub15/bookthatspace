@@ -1,20 +1,20 @@
 import { maskHourlyRate } from "@/lib/masks/masks";
-
-import { RadioGroup } from "@headlessui/react";
-import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { cn } from "@/lib/utils/cn";
-import { useRooms } from "./hooks";
+import { Description, Radio, RadioGroup } from "@headlessui/react";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
+import { useFacilityPublic } from "./hooks/use_facility.public";
 
 type Props = {
   id?: string;
   name?: string;
   facilityId: string;
   value: string | undefined;
-  onChange: (value: string | undefined) => void;
+  onChange: (value: string) => void;
 };
 
 export function RoomPicker(props: Props) {
-  const rooms = useRooms(props.facilityId);
+  const facility = useFacilityPublic(props.facilityId);
+  const rooms = facility.data?.rooms;
   return (
     <RadioGroup
       id={props.id}
@@ -23,40 +23,35 @@ export function RoomPicker(props: Props) {
       onChange={(v) => props.onChange(v)}
     >
       <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">
-        {rooms.data?.map((room) => (
-          <RadioGroup.Option
+        {rooms?.map((room) => (
+          <Radio
             key={room.id}
             value={room.id}
-            className={({ active }) =>
-              cn(
-                active
-                  ? "border-indigo-600 ring-2 ring-indigo-600"
-                  : "border-gray-300",
-                "relative flex rounded-lg border bg-white p-4 shadow-sm focus:outline-none select-none",
-              )}
+            className={cn(
+              "data-[active]:border-indigo-600 data-[active]:ring-2 data-[active]:ring-indigo-600",
+              "border-gray-300",
+              "relative flex rounded-lg border bg-white p-4 shadow-sm focus:outline-none select-none",
+            )}
           >
-            {({ checked, active }) => (
+            {({ checked }) => (
               <>
                 <span className="flex flex-1">
                   <span className="flex flex-col">
-                    <RadioGroup.Label
-                      as="span"
-                      className="block text-sm font-medium text-gray-900"
-                    >
+                    <span className="block text-sm font-medium text-gray-900">
                       {room.name}
-                    </RadioGroup.Label>
-                    <RadioGroup.Description
+                    </span>
+                    <Description
                       as="span"
                       className="mt-1 flex items-center text-sm text-gray-500"
                     >
                       {room.description}
-                    </RadioGroup.Description>
-                    <RadioGroup.Description
+                    </Description>
+                    <Description
                       as="span"
                       className="mt-6 text-sm font-medium text-gray-900"
                     >
-                      {maskHourlyRate(room.hourly_rate)}
-                    </RadioGroup.Description>
+                      {maskHourlyRate(room.hourlyRate)}
+                    </Description>
                   </span>
                 </span>
                 <CheckCircleIcon
@@ -68,7 +63,8 @@ export function RoomPicker(props: Props) {
                 />
                 <span
                   className={cn(
-                    active ? "border" : "border-2",
+                    "todo: active:::: border",
+                    "border-2",
                     checked ? "border-indigo-600" : "border-transparent",
                     "pointer-events-none absolute -inset-px rounded-lg",
                   )}
@@ -76,7 +72,7 @@ export function RoomPicker(props: Props) {
                 />
               </>
             )}
-          </RadioGroup.Option>
+          </Radio>
         ))}
       </div>
     </RadioGroup>

@@ -4,3 +4,4 @@ node_modules
 # Tanstack Start
 .vinxi
 .output
+app.config.timestamp*

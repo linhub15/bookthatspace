@@ -1,13 +1,16 @@
 import { Card } from "@/app/components/card";
-import { confirmationRoute } from "./public.routes";
 import { Feed } from "@/app/components/feed";
-import { Link } from "@tanstack/react-router";
-import { useGetBooking } from "../dashboard/bookings/hooks";
-import { viewBookingRoute } from "../renter_portal/renter_portal.routes";
+import { useBookingPublic } from "@/app/features/public/hooks/use_booking.public";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
-export function Confirmation() {
-  const { booking_id } = confirmationRoute.useSearch();
-  const booking = useGetBooking(booking_id);
+export const Route = createFileRoute("/@/booking-success/$bookingId")({
+  component: RouteComponent,
+});
+
+function RouteComponent() {
+  const { bookingId } = Route.useParams();
+  const booking = useBookingPublic(bookingId);
+
   return (
     <div className="max-w-xl mx-2 sm:mx-auto space-y-4">
       <Card>
@@ -18,19 +21,9 @@ export function Confirmation() {
           </p>
           <p className="mt-2 text-base text-gray-500">
             An email will be sent to{" "}
-            <strong>{booking.data?.booked_by_email}</strong>{" "}
+            <strong>{booking.data?.bookedByEmail}</strong>{" "}
             when the booking is reviewed.
           </p>
-
-          <div className="pt-10">
-            <Link
-              className="text-indigo-600 underline"
-              to={viewBookingRoute.to}
-              params={{ booking_id }}
-            >
-              Review booking
-            </Link>
-          </div>
         </div>
       </Card>
 

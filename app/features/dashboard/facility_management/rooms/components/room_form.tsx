@@ -88,7 +88,7 @@ export function RoomForm(props: Props) {
                     id={field.name}
                     placeholder="0.00"
                     value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
+                    onChange={(e) => field.handleChange(Number(e.target.value))}
                     aria-describedby="price-currency"
                   />
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -120,7 +120,7 @@ export function RoomForm(props: Props) {
                     name={field.name}
                     id={field.name}
                     value={field.state.value}
-                    onChange={(e) => field.handleChange(e.target.value)}
+                    onChange={(e) => field.handleChange(Number(e.target.value))}
                   />
                 </div>
               </FormField>

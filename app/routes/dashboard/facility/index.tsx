@@ -58,7 +58,7 @@ function RouteComponent() {
   );
 }
 function RoomCard(
-  props: { room: { id: string; name: string; hourlyRate: string | null } },
+  props: { room: { id: string; name: string; hourlyRate: number | null } },
 ) {
   return (
     <Link to={roomRoute.to} params={{ roomId: props.room.id }}>

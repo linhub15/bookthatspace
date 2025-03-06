@@ -13,7 +13,7 @@ type Props = {
 export function TimePicker(props: Props) {
   const timeOptions = useMemo(() =>
     [...Array(24).keys()]
-      .map((hour) => {
+      .flatMap((hour) => {
         const hourStart = Temporal.PlainTime.from({ hour: hour });
         const hourHalf = hourStart.add({ minutes: INTERVAL });
         return [
@@ -21,17 +21,20 @@ export function TimePicker(props: Props) {
           hourHalf,
         ];
       })
-      .flat()
-      .toSpliced(Infinity, 0, Temporal.PlainTime.from({ hour: 23, minute: 59 }))
+      .toSpliced(
+        Number.POSITIVE_INFINITY,
+        0,
+        Temporal.PlainTime.from({ hour: 23, minute: 59 }),
+      )
       .filter((time) => isValid({ time, min: props.min })), [props.min]);
 
   // this is ugly, but used to update the time when min changes
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!props.min || !props.value) return; // prevent infinite loop
     if (isValid({ time: props.value, min: props.min })) return;
     const optionIdx = timeOptions.findIndex((o) => o.equals(props.min!)) + 1;
     props.onChange(timeOptions.at(optionIdx) || props.min);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.min]);
 
   return (
@@ -45,8 +48,8 @@ export function TimePicker(props: Props) {
         props.onChange(plainTime);
       }}
     >
-      {timeOptions.map((time, index) => (
-        <option value={time.toJSON()} key={index}>
+      {timeOptions.map((time) => (
+        <option value={time.toJSON()} key={time.minute}>
           {maskTimeOption(time)}
         </option>
       ))}
