@@ -1,6 +1,6 @@
 # Book that space
 
-Space rental management software for dance studios and community centers.
+Space rental management software for community centers.
 
 ## Developer Setup
 

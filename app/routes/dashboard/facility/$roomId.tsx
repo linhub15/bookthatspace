@@ -18,7 +18,7 @@ import {
 } from "@tanstack/react-router";
 import { Temporal } from "temporal-polyfill";
 
-export const Route = createFileRoute("/dashboard/rooms/$roomId")({
+export const Route = createFileRoute("/dashboard/facility/$roomId")({
   component: RouteComponent,
 });
 

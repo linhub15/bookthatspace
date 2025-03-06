@@ -1,4 +1,6 @@
-.env
-.env.local
-
+.env*
 node_modules
+
+# Tanstack Start
+.vinxi
+.output

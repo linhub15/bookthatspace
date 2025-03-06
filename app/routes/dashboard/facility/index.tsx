@@ -5,7 +5,10 @@ import { useRooms } from "@/app/features/dashboard/facility_management/rooms/hoo
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/dashboard/rooms/")({
+/// Routes
+import { Route as roomRoute } from "./$roomId";
+
+export const Route = createFileRoute("/dashboard/facility/")({
   component: RouteComponent,
 });
 
@@ -33,7 +36,7 @@ function RouteComponent() {
               <CreateRoomModalButton
                 onSuccess={(id) =>
                   navigate({
-                    to: "/dashboard/rooms/$roomId",
+                    to: roomRoute.to,
                     params: { roomId: id },
                   })}
               />
@@ -58,7 +61,7 @@ function RoomCard(
   props: { room: { id: string; name: string; hourlyRate: string | null } },
 ) {
   return (
-    <Link to="/dashboard/rooms/$roomId" params={{ roomId: props.room.id }}>
+    <Link to={roomRoute.to} params={{ roomId: props.room.id }}>
       <div className="rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none">
         <div className="flex w-full px-6 py-6 justify-between align-top">
           <div className="flex-auto">

@@ -1,5 +1,5 @@
-import { Link, type LinkProps, Outlet } from "@tanstack/react-router";
-import { Fragment, useState } from "react";
+import { useSignOut } from "@/lib/auth/use_sign_out";
+import { cn } from "@/lib/utils/cn";
 import {
   Dialog,
   DialogPanel,
@@ -19,10 +19,15 @@ import {
   InboxIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { cn } from "@/lib/utils/cn";
+import { Link, type LinkProps, Outlet } from "@tanstack/react-router";
+import { Fragment, useState } from "react";
 import { useProfile } from "../use_profile";
-import { useSignOut } from "@/lib/auth/use_sign_out";
 import { useFacility } from "./facility_management/facility/use_facility";
+
+/// Routes
+import { Route as bookingRequestRoute } from "@/app/routes/dashboard/booking-requests";
+import { Route as bookingsRoute } from "@/app/routes/dashboard/bookings";
+import { Route as facilityRoute } from "@/app/routes/dashboard/facility";
 
 type NavItem = {
   name: string;
@@ -33,17 +38,17 @@ function useNavigation(): NavItem[] {
   return [
     {
       name: "Bookings",
-      to: "/dashboard/bookings",
+      to: bookingsRoute.to,
       icon: CalendarIcon,
     },
     {
       name: "Requests",
-      to: "/dashboard/booking-requests",
+      to: bookingRequestRoute.to,
       icon: InboxIcon,
     },
     {
       name: "Facility & Rooms",
-      to: "/dashboard/rooms",
+      to: facilityRoute.to,
       icon: HomeIcon,
     },
     // {

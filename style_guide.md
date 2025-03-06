@@ -9,8 +9,9 @@ Follow these conventions for consistency.
   - exception: only 1 argument
 - pass optional arguments as `options` object as second parameter
 - files names are `snake_case` lowercase and use underscores
+  - exception: `app/routes` uses file based routing so `-` and camel cased
+    variables are permitted
 - all variable names are `pascalCased`
-  - exception: database table columns are `snake_case`
   - exception: search parameters use `snake_case`
   - exception: url routes use `snake_case`
 

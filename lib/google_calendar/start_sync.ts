@@ -1,8 +1,8 @@
 import type { calendar_v3 } from "@googleapis/calendar";
 import type { Supabase } from "../../middleware/supabase.ts";
 import { z } from "zod";
-import { pullEvents } from "./shared/pull_events.ts";
-import { openChannel } from "./shared/open_channel.ts";
+import { pullEvents } from "./shared/pull_events.js";
+import { openChannel } from "./shared/open_channel.js";
 
 const INITIAL_MONTHS_TO_PULL = 5;
 

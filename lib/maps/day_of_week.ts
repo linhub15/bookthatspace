@@ -1,9 +1,7 @@
-import type { Enums } from "@/lib/types/supabase_types";
-
-// todo: find out how to handle enums?
+import type { DayOfWeekEnum } from "@/app/db/types";
 
 /** ISO 8601 Monday is 1 */
-export const mapNumberToDayOfWeek: Record<number, Enums<"day_of_week">> = {
+export const mapNumberToDayOfWeek: Record<number, DayOfWeekEnum> = {
   1: "mon",
   2: "tue",
   3: "wed",

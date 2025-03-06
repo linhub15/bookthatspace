@@ -4,7 +4,7 @@ import {
   SupabaseClientOptions,
 } from "@supabase/supabase-js";
 import { MiddlewareHandler } from "hono/types.ts";
-import { Database } from "@/lib/types/supabase_types.d.ts";
+import { Database } from "../../../../lib/types/supabase_types.js";
 import { getEnv } from "../utils.ts";
 
 /** @default {mode} "auth"  */
@@ -35,7 +35,7 @@ export function supabase(
   };
 }
 
-export type { Json } from "@/lib/types/supabase_types.d.ts";
+export type { Json } from "../../../../lib/types/supabase_types.js";
 export type Supabase = SupabaseClient<Database>;
 export type SupabaseEnv = {
   Variables: {
