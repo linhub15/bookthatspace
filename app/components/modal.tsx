@@ -2,11 +2,6 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import clsx from "clsx";
 import type { JSX, PropsWithChildren } from "react";
 
-export type ModalHook = {
-  Modal: () => JSX.Element;
-  open: () => void;
-};
-
 type Props = {
   open: boolean;
   /** Called when backdrop is clicked. Use `() => {}` to disable backdrop close */

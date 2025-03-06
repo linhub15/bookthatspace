@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { listRoomAvailabilityFn } from "../fns/list_room_availability.fn";
+import { listRoomAvailabilityFn } from "../functions/list_room_availability.fn";
 
 export function useRoomAvailability(roomId: string) {
   const listRoomAvailability = useServerFn(listRoomAvailabilityFn);

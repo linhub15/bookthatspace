@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import {
   updateRoomAvailabilityFn,
   type UpdateRoomAvailabilityRequest,
-} from "../fns/update_room_availability.fn";
+} from "../functions/update_room_availability.fn";
 
 export function useChangeAvailability(args: { roomId: string }) {
   const updateRoomAvailability = useServerFn(updateRoomAvailabilityFn);

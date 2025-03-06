@@ -1,15 +1,14 @@
-import { Card } from "@/app/components/card";
-import {
-  availabilityRoute,
-  publicBookingRoute,
-  publicOutlet,
-} from "./public.routes";
-import { useFacility, useRooms } from "./hooks";
-import { AddressDisplay } from "@/app/components/form/address_input";
-import type { Image } from "@/lib/types/image.type";
-import { maskHourlyRate } from "@/lib/masks/masks";
-import { Link } from "@tanstack/react-router";
 import { SubmitButton } from "@/app/components/buttons/submit_button";
+import { Card } from "@/app/components/card";
+import { AddressDisplay } from "@/app/components/form/address_input";
+import { GoogleMapImg } from "@/app/components/google_map";
+import { usePublicFacility } from "@/app/features/public/hooks/use_facility.public";
+import { maskHourlyRate } from "@/lib/masks/masks";
+import type { Image } from "@/lib/types/image.type";
+import { cn } from "@/lib/utils/cn";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Route as makeBookingRoute } from "./book";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 import {
   Carousel,
   CarouselContent,
@@ -18,15 +17,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/app/components/ui/carousel";
-import { PhotoIcon } from "@heroicons/react/24/outline";
-import { cn } from "@/lib/utils/cn";
-import { GoogleMapImg } from "@/app/components/google_map";
-export function FacilityWidget() {
-  const { facility_id } = publicOutlet.useParams();
-  const facility = useFacility(facility_id);
-  const rooms = useRooms(facility_id);
+import type { RoomSelect } from "@/app/db/types";
+
+export const Route = createFileRoute("/@/$facilityId/")({
+  component: RouteComponent,
+});
+
+function RouteComponent() {
+  const { facilityId } = Route.useParams();
+  const facility = usePublicFacility(facilityId);
 
   if (!facility.data) return;
+
+  const rooms = facility.data.rooms;
 
   return (
     <div className="max-w-screen-lg space-y-4 px-2 sm:mx-auto pt-8">
@@ -43,8 +46,8 @@ export function FacilityWidget() {
             </div>
             <Link
               className="max-w-xs"
-              to={publicBookingRoute.to}
-              params={{ facility_id: facility_id }}
+              to={makeBookingRoute.to}
+              params={{ facilityId: facilityId }}
             >
               <SubmitButton>Book a Room</SubmitButton>
             </Link>
@@ -56,7 +59,7 @@ export function FacilityWidget() {
       </Card>
 
       <div className="flex flex-col sm:flex-row gap-3 py-8 sm:justify-center flex-wrap">
-        {rooms.data?.map((room) => (
+        {rooms.map((room) => (
           <RoomCard room={room} photos={room.images} key={room.id} />
         ))}
       </div>
@@ -65,7 +68,7 @@ export function FacilityWidget() {
 }
 
 export function RoomCard(
-  { room, photos }: { room: Tables<"room">; photos: Image[] },
+  { room, photos }: { room: RoomSelect; photos: Image[] },
 ) {
   return (
     <Card className="flex flex-col gap-2 p-4 sm:rounded-xl overflow-hidden md:max-w-[328px]">
@@ -77,18 +80,18 @@ export function RoomCard(
           </span>
           <Link
             className="text-xs leading-6 font-medium text-indigo-600 hover:text-indigo-500"
-            to={availabilityRoute.to}
+            to={makeBookingRoute.to}
             search={{ room_id: room.id }}
-            params={{ facility_id: room.facility_id }}
+            params={{ facilityId: room.facilityId }}
           >
             Availability
           </Link>
         </div>
         <div className="text-sm text-gray-600">
-          Maximum {room.max_capacity} people
+          Maximum {room.maxCapacity} people
         </div>
         <div className="text-sm">
-          {maskHourlyRate(room.hourly_rate)}
+          {maskHourlyRate(room.hourlyRate)}
         </div>
       </div>
     </Card>
@@ -109,12 +112,13 @@ function ImageCarousel(props: { images: Image[] }) {
             </div>
           </CarouselItem>
         )}
-        {props.images.map((image, index) => (
-          <CarouselItem key={index}>
+        {props.images.map((image) => (
+          <CarouselItem key={image.id}>
             <img
               className={cn("snap-center object-cover object-center", styles)}
               src={image.url}
               key={image.id}
+              alt=""
             />
           </CarouselItem>
         ))}

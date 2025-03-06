@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { deleteRoomFn } from "../fns/delete_room.fn";
+import { deleteRoomFn } from "../functions/delete_room.fn";
 
 export function useDeleteRoom() {
   const deleteRoom = useServerFn(deleteRoomFn);

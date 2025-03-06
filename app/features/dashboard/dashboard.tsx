@@ -24,10 +24,10 @@ import { Fragment, useState } from "react";
 import { useProfile } from "../use_profile";
 import { useFacility } from "./facility_management/facility/use_facility";
 
-/// Routes
 import { Route as bookingRequestRoute } from "@/app/routes/dashboard/booking-requests";
 import { Route as bookingsRoute } from "@/app/routes/dashboard/bookings";
 import { Route as facilityRoute } from "@/app/routes/dashboard/facility";
+import { Route as publicFacilityRoute } from "@/app/routes/@/$facilityId";
 
 type NavItem = {
   name: string;
@@ -60,10 +60,9 @@ function useNavigation(): NavItem[] {
 }
 
 function usePublicPageLink() {
-  // todo: import route to:...
   return {
     name: "View public page",
-    to: "/",
+    to: publicFacilityRoute.to,
     icon: ArrowTopRightOnSquareIcon,
   } as const;
 }
@@ -185,7 +184,7 @@ export function Dashboard() {
                           <Link
                             className="group flex gap-x-3 rounded-md p-2 items-center text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                             to={publicPageLink.to}
-                            params={{ facility_id: data.id }}
+                            params={{ facilityId: data.id }}
                             target="_blank"
                             key={publicPageLink.name}
                           >
@@ -374,7 +373,7 @@ function DesktopSidebar() {
                 <Link
                   className="group flex gap-x-3 rounded-md p-2 items-center text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                   to={publicPageLink.to}
-                  params={{ facility_id: data.id }}
+                  params={{ facilityId: data.id }}
                   target="_blank"
                   key={publicPageLink.name}
                 >

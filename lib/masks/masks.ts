@@ -59,8 +59,10 @@ export function maskHourlyRate(rate: string | null) {
   return `${masked} hourly`;
 }
 
-export function maskDurationSince(target: string) {
-  const duration = Temporal.Now.instant().since(target).round({
+export function maskDurationSince(target: string | Date) {
+  const date: string = target instanceof Date ? target.toISOString() : target;
+
+  const duration = Temporal.Now.instant().since(date).round({
     largestUnit: "month",
     relativeTo: Temporal.Now.zonedDateTimeISO(),
   });

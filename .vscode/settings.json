@@ -1,16 +1,13 @@
 {
-  "deno.enablePaths": ["./supabase/functions"],
-  "deno.importMap": "./supabase/functions/import_map.json",
-  "deno.lint": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
+  "editor.detectIndentation": true,
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
     ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "editor.detectIndentation": true,
   "[json]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   }

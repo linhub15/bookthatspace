@@ -80,6 +80,7 @@ export const room_relations = relations(room, ({ one, many }) => ({
     references: [facility.id],
   }),
   availabilities: many(room_availability),
+  images: many(room_image),
 }));
 
 export const room_availability = pgTable("room_availability", {
@@ -105,8 +106,8 @@ export const room_booking = pgTable("room_booking", {
   id: uuid("id").primaryKey().defaultRandom(),
   roomId: uuid("room_id").notNull().references(() => room.id),
   profileId: uuid("profile_id").notNull().references(() => profile.id),
-  start: timestamp("start", { withTimezone: true }).notNull(),
-  end: timestamp("end", { withTimezone: true }).notNull(),
+  start: timestamp("start", { withTimezone: true, mode: "string" }).notNull(),
+  end: timestamp("end", { withTimezone: true, mode: "string" }).notNull(),
   status: room_booking_status("status"),
   totalCost: numeric("total_cost"),
   bookedByEmail: text("booked_by_email").notNull(),
@@ -116,12 +117,19 @@ export const room_booking = pgTable("room_booking", {
   ...defaultColumns,
 });
 
-export const room_photo = pgTable("room_photo", {
+export const room_image = pgTable("room_image", {
   id: uuid("id").primaryKey().defaultRandom(),
-  roomId: uuid("room_id").notNull(),
+  roomId: uuid("room_id").references(() => room.id, { onDelete: "set null" }),
   path: text().notNull(),
   ...defaultColumns,
 });
+
+export const room_photo_relations = relations(room_image, ({ one }) => ({
+  room: one(room, {
+    fields: [room_image.roomId],
+    references: [room.id],
+  }),
+}));
 
 export const google_calendar = pgTable("google_calendar", {
   id: text("id").notNull(),

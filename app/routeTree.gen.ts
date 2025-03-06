@@ -10,186 +10,226 @@
 
 // Import Routes
 
-import { Route as rootRoute } from "./routes/__root";
-import { Route as DashboardRouteImport } from "./routes/dashboard/route";
-import { Route as IndexImport } from "./routes/index";
-import { Route as DashboardProfileImport } from "./routes/dashboard/profile";
-import { Route as AuthSignupImport } from "./routes/_auth/signup";
-import { Route as AuthLoginImport } from "./routes/_auth/login";
-import { Route as DashboardFacilityIndexImport } from "./routes/dashboard/facility/index";
-import { Route as DashboardBookingsIndexImport } from "./routes/dashboard/bookings/index";
-import { Route as DashboardBookingRequestsIndexImport } from "./routes/dashboard/booking-requests/index";
-import { Route as DashboardFacilityRoomIdImport } from "./routes/dashboard/facility/$roomId";
-import { Route as DashboardBookingsBookingIdViewImport } from "./routes/dashboard/bookings/$bookingId.view";
-import { Route as DashboardBookingRequestsBookingIdReviewImport } from "./routes/dashboard/booking-requests/$bookingId.review";
+import { Route as rootRoute } from './routes/__root'
+import { Route as DashboardRouteImport } from './routes/dashboard/route'
+import { Route as IndexImport } from './routes/index'
+import { Route as DashboardProfileImport } from './routes/dashboard/profile'
+import { Route as AuthSignupImport } from './routes/_auth/signup'
+import { Route as AuthLoginImport } from './routes/_auth/login'
+import { Route as DashboardFacilityIndexImport } from './routes/dashboard/facility/index'
+import { Route as DashboardBookingsIndexImport } from './routes/dashboard/bookings/index'
+import { Route as DashboardBookingRequestsIndexImport } from './routes/dashboard/booking-requests/index'
+import { Route as FacilityIdIndexImport } from './routes/@/$facilityId/index'
+import { Route as DashboardFacilityRoomIdImport } from './routes/dashboard/facility/$roomId'
+import { Route as FacilityIdBookImport } from './routes/@/$facilityId/book'
+import { Route as FacilityIdAvailabilityImport } from './routes/@/$facilityId/availability'
+import { Route as DashboardBookingsBookingIdViewImport } from './routes/dashboard/bookings/$bookingId.view'
+import { Route as DashboardBookingRequestsBookingIdReviewImport } from './routes/dashboard/booking-requests/$bookingId.review'
 
 // Create/Update Routes
 
 const DashboardRouteRoute = DashboardRouteImport.update({
-  id: "/dashboard",
-  path: "/dashboard",
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const IndexRoute = IndexImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const DashboardProfileRoute = DashboardProfileImport.update({
-  id: "/profile",
-  path: "/profile",
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => DashboardRouteRoute,
-} as any);
+} as any)
 
 const AuthSignupRoute = AuthSignupImport.update({
-  id: "/_auth/signup",
-  path: "/signup",
+  id: '/_auth/signup',
+  path: '/signup',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const AuthLoginRoute = AuthLoginImport.update({
-  id: "/_auth/login",
-  path: "/login",
+  id: '/_auth/login',
+  path: '/login',
   getParentRoute: () => rootRoute,
-} as any);
+} as any)
 
 const DashboardFacilityIndexRoute = DashboardFacilityIndexImport.update({
-  id: "/facility/",
-  path: "/facility/",
+  id: '/facility/',
+  path: '/facility/',
   getParentRoute: () => DashboardRouteRoute,
-} as any);
+} as any)
 
 const DashboardBookingsIndexRoute = DashboardBookingsIndexImport.update({
-  id: "/bookings/",
-  path: "/bookings/",
+  id: '/bookings/',
+  path: '/bookings/',
   getParentRoute: () => DashboardRouteRoute,
-} as any);
+} as any)
 
-const DashboardBookingRequestsIndexRoute = DashboardBookingRequestsIndexImport
-  .update({
-    id: "/booking-requests/",
-    path: "/booking-requests/",
+const DashboardBookingRequestsIndexRoute =
+  DashboardBookingRequestsIndexImport.update({
+    id: '/booking-requests/',
+    path: '/booking-requests/',
     getParentRoute: () => DashboardRouteRoute,
-  } as any);
+  } as any)
+
+const FacilityIdIndexRoute = FacilityIdIndexImport.update({
+  id: '/@/$facilityId/',
+  path: '/@/$facilityId/',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const DashboardFacilityRoomIdRoute = DashboardFacilityRoomIdImport.update({
-  id: "/facility/$roomId",
-  path: "/facility/$roomId",
+  id: '/facility/$roomId',
+  path: '/facility/$roomId',
   getParentRoute: () => DashboardRouteRoute,
-} as any);
+} as any)
 
-const DashboardBookingsBookingIdViewRoute = DashboardBookingsBookingIdViewImport
-  .update({
-    id: "/bookings/$bookingId/view",
-    path: "/bookings/$bookingId/view",
+const FacilityIdBookRoute = FacilityIdBookImport.update({
+  id: '/@/$facilityId/book',
+  path: '/@/$facilityId/book',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FacilityIdAvailabilityRoute = FacilityIdAvailabilityImport.update({
+  id: '/@/$facilityId/availability',
+  path: '/@/$facilityId/availability',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardBookingsBookingIdViewRoute =
+  DashboardBookingsBookingIdViewImport.update({
+    id: '/bookings/$bookingId/view',
+    path: '/bookings/$bookingId/view',
     getParentRoute: () => DashboardRouteRoute,
-  } as any);
+  } as any)
 
 const DashboardBookingRequestsBookingIdReviewRoute =
   DashboardBookingRequestsBookingIdReviewImport.update({
-    id: "/booking-requests/$bookingId/review",
-    path: "/booking-requests/$bookingId/review",
+    id: '/booking-requests/$bookingId/review',
+    path: '/booking-requests/$bookingId/review',
     getParentRoute: () => DashboardRouteRoute,
-  } as any);
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/dashboard": {
-      id: "/dashboard";
-      path: "/dashboard";
-      fullPath: "/dashboard";
-      preLoaderRoute: typeof DashboardRouteImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_auth/login": {
-      id: "/_auth/login";
-      path: "/login";
-      fullPath: "/login";
-      preLoaderRoute: typeof AuthLoginImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_auth/signup": {
-      id: "/_auth/signup";
-      path: "/signup";
-      fullPath: "/signup";
-      preLoaderRoute: typeof AuthSignupImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/dashboard/profile": {
-      id: "/dashboard/profile";
-      path: "/profile";
-      fullPath: "/dashboard/profile";
-      preLoaderRoute: typeof DashboardProfileImport;
-      parentRoute: typeof DashboardRouteImport;
-    };
-    "/dashboard/facility/$roomId": {
-      id: "/dashboard/facility/$roomId";
-      path: "/facility/$roomId";
-      fullPath: "/dashboard/facility/$roomId";
-      preLoaderRoute: typeof DashboardFacilityRoomIdImport;
-      parentRoute: typeof DashboardRouteImport;
-    };
-    "/dashboard/booking-requests/": {
-      id: "/dashboard/booking-requests/";
-      path: "/booking-requests";
-      fullPath: "/dashboard/booking-requests";
-      preLoaderRoute: typeof DashboardBookingRequestsIndexImport;
-      parentRoute: typeof DashboardRouteImport;
-    };
-    "/dashboard/bookings/": {
-      id: "/dashboard/bookings/";
-      path: "/bookings";
-      fullPath: "/dashboard/bookings";
-      preLoaderRoute: typeof DashboardBookingsIndexImport;
-      parentRoute: typeof DashboardRouteImport;
-    };
-    "/dashboard/facility/": {
-      id: "/dashboard/facility/";
-      path: "/facility";
-      fullPath: "/dashboard/facility";
-      preLoaderRoute: typeof DashboardFacilityIndexImport;
-      parentRoute: typeof DashboardRouteImport;
-    };
-    "/dashboard/booking-requests/$bookingId/review": {
-      id: "/dashboard/booking-requests/$bookingId/review";
-      path: "/booking-requests/$bookingId/review";
-      fullPath: "/dashboard/booking-requests/$bookingId/review";
-      preLoaderRoute: typeof DashboardBookingRequestsBookingIdReviewImport;
-      parentRoute: typeof DashboardRouteImport;
-    };
-    "/dashboard/bookings/$bookingId/view": {
-      id: "/dashboard/bookings/$bookingId/view";
-      path: "/bookings/$bookingId/view";
-      fullPath: "/dashboard/bookings/$bookingId/view";
-      preLoaderRoute: typeof DashboardBookingsBookingIdViewImport;
-      parentRoute: typeof DashboardRouteImport;
-    };
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth/login': {
+      id: '/_auth/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof AuthLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth/signup': {
+      id: '/_auth/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof AuthSignupImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/profile': {
+      id: '/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof DashboardProfileImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/@/$facilityId/availability': {
+      id: '/@/$facilityId/availability'
+      path: '/@/$facilityId/availability'
+      fullPath: '/@/$facilityId/availability'
+      preLoaderRoute: typeof FacilityIdAvailabilityImport
+      parentRoute: typeof rootRoute
+    }
+    '/@/$facilityId/book': {
+      id: '/@/$facilityId/book'
+      path: '/@/$facilityId/book'
+      fullPath: '/@/$facilityId/book'
+      preLoaderRoute: typeof FacilityIdBookImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/facility/$roomId': {
+      id: '/dashboard/facility/$roomId'
+      path: '/facility/$roomId'
+      fullPath: '/dashboard/facility/$roomId'
+      preLoaderRoute: typeof DashboardFacilityRoomIdImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/@/$facilityId/': {
+      id: '/@/$facilityId/'
+      path: '/@/$facilityId'
+      fullPath: '/@/$facilityId'
+      preLoaderRoute: typeof FacilityIdIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/booking-requests/': {
+      id: '/dashboard/booking-requests/'
+      path: '/booking-requests'
+      fullPath: '/dashboard/booking-requests'
+      preLoaderRoute: typeof DashboardBookingRequestsIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/dashboard/bookings/': {
+      id: '/dashboard/bookings/'
+      path: '/bookings'
+      fullPath: '/dashboard/bookings'
+      preLoaderRoute: typeof DashboardBookingsIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/dashboard/facility/': {
+      id: '/dashboard/facility/'
+      path: '/facility'
+      fullPath: '/dashboard/facility'
+      preLoaderRoute: typeof DashboardFacilityIndexImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/dashboard/booking-requests/$bookingId/review': {
+      id: '/dashboard/booking-requests/$bookingId/review'
+      path: '/booking-requests/$bookingId/review'
+      fullPath: '/dashboard/booking-requests/$bookingId/review'
+      preLoaderRoute: typeof DashboardBookingRequestsBookingIdReviewImport
+      parentRoute: typeof DashboardRouteImport
+    }
+    '/dashboard/bookings/$bookingId/view': {
+      id: '/dashboard/bookings/$bookingId/view'
+      path: '/bookings/$bookingId/view'
+      fullPath: '/dashboard/bookings/$bookingId/view'
+      preLoaderRoute: typeof DashboardBookingsBookingIdViewImport
+      parentRoute: typeof DashboardRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
 interface DashboardRouteRouteChildren {
-  DashboardProfileRoute: typeof DashboardProfileRoute;
-  DashboardFacilityRoomIdRoute: typeof DashboardFacilityRoomIdRoute;
-  DashboardBookingRequestsIndexRoute: typeof DashboardBookingRequestsIndexRoute;
-  DashboardBookingsIndexRoute: typeof DashboardBookingsIndexRoute;
-  DashboardFacilityIndexRoute: typeof DashboardFacilityIndexRoute;
-  DashboardBookingRequestsBookingIdReviewRoute:
-    typeof DashboardBookingRequestsBookingIdReviewRoute;
-  DashboardBookingsBookingIdViewRoute:
-    typeof DashboardBookingsBookingIdViewRoute;
+  DashboardProfileRoute: typeof DashboardProfileRoute
+  DashboardFacilityRoomIdRoute: typeof DashboardFacilityRoomIdRoute
+  DashboardBookingRequestsIndexRoute: typeof DashboardBookingRequestsIndexRoute
+  DashboardBookingsIndexRoute: typeof DashboardBookingsIndexRoute
+  DashboardFacilityIndexRoute: typeof DashboardFacilityIndexRoute
+  DashboardBookingRequestsBookingIdReviewRoute: typeof DashboardBookingRequestsBookingIdReviewRoute
+  DashboardBookingsBookingIdViewRoute: typeof DashboardBookingsBookingIdViewRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
@@ -201,109 +241,124 @@ const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardBookingRequestsBookingIdReviewRoute:
     DashboardBookingRequestsBookingIdReviewRoute,
   DashboardBookingsBookingIdViewRoute: DashboardBookingsBookingIdViewRoute,
-};
+}
 
 const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
   DashboardRouteRouteChildren,
-);
+)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/dashboard": typeof DashboardRouteRouteWithChildren;
-  "/login": typeof AuthLoginRoute;
-  "/signup": typeof AuthSignupRoute;
-  "/dashboard/profile": typeof DashboardProfileRoute;
-  "/dashboard/facility/$roomId": typeof DashboardFacilityRoomIdRoute;
-  "/dashboard/booking-requests": typeof DashboardBookingRequestsIndexRoute;
-  "/dashboard/bookings": typeof DashboardBookingsIndexRoute;
-  "/dashboard/facility": typeof DashboardFacilityIndexRoute;
-  "/dashboard/booking-requests/$bookingId/review":
-    typeof DashboardBookingRequestsBookingIdReviewRoute;
-  "/dashboard/bookings/$bookingId/view":
-    typeof DashboardBookingsBookingIdViewRoute;
+  '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/login': typeof AuthLoginRoute
+  '/signup': typeof AuthSignupRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/@/$facilityId/availability': typeof FacilityIdAvailabilityRoute
+  '/@/$facilityId/book': typeof FacilityIdBookRoute
+  '/dashboard/facility/$roomId': typeof DashboardFacilityRoomIdRoute
+  '/@/$facilityId': typeof FacilityIdIndexRoute
+  '/dashboard/booking-requests': typeof DashboardBookingRequestsIndexRoute
+  '/dashboard/bookings': typeof DashboardBookingsIndexRoute
+  '/dashboard/facility': typeof DashboardFacilityIndexRoute
+  '/dashboard/booking-requests/$bookingId/review': typeof DashboardBookingRequestsBookingIdReviewRoute
+  '/dashboard/bookings/$bookingId/view': typeof DashboardBookingsBookingIdViewRoute
 }
 
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/dashboard": typeof DashboardRouteRouteWithChildren;
-  "/login": typeof AuthLoginRoute;
-  "/signup": typeof AuthSignupRoute;
-  "/dashboard/profile": typeof DashboardProfileRoute;
-  "/dashboard/facility/$roomId": typeof DashboardFacilityRoomIdRoute;
-  "/dashboard/booking-requests": typeof DashboardBookingRequestsIndexRoute;
-  "/dashboard/bookings": typeof DashboardBookingsIndexRoute;
-  "/dashboard/facility": typeof DashboardFacilityIndexRoute;
-  "/dashboard/booking-requests/$bookingId/review":
-    typeof DashboardBookingRequestsBookingIdReviewRoute;
-  "/dashboard/bookings/$bookingId/view":
-    typeof DashboardBookingsBookingIdViewRoute;
+  '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/login': typeof AuthLoginRoute
+  '/signup': typeof AuthSignupRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/@/$facilityId/availability': typeof FacilityIdAvailabilityRoute
+  '/@/$facilityId/book': typeof FacilityIdBookRoute
+  '/dashboard/facility/$roomId': typeof DashboardFacilityRoomIdRoute
+  '/@/$facilityId': typeof FacilityIdIndexRoute
+  '/dashboard/booking-requests': typeof DashboardBookingRequestsIndexRoute
+  '/dashboard/bookings': typeof DashboardBookingsIndexRoute
+  '/dashboard/facility': typeof DashboardFacilityIndexRoute
+  '/dashboard/booking-requests/$bookingId/review': typeof DashboardBookingRequestsBookingIdReviewRoute
+  '/dashboard/bookings/$bookingId/view': typeof DashboardBookingsBookingIdViewRoute
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/dashboard": typeof DashboardRouteRouteWithChildren;
-  "/_auth/login": typeof AuthLoginRoute;
-  "/_auth/signup": typeof AuthSignupRoute;
-  "/dashboard/profile": typeof DashboardProfileRoute;
-  "/dashboard/facility/$roomId": typeof DashboardFacilityRoomIdRoute;
-  "/dashboard/booking-requests/": typeof DashboardBookingRequestsIndexRoute;
-  "/dashboard/bookings/": typeof DashboardBookingsIndexRoute;
-  "/dashboard/facility/": typeof DashboardFacilityIndexRoute;
-  "/dashboard/booking-requests/$bookingId/review":
-    typeof DashboardBookingRequestsBookingIdReviewRoute;
-  "/dashboard/bookings/$bookingId/view":
-    typeof DashboardBookingsBookingIdViewRoute;
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/_auth/login': typeof AuthLoginRoute
+  '/_auth/signup': typeof AuthSignupRoute
+  '/dashboard/profile': typeof DashboardProfileRoute
+  '/@/$facilityId/availability': typeof FacilityIdAvailabilityRoute
+  '/@/$facilityId/book': typeof FacilityIdBookRoute
+  '/dashboard/facility/$roomId': typeof DashboardFacilityRoomIdRoute
+  '/@/$facilityId/': typeof FacilityIdIndexRoute
+  '/dashboard/booking-requests/': typeof DashboardBookingRequestsIndexRoute
+  '/dashboard/bookings/': typeof DashboardBookingsIndexRoute
+  '/dashboard/facility/': typeof DashboardFacilityIndexRoute
+  '/dashboard/booking-requests/$bookingId/review': typeof DashboardBookingRequestsBookingIdReviewRoute
+  '/dashboard/bookings/$bookingId/view': typeof DashboardBookingsBookingIdViewRoute
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | "/"
-    | "/dashboard"
-    | "/login"
-    | "/signup"
-    | "/dashboard/profile"
-    | "/dashboard/facility/$roomId"
-    | "/dashboard/booking-requests"
-    | "/dashboard/bookings"
-    | "/dashboard/facility"
-    | "/dashboard/booking-requests/$bookingId/review"
-    | "/dashboard/bookings/$bookingId/view";
-  fileRoutesByTo: FileRoutesByTo;
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/signup'
+    | '/dashboard/profile'
+    | '/@/$facilityId/availability'
+    | '/@/$facilityId/book'
+    | '/dashboard/facility/$roomId'
+    | '/@/$facilityId'
+    | '/dashboard/booking-requests'
+    | '/dashboard/bookings'
+    | '/dashboard/facility'
+    | '/dashboard/booking-requests/$bookingId/review'
+    | '/dashboard/bookings/$bookingId/view'
+  fileRoutesByTo: FileRoutesByTo
   to:
-    | "/"
-    | "/dashboard"
-    | "/login"
-    | "/signup"
-    | "/dashboard/profile"
-    | "/dashboard/facility/$roomId"
-    | "/dashboard/booking-requests"
-    | "/dashboard/bookings"
-    | "/dashboard/facility"
-    | "/dashboard/booking-requests/$bookingId/review"
-    | "/dashboard/bookings/$bookingId/view";
+    | '/'
+    | '/dashboard'
+    | '/login'
+    | '/signup'
+    | '/dashboard/profile'
+    | '/@/$facilityId/availability'
+    | '/@/$facilityId/book'
+    | '/dashboard/facility/$roomId'
+    | '/@/$facilityId'
+    | '/dashboard/booking-requests'
+    | '/dashboard/bookings'
+    | '/dashboard/facility'
+    | '/dashboard/booking-requests/$bookingId/review'
+    | '/dashboard/bookings/$bookingId/view'
   id:
-    | "__root__"
-    | "/"
-    | "/dashboard"
-    | "/_auth/login"
-    | "/_auth/signup"
-    | "/dashboard/profile"
-    | "/dashboard/facility/$roomId"
-    | "/dashboard/booking-requests/"
-    | "/dashboard/bookings/"
-    | "/dashboard/facility/"
-    | "/dashboard/booking-requests/$bookingId/review"
-    | "/dashboard/bookings/$bookingId/view";
-  fileRoutesById: FileRoutesById;
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/_auth/login'
+    | '/_auth/signup'
+    | '/dashboard/profile'
+    | '/@/$facilityId/availability'
+    | '/@/$facilityId/book'
+    | '/dashboard/facility/$roomId'
+    | '/@/$facilityId/'
+    | '/dashboard/booking-requests/'
+    | '/dashboard/bookings/'
+    | '/dashboard/facility/'
+    | '/dashboard/booking-requests/$bookingId/review'
+    | '/dashboard/bookings/$bookingId/view'
+  fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren;
-  AuthLoginRoute: typeof AuthLoginRoute;
-  AuthSignupRoute: typeof AuthSignupRoute;
+  IndexRoute: typeof IndexRoute
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthSignupRoute: typeof AuthSignupRoute
+  FacilityIdAvailabilityRoute: typeof FacilityIdAvailabilityRoute
+  FacilityIdBookRoute: typeof FacilityIdBookRoute
+  FacilityIdIndexRoute: typeof FacilityIdIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -311,11 +366,14 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
-};
+  FacilityIdAvailabilityRoute: FacilityIdAvailabilityRoute,
+  FacilityIdBookRoute: FacilityIdBookRoute,
+  FacilityIdIndexRoute: FacilityIdIndexRoute,
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
 /* ROUTE_MANIFEST_START
 {
@@ -326,7 +384,10 @@ export const routeTree = rootRoute
         "/",
         "/dashboard",
         "/_auth/login",
-        "/_auth/signup"
+        "/_auth/signup",
+        "/@/$facilityId/availability",
+        "/@/$facilityId/book",
+        "/@/$facilityId/"
       ]
     },
     "/": {
@@ -354,9 +415,18 @@ export const routeTree = rootRoute
       "filePath": "dashboard/profile.tsx",
       "parent": "/dashboard"
     },
+    "/@/$facilityId/availability": {
+      "filePath": "@/$facilityId/availability.tsx"
+    },
+    "/@/$facilityId/book": {
+      "filePath": "@/$facilityId/book.tsx"
+    },
     "/dashboard/facility/$roomId": {
       "filePath": "dashboard/facility/$roomId.tsx",
       "parent": "/dashboard"
+    },
+    "/@/$facilityId/": {
+      "filePath": "@/$facilityId/index.tsx"
     },
     "/dashboard/booking-requests/": {
       "filePath": "dashboard/booking-requests/index.tsx",

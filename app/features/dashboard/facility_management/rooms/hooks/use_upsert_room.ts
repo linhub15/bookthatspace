@@ -1,6 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { upsertRoomFn, type UpsertRoomRequest } from "../fns/upsert_room.fn";
+import {
+  upsertRoomFn,
+  type UpsertRoomRequest,
+} from "../functions/upsert_room.fn";
 
 export function useUpsertRoom() {
   const upsertRoom = useServerFn(upsertRoomFn);
