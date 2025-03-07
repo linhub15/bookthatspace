@@ -2,12 +2,12 @@ import { BackButton } from "@/app/components/buttons/back_button";
 import { Card } from "@/app/components/card";
 import {
   useRoomAvailability,
-} from "@/app/features/dashboard/facility_management/rooms/hooks/use_room_availability";
-import { ChangeRoomAvailabilityModalButton } from "@/app/features/dashboard/facility_management/rooms/components/change_room_availability_modal_button";
-import { DeleteRoomModalButton } from "@/app/features/dashboard/facility_management/rooms/components/delete_room_modal_button";
-import { EditRoomModalButton } from "@/app/features/dashboard/facility_management/rooms/components/edit_room_modal_button";
-import { useRoom } from "@/app/features/dashboard/facility_management/rooms/hooks/use_rooms";
-import { useWeekCalendar } from "@/app/features/dashboard/facility_management/rooms/use_week_calendar";
+} from "@/app/features/facility_management/rooms/hooks/use_room_availability";
+import { ChangeRoomAvailabilityModalButton } from "@/app/features/facility_management/rooms/components/change_room_availability_modal_button";
+import { DeleteRoomModalButton } from "@/app/features/facility_management/rooms/components/delete_room_modal_button";
+import { EditRoomModalButton } from "@/app/features/facility_management/rooms/components/edit_room_modal_button";
+import { useRoom } from "@/app/features/facility_management/rooms/hooks/use_rooms";
+import { useWeekCalendar } from "@/app/features/facility_management/rooms/use_week_calendar";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { PhotoIcon, UserIcon } from "@heroicons/react/24/outline";
 import {

@@ -4,7 +4,7 @@ import { authMiddleware } from "@/lib/auth/auth_middleware";
 import { createServerFn } from "@tanstack/react-start";
 import { createInsertSchema } from "drizzle-zod";
 import type { z } from "zod";
-import { getProfileFn } from "../../get_profile.fn";
+import { getProfileFn } from "../../profile/get_profile.fn";
 
 const Request = createInsertSchema(facility);
 export type UpsertFacilityRequest = z.infer<typeof Request>;

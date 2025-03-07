@@ -3,10 +3,10 @@ import { SubmitButton } from "@/app/components/buttons/submit_button";
 import { Card } from "@/app/components/card";
 import { Feed } from "@/app/components/feed";
 import type { RoomBookingSelect } from "@/app/db/types";
-import { RejectBookingModalButton } from "@/app/features/dashboard/booking_requests/reject_booking_modal_button";
-import { useAcceptBooking } from "@/app/features/dashboard/booking_requests/use_accept_booking";
-import { useRoomBooking } from "@/app/features/dashboard/bookings/hooks";
-import { useRoom } from "@/app/features/dashboard/facility_management/rooms/hooks/use_rooms";
+import { RejectBookingModalButton } from "@/app/features/booking_management/reject_booking_modal_button";
+import { useAcceptBooking } from "@/app/features/booking_management/hooks/use_accept_booking";
+import { useRoomBooking } from "@/app/features/booking_management/hooks/use_room_booking";
+import { useRoom } from "@/app/features/facility_management/rooms/hooks/use_rooms";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/lib/masks/masks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
 import {
@@ -17,6 +17,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Temporal } from "temporal-polyfill";
+import { Route as bookingRequestsRoute } from "./index";
 
 export const Route = createFileRoute(
   "/dashboard/booking-requests/$bookingId/review",
@@ -26,16 +27,16 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   const { bookingId } = Route.useParams();
-  const { data: booking } = useRoomBooking(bookingId);
+  const { data } = useRoomBooking(bookingId);
   return (
     <>
       <div className="py-4">
-        <Link className="w-fit" to="..">
+        <Link className="w-fit" to={bookingRequestsRoute.to}>
           <BackButton />
         </Link>
       </div>
       <div>
-        {booking && <BookingCard booking={booking} />}
+        {data && <BookingCard booking={data.booking} />}
       </div>
     </>
   );

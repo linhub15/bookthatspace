@@ -11,9 +11,11 @@ export const zPlainDateString = z.custom<string>((value) => {
     : false;
 });
 
-export const asPlainDate = (date: string): Temporal.PlainDate => {
-  const parsed = zPlainDateString.parse(date);
-  return Temporal.PlainDate.from(parsed);
+export const asPlainDate = (utcDate: string): Temporal.PlainDate => {
+  return Temporal.Instant.from(utcDate).toZonedDateTime({
+    calendar: "iso8601",
+    timeZone: Temporal.Now.timeZoneId(),
+  }).toPlainDate();
 };
 
 export const asPlainTime = (date: DateLike): Temporal.PlainTime => {

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { getProfileFn } from "./dashboard/get_profile.fn";
+import { getProfileFn } from "./get_profile.fn";
 
 export function useProfile() {
   const getProfile = useServerFn(getProfileFn);

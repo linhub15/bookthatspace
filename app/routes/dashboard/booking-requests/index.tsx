@@ -1,9 +1,7 @@
 import { Card } from "@/app/components/card";
-import { useBookingRequests } from "@/app/features/dashboard/booking_requests/use_booking_requests";
+import { useBookingRequests } from "@/app/features/booking_management/hooks/use_booking_requests";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/lib/masks/masks";
 import { createFileRoute, Link } from "@tanstack/react-router";
-
-/// Routes
 import { Route as reviewBookingRequestRoute } from "./$bookingId.review";
 
 export const Route = createFileRoute("/dashboard/booking-requests/")({

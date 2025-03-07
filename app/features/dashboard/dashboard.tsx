@@ -21,8 +21,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link, type LinkProps, Outlet } from "@tanstack/react-router";
 import { Fragment, useState } from "react";
-import { useProfile } from "../use_profile";
-import { useFacility } from "./facility_management/facility/use_facility";
+import { useProfile } from "../profile/use_profile";
+import { useFacility } from "../facility_management/facility/use_facility";
 
 import { Route as bookingRequestRoute } from "@/app/routes/dashboard/booking-requests";
 import { Route as bookingsRoute } from "@/app/routes/dashboard/bookings";

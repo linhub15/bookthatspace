@@ -105,7 +105,7 @@ export const room_availability_relations = relations(
 export const room_booking = pgTable("room_booking", {
   id: uuid("id").primaryKey().defaultRandom(),
   roomId: uuid("room_id").notNull().references(() => room.id),
-  profileId: uuid("profile_id").notNull().references(() => profile.id),
+  profileId: uuid("profile_id").references(() => profile.id),
   start: timestamp("start", { withTimezone: true, mode: "string" }).notNull(),
   end: timestamp("end", { withTimezone: true, mode: "string" }).notNull(),
   status: room_booking_status("status"),

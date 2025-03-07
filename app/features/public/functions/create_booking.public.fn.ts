@@ -5,7 +5,6 @@ import { z } from "zod";
 
 const request = z.object({
   roomId: z.string(),
-  profileId: z.string(),
   start: z.string(),
   end: z.string(),
   totalCost: z.number().optional(),

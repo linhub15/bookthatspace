@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import {
   acceptBookingFn,
   type AcceptBookingRequest,
-} from "./accept_booking.fn";
+} from "../functions/accept_booking.fn";
 
 export function useAcceptBooking() {
   const acceptBooking = useServerFn(acceptBookingFn);

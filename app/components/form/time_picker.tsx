@@ -1,5 +1,5 @@
 import { Temporal } from "temporal-polyfill";
-import { useEffect, useMemo } from "react";
+import { useEffect, useId, useMemo } from "react";
 
 /** Minutes between 0 and 60 exclusive */
 const INTERVAL = 30;
@@ -11,6 +11,7 @@ type Props = {
 };
 
 export function TimePicker(props: Props) {
+  const id = useId();
   const timeOptions = useMemo(() =>
     [...Array(24).keys()]
       .flatMap((hour) => {
@@ -49,7 +50,7 @@ export function TimePicker(props: Props) {
       }}
     >
       {timeOptions.map((time) => (
-        <option value={time.toJSON()} key={time.minute}>
+        <option value={time.toJSON()} key={`${id}-${time.toJSON()}`}>
           {maskTimeOption(time)}
         </option>
       ))}

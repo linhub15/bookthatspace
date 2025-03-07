@@ -10,6 +10,7 @@ import { Route as publicFacilityRoute } from "./index";
 import { Route as confirmationRoute } from "../booking-success.$bookingId";
 import { useCreateBookingPublic } from "@/app/features/public/hooks/use_create_booking.public";
 import { Label } from "@/app/components/form/label";
+import { toZonedDateTime } from "@/lib/pipes/to_zoned_date_time";
 
 type Form = {
   date: Temporal.PlainDate | undefined;
@@ -45,31 +46,14 @@ function RouteComponent() {
       description: "",
     } as Form,
     onSubmit: async ({ value }) => {
-      const start = Temporal.PlainDateTime
-        .from({
-          day: value.date?.day,
-          month: value.date?.month,
-          year: value.date?.year,
-          hour: value.start?.hour,
-          minute: value.start?.minute,
-        })
-        .toZonedDateTime(Temporal.Now.timeZoneId())
+      const start = toZonedDateTime(value.date, value.start)
         .toString({ timeZoneName: "never" });
 
-      const end = Temporal.PlainDateTime
-        .from({
-          day: value.date?.day,
-          month: value.date?.month,
-          year: value.date?.year,
-          hour: value.end?.hour,
-          minute: value.end?.minute,
-        })
-        .toZonedDateTime(Temporal.Now.timeZoneId())
+      const end = toZonedDateTime(value.date, value.end)
         .toString({ timeZoneName: "never" });
 
       return await mutation.mutateAsync({
         roomId: value.room,
-        profileId: "",
         start: start,
         end: end,
         bookedByName: value.name,
@@ -111,6 +95,7 @@ function RouteComponent() {
                     View room details
                   </Link>
                 </div>
+                {field.state.value}
                 <RoomPicker
                   name={field.name}
                   id={field.name}

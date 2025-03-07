@@ -1,12 +1,14 @@
 import { useForm } from "@tanstack/react-form";
-import { useCreateBooking } from "./hooks";
 import { Temporal } from "temporal-polyfill";
 import { Label } from "@/app/components/form/label";
 import { DatePicker } from "@/app/components/form/date_picker";
 import { TimePicker } from "@/app/components/form/time_picker";
 import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { useRooms } from "../facility_management/hooks";
 import { FormField } from "@/app/components/form/form_field";
+import { useRooms } from "../facility_management/rooms/hooks/use_rooms";
+import { useCreateBooking } from "./hooks/use_create_booking";
+import { z } from "zod";
+import { toZonedDateTime } from "@/lib/pipes/to_zoned_date_time";
 
 type Props = {
   userName: string;
@@ -15,9 +17,17 @@ type Props = {
   onCancel: () => void;
 };
 
+const zForm = z.object({
+  date: z.string(),
+  roomId: z.string(),
+  start: z.string(),
+  end: z.string(),
+  description: z.string(),
+});
+
 type Form = {
+  roomId: string;
   date: Temporal.PlainDate | undefined;
-  roomId: string | undefined;
   start: Temporal.PlainTime | undefined;
   end: Temporal.PlainTime | undefined;
   description: string;
@@ -25,23 +35,31 @@ type Form = {
 
 export function InternalBookingForm(props: Props) {
   const createBooking = useCreateBooking();
-  const form = useForm<Form>({
+  const form = useForm({
     defaultValues: {
-      roomId: undefined,
+      roomId: "",
       date: Temporal.Now.plainDateISO(),
       start: undefined,
       end: undefined,
       description: "",
+    } as Form,
+    validators: {
+      onSubmit: (form) => zForm.parse(form.value),
     },
-    onSubmit: async (form) => {
+    onSubmit: async ({ value }) => {
+      const start = toZonedDateTime(value.date, value.start)
+        .toString({ timeZoneName: "never" });
+
+      const end = toZonedDateTime(value.date, value.end)
+        .toString({ timeZoneName: "never" });
+
       await createBooking.mutateAsync({
-        roomId: form.value.roomId!,
-        name: props.userName,
-        email: props.userEmail,
-        date: form.value.date!,
-        start: form.value.start!,
-        end: form.value.end!,
-        description: form.value.description,
+        roomId: value.roomId,
+        bookedByName: props.userName,
+        bookedByEmail: props.userEmail,
+        start: start,
+        end: end,
+        description: value.description,
       }, { onSuccess: props.onAfterSubmit });
     },
   });
@@ -169,7 +187,7 @@ function RoomSelect(
       value={props.value}
       onChange={(e) => props.onChange(e.currentTarget.value)}
     >
-      <option></option>
+      <option />
       {rooms.data?.map((room) => (
         <option key={room.id} value={room.id}>{room.name}</option>
       ))}
