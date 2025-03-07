@@ -1,6 +1,6 @@
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { FormField } from "@/app/components/form/form_field";
-import { Label } from "@/app/components/form/label";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { FormField } from "@/components/form/form_field";
+import { Label } from "@/components/form/label";
 import { UserIcon } from "@heroicons/react/24/outline";
 import { useForm } from "@tanstack/react-form";
 import { useFacility } from "../../facility/use_facility";

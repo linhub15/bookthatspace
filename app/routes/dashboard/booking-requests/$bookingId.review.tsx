@@ -1,12 +1,12 @@
-import { BackButton } from "@/app/components/buttons/back_button";
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { Card } from "@/app/components/card";
-import { Feed } from "@/app/components/feed";
-import type { RoomBookingSelect } from "@/app/db/types";
-import { RejectBookingModalButton } from "@/app/features/booking_management/reject_booking_modal_button";
-import { useAcceptBooking } from "@/app/features/booking_management/hooks/use_accept_booking";
-import { useRoomBooking } from "@/app/features/booking_management/hooks/use_room_booking";
-import { useRoom } from "@/app/features/facility_management/rooms/hooks/use_rooms";
+import { BackButton } from "@/components/buttons/back_button";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { Card } from "@/components/card";
+import { Feed } from "@/components/feed";
+import type { RoomBookingSelect } from "@/db/types";
+import { RejectBookingModalButton } from "@/features/booking_management/reject_booking_modal_button";
+import { useAcceptBooking } from "@/features/booking_management/hooks/use_accept_booking";
+import { useRoomBooking } from "@/features/booking_management/hooks/use_room_booking";
+import { useRoom } from "@/features/facility_management/rooms/hooks/use_rooms";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/lib/masks/masks";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";
 import {

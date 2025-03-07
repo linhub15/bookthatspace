@@ -1,5 +1,5 @@
 // Moved this into a separate file for Vite "fast refresh" warning
-import type { DayOfWeekEnum } from "@/app/db/types";
+import type { DayOfWeekEnum } from "@/db/types";
 import { Fragment, type PropsWithChildren, useMemo, useRef } from "react";
 import { Temporal } from "temporal-polyfill";
 

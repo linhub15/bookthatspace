@@ -17,5 +17,5 @@ export function GoogleMapImg(props: Props) {
     "markers",
     `size:mid|color:red|${geocode(props.address)}`,
   );
-  return <img className="object-none" src={mapUrl.toString()} />;
+  return <img className="object-none" src={mapUrl.toString()} alt="Map" />;
 }

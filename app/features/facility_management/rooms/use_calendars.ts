@@ -1,6 +1,6 @@
-import { api } from "@/app/clients/api";
-import { calendar } from "@/app/clients/googleapis";
-import { supabase } from "@/app/clients/supabase";
+import { api } from "@/clients/api";
+import { calendar } from "@/clients/googleapis";
+import { supabase } from "@/clients/supabase";
 import { useQuery } from "@tanstack/react-query";
 
 export function useCalendars() {

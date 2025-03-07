@@ -1,6 +1,6 @@
-import { user } from "@/app/db/auth_schema";
-import { db } from "@/app/db/database";
-import { facility, profile } from "@/app/db/schema";
+import { user } from "@/db/auth_schema";
+import { db } from "@/db/database";
+import { facility, profile } from "@/db/schema";
 import { authMiddleware } from "@/lib/auth/auth_middleware";
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";

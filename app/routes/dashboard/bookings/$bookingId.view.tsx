@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Route as bookingsIndexRoute } from "./index";
-import { BackButton } from "@/app/components/buttons/back_button";
-import { useRoomBooking } from "@/app/features/booking_management/hooks/use_room_booking";
-import type { RoomBookingSelect, RoomSelect } from "@/app/db/types";
-import { Card } from "@/app/components/card";
+import { BackButton } from "@/components/buttons/back_button";
+import { useRoomBooking } from "@/features/booking_management/hooks/use_room_booking";
+import type { RoomBookingSelect, RoomSelect } from "@/db/types";
+import { Card } from "@/components/card";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/lib/masks/masks";
 import { MapPinIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { PaperClipIcon, TrashIcon } from "@heroicons/react/16/solid";

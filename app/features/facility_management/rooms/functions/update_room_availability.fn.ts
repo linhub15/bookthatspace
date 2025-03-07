@@ -1,11 +1,11 @@
-import { db } from "@/app/db/database";
-import { room_availability } from "@/app/db/schema";
+import { db } from "@/db/database";
+import { room_availability } from "@/db/schema";
 import { authMiddleware } from "@/lib/auth/auth_middleware";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { listRoomAvailabilityFn } from "./list_room_availability.fn";
 import { and, eq, inArray } from "drizzle-orm";
-import { zRoomAvailabilityInsert } from "@/app/db/types";
+import { zRoomAvailabilityInsert } from "@/db/types";
 
 const request = z.object({
   roomId: z.string(),

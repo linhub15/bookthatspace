@@ -1,7 +1,8 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import tailwind from "@/app/index.css?url";
+import tailwind from "@/index.css?url";
 import {
+  CatchBoundary,
   createRootRouteWithContext,
   HeadContent,
   Outlet,
@@ -25,7 +26,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <CatchBoundary
+        getResetKey={() => "reset"}
+        onCatch={(error) => console.error(error)}
+      >
+        <Outlet />
+      </CatchBoundary>
     </RootDocument>
   );
 }

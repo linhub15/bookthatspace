@@ -9,10 +9,8 @@
     "strictNullChecks": true,
 
     "paths": {
-      "@/*": ["./*"],
-      "@lib/*": ["./lib/*"]
+      "@/*": ["./app/*"]
     }
   },
-
-  "include": ["."]
+  "include": ["./app/**/*", "*.ts"]
 }

@@ -1,8 +1,8 @@
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { Card } from "@/app/components/card";
-import { AddressDisplay } from "@/app/components/form/address_input";
-import { GoogleMapImg } from "@/app/components/google_map";
-import { useFacilityPublic } from "@/app/features/public/hooks/use_facility.public";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { Card } from "@/components/card";
+import { AddressDisplay } from "@/components/form/address_input";
+import { GoogleMapImg } from "@/components/google_map";
+import { useFacilityPublic } from "@/features/public/hooks/use_facility.public";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import type { Image } from "@/lib/types/image.type";
 import { cn } from "@/lib/utils/cn";
@@ -17,8 +17,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/app/components/ui/carousel";
-import type { RoomSelect } from "@/app/db/types";
+} from "@/components/ui/carousel";
+import type { RoomSelect } from "@/db/types";
 
 export const Route = createFileRoute("/@/$facilityId/")({
   component: RouteComponent,
@@ -53,8 +53,10 @@ function RouteComponent() {
               <SubmitButton>Book a Room</SubmitButton>
             </Link>
           </div>
+
           <div className="w-96 rounded-xl overflow-hidden">
-            <GoogleMapImg address={facility.data.address} />
+            {facility.data.address &&
+              <GoogleMapImg address={facility.data.address} />}
           </div>
         </div>
       </Card>

@@ -1,7 +1,7 @@
 import { useForm } from "@tanstack/react-form";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { FormField } from "@/app/components/form/form_field";
-import { Label } from "@/app/components/form/label";
+import { FormField } from "@/components/form/form_field";
+import { Label } from "@/components/form/label";
 import { useRejectBooking } from "./hooks/use_reject_booking";
 
 export function RejectBookingForm(

@@ -7,7 +7,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import { facilityRoute, publicBookingRoute } from "../../public/public.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
-import { router } from "@/app.router";
+import { router } from "@/router";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 

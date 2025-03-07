@@ -1,7 +1,7 @@
-import { Card } from "@/app/components/card";
-import { FacilityCard } from "@/app/features/facility_management/facility/facility_card";
-import { CreateRoomModalButton } from "@/app/features/facility_management/rooms/components/create_room_modal_button";
-import { useRooms } from "@/app/features/facility_management/rooms/hooks/use_rooms";
+import { Card } from "@/components/card";
+import { FacilityCard } from "@/features/facility_management/facility/facility_card";
+import { CreateRoomModalButton } from "@/features/facility_management/rooms/components/create_room_modal_button";
+import { useRooms } from "@/features/facility_management/rooms/hooks/use_rooms";
 import { maskHourlyRate } from "@/lib/masks/masks";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 

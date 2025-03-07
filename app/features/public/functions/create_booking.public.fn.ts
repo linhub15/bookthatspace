@@ -1,5 +1,5 @@
-import { db } from "@/app/db/database";
-import { room_booking } from "@/app/db/schema";
+import { db } from "@/db/database";
+import { room_booking } from "@/db/schema";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 

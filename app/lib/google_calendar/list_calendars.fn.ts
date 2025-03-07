@@ -1,4 +1,4 @@
-import { db } from "@/app/db/database";
+import { db } from "@/db/database";
 import { authMiddleware } from "@/lib/auth/auth_middleware";
 import { createServerFn } from "@tanstack/react-start";
 

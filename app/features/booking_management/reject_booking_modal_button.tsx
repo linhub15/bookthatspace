@@ -1,4 +1,4 @@
-import { Modal } from "@/app/components/modal";
+import { Modal } from "@/components/modal";
 import { useState } from "react";
 import { RejectBookingForm } from "./reject_booking_form";
 

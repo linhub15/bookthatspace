@@ -6,7 +6,7 @@ import useEmblaCarousel, {
 } from "embla-carousel-react";
 
 import { cn } from "@/lib/utils/cn";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -137,7 +137,6 @@ const Carousel = React.forwardRef<
           ref={ref}
           onKeyDownCapture={handleKeyDown}
           className={cn("relative", className)}
-          role="region"
           aria-roledescription="carousel"
           {...props}
         >
@@ -294,14 +293,15 @@ const CarouselIndicatorDots = (props: React.ComponentProps<"div">) => {
         props.className,
       )}
     >
-      {scrollSnaps.map((_, index) => (
+      {scrollSnaps.map((x, index) => (
         <button
           className={cn(
             "rounded-full size-2 border-2 border-white shadow-sm",
             selectedIndex === index ? "bg-gray-100" : "bg-gray-400/20",
           )}
           onClick={() => onDotButtonClick(index)}
-          key={index}
+          key={x}
+          type="button"
         >
         </button>
       ))}

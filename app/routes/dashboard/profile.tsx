@@ -1,7 +1,7 @@
-import { calendar } from "@/app/clients/googleapis";
-import { Card } from "@/app/components/card";
-import { ToggleSwitch } from "@/app/components/form/toggle_switch";
-import { useProfile } from "@/app/features/profile/use_profile";
+import { calendar } from "@/clients/googleapis";
+import { Card } from "@/components/card";
+import { ToggleSwitch } from "@/components/form/toggle_switch";
+import { useProfile } from "@/features/profile/use_profile";
 import {
   disableCalendar,
   enableCalendar,

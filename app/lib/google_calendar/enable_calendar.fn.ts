@@ -1,5 +1,5 @@
-import { db } from "@/app/db/database";
-import { google_calendar } from "@/app/db/schema";
+import { db } from "@/db/database";
+import { google_calendar } from "@/db/schema";
 import { authMiddleware } from "@/lib/auth/auth_middleware";
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";

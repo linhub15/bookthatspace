@@ -1,8 +1,8 @@
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { AddressInput } from "@/app/components/form/address_input";
-import { FormField } from "@/app/components/form/form_field";
-import { Label } from "@/app/components/form/label";
-import { useProfile } from "@/app/features/profile/use_profile";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { AddressInput } from "@/components/form/address_input";
+import { FormField } from "@/components/form/form_field";
+import { Label } from "@/components/form/label";
+import { useProfile } from "@/features/profile/use_profile";
 import { type Address, zAddress } from "@/lib/types/address";
 import { useForm } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

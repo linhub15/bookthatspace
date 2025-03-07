@@ -1,10 +1,10 @@
 import { useForm } from "@tanstack/react-form";
 import { Temporal } from "temporal-polyfill";
-import { Label } from "@/app/components/form/label";
-import { DatePicker } from "@/app/components/form/date_picker";
-import { TimePicker } from "@/app/components/form/time_picker";
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { FormField } from "@/app/components/form/form_field";
+import { Label } from "@/components/form/label";
+import { DatePicker } from "@/components/form/date_picker";
+import { TimePicker } from "@/components/form/time_picker";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { FormField } from "@/components/form/form_field";
 import { useRooms } from "../facility_management/rooms/hooks/use_rooms";
 import { useCreateBooking } from "./hooks/use_create_booking";
 import { z } from "zod";

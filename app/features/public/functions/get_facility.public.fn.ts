@@ -1,5 +1,5 @@
-import { db } from "@/app/db/database";
-import { room_image } from "@/app/db/schema";
+import { db } from "@/db/database";
+import { room_image } from "@/db/schema";
 import { createServerFn } from "@tanstack/react-start";
 import { sql } from "drizzle-orm";
 import { z } from "zod";

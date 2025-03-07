@@ -1,4 +1,4 @@
-import { Modal } from "@/app/components/modal";
+import { Modal } from "@/components/modal";
 import { type PropsWithChildren, useState } from "react";
 import { FacilityForm } from "./facility_form";
 

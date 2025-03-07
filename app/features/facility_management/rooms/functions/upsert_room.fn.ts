@@ -1,5 +1,5 @@
-import { db } from "@/app/db/database";
-import { room } from "@/app/db/schema";
+import { db } from "@/db/database";
+import { room } from "@/db/schema";
 import { authMiddleware } from "@/lib/auth/auth_middleware";
 import { createServerFn } from "@tanstack/react-start";
 import { createInsertSchema } from "drizzle-zod";

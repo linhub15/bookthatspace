@@ -1,5 +1,5 @@
-import { Card } from "@/app/components/card";
-import { AddressDisplay } from "@/app/components/form/address_input";
+import { Card } from "@/components/card";
+import { AddressDisplay } from "@/components/form/address_input";
 import { HomeModernIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useFacility } from "./use_facility";
 import { FacilityFormModalButton } from "./facility_form_modal_button";

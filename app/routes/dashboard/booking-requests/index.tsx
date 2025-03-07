@@ -1,5 +1,5 @@
-import { Card } from "@/app/components/card";
-import { useBookingRequests } from "@/app/features/booking_management/hooks/use_booking_requests";
+import { Card } from "@/components/card";
+import { useBookingRequests } from "@/features/booking_management/hooks/use_booking_requests";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/lib/masks/masks";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Route as reviewBookingRequestRoute } from "./$bookingId.review";

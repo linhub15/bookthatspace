@@ -1,4 +1,4 @@
-import { Enums } from "@lib/types/supabase_types";
+import { Enums } from "@/lib/types/supabase_types";
 
 /** ISO 8601 Monday is 1 */
 export const mapNumberToDayOfWeek: Record<number, Enums<"day_of_week">> = {

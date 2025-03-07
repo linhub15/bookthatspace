@@ -18,7 +18,3 @@ pnpm dev
 ```
 pnpm drizzle check
 ```
-
-## Roadmap
-
-- upgrade to Tailwind v4

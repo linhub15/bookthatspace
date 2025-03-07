@@ -1,4 +1,4 @@
-import { Card } from "@/app/components/card";
+import { Card } from "@/components/card";
 import {
   CheckIcon,
   ClipboardDocumentListIcon,
@@ -6,7 +6,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import { facilityRoute, publicBookingRoute } from "../../public/public.routes";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
-import { router } from "@/app.router";
+import { router } from "@.router";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils/cn";
 import { useFacility } from "../../facility_management/facility/use_facility";

@@ -1,6 +1,6 @@
-import { Card } from "@/app/components/card";
-import { Feed } from "@/app/components/feed";
-import { useBookingPublic } from "@/app/features/public/hooks/use_booking.public";
+import { Card } from "@/components/card";
+import { Feed } from "@/components/feed";
+import { useBookingPublic } from "@/features/public/hooks/use_booking.public";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/@/booking-success/$bookingId")({

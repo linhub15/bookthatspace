@@ -1,15 +1,13 @@
-import { Card } from "@/app/components/card";
-import { CreateBookingModalButton } from "@/app/features/booking_management/create_booking_modal_button";
+import { Card } from "@/components/card";
+import { CreateBookingModalButton } from "@/features/booking_management/create_booking_modal_button";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Route as bookingsIndexRoute } from "./index";
 import { maskDate, maskDurationSince, maskTimeRange } from "@/lib/masks/masks";
 import { Fragment } from "react/jsx-runtime";
 import { cn } from "@/lib/utils/cn";
-import { useRoomBookingList } from "@/app/features/booking_management/hooks/use_room_booking_list";
+import { useRoomBookingList } from "@/features/booking_management/hooks/use_room_booking_list";
 import { asPlainDate } from "@/lib/types/safe_date";
 import { Route as viewBookingRoute } from "./$bookingId.view";
-import { useEffect, useState } from "react";
-import { RoomBookingSelect } from "@/app/db/types";
 
 export const Route = createFileRoute("/dashboard/bookings/")({
   component: RouteComponent,

@@ -29,7 +29,7 @@ export function Feed(props: Props) {
     <div className="flow-root">
       <ul className="-mb-8">
         {timeline.map((event, eventIndex) => (
-          <li key={eventIndex}>
+          <li key={event.label}>
             <div className="relative pb-8">
               {eventIndex !== timeline.length - 1
                 ? (

@@ -1,4 +1,4 @@
-import { asDayOfWeek } from "@/app/db/types";
+import { asDayOfWeek } from "@/db/types";
 import { cn } from "@/lib/utils/cn";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Temporal } from "temporal-polyfill";
 import { Button } from "./button";
 import { useServerFn } from "@tanstack/react-start";
-import { listRoomAvailableDaysPublicFn } from "@/app/features/public/functions/list_room_available_days.public.fn";
+import { listRoomAvailableDaysPublicFn } from "@/features/public/functions/list_room_available_days.public.fn";
 
 type Props = {
   value: Temporal.PlainDate | undefined;

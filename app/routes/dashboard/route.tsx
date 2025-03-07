@@ -1,4 +1,4 @@
-import { Dashboard } from "@/app/features/dashboard/dashboard";
+import { Dashboard } from "@/features/dashboard/dashboard";
 import { getSessionFn } from "@/lib/auth/get_session.fn";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 

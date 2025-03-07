@@ -1,6 +1,6 @@
-import { db } from "@/app/db/database";
-import { room_availability, room_booking } from "@/app/db/schema";
-import { asDayOfWeekEnum } from "@/app/db/types";
+import { db } from "@/db/database";
+import { room_availability, room_booking } from "@/db/schema";
+import { asDayOfWeekEnum } from "@/db/types";
 import {
   asPlainDate,
   asPlainTime,

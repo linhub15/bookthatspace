@@ -1,7 +1,7 @@
-import { Card } from "@/app/components/card";
-import { AvailabilityCalendar } from "@/app/components/ui/availability_calendar";
-import { useFacilityPublic } from "@/app/features/public/hooks/use_facility.public";
-import { useRoomAvailabilityPublic } from "@/app/features/public/hooks/use_room_availability.public";
+import { Card } from "@/components/card";
+import { AvailabilityCalendar } from "@/components/ui/availability_calendar";
+import { useFacilityPublic } from "@/features/public/hooks/use_facility.public";
+import { useRoomAvailabilityPublic } from "@/features/public/hooks/use_room_availability.public";
 import { maskHourlyRate, maskPlainTimeRange } from "@/lib/masks/masks";
 import { cn } from "@/lib/utils/cn";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";

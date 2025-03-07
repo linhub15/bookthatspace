@@ -1,4 +1,4 @@
-import { Modal } from "@/app/components/modal";
+import { Modal } from "@/components/modal";
 import { useState } from "react";
 import { RoomForm } from "./room_form";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";

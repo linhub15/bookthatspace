@@ -1,12 +1,12 @@
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { TimePicker } from "@/app/components/form/time_picker";
-import { ToggleSwitch } from "@/app/components/form/toggle_switch";
-import { Button } from "@/app/components/ui/button";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { TimePicker } from "@/components/form/time_picker";
+import { ToggleSwitch } from "@/components/form/toggle_switch";
+import { Button } from "@/components/ui/button";
 import type {
   DayOfWeekEnum,
   RoomAvailabilityInsert,
   RoomAvailabilitySelect,
-} from "@/app/db/types";
+} from "@/db/types";
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useForm } from "@tanstack/react-form";
 import { Temporal } from "temporal-polyfill";

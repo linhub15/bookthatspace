@@ -1,20 +1,20 @@
-import { SubmitButton } from "@/app/components/buttons/submit_button";
-import { Card } from "@/app/components/card";
-import { DatePicker } from "@/app/components/form/date_picker";
-import { TimePicker } from "@/app/components/form/time_picker";
-import { RoomPicker } from "@/app/features/public/room_picker";
+import { SubmitButton } from "@/components/buttons/submit_button";
+import { Card } from "@/components/card";
+import { DatePicker } from "@/components/form/date_picker";
+import { TimePicker } from "@/components/form/time_picker";
+import { RoomPicker } from "@/features/public/room_picker";
 import { useForm } from "@tanstack/react-form";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Temporal } from "temporal-polyfill";
 import { Route as publicFacilityRoute } from "./index";
 import { Route as confirmationRoute } from "../booking-success.$bookingId";
-import { useCreateBookingPublic } from "@/app/features/public/hooks/use_create_booking.public";
-import { Label } from "@/app/components/form/label";
+import { useCreateBookingPublic } from "@/features/public/hooks/use_create_booking.public";
+import { Label } from "@/components/form/label";
 import { toZonedDateTime } from "@/lib/pipes/to_zoned_date_time";
 
 type Form = {
   date: Temporal.PlainDate | undefined;
-  room: string;
+  roomId: string;
   start: Temporal.PlainTime | undefined;
   end: Temporal.PlainTime | undefined;
   name: string;
@@ -24,21 +24,17 @@ type Form = {
 
 export const Route = createFileRoute("/@/$facilityId/book")({
   component: RouteComponent,
-  validateSearch: (search) => {
-    return { roomId: search.roomId as string };
-  },
 });
 
 function RouteComponent() {
   const { facilityId } = Route.useParams();
-  const { roomId } = Route.useSearch();
   const navigate = useNavigate();
   const mutation = useCreateBookingPublic();
 
   const form = useForm({
     defaultValues: {
       date: Temporal.Now.plainDateISO(),
-      room: roomId,
+      roomId: "",
       start: Temporal.PlainTime.from("00:00"),
       end: undefined,
       name: "",
@@ -53,7 +49,7 @@ function RouteComponent() {
         .toString({ timeZoneName: "never" });
 
       return await mutation.mutateAsync({
-        roomId: value.room,
+        roomId: value.roomId,
         start: start,
         end: end,
         bookedByName: value.name,
@@ -82,7 +78,7 @@ function RouteComponent() {
             form.handleSubmit();
           }}
         >
-          <form.Field name="room">
+          <form.Field name="roomId">
             {(field) => (
               <div className="space-y-2">
                 <div className="space-x-4">

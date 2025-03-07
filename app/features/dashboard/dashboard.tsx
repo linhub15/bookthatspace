@@ -24,10 +24,10 @@ import { Fragment, useState } from "react";
 import { useProfile } from "../profile/use_profile";
 import { useFacility } from "../facility_management/facility/use_facility";
 
-import { Route as bookingRequestRoute } from "@/app/routes/dashboard/booking-requests";
-import { Route as bookingsRoute } from "@/app/routes/dashboard/bookings";
-import { Route as facilityRoute } from "@/app/routes/dashboard/facility";
-import { Route as publicFacilityRoute } from "@/app/routes/@/$facilityId";
+import { Route as bookingRequestRoute } from "@/routes/dashboard/booking-requests";
+import { Route as bookingsRoute } from "@/routes/dashboard/bookings";
+import { Route as facilityRoute } from "@/routes/dashboard/facility";
+import { Route as publicFacilityRoute } from "@/routes/@/$facilityId";
 
 type NavItem = {
   name: string;

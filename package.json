@@ -12,7 +12,6 @@
     "@googleapis/calendar": "^9.8.0",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@preact/signals": "^2.0.1",
     "@radix-ui/react-slider": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",
     "@tanstack/react-form": "^1.0.2",

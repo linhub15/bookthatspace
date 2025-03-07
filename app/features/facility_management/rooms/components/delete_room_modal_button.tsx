@@ -1,4 +1,4 @@
-import { Modal } from "@/app/components/modal";
+import { Modal } from "@/components/modal";
 import { useState } from "react";
 import { useDeleteRoom } from "../hooks/use_delete_room";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
