@@ -27,20 +27,20 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2(@types/react@19.0.10)(react@19.0.0)
       '@tanstack/react-form':
-        specifier: ^1.0.0
-        version: 1.0.0(cdaf5d4d8c8ce8ffb5b9e63f065219c2)
+        specifier: ^1.0.2
+        version: 1.0.2(18816ea87c4b62743a2f0eba5614271b)
       '@tanstack/react-query':
-        specifier: ^5.67.1
-        version: 5.67.1(react@19.0.0)
+        specifier: ^5.67.2
+        version: 5.67.2(react@19.0.0)
       '@tanstack/react-router':
-        specifier: ^1.112.17
-        version: 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.112.18
+        version: 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tanstack/react-router-with-query':
-        specifier: ^1.112.17
-        version: 1.112.17(@tanstack/react-query@5.67.1(react@19.0.0))(@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^1.112.18
+        version: 1.112.18(@tanstack/react-query@5.67.2(react@19.0.0))(@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tanstack/react-start':
-        specifier: ^1.112.17
-        version: 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
+        specifier: ^1.113.0
+        version: 1.113.0(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
       better-auth:
         specifier: ^1.2.3
         version: 1.2.3(typescript@5.8.2)
@@ -91,8 +91,8 @@ importers:
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@3.4.17)
       '@tanstack/react-query-devtools':
-        specifier: ^5.67.1
-        version: 5.67.1(@tanstack/react-query@5.67.1(react@19.0.0))(react@19.0.0)
+        specifier: ^5.67.2
+        version: 5.67.2(@tanstack/react-query@5.67.2(react@19.0.0))(react@19.0.0)
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.10
@@ -116,7 +116,7 @@ importers:
         version: 5.8.2
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+        version: 5.1.4(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
 
 packages:
 
@@ -1188,12 +1188,12 @@ packages:
     resolution: {integrity: sha512-FA+nTU8p6OcSH4tLDY5JilGYr1bVWHpNmcLr7xmMEdbWmKHa+3QZ+DqefrXKmdjO/brHTnQZo20lLSjaO7ydog==}
     engines: {node: '>=18.16.0'}
 
-  '@poppinss/dumper@0.6.2':
-    resolution: {integrity: sha512-FhE9rY15aZ6Qp6ltQ0NZjseVRhwgWZ7+sg16343FqnjdUQvvBBi5eSeH/aZA4LF1ZOV5779DYrJXTHT42JlHNg==}
+  '@poppinss/dumper@0.6.3':
+    resolution: {integrity: sha512-iombbn8ckOixMtuV1p3f8jN6vqhXefNjJttoPaJDMeIk/yIGhkkL3OrHkEjE9SRsgoAx1vBUU2GtgggjvA5hCA==}
 
-  '@poppinss/exception@1.2.0':
-    resolution: {integrity: sha512-WLneXKQYNClhaMXccO111VQmZahSrcSRDaHRbV6KL5R4pTvK87fMn/MXLUcvOjk0X5dTHDPKF61tM7j826wrjQ==}
-    engines: {node: '>=20.6.0'}
+  '@poppinss/exception@1.2.1':
+    resolution: {integrity: sha512-aQypoot0HPSJa6gDPEPTntc1GT6QINrSbgRlRhadGW2WaYqUK3tK4Bw9SBMZXhmxd3GeAlZjVcODHgiu+THY7A==}
+    engines: {node: '>=18'}
 
   '@preact/signals-core@1.8.0':
     resolution: {integrity: sha512-OBvUsRZqNmjzCZXWLxkZfhcgT+Fk8DDcT/8vD6a1xhDemodyy87UJRJfASMuSD8FaAIeGgGm85ydXhm7lr4fyA==}
@@ -1353,14 +1353,14 @@ packages:
       '@types/react':
         optional: true
 
-  '@react-aria/focus@3.19.1':
-    resolution: {integrity: sha512-bix9Bu1Ue7RPcYmjwcjhB14BMu2qzfJ3tMQLqDc9pweJA66nOw8DThy3IfVr8Z7j2PHktOLf9kcbiZpydKHqzg==}
+  '@react-aria/focus@3.20.0':
+    resolution: {integrity: sha512-KXZCwWzwnmtUo6xhnyV26ptxlxmqd0Reez7axduqqqeDDgDZOVscoo/5gFg71fdPZmnDC8MyUK1vxSbMhOTrGg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-aria/interactions@3.23.0':
-    resolution: {integrity: sha512-0qR1atBIWrb7FzQ+Tmr3s8uH5mQdyRH78n0krYaG8tng9+u1JlSi8DGRSaC9ezKyNB84m7vHT207xnHXGeJ3Fg==}
+  '@react-aria/interactions@3.24.0':
+    resolution: {integrity: sha512-6Zdhp1pswyPgbwEWzvXARdKAWPjP7mACczoIUvlEQiMsX04fuizBiBLAA+W/5mPe17pbJYHA/rxZF5Y5m+M0Ng==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
@@ -1371,27 +1371,30 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-aria/utils@3.27.0':
-    resolution: {integrity: sha512-p681OtApnKOdbeN8ITfnnYqfdHS0z7GE+4l8EXlfLnr70Rp/9xicBO6d2rU+V/B3JujDw2gPWxYKEnEeh0CGCw==}
+  '@react-aria/utils@3.28.0':
+    resolution: {integrity: sha512-FfpvpADk61OvEnFe37k6jF1zr5gtafIPN9ccJRnPCTqrzuExag01mGi+wX/hWyFK0zAe1OjWf1zFOX3FsFvikg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
       react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
+  '@react-stately/flags@3.1.0':
+    resolution: {integrity: sha512-KSHOCxTFpBtxhIRcKwsD1YDTaNxFtCYuAUb0KEihc16QwqZViq4hasgPBs2gYm7fHRbw7WYzWKf6ZSo/+YsFlg==}
 
   '@react-stately/utils@3.10.5':
     resolution: {integrity: sha512-iMQSGcpaecghDIh3mZEpZfoFH3ExBwTtuBEcvZ2XnGzCgQjeYXcMdIUwAfVQLXFTdHUHGF6Gu6/dFrYsCzySBQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
-  '@react-types/shared@3.27.0':
-    resolution: {integrity: sha512-gvznmLhi6JPEf0bsq7SwRYTHAKKq/wcmKqFez9sRdbED+SPMUmK5omfZ6w3EwUFQHbYUa4zPBYedQ7Knv70RMw==}
+  '@react-types/shared@3.28.0':
+    resolution: {integrity: sha512-9oMEYIDc3sk0G5rysnYvdNrkSg7B04yTKl50HHSZVbokeHpnU0yRmsDaWb9B/5RprcKj8XszEk5guBO8Sa/Q+Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
   '@redocly/ajv@8.11.2':
     resolution: {integrity: sha512-io1JpnwtIcvojV7QKDUSIuMN/ikdOUd1ReEnUnMKGfDVridQZ31J0MmIuqwuRjWDZfmvr+Q0MqCcfHM2gTivOg==}
 
-  '@redocly/config@0.22.0':
-    resolution: {integrity: sha512-gAy93Ddo01Z3bHuVdPWfCwzgfaYgMdaZPcfL7JZ7hWJoK9V0lXDbigTWkhiPFAaLWzbOJ+kbUQG1+XwIm0KRGQ==}
+  '@redocly/config@0.22.1':
+    resolution: {integrity: sha512-1CqQfiG456v9ZgYBG9xRQHnpXjt8WoSnDwdkX6gxktuK69v2037hTAR1eh0DGIqpZ1p4k82cGH8yTNwt7/pI9g==}
 
   '@redocly/openapi-core@1.33.0':
     resolution: {integrity: sha512-MUB1jPxYX2NmgiobICcvyrkSbPSaGAb/P/MsxSW+UT9hxpQvDCX81bstGg68BcKIdeFvVRKcoyG4xiTgDOEBfQ==}
@@ -1444,8 +1447,8 @@ packages:
       rollup:
         optional: true
 
-  '@rollup/plugin-commonjs@28.0.2':
-    resolution: {integrity: sha512-BEFI2EDqzl+vA1rl97IDRZ61AIwGH093d9nz8+dThxJNH8oSoB7MjWvPCX3dkaK1/RCJ/1v/R1XB15FuSs0fQw==}
+  '@rollup/plugin-commonjs@28.0.3':
+    resolution: {integrity: sha512-pyltgilam1QPdn+Zd9gaCfOLcnjMEJ9gV+bTw6/r73INdvzf1ah9zLIJBm+kW7R6IUFIQ1YO+VqZtYxZNWFPEQ==}
     engines: {node: '>=16.0.0 || 14 >= 14.17'}
     peerDependencies:
       rollup: ^2.68.0||^3.0.0||^4.0.0
@@ -1633,25 +1636,25 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20 || >= 4.0.0-beta.1'
 
-  '@tanstack/directive-functions-plugin@1.111.2':
-    resolution: {integrity: sha512-9j4N7wt1C38n1Egi8kDE270QXgKEEADUyIGS2ZlcJIbrye7p4QjBxkcx600S+vMy9qFxEhw3I7Oi9/KjRp69qw==}
+  '@tanstack/directive-functions-plugin@1.112.18':
+    resolution: {integrity: sha512-QW7ne+xiVPW0bbRDfZzm65shh1V3eCwvS3nPFRFuNdcm7/Sg7/A77a7+scxNmuJpjqhaDybRtp0MmQTPQYFTVg==}
     engines: {node: '>=12'}
 
-  '@tanstack/form-core@1.0.0':
-    resolution: {integrity: sha512-GHYjF9m+FjXbIMpbMP1Ru8XzTJnQDva9wkw3E/fXUIPAtx0NmTGrefxUGqs7/aCT2uSqdrmzRyVFUJObemx51Q==}
+  '@tanstack/form-core@1.0.2':
+    resolution: {integrity: sha512-yHLs/YeWxW6E+VmlcwsTCKWvDXTpzF1REXGsvmjkIwZ4msZcWYac4QZJOpdLy1Cy7e8ftxTcCrrwA9G23OvQ/A==}
 
-  '@tanstack/history@1.112.8':
-    resolution: {integrity: sha512-+EPOvUtnA3PnIBF2oUhggdy7UrVimLZd1SpULhV1UiesNgKtmLjArO7ZdGPrRq7pRXhc8V0ZAWTI9vfplhZfeA==}
+  '@tanstack/history@1.112.18':
+    resolution: {integrity: sha512-57QWQ0DWkhJGwUxFqzHD51tfCZmU5Bnl7KY7x3yaKvk/+uU7i0Pz7d4HFTFMl+pxq/Q/zmV8TyQSctM5MIZWvw==}
     engines: {node: '>=12'}
 
-  '@tanstack/query-core@5.67.1':
-    resolution: {integrity: sha512-AkFmuukVejyqVIjEQoFhLb3q+xHl7JG8G9cANWTMe3s8iKzD9j1VBSYXgCjy6vm6xM8cUCR9zP2yqWxY9pTWOA==}
+  '@tanstack/query-core@5.67.2':
+    resolution: {integrity: sha512-+iaFJ/pt8TaApCk6LuZ0WHS/ECVfTzrxDOEL9HH9Dayyb5OVuomLzDXeSaI2GlGT/8HN7bDGiRXDts3LV+u6ww==}
 
-  '@tanstack/query-devtools@5.65.0':
-    resolution: {integrity: sha512-g5y7zc07U9D3esMdqUfTEVu9kMHoIaVBsD0+M3LPdAdD710RpTcLiNvJY1JkYXqkq9+NV+CQoemVNpQPBXVsJg==}
+  '@tanstack/query-devtools@5.67.2':
+    resolution: {integrity: sha512-O4QXFFd7xqp6EX7sdvc9tsVO8nm4lpWBqwpgjpVLW5g7IeOY6VnS/xvs/YzbRhBVkKTMaJMOUGU7NhSX+YGoNg==}
 
-  '@tanstack/react-form@1.0.0':
-    resolution: {integrity: sha512-8vhhpfdWlLfO92DF70dIzi/tKIbtVb0mJkixXPKUzfxgp/s0fpILNHeLePs5xjBlRmm35xt6PmNXwcGKM1Ofkg==}
+  '@tanstack/react-form@1.0.2':
+    resolution: {integrity: sha512-DaU/dAEfPaSYI/TIocNk7UOlwgqi17YWST9RYbUwaZ0+OKsNU6sxFZICaU6HKa9Dzrw2QppgWBBLjwcqZf4C7w==}
     peerDependencies:
       '@tanstack/react-start': ^1.112.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -1662,19 +1665,19 @@ packages:
       vinxi:
         optional: true
 
-  '@tanstack/react-query-devtools@5.67.1':
-    resolution: {integrity: sha512-a/2I8ORNalh+ek6Nyb9mEiq2u7vydjVMvaQz5ZieGq7r7DxgIFcPiMs4Ay0qkQvHfptESgXR5nImGTHmmt19yQ==}
+  '@tanstack/react-query-devtools@5.67.2':
+    resolution: {integrity: sha512-cmj2DxBc+/9btQ66n5xI8wTtAma2BLVa403K7zIYiguzJ/kV201jnGensYqJeu1Rd8uRMLLRM74jLVMLDWNRJA==}
     peerDependencies:
-      '@tanstack/react-query': ^5.67.1
+      '@tanstack/react-query': ^5.67.2
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.67.1':
-    resolution: {integrity: sha512-fH5u4JLwB6A+wLFdi8wWBWAYoJV5deYif2OveJ26ktAWjU499uvVFS1wPWnyEyq5LvZX1MZInvv9QRaIZANRaQ==}
+  '@tanstack/react-query@5.67.2':
+    resolution: {integrity: sha512-6Sa+BVNJWhAV4QHvIqM73norNeGRWGC3ftN0Ix87cmMvI215I1wyJ44KUTt/9a0V9YimfGcg25AITaYVel71Og==}
     peerDependencies:
       react: ^18 || ^19
 
-  '@tanstack/react-router-with-query@1.112.17':
-    resolution: {integrity: sha512-9uLLFYX7rLrQFZF9juLeahS2a/vEb7JgBr+fzZbO+n69cNbZSfxFktlkESQfzhOhm+xpELohpJdB6Xa2YiAruA==}
+  '@tanstack/react-router-with-query@1.112.18':
+    resolution: {integrity: sha512-gWR/BIB/xJSFbzeeIVn45lFYP1y2TGu4vxR3BYngGhf3Q5MQR1PefaLkyPOmB9I6BfYtW6lBSYVhsRMDGgtl8Q==}
     engines: {node: '>=12'}
     peerDependencies:
       '@tanstack/react-query': '>=5.49.2'
@@ -1682,71 +1685,71 @@ packages:
       react: '>=18.0.0 || >=19.0.0'
       react-dom: '>=18.0.0 || >=19.0.0'
 
-  '@tanstack/react-router@1.112.17':
-    resolution: {integrity: sha512-UYd9FspQAFs9uxSwHBWQ7LIO1M7FcKVCpYm+vdYJABj6RRMelWuBOOIXgYhMJaGBPazQO3wZVytkW+RW+iwA1A==}
+  '@tanstack/react-router@1.112.18':
+    resolution: {integrity: sha512-eOoCD1DDWOxHaG1kTaY6dJ5EfpKO8JZKWQ+o6txvAmQhe/qk9eKkb26D0YXcOgOmnltjRXPN/7JRwK4mpJPQzw==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=18.0.0 || >=19.0.0'
       react-dom: '>=18.0.0 || >=19.0.0'
 
-  '@tanstack/react-start-api-routes@1.112.17':
-    resolution: {integrity: sha512-spMOyVhMdHH+S8cTmm7SIzkreljUzkNKdkpAKPFsnP9/2+zmKWPPwIsYp8VrRAGO0ynuAY624AFM+QDd3PtjYw==}
+  '@tanstack/react-start-api-routes@1.112.18':
+    resolution: {integrity: sha512-Rm4KXv9kJxBCHX1TNrJ+cGYVTwEsD37t2TIEv9YrgadyaZ6YxBy6WsAcZmB4M/VECKRINtcUq3LI3HA33HObiQ==}
     engines: {node: '>=12'}
 
-  '@tanstack/react-start-client@1.112.17':
-    resolution: {integrity: sha512-NOElGeP3Lrbpq0E/WtRHLTLQGRRzHfaHS91tiRbcdn83xOixsc3VhFztrusqeSdqut7fLYhFNEfp4InJSabb/g==}
+  '@tanstack/react-start-client@1.112.18':
+    resolution: {integrity: sha512-Q3VjC6x7zZxgSYYJxiWEtESG0YPkjZBElTDSRmMmlk0uipza/v2r0Be3nIXacAxnQeLgfK8h2wI3Drygcyv7Rg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=18.0.0 || >=19.0.0'
       react-dom: '>=18.0.0 || >=19.0.0'
 
-  '@tanstack/react-start-config@1.112.17':
-    resolution: {integrity: sha512-EPXqWBtKRGUEw0jMAPFPnWwTK5QPFqf6tAceYFAEQ1GivkbBDp7+nO+l/OGSZC/zxSO22A5kARtALDv6nfIOVw==}
+  '@tanstack/react-start-config@1.113.0':
+    resolution: {integrity: sha512-2AGDoKO64+kbLdPxrw0XqHc0EekXlus6hk5JjrJqi+MwISMdDes3Q6lv0iZvq1a2i/Yh2iV0Tv9RG2PdaOl+gA==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=18.0.0 || >=19.0.0'
       react-dom: '>=18.0.0 || >=19.0.0'
       vite: ^6.0.0
 
-  '@tanstack/react-start-plugin@1.112.14':
-    resolution: {integrity: sha512-iVjx/936Ohp7z6FZ4sUqfHw9h8jrICFRHmzC+9IyQGIWnwW0jYT4CBcTwKHTx6ROEDGbkS/ZQ+GlVPr3v9VNsQ==}
+  '@tanstack/react-start-plugin@1.112.18':
+    resolution: {integrity: sha512-cK/aAEQyU623V7H/NHPWlleyRgiR0YP3hBIkfss57Ef7yBEhZ7Nz5ypiGZ8xwcTTQcxk8myZgCfQUKo1nOiIFw==}
     engines: {node: '>=12'}
 
-  '@tanstack/react-start-router-manifest@1.112.12':
-    resolution: {integrity: sha512-dRPahRZjwJQXkw1WTyDZmilzB4S5RWp3hgKqcvVa5Zjb61ZiC5ubvS5jLOi7lneyY+tXGiOBE9Y96srfTgR4nQ==}
+  '@tanstack/react-start-router-manifest@1.112.18':
+    resolution: {integrity: sha512-X1slY47p6jq+0z+PDhyYJ6GuRKDXKJU8uwDwGTQGhTruLxq8FHqYvFR2HPXrqAJzYtDhaVhUnR83w9IMXldUrw==}
     engines: {node: '>=12'}
 
-  '@tanstack/react-start-server-functions-client@1.112.17':
-    resolution: {integrity: sha512-oVoyC5RBki8vv4Mym5tq6qDOul41FjWa1MgJake/ynvogFNYx7x34OpxvODj8KpU6IK2G083cAx1HRkc5u20rw==}
+  '@tanstack/react-start-server-functions-client@1.112.18':
+    resolution: {integrity: sha512-uHZNeBcMDLpzDMFozFg5OzhydWTb+jVqOL/PyCfKwh0ojri4SPlhRzuONRrG47Uqy4vSqhJrQV5V19uKRsMMnw==}
     engines: {node: '>=12'}
 
-  '@tanstack/react-start-server-functions-fetcher@1.112.17':
-    resolution: {integrity: sha512-PplT8QvuwQt5BWDoJnv+FkRHPUOYV9TGmTHx3BIOLZ+iK8wyYcpNI5BADUr8utxnTdCNvFtixGuxfXwC5tUy/A==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      react: '>=18.0.0 || >=19.0.0'
-      react-dom: '>=18.0.0 || >=19.0.0'
-
-  '@tanstack/react-start-server-functions-handler@1.112.17':
-    resolution: {integrity: sha512-Q7Eey/u9URTRi656W+gcWnI9AeyPTByYGY/QuB7KOOdt3/3G9lHMofo1CdAWPYFBQeBvCie++whEdmnIVo61TA==}
+  '@tanstack/react-start-server-functions-fetcher@1.112.18':
+    resolution: {integrity: sha512-p44Vr3gsjvMdzicPevy7MEi2XvxKr6Wpqxrt03Yokr5RP/Ca8TxtMOzhjrZKKLQvFx6PN4EKh3US6VfNYaq2Sg==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=18.0.0 || >=19.0.0'
       react-dom: '>=18.0.0 || >=19.0.0'
 
-  '@tanstack/react-start-server-functions-ssr@1.112.17':
-    resolution: {integrity: sha512-NGEUQW3hYhntefKaMIfdL+kv1vDqHlt76Ib7EjH8UwvJ3BT3m1VSMW57NafFtOmYeEUderbCcounjADb+3I16A==}
-    engines: {node: '>=12'}
-
-  '@tanstack/react-start-server@1.112.17':
-    resolution: {integrity: sha512-TO1LJiA/FBz28InCJUGrTqQ0P74Q1w7BTz9p+P9K0t8Ysnl0vwUHLBEHw3xEScC5bs5OAlElr/I5GzzixN+szw==}
+  '@tanstack/react-start-server-functions-handler@1.112.18':
+    resolution: {integrity: sha512-vAdVQPL2sd28H33Nqf4HCILPv3wsUzLwiI2wLfPoSwOOgCfecR9v99aYUQRBnZE4xCqwEyUxfGOv5etAf14zig==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=18.0.0 || >=19.0.0'
       react-dom: '>=18.0.0 || >=19.0.0'
 
-  '@tanstack/react-start@1.112.17':
-    resolution: {integrity: sha512-1R9I/lOns8iJ9LFpcMhH536Mx9hKsi75muC0s61a7zXvDPThsKHduzrwfK5jx/kTvk1CFR09E+E86cIzOu/fVw==}
+  '@tanstack/react-start-server-functions-ssr@1.112.18':
+    resolution: {integrity: sha512-Y2Eaf5F6daiUr7rwSs3duI12VcCGLI2GFe4xn46lRf8th4HiGMa4KTcrcRhMGxFFGgZckje5SriJB6kGzHb4PA==}
+    engines: {node: '>=12'}
+
+  '@tanstack/react-start-server@1.112.18':
+    resolution: {integrity: sha512-cS8QkHsm2JTIGEgPnq4OVjzojwEubCyECUHfktXQNNuTFdfHeAcZDe4KbVMzCCfVInuqSI8dq8kc1BbuhjkF5g==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=18.0.0 || >=19.0.0'
+      react-dom: '>=18.0.0 || >=19.0.0'
+
+  '@tanstack/react-start@1.113.0':
+    resolution: {integrity: sha512-L0M5KRkFwvAjT8HZOHfwBqYSjnPwgbP0mOYJg2bVAnLLtvV4xhpH3FYFZy3wmxKtpnAtFfOlFwe/Fa8atISLrw==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=18.0.0 || >=19.0.0'
@@ -1765,25 +1768,25 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@tanstack/router-core@1.112.12':
-    resolution: {integrity: sha512-nuKEl7qEDO/F4+d7RdAHmxGAq6Sc1SJyCRthnxycSANMTK8bAT6gVoAaag/BJgl4aKgmP1iSHPVv8slcVpmPrQ==}
+  '@tanstack/router-core@1.112.18':
+    resolution: {integrity: sha512-OQ7qxpK6l0727LUzaDBNj6Wg4yBtYyIgTqThMFN2a5Tl7nNAFfjh4xfSljmXEMRmrcZTprdDpbD8NHq1wgLVvA==}
     engines: {node: '>=12'}
 
-  '@tanstack/router-generator@1.112.17':
-    resolution: {integrity: sha512-UPpRyKMWlHG56KoUOYSM6JwJkj31+CXw9nrIiHjhSSyyR6Quk0fY+DPACGKM2Qh+3kUgQ9GXUhXahTdUyjWNyQ==}
+  '@tanstack/router-generator@1.113.0':
+    resolution: {integrity: sha512-r8Yh1Nr3LIf7Nzv388CjXnSB2nooAN+HoRzPUE15O0pxsVXc7ISRQVSXgniJgitxsrqRRbuBLlN1RyvQZpfzFw==}
     engines: {node: '>=12'}
     peerDependencies:
-      '@tanstack/react-router': ^1.112.17
+      '@tanstack/react-router': ^1.112.18
     peerDependenciesMeta:
       '@tanstack/react-router':
         optional: true
 
-  '@tanstack/router-plugin@1.112.17':
-    resolution: {integrity: sha512-EIm+T4S3c1R180OAK1VviyUJmM5Z1Iagwu0E3oHs4vCc4fDVP55IEPpYp7C1rNP8HjobmErv+CN7a6h1YDiFQQ==}
+  '@tanstack/router-plugin@1.113.0':
+    resolution: {integrity: sha512-i9gMHtSYCPbm2QyDxiIia8mV1MghgE04nuhKIX+1jiMD8rizPpmALuQMwqCC2697/8bjnJ0NB8GUY0UFPv5lGQ==}
     engines: {node: '>=12'}
     peerDependencies:
       '@rsbuild/core': '>=1.0.2'
-      '@tanstack/react-router': ^1.112.17
+      '@tanstack/react-router': ^1.112.18
       vite: '>=5.0.0 || >=6.0.0'
       vite-plugin-solid: ^2.11.2
       webpack: '>=5.92.0'
@@ -1799,16 +1802,16 @@ packages:
       webpack:
         optional: true
 
-  '@tanstack/router-utils@1.102.2':
-    resolution: {integrity: sha512-Uwl2nbrxhCzviaHHBLNPhSC/OMpZLdOTxTJndUSsXTzWUP4IoQcVmngaIsxi9iriE3ArC1VXuanUAkfGmimNOQ==}
+  '@tanstack/router-utils@1.112.18':
+    resolution: {integrity: sha512-qo6Ac9geasjmt3zfcG73N6PDYqXhIvKO0c2Z41r8al7EBZvjU1eM9DR9nPE6jXu3y2B4/Nd5UiVGvP7/vXUDng==}
     engines: {node: '>=12'}
 
-  '@tanstack/server-functions-plugin@1.111.2':
-    resolution: {integrity: sha512-V1UzMXNGO7igH/Dk6cDRw6V3VM8TbJca+UEUrdV/J7M3jLMfMr5BoASmoKdWmTvrRsML8F1CFKsv6XdrG5c8LA==}
+  '@tanstack/server-functions-plugin@1.112.18':
+    resolution: {integrity: sha512-Q3/CGxaf6wb0mFaF6j3DjiWRjn4Dort3jpXC5j0+8t/rW7woNGyQ+9+aID9BDFoXA5PksoCX2GEi6TwT0fD2+A==}
     engines: {node: '>=12'}
 
-  '@tanstack/start-server-functions-server@1.111.10':
-    resolution: {integrity: sha512-XZSaJlj5zmxSDDoV0qP89aTHXiH28vYpNMsPSzk4L/Q4dd7rSSExG8heRks0XlsWzhNVM0WSKB3H5zDJ6in0KQ==}
+  '@tanstack/start-server-functions-server@1.112.18':
+    resolution: {integrity: sha512-D80+YBoVsqOStPV9WrUvgKmIy39zhpAkObmGFKY0DwKGG9InZuLu8EVDJm1rVIm5TrePwpzZZuLCCGYtfMC1fQ==}
     engines: {node: '>=12'}
 
   '@tanstack/store@0.7.0':
@@ -2463,8 +2466,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.112:
-    resolution: {integrity: sha512-oen93kVyqSb3l+ziUgzIOlWt/oOuy4zRmpwestMn4rhFWAoFJeFuCVte9F2fASjeZZo7l/Cif9TiyrdW4CwEMA==}
+  electron-to-chromium@1.5.113:
+    resolution: {integrity: sha512-wjT2O4hX+wdWPJ76gWSkMhcHAV2PTMX+QetUCPYEdCIe+cxmgzzSSiGRCKW8nuh4mwKZlpv0xvoW7OF2X+wmHg==}
 
   embla-carousel-react@8.5.2:
     resolution: {integrity: sha512-Tmx+uY3MqseIGdwp0ScyUuxpBgx5jX1f7od4Cm5mDwg/dptEiTKf9xp6tw0lZN2VA9JbnVMl/aikmbc53c6QFA==}
@@ -2500,8 +2503,8 @@ packages:
     resolution: {integrity: sha512-dtJUTepzMW3Lm/NPxRf3wP4642UWhjL2sQxc+ym2YMj1m/H2zDNQOlezafzkHwn6sMstjHTwG6iQQsctDW/b1A==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  error-stack-parser-es@0.1.5:
-    resolution: {integrity: sha512-xHku1X40RO+fO8yJ8Wh2f2rZWVjqyhb1zgq1yZ8aZRQkv6OOKhKWRUaht3eSCUbAOBaKIgM+ykwFLE+QUxgGeg==}
+  error-stack-parser-es@1.0.5:
+    resolution: {integrity: sha512-5qucVt2XcuGMcEGgWI7i+yZpmpByQ8J1lHhcL7PwqCwu9FPP3VUXzT4ltHe5i2z9dePwEHcDVOAfSnHsOlCXRA==}
 
   es-define-property@1.0.1:
     resolution: {integrity: sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==}
@@ -3123,8 +3126,8 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  nanoid@3.3.8:
-    resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
+  nanoid@3.3.9:
+    resolution: {integrity: sha512-SppoicMGpZvbF1l3z4x7No3OlIjP7QJvC9XR7AhZr1kL133KHnKPztkKDc+Ir4aJ/1VhTySrtKhrsycmrMQfvg==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -3135,8 +3138,8 @@ packages:
   napi-build-utils@2.0.0:
     resolution: {integrity: sha512-GEbrYkbfF7MoNaoh2iGG84Mnf/WZfB0GdGEsM8wz7Expx/LlWf5U8t9nvJKXSp3qr5IsEbK04cBGhol/KwOsWA==}
 
-  nitropack@2.11.2:
-    resolution: {integrity: sha512-NyXw88hkrigXYo0iDodEbWdLyv8iF69LAj63eS+FDLg8+IDEKv1y58eMKmzk8vW/hwHoi2aimqHTfsZbqFAWrg==}
+  nitropack@2.11.5:
+    resolution: {integrity: sha512-reMkV/aFfaiD37gWa8ehGHBxF0rrAJIJr3GK8DmaQzV0ucyxOCFx2mO92c8dRV1tBXISKL60YwBofhwgGv+bMw==}
     engines: {node: ^16.11.0 || >=17.0.0}
     hasBin: true
     peerDependencies:
@@ -4039,8 +4042,8 @@ packages:
       yaml:
         optional: true
 
-  vite@6.2.0:
-    resolution: {integrity: sha512-7dPxoo+WsT/64rDcwoOjk76XHj+TqNTIvHKcuMQ1k4/SeHDaQt5GFAeLYzrimZrMpn/O6DtdI03WUjdxuPM0oQ==}
+  vite@6.2.1:
+    resolution: {integrity: sha512-n2GnqDb6XPhlt9B8olZPrgMD/es/Nd1RdChF6CBD/fHW6pUyUTt2sQW2fPRX5GiD9XEa6+8A6A4f2vT6pSsE7Q==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -4151,13 +4154,13 @@ packages:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
 
-  youch-core@0.3.1:
-    resolution: {integrity: sha512-KOAmtABz17fgK+uBBJYIzaPpIgX+JgTRgY4t3zXH18akc5rRtFkRmcNTMCuSxLdbOJDY9+T/O3nyA/EQuN4EWA==}
-    engines: {node: '>=20.6.0'}
+  youch-core@0.3.2:
+    resolution: {integrity: sha512-fusrlIMLeRvTFYLUjJ9KzlGC3N+6MOPJ68HNj/yJv2nz7zq8t4HEviLms2gkdRPUS7F5rZ5n+pYx9r88m6IE1g==}
+    engines: {node: '>=18'}
 
-  youch@4.1.0-beta.5:
-    resolution: {integrity: sha512-92+bvKtAjm18S2o+IP0aLBpLtzY332Ji9geNLp07cLgHsK3aHVjWrg2eyE5LIKMv6j+GWu+Ehx4My7BTXxMbsA==}
-    engines: {node: '>=20.6.0'}
+  youch@4.1.0-beta.6:
+    resolution: {integrity: sha512-y1aNsEeoLXnWb6pI9TvfNPIxySyo4Un3OGxKn7rsNj8+tgSquzXEWkzfA5y6gU0fvzmQgvx3JBn/p51qQ8Xg9A==}
+    engines: {node: '>=18'}
 
   zip-stream@6.0.1:
     resolution: {integrity: sha512-zK7YHHz4ZXpW89AHXUPbQVGKI7uvkd3hzusTdotCg1UxyaVtg0zFJSTfW/Dq5f7OBBVnq6cZIaC8Ti4hb6dtCA==}
@@ -4715,8 +4718,8 @@ snapshots:
   '@headlessui/react@2.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@floating-ui/react': 0.26.28(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-aria/focus': 3.19.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-aria/interactions': 3.23.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-aria/focus': 3.20.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-aria/interactions': 3.24.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tanstack/react-virtual': 3.13.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
@@ -4918,13 +4921,13 @@ snapshots:
     dependencies:
       kleur: 4.1.5
 
-  '@poppinss/dumper@0.6.2':
+  '@poppinss/dumper@0.6.3':
     dependencies:
       '@poppinss/colors': 4.1.4
       '@sindresorhus/is': 7.0.1
       supports-color: 10.0.0
 
-  '@poppinss/exception@1.2.0': {}
+  '@poppinss/exception@1.2.1': {}
 
   '@preact/signals-core@1.8.0': {}
 
@@ -5065,21 +5068,22 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.0.10
 
-  '@react-aria/focus@3.19.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@react-aria/focus@3.20.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@react-aria/interactions': 3.23.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-aria/utils': 3.27.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-types/shared': 3.27.0(react@19.0.0)
+      '@react-aria/interactions': 3.24.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-aria/utils': 3.28.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       clsx: 2.1.1
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@react-aria/interactions@3.23.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@react-aria/interactions@3.24.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@react-aria/ssr': 3.9.7(react@19.0.0)
-      '@react-aria/utils': 3.27.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@react-types/shared': 3.27.0(react@19.0.0)
+      '@react-aria/utils': 3.28.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@react-stately/flags': 3.1.0
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
@@ -5089,22 +5093,27 @@ snapshots:
       '@swc/helpers': 0.5.15
       react: 19.0.0
 
-  '@react-aria/utils@3.27.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@react-aria/utils@3.28.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@react-aria/ssr': 3.9.7(react@19.0.0)
+      '@react-stately/flags': 3.1.0
       '@react-stately/utils': 3.10.5(react@19.0.0)
-      '@react-types/shared': 3.27.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       clsx: 2.1.1
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
+
+  '@react-stately/flags@3.1.0':
+    dependencies:
+      '@swc/helpers': 0.5.15
 
   '@react-stately/utils@3.10.5(react@19.0.0)':
     dependencies:
       '@swc/helpers': 0.5.15
       react: 19.0.0
 
-  '@react-types/shared@3.27.0(react@19.0.0)':
+  '@react-types/shared@3.28.0(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -5115,12 +5124,12 @@ snapshots:
       require-from-string: 2.0.2
       uri-js-replace: 1.0.1
 
-  '@redocly/config@0.22.0': {}
+  '@redocly/config@0.22.1': {}
 
   '@redocly/openapi-core@1.33.0(supports-color@9.4.0)':
     dependencies:
       '@redocly/ajv': 8.11.2
-      '@redocly/config': 0.22.0
+      '@redocly/config': 0.22.1
       colorette: 1.4.0
       https-proxy-agent: 7.0.6(supports-color@9.4.0)
       js-levenshtein: 1.1.6
@@ -5189,7 +5198,7 @@ snapshots:
     optionalDependencies:
       rollup: 4.34.9
 
-  '@rollup/plugin-commonjs@28.0.2(rollup@4.34.9)':
+  '@rollup/plugin-commonjs@28.0.3(rollup@4.34.9)':
     dependencies:
       '@rollup/pluginutils': 5.1.4(rollup@4.34.9)
       commondir: 1.0.1
@@ -5336,7 +5345,7 @@ snapshots:
       mini-svg-data-uri: 1.4.4
       tailwindcss: 3.4.17
 
-  '@tanstack/directive-functions-plugin@1.111.2(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
+  '@tanstack/directive-functions-plugin@1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.9
@@ -5345,7 +5354,7 @@ snapshots:
       '@babel/template': 7.26.9
       '@babel/traverse': 7.26.9
       '@babel/types': 7.26.9
-      '@tanstack/router-utils': 1.102.2
+      '@tanstack/router-utils': 1.112.18
       babel-dead-code-elimination: 1.0.9
       dedent: 1.5.3
       tiny-invariant: 1.3.3
@@ -5365,63 +5374,63 @@ snapshots:
       - tsx
       - yaml
 
-  '@tanstack/form-core@1.0.0':
+  '@tanstack/form-core@1.0.2':
     dependencies:
       '@tanstack/store': 0.7.0
 
-  '@tanstack/history@1.112.8': {}
+  '@tanstack/history@1.112.18': {}
 
-  '@tanstack/query-core@5.67.1': {}
+  '@tanstack/query-core@5.67.2': {}
 
-  '@tanstack/query-devtools@5.65.0': {}
+  '@tanstack/query-devtools@5.67.2': {}
 
-  '@tanstack/react-form@1.0.0(cdaf5d4d8c8ce8ffb5b9e63f065219c2)':
+  '@tanstack/react-form@1.0.2(18816ea87c4b62743a2f0eba5614271b)':
     dependencies:
       '@remix-run/node': 2.16.0(typescript@5.8.2)
-      '@tanstack/form-core': 1.0.0
+      '@tanstack/form-core': 1.0.2
       '@tanstack/react-store': 0.7.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       decode-formdata: 0.8.0
       react: 19.0.0
     optionalDependencies:
-      '@tanstack/react-start': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
+      '@tanstack/react-start': 1.113.0(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
       vinxi: 0.5.3(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - react-dom
       - typescript
 
-  '@tanstack/react-query-devtools@5.67.1(@tanstack/react-query@5.67.1(react@19.0.0))(react@19.0.0)':
+  '@tanstack/react-query-devtools@5.67.2(@tanstack/react-query@5.67.2(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@tanstack/query-devtools': 5.65.0
-      '@tanstack/react-query': 5.67.1(react@19.0.0)
+      '@tanstack/query-devtools': 5.67.2
+      '@tanstack/react-query': 5.67.2(react@19.0.0)
       react: 19.0.0
 
-  '@tanstack/react-query@5.67.1(react@19.0.0)':
+  '@tanstack/react-query@5.67.2(react@19.0.0)':
     dependencies:
-      '@tanstack/query-core': 5.67.1
+      '@tanstack/query-core': 5.67.2
       react: 19.0.0
 
-  '@tanstack/react-router-with-query@1.112.17(@tanstack/react-query@5.67.1(react@19.0.0))(@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@tanstack/react-router-with-query@1.112.18(@tanstack/react-query@5.67.2(react@19.0.0))(@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@tanstack/react-query': 5.67.1(react@19.0.0)
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tanstack/react-query': 5.67.2(react@19.0.0)
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@tanstack/history': 1.112.8
+      '@tanstack/history': 1.112.18
       '@tanstack/react-store': 0.7.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tanstack/router-core': 1.112.12
+      '@tanstack/router-core': 1.112.18
       jsesc: 3.1.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
 
-  '@tanstack/react-start-api-routes@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-api-routes@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-start-server': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/router-core': 1.112.12
+      '@tanstack/react-start-server': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/router-core': 1.112.18
       vinxi: 0.5.3(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -5468,10 +5477,10 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-client@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-client@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tanstack/router-core': 1.112.12
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tanstack/router-core': 1.112.18
       cookie-es: 1.2.2
       jsesc: 3.1.0
       react: 19.0.0
@@ -5522,22 +5531,22 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-config@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)':
+  '@tanstack/react-start-config@1.113.0(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tanstack/react-start-plugin': 1.112.14(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
-      '@tanstack/react-start-server-functions-handler': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/router-generator': 1.112.17(@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
-      '@tanstack/router-plugin': 1.112.17(@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
-      '@tanstack/server-functions-plugin': 1.111.2(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
-      '@vitejs/plugin-react': 4.3.4(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tanstack/react-start-plugin': 1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@tanstack/react-start-server-functions-handler': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/router-generator': 1.113.0(@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+      '@tanstack/router-plugin': 1.113.0(@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
+      '@tanstack/server-functions-plugin': 1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@vitejs/plugin-react': 4.3.4(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
       import-meta-resolve: 4.1.0
-      nitropack: 2.11.2(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(typescript@5.8.2)
+      nitropack: 2.11.5(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(typescript@5.8.2)
       ofetch: 1.4.1
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       vinxi: 0.5.3(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      vite: 6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       zod: 3.24.2
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -5586,7 +5595,7 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-plugin@1.112.14(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
+  '@tanstack/react-start-plugin@1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.9
@@ -5595,7 +5604,7 @@ snapshots:
       '@babel/template': 7.26.9
       '@babel/traverse': 7.26.9
       '@babel/types': 7.26.9
-      '@tanstack/router-utils': 1.102.2
+      '@tanstack/router-utils': 1.112.18
       babel-dead-code-elimination: 1.0.9
       tiny-invariant: 1.3.3
       vite: 6.1.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
@@ -5613,9 +5622,9 @@ snapshots:
       - tsx
       - yaml
 
-  '@tanstack/react-start-router-manifest@1.112.12(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-router-manifest@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/router-core': 1.112.12
+      '@tanstack/router-core': 1.112.18
       tiny-invariant: 1.3.3
       vinxi: 0.5.3(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
     transitivePeerDependencies:
@@ -5661,10 +5670,10 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-server-functions-client@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-server-functions-client@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-start-server-functions-fetcher': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/server-functions-plugin': 1.111.2(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@tanstack/react-start-server-functions-fetcher': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/server-functions-plugin': 1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -5711,11 +5720,11 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-server-functions-fetcher@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-server-functions-fetcher@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tanstack/react-start-client': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/router-core': 1.112.12
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tanstack/react-start-client': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/router-core': 1.112.18
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
     transitivePeerDependencies:
@@ -5761,11 +5770,11 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-server-functions-handler@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-server-functions-handler@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tanstack/react-start-client': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-server': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tanstack/react-start-client': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-server': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       tiny-invariant: 1.3.3
@@ -5812,12 +5821,12 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-server-functions-ssr@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-server-functions-ssr@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-start-client': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-server': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-server-functions-fetcher': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/server-functions-plugin': 1.111.2(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@tanstack/react-start-client': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-server': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-server-functions-fetcher': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/server-functions-plugin': 1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       tiny-invariant: 1.3.3
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -5865,12 +5874,12 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start-server@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
+  '@tanstack/react-start-server@1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/history': 1.112.8
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tanstack/react-start-client': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/router-core': 1.112.12
+      '@tanstack/history': 1.112.18
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tanstack/react-start-client': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/router-core': 1.112.18
       h3: 1.13.0
       isbot: 5.1.23
       jsesc: 3.1.0
@@ -5921,20 +5930,20 @@ snapshots:
       - xml2js
       - yaml
 
-  '@tanstack/react-start@1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)':
+  '@tanstack/react-start@1.113.0(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)':
     dependencies:
-      '@tanstack/react-start-api-routes': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-client': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-config': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
-      '@tanstack/react-start-router-manifest': 1.112.12(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-server': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-server-functions-client': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-server-functions-handler': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/react-start-server-functions-ssr': 1.112.17(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
-      '@tanstack/start-server-functions-server': 1.111.10(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@tanstack/react-start-api-routes': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-client': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-config': 1.113.0(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(yaml@2.7.0)
+      '@tanstack/react-start-router-manifest': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-server': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-server-functions-client': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-server-functions-handler': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/react-start-server-functions-ssr': 1.112.18(@types/node@22.13.9)(better-sqlite3@11.8.1)(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(ioredis@5.6.0)(jiti@2.4.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(terser@5.39.0)(tsx@4.19.3)(typescript@5.8.2)(yaml@2.7.0)
+      '@tanstack/start-server-functions-server': 1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
-      vite: 6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -5995,21 +6004,21 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@tanstack/router-core@1.112.12':
+  '@tanstack/router-core@1.112.18':
     dependencies:
-      '@tanstack/history': 1.112.8
+      '@tanstack/history': 1.112.18
       '@tanstack/store': 0.7.0
 
-  '@tanstack/router-generator@1.112.17(@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
+  '@tanstack/router-generator@1.113.0(@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0))':
     dependencies:
       '@tanstack/virtual-file-routes': 1.99.0
       prettier: 3.5.3
       tsx: 4.19.3
       zod: 3.24.2
     optionalDependencies:
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
-  '@tanstack/router-plugin@1.112.17(@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))':
+  '@tanstack/router-plugin@1.113.0(@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))':
     dependencies:
       '@babel/core': 7.26.9
       '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.9)
@@ -6017,9 +6026,9 @@ snapshots:
       '@babel/template': 7.26.9
       '@babel/traverse': 7.26.9
       '@babel/types': 7.26.9
-      '@tanstack/router-core': 1.112.12
-      '@tanstack/router-generator': 1.112.17(@tanstack/react-router@1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
-      '@tanstack/router-utils': 1.102.2
+      '@tanstack/router-core': 1.112.18
+      '@tanstack/router-generator': 1.113.0(@tanstack/react-router@1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+      '@tanstack/router-utils': 1.112.18
       '@tanstack/virtual-file-routes': 1.99.0
       '@types/babel__core': 7.20.5
       '@types/babel__template': 7.4.4
@@ -6029,19 +6038,19 @@ snapshots:
       unplugin: 2.2.0
       zod: 3.24.2
     optionalDependencies:
-      '@tanstack/react-router': 1.112.17(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      vite: 6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@tanstack/react-router': 1.112.18(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      vite: 6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@tanstack/router-utils@1.102.2':
+  '@tanstack/router-utils@1.112.18':
     dependencies:
       '@babel/generator': 7.26.9
       '@babel/parser': 7.26.9
       ansis: 3.17.0
       diff: 7.0.0
 
-  '@tanstack/server-functions-plugin@1.111.2(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
+  '@tanstack/server-functions-plugin@1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.9
@@ -6050,7 +6059,7 @@ snapshots:
       '@babel/template': 7.26.9
       '@babel/traverse': 7.26.9
       '@babel/types': 7.26.9
-      '@tanstack/directive-functions-plugin': 1.111.2(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@tanstack/directive-functions-plugin': 1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       babel-dead-code-elimination: 1.0.9
       dedent: 1.5.3
       tiny-invariant: 1.3.3
@@ -6069,9 +6078,9 @@ snapshots:
       - tsx
       - yaml
 
-  '@tanstack/start-server-functions-server@1.111.10(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
+  '@tanstack/start-server-functions-server@1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)':
     dependencies:
-      '@tanstack/server-functions-plugin': 1.111.2(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      '@tanstack/server-functions-plugin': 1.112.18(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       tiny-invariant: 1.3.3
     transitivePeerDependencies:
       - '@types/node'
@@ -6187,14 +6196,14 @@ snapshots:
       untun: 0.1.3
       uqr: 0.1.2
 
-  '@vitejs/plugin-react@4.3.4(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))':
+  '@vitejs/plugin-react@4.3.4(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))':
     dependencies:
       '@babel/core': 7.26.9
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.9)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.9)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -6376,7 +6385,7 @@ snapshots:
   browserslist@4.24.4:
     dependencies:
       caniuse-lite: 1.0.30001702
-      electron-to-chromium: 1.5.112
+      electron-to-chromium: 1.5.113
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
@@ -6672,7 +6681,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.112: {}
+  electron-to-chromium@1.5.113: {}
 
   embla-carousel-react@8.5.2(react@19.0.0):
     dependencies:
@@ -6701,7 +6710,7 @@ snapshots:
 
   env-paths@3.0.0: {}
 
-  error-stack-parser-es@0.1.5: {}
+  error-stack-parser-es@1.0.5: {}
 
   es-define-property@1.0.1: {}
 
@@ -7452,19 +7461,19 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.8: {}
+  nanoid@3.3.9: {}
 
   nanostores@0.11.4: {}
 
   napi-build-utils@2.0.0:
     optional: true
 
-  nitropack@2.11.2(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(typescript@5.8.2):
+  nitropack@2.11.5(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(typescript@5.8.2):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@netlify/functions': 3.0.0
       '@rollup/plugin-alias': 5.1.1(rollup@4.34.9)
-      '@rollup/plugin-commonjs': 28.0.2(rollup@4.34.9)
+      '@rollup/plugin-commonjs': 28.0.3(rollup@4.34.9)
       '@rollup/plugin-inject': 5.0.5(rollup@4.34.9)
       '@rollup/plugin-json': 6.1.0(rollup@4.34.9)
       '@rollup/plugin-node-resolve': 16.0.0(rollup@4.34.9)
@@ -7533,8 +7542,8 @@ snapshots:
       unstorage: 1.15.0(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(ioredis@5.6.0)
       untyped: 2.0.0
       unwasm: 0.3.9
-      youch: 4.1.0-beta.5
-      youch-core: 0.3.1
+      youch: 4.1.0-beta.6
+      youch-core: 0.3.2
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -7739,7 +7748,7 @@ snapshots:
 
   postcss@8.5.3:
     dependencies:
-      nanoid: 3.3.8
+      nanoid: 3.3.9
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -8440,7 +8449,7 @@ snapshots:
       hookable: 5.5.3
       http-proxy: 1.18.1
       micromatch: 4.0.8
-      nitropack: 2.11.2(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(typescript@5.8.2)
+      nitropack: 2.11.5(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0))(typescript@5.8.2)
       node-fetch-native: 1.6.6
       path-to-regexp: 6.3.0
       pathe: 1.1.2
@@ -8452,7 +8461,7 @@ snapshots:
       unctx: 2.4.1
       unenv: 1.10.0
       unstorage: 1.15.0(db0@0.3.1(better-sqlite3@11.8.1)(drizzle-orm@0.40.0(@prisma/client@5.22.0(prisma@5.22.0))(@types/better-sqlite3@7.6.12)(better-sqlite3@11.8.1)(gel@2.0.1)(kysely@0.27.6)(postgres@3.4.5)(prisma@5.22.0)))(ioredis@5.6.0)
-      vite: 6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
       zod: 3.24.2
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -8497,13 +8506,13 @@ snapshots:
       - xml2js
       - yaml
 
-  vite-tsconfig-paths@5.1.4(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)):
+  vite-tsconfig-paths@5.1.4(typescript@5.8.2)(vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)):
     dependencies:
       debug: 4.4.0(supports-color@9.4.0)
       globrex: 0.1.2
       tsconfck: 3.1.5(typescript@5.8.2)
     optionalDependencies:
-      vite: 6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
+      vite: 6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -8521,7 +8530,7 @@ snapshots:
       tsx: 4.19.3
       yaml: 2.7.0
 
-  vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0):
+  vite@6.2.1(@types/node@22.13.9)(jiti@2.4.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.0
       postcss: 8.5.3
@@ -8609,17 +8618,17 @@ snapshots:
       y18n: 5.0.8
       yargs-parser: 21.1.1
 
-  youch-core@0.3.1:
+  youch-core@0.3.2:
     dependencies:
-      '@poppinss/exception': 1.2.0
-      error-stack-parser-es: 0.1.5
+      '@poppinss/exception': 1.2.1
+      error-stack-parser-es: 1.0.5
 
-  youch@4.1.0-beta.5:
+  youch@4.1.0-beta.6:
     dependencies:
-      '@poppinss/dumper': 0.6.2
+      '@poppinss/dumper': 0.6.3
       '@speed-highlight/core': 1.2.7
       cookie: 1.0.2
-      youch-core: 0.3.1
+      youch-core: 0.3.2
 
   zip-stream@6.0.1:
     dependencies:
