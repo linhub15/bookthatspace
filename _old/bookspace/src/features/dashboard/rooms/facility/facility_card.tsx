@@ -21,7 +21,7 @@ export function FacilityCard() {
               </p>
             </div>
             <button
-              className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               type="button"
               onClick={facilityModal.open}
             >
@@ -44,7 +44,7 @@ export function FacilityCard() {
               </div>
               <div>
                 <button
-                  className="bg-blue-600 rounded text-white py-2 px-4 w-fit"
+                  className="bg-blue-600 rounded-sm text-white py-2 px-4 w-fit"
                   onClick={facilityModal.open}
                 >
                   Edit Facility

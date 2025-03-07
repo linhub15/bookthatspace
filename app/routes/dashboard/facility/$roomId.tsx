@@ -54,7 +54,7 @@ function RouteComponent() {
                     {room.name}
                   </h3>
                 </div>
-                <div className="flex flex-shrink-0 gap-4">
+                <div className="flex shrink-0 gap-4">
                   <EditRoomModalButton roomId={room.id} />
                 </div>
               </div>
@@ -115,7 +115,7 @@ function RouteComponent() {
                     </XCircleIcon>
                   </button>
                   <img
-                    className="w-full rounded-lg aspect-[1/1] object-cover"
+                    className="w-full rounded-lg aspect-1/1 object-cover"
                     src={url}
                     alt=""
                   />
@@ -237,7 +237,7 @@ function AvailabilityCard() {
 //   return (
 //     <button
 //       type="button"
-//       className="aspect-[1/1] block w-full rounded-lg border-2 border-dashed border-gray-300 p-4 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+//       className="aspect-1/1 block w-full rounded-lg border-2 border-dashed border-gray-300 p-4 text-center hover:border-gray-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
 //       onClick={() => input.current?.click()}
 //     >
 //       <PhotoIcon className="text-gray-500 w-8 mx-auto" />

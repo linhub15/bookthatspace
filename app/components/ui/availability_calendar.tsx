@@ -65,7 +65,7 @@ export function AvailabilityCalendar(props: Props) {
               size="icon"
               onClick={() => setMonth((old) => old.add({ months: -1 }))}
             >
-              <ChevronLeftIcon className="size-4 stroke-[2]" />
+              <ChevronLeftIcon className="size-4 stroke-2" />
             </Button>
           )}
 
@@ -74,7 +74,7 @@ export function AvailabilityCalendar(props: Props) {
             size="icon"
             onClick={() => setMonth((old) => old.add({ months: 1 }))}
           >
-            <ChevronRightIcon className="size-4 stroke-[2]" />
+            <ChevronRightIcon className="size-4 stroke-2" />
           </Button>
         </div>
       </div>

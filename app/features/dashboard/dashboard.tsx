@@ -219,7 +219,7 @@ export function Dashboard() {
       </div>
 
       <main className="py-4 lg:py-8 lg:pl-72">
-        <div className="px-4 sm:px-6 lg:px-8 max-w-screen-xl">
+        <div className="px-4 sm:px-6 lg:px-8 max-w-(--breakpoint-xl)">
           <Outlet />
         </div>
       </main>
@@ -236,7 +236,7 @@ function HeaderBar(props: { openSidebar: () => void }) {
 
   return (
     <div className="lg:pl-72">
-      <div className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+      <div className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-xs sm:gap-x-6 sm:px-6 lg:px-8">
         <button
           type="button"
           className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -282,12 +282,12 @@ function HeaderBar(props: { openSidebar: () => void }) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <MenuItems className="absolute right-0 mt-3 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-900/5 focus:outline-none divide-y divide-gray-100">
+                <MenuItems className="absolute right-0 mt-3 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-gray-900/5 focus:outline-hidden divide-y divide-gray-100">
                   <div>
                     {navigationOptions.map((item) => (
                       <MenuItem key={item.name}>
                         <Link
-                          className="data-[active]:bg-gray-50 block px-5 py-3 text-sm leading-6 text-gray-900"
+                          className="data-active:bg-gray-50 block px-5 py-3 text-sm leading-6 text-gray-900"
                           to={item.to}
                         >
                           {item.name}
@@ -298,7 +298,7 @@ function HeaderBar(props: { openSidebar: () => void }) {
 
                   <MenuItem>
                     <button
-                      className="data-[active]:bg-gray-50 block px-5 py-3 text-sm leading-6 text-gray-900 w-full text-left"
+                      className="data-active:bg-gray-50 block px-5 py-3 text-sm leading-6 text-gray-900 w-full text-left"
                       type="button"
                       onClick={() => signOut.mutateAsync()}
                     >

@@ -1,4 +1,5 @@
 import { defineConfig } from "@tanstack/react-start/config";
+import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
@@ -7,6 +8,7 @@ export default defineConfig({
       tsConfigPaths({
         projects: ["./tsconfig.json"],
       }),
+      tailwindcss(),
     ],
     define: {
       VITE_APP_VERSION: JSON.stringify(process.env.npm_package_version),

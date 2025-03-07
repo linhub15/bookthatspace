@@ -42,7 +42,7 @@ export function Bookings() {
           </div>
           <div>
             <button
-              className="block text-nowrap bg-blue-600 rounded text-white py-2 px-4 w-fit"
+              className="block text-nowrap bg-blue-600 rounded-sm text-white py-2 px-4 w-fit"
               onClick={() => createBookingModal.open()}
             >
               Add Booking
@@ -176,7 +176,7 @@ function BookingList(props: { tab: Tabs }) {
             {bookings?.map((booking) => (
               <li key={booking.id}>
                 <Link
-                  className="flex flex-col sm:flex-row gap-x-6 px-5 py-3 rounded-lg shadow-sm ring-1 ring-gray-900/5 hover:bg-gray-50"
+                  className="flex flex-col sm:flex-row gap-x-6 px-5 py-3 rounded-lg shadow-xs ring-1 ring-gray-900/5 hover:bg-gray-50"
                   to={bookingRoute.to}
                   params={{ booking_id: booking.id }}
                 >

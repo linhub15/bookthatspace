@@ -29,7 +29,7 @@ export function EmailConfirmation() {
 
   return (
     <div>
-      <div className="grid gap-6 w-full max-w-xl mx-auto mt-20 p-10 shadow rounded-lg bg-white">
+      <div className="grid gap-6 w-full max-w-xl mx-auto mt-20 p-10 shadow-sm rounded-lg bg-white">
         <h2 className="text-2xl text-center">🎉 Check your email</h2>
         <p>
           An email was sent to <strong>{email}</strong>{" "}
@@ -41,7 +41,7 @@ export function EmailConfirmation() {
         {canResend && (
           <div>
             <button
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={() => resendConfirmation()}
             >
               Resend confirmation email

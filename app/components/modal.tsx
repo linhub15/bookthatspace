@@ -17,7 +17,7 @@ export function Modal(
       as="div"
       className={clsx([
         "relative z-40",
-        "data-[closed]:opacity-0",
+        "data-closed:opacity-0",
       ])}
       onClose={onDismiss}
       transition

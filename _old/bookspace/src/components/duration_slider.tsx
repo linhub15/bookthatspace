@@ -25,7 +25,7 @@ export function DurationSlider(props: Props) {
         <Slider.Range className="absolute bg-gray-400 rounded-full h-full" />
       </Slider.Track>
       <Slider.Thumb
-        className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-gray-400 rounded-[10px] hover:bg-violet-100 focus:outline-none focus:shadow-[0_0_0_5px] focus:shadow-gray-300"
+        className="block w-5 h-5 bg-white shadow-[0_2px_10px] shadow-gray-400 rounded-[10px] hover:bg-violet-100 focus:outline-hidden focus:shadow-[0_0_0_5px] focus:shadow-gray-300"
         aria-label="Volume"
       />
     </Slider.Root>

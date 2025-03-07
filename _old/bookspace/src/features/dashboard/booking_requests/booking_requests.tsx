@@ -57,7 +57,7 @@ function BookingRequestList() {
         {data?.map((booking) => (
           <li key={booking.id}>
             <Link
-              className="flex items-center justify-between gap-x-6 p-5 rounded-lg shadow-sm ring-1 ring-gray-900/5 hover:bg-gray-50"
+              className="flex items-center justify-between gap-x-6 p-5 rounded-lg shadow-xs ring-1 ring-gray-900/5 hover:bg-gray-50"
               to={bookingRequestRoute.to}
               params={{ booking_id: booking.id }}
             >

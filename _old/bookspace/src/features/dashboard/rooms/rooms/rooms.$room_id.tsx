@@ -77,7 +77,7 @@ export function Room() {
             <BackButton />
           </Link>
           <button
-            className="relativeinline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-800 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-50"
+            className="relativeinline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-red-800 shadow-xs ring-1 ring-inset ring-red-300 hover:bg-red-50"
             type="button"
             onClick={() => deleteRoom.open()}
           >
@@ -94,9 +94,9 @@ export function Room() {
                     {room.name}
                   </h3>
                 </div>
-                <div className="flex flex-shrink-0 gap-4">
+                <div className="flex shrink-0 gap-4">
                   <button
-                    className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                    className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     type="button"
                     onClick={() => editRoom.open()}
                   >
@@ -163,7 +163,7 @@ export function Room() {
                       </XCircleIcon>
                     </button>
                     <img
-                      className="w-full rounded-lg aspect-[1/1] object-cover"
+                      className="w-full rounded-lg aspect-1/1 object-cover"
                       src={url}
                     />
                   </div>
@@ -180,9 +180,9 @@ export function Room() {
               <h3 className="text-base font-semibold leading-6 text-gray-900">
                 Availability
               </h3>
-              <div className="flex flex-shrink-0 gap-4">
+              <div className="flex shrink-0 gap-4">
                 <button
-                  className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                  className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                   type="button"
                   onClick={() => changeAvailability.open()}
                 >
@@ -272,7 +272,7 @@ function AddImage(props: { roomId: string }) {
   return (
     <button
       type="button"
-      className="aspect-[1/1] block w-full rounded-lg border-2 border-dashed border-gray-300 p-4 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      className="aspect-1/1 block w-full rounded-lg border-2 border-dashed border-gray-300 p-4 text-center hover:border-gray-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       onClick={() => input.current?.click()}
     >
       <PhotoIcon className="text-gray-500 w-8 mx-auto" />

@@ -125,7 +125,7 @@ function BookingList(props: { tab: Tab }) {
             {bookings?.map((booking) => (
               <li key={booking.id}>
                 <Link
-                  className="flex flex-col sm:flex-row gap-x-6 px-5 py-3 rounded-lg shadow-sm ring-1 ring-gray-900/5 hover:bg-gray-50"
+                  className="flex flex-col sm:flex-row gap-x-6 px-5 py-3 rounded-lg shadow-xs ring-1 ring-gray-900/5 hover:bg-gray-50"
                   to={viewBookingRoute.to}
                   params={{ bookingId: booking.id }}
                 >

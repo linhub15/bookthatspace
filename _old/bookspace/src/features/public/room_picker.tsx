@@ -32,7 +32,7 @@ export function RoomPicker(props: Props) {
                 active
                   ? "border-indigo-600 ring-2 ring-indigo-600"
                   : "border-gray-300",
-                "relative flex rounded-lg border bg-white p-4 shadow-sm focus:outline-none select-none",
+                "relative flex rounded-lg border bg-white p-4 shadow-xs focus:outline-hidden select-none",
               )}
           >
             {({ checked, active }) => (

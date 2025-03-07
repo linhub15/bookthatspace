@@ -19,7 +19,7 @@ function RouteComponent() {
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12 space-y-8">
+        <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12 space-y-8">
           <div className="text-center">
             <h1 className="text-indigo-600 text-2xl italics">
               Book That Space
@@ -70,7 +70,7 @@ function OAuthSection(props: { redirect?: string }) {
     <div className="space-y-6">
       <div className="flex flex-col gap-4">
         <button
-          className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
+          className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-xs ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
           type="button"
           onClick={() => signInGoogle.mutateAsync()}
         >

@@ -39,7 +39,7 @@ export function Rooms() {
           </div>
           <div>
             <button
-              className="block text-nowrap bg-blue-600 rounded text-white py-2 px-4 w-fit"
+              className="block text-nowrap bg-blue-600 rounded-sm text-white py-2 px-4 w-fit"
               onClick={openNewRoomForm}
               disabled={rooms.isLoading}
             >
@@ -75,7 +75,7 @@ export function Rooms() {
 function RoomCard(props: { room: Tables<"room"> }) {
   return (
     <Link to={roomRoute.to} params={{ room_id: props.room.id }}>
-      <div className="rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none">
+      <div className="rounded-lg shadow-xs ring-1 ring-gray-900/5 select-none">
         <div className="flex w-full px-6 py-6 justify-between align-top">
           <div className="flex-auto">
             <dt className="text-sm font-semibold leading-6 text-gray-900">

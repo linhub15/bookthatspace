@@ -297,7 +297,7 @@ const CarouselIndicatorDots = (props: React.ComponentProps<"div">) => {
       {scrollSnaps.map((_, index) => (
         <button
           className={cn(
-            "rounded-full size-2 border-2 border-white shadow",
+            "rounded-full size-2 border-2 border-white shadow-sm",
             selectedIndex === index ? "bg-gray-100" : "bg-gray-400/20",
           )}
           onClick={() => onDotButtonClick(index)}

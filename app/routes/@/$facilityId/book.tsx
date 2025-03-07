@@ -72,7 +72,7 @@ function RouteComponent() {
   });
 
   return (
-    <div className="flex gap-4 max-w-screen-lg w-full px-2 sm:mx-auto pt-8">
+    <div className="flex gap-4 max-w-(--breakpoint-lg) w-full px-2 sm:mx-auto pt-8">
       <Card>
         <form
           className="space-y-8 px-4 py-5"
@@ -155,7 +155,7 @@ function RouteComponent() {
               <div className="space-y-2">
                 <Label htmlFor={field.name}>Name</Label>
                 <input
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
                   name={field.name}
                   id={field.name}
@@ -171,7 +171,7 @@ function RouteComponent() {
               <div className="space-y-2">
                 <Label htmlFor={field.name}>Email</Label>
                 <input
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
                   name={field.name}
                   id={field.name}
@@ -187,7 +187,7 @@ function RouteComponent() {
               <div className="space-y-2">
                 <Label htmlFor={field.name}>Additional Information</Label>
                 <textarea
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   name={field.name}
                   id={field.name}
                   value={field.state.value}

@@ -62,7 +62,7 @@ function RoomCard(
 ) {
   return (
     <Link to={roomRoute.to} params={{ roomId: props.room.id }}>
-      <div className="rounded-lg shadow-sm ring-1 ring-gray-900/5 select-none">
+      <div className="rounded-lg shadow-xs ring-1 ring-gray-900/5 select-none">
         <div className="flex w-full px-6 py-6 justify-between align-top">
           <div className="flex-auto">
             <dt className="text-sm font-semibold leading-6 text-gray-900">

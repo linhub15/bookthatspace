@@ -14,7 +14,7 @@ export function CreateRoomModalButton(props: Props) {
   return (
     <>
       <button
-        className="block text-nowrap bg-blue-600 rounded text-white py-2 px-4 w-fit"
+        className="block text-nowrap bg-blue-600 rounded-sm text-white py-2 px-4 w-fit"
         onClick={() => setOpen(true)}
         type="button"
         disabled={rooms.isLoading}

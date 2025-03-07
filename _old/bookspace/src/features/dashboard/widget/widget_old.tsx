@@ -95,7 +95,7 @@ export function Widget() {
   };
 
   return (
-    <div className="flex gap-4 max-w-screen-lg">
+    <div className="flex gap-4 max-w-(--breakpoint-lg)">
       <div id="steps" className="w-full">
         {!selectedDay && (
           <Step heading="Select Day">
@@ -279,7 +279,7 @@ function BookingForm(props: BookingFormProps) {
       <FormField>
         <Label>Email</Label>
         <input
-          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           type="email"
           placeholder="email"
           value={props.value.email}
@@ -290,7 +290,7 @@ function BookingForm(props: BookingFormProps) {
       <FormField>
         <Label>Additional Information</Label>
         <textarea
-          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           rows={3}
           value={props.value.description}
           onChange={(e) =>
@@ -351,7 +351,7 @@ function Summary(
     selectedDuration;
 
   return (
-    <div className="bg-white shadow sm:rounded-lg max-w-sm w-full">
+    <div className="bg-white shadow-sm sm:rounded-lg max-w-sm w-full">
       <div className="flex flex-col content-between h-full">
         <div className="h-full">
           <div className="">

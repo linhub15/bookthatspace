@@ -100,7 +100,7 @@ function BookingCard(
           <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
             <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
               <div className="flex w-0 flex-1 items-center">
-                <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                <PaperClipIcon className="h-5 w-5 shrink-0 text-gray-400" />
 
                 <div className="ml-4 flex min-w-0 flex-1 gap-2">
                   <span className="truncate font-medium">
@@ -108,7 +108,7 @@ function BookingCard(
                   </span>
                 </div>
               </div>
-              <div className="ml-4 flex-shrink-0">
+              <div className="ml-4 shrink-0">
                 <button
                   className="font-medium text-red-600 hover:text-red-500"
                   type="button"
@@ -119,14 +119,14 @@ function BookingCard(
             </li>
             <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
               <div className="flex w-0 flex-1 items-center">
-                <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                <PaperClipIcon className="h-5 w-5 shrink-0 text-gray-400" />
                 <div className="ml-3 flex min-w-0 flex-1 gap-2">
                   <span className="truncate font-medium">
                     coverletter_back_end_developer.pdf
                   </span>
                 </div>
               </div>
-              <div className="ml-4 flex-shrink-0">
+              <div className="ml-4 shrink-0">
                 <button
                   className="font-medium text-red-600 hover:text-red-500"
                   type="button"

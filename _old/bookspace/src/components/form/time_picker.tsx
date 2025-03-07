@@ -36,7 +36,7 @@ export function TimePicker(props: Props) {
 
   return (
     <select
-      className="block rounded-md border-0 py-1.5 pr-8 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-60 text-sm sm:leading-6"
+      className="block rounded-md border-0 py-1.5 pr-8 text-gray-900 shadow-xs ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-60 text-sm sm:leading-6"
       value={props.value?.toJSON()}
       onChange={(e) => {
         const plainTime = Temporal.PlainTime.from(

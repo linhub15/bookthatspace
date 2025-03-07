@@ -61,7 +61,7 @@ export function WidgetIndex() {
               </Link>
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <div className="flex rounded-md shadow-sm">
+              <div className="flex rounded-md shadow-xs">
                 <input
                   className="block w-full min-w-0 flex-1 rounded-l-md rounded-none border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
@@ -87,7 +87,7 @@ export function WidgetIndex() {
               </Link>
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <div className="flex rounded-md shadow-sm">
+              <div className="flex rounded-md shadow-xs">
                 <input
                   className="block w-full min-w-0 flex-1 rounded-l-md rounded-none border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
@@ -123,7 +123,7 @@ export function WidgetIndex() {
               </p>
             </dt>
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              <div className="flex rounded-md shadow-sm">
+              <div className="flex rounded-md shadow-xs">
                 <input
                   type="text"
                   name="company-website"
@@ -150,7 +150,7 @@ function NoFacility() {
           Create facility to enable widget
         </p>
         <Link
-          className="mx-auto w-fit block text-nowrap bg-blue-600 rounded text-white py-2 px-4"
+          className="mx-auto w-fit block text-nowrap bg-blue-600 rounded-sm text-white py-2 px-4"
           to="/dashboard/profile"
         >
           Create Facility

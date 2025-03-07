@@ -49,7 +49,7 @@ export function AvailabilityCalendar(props: Props) {
           <div className="flex max-w-full flex-none flex-col sm:max-w-none md:max-w-full">
             <div
               ref={containerNav}
-              className="sticky top-0 z-30 flex-none bg-white shadow ring-1 ring-black ring-opacity-5 sm:pr-8"
+              className="sticky top-0 z-30 flex-none bg-white shadow-sm ring-1 ring-black ring-opacity-5 sm:pr-8"
             >
               {/* Weekday heading mobile */}
               <div className="grid grid-cols-7 text-sm leading-6 text-gray-600 sm:hidden">

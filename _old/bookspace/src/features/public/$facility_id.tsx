@@ -30,8 +30,8 @@ export function FacilityWidget() {
   if (!facility.data) return;
 
   return (
-    <div className="max-w-screen-lg space-y-4 px-2 sm:mx-auto pt-8">
-      <Card className="max-w-screen-md mx-auto">
+    <div className="max-w-(--breakpoint-lg) space-y-4 px-2 sm:mx-auto pt-8">
+      <Card className="max-w-(--breakpoint-md) mx-auto">
         <div className="flex justify-between w-full px-4 py-6 sm:px-6 gap-8">
           <div className="flex flex-col w-full justify-between">
             <div>

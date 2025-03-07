@@ -146,14 +146,14 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
             >
               <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                 <div className="flex w-0 flex-1 items-center">
-                  <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                  <PaperClipIcon className="h-5 w-5 shrink-0 text-gray-400" />
                   <div className="ml-3 flex min-w-0 flex-1 gap-2">
                     <span className="truncate font-medium">
                       rental_contract.pdf
                     </span>
                   </div>
                 </div>
-                <div className="ml-4 flex-shrink-0">
+                <div className="ml-4 shrink-0">
                   <button
                     className="font-medium text-red-600 hover:text-red-500"
                     type="button"
@@ -174,7 +174,7 @@ function BookingCard({ booking }: { booking: Tables<"room_booking"> }) {
                 Accept
               </SubmitButton>
               <button
-                className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-sm hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full border border-gray-300 justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 shadow-xs hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={rejectBookingModal.open}
               >
                 Reject
