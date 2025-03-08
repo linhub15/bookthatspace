@@ -4,5 +4,6 @@ node_modules
 
 # Tanstack Start
 .vinxi
+.vercel
 .output
 app.config.timestamp*
