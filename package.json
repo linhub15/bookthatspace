@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "vinxi build",
+    "build": "pnpm drizzle push && vinxi build",
     "start": "vinxi start",
     "drizzle": "drizzle-kit",
     "better-auth:gen": "pnpx @better-auth/cli@latest generate --config ./lib/auth/better_auth.ts --output ./app/db/auth_schema.ts"
