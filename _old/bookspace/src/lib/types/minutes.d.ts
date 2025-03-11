@@ -1,1 +1,0 @@
-type Minutes = number;

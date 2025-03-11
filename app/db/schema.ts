@@ -120,7 +120,7 @@ export const room_booking = pgTable("room_booking", {
 
 export const room_image = pgTable("room_image", {
   id: uuid("id").primaryKey().defaultRandom(),
-  roomId: uuid("room_id").references(() => room.id, { onDelete: "set null" }),
+  roomId: uuid("room_id").references(() => room.id, { onDelete: "cascade" }),
   blobId: uuid("blob_id").notNull().references(() => blob.id),
   ...defaultColumns,
 });

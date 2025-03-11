@@ -1,20 +1,25 @@
 # Book that space
 
-Space rental management software for community centers.
+Facility booking software for halls and multi-purpose rooms.
 
 ## Quick Start
 
-```
-pnpm install
-pnpm dev
-```
-
-- requires `node.js`, `pnpm`
-- create your `.env` file. [Example](.env.example)
+- Prerequisites `node.js`, `pnpm`
+- create your `.env` file entries. [Example](.env.example)
+- push database schema `pnpm drizzle push`
 - read the [Style Guide](docs/style_guide.md)
 
-### Dabase (Drizzle ORM)
+```sh
+pnpm install && pnpm dev
+```
+
+### Configure Google OAuth Client
+
+[Create Google OAuth 2.0 Client](https://console.cloud.google.com/auth/clients)
 
 ```
-pnpm drizzle check
+Application type: Web application
+name: localhost
+Authorized JavaScript origigns: http://localhost:3000
+Authorized redirect URIs: http://localhost:3000/api/auth/callback/google
 ```

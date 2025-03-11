@@ -1,9 +1,0 @@
-{
-  "tasks": {
-    "frontend": "pnpm --prefix bookspace run dev",
-    "functions": "supabase functions serve --no-verify-jwt",
-    "supabase:types": "supabase gen types typescript --local --schema public > lib/types/supabase_types.d.ts",
-    "supabase:diff": "supabase db diff -s public, auth, storage"
-  },
-  "lock": false
-}
