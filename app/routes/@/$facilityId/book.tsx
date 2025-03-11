@@ -91,7 +91,6 @@ function RouteComponent() {
                     View room details
                   </Link>
                 </div>
-                {field.state.value}
                 <RoomPicker
                   name={field.name}
                   id={field.name}

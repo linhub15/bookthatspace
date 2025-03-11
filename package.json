@@ -6,6 +6,7 @@
     "build": "pnpm drizzle push && vinxi build",
     "start": "vinxi start",
     "drizzle": "drizzle-kit",
+    "serve:email": "email dev --port 3001 --dir app/lib/email/templates",
     "better-auth:gen": "pnpx @better-auth/cli@latest generate --config ./lib/auth/better_auth.ts --output ./app/db/auth_schema.ts"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "@heroicons/react": "^2.2.0",
     "@radix-ui/react-slider": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",
+    "@react-email/components": "^0.0.33",
     "@tanstack/react-form": "^1.0.5",
     "@tanstack/react-query": "^5.67.2",
     "@tanstack/react-router": "^1.114.13",
@@ -30,6 +32,7 @@
     "react": "^19.0.0",
     "react-day-picker": "^9.6.1",
     "react-dom": "^19.0.0",
+    "resend": "^4.1.2",
     "tailwind-merge": "^3.0.2",
     "temporal-polyfill": "^0.2.5",
     "uploadthing": "^7.5.2",
@@ -45,6 +48,7 @@
     "@types/react-dom": "^19.0.4",
     "dotenv": "^16.4.7",
     "drizzle-kit": "^0.30.5",
+    "react-email": "^3.0.7",
     "tailwindcss": "^4.0.12",
     "typescript": "^5.8.2",
     "vite-tsconfig-paths": "^5.1.4"

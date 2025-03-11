@@ -1,5 +1,6 @@
 import { db } from "@/db/database";
-import { room_image } from "@/db/schema";
+import { blob, room_image } from "@/db/schema";
+import { notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { sql } from "drizzle-orm";
 import { z } from "zod";
@@ -13,12 +14,6 @@ export const getFacilityPublicFn = createServerFn({ method: "GET" })
   .middleware([]) // todo: add captcha middleware
   .validator((data: GetFacilityPublicRequest) => request.parse(data))
   .handler(async ({ data }) => {
-    // todo: find a way to determine the baseURL
-    const baseUrl = sql`'http://localhost:3000'`;
-    const imageFullUrl = sql<string>`concat(${baseUrl},${room_image.path})`.as(
-      "url",
-    );
-
     const result = await db
       .query
       .facility
@@ -28,8 +23,11 @@ export const getFacilityPublicFn = createServerFn({ method: "GET" })
           rooms: {
             with: {
               images: {
-                extras: {
-                  url: imageFullUrl,
+                columns: { id: true },
+                with: {
+                  blob: {
+                    columns: { uploadthingMeta: true },
+                  },
                 },
               },
             },
@@ -37,5 +35,25 @@ export const getFacilityPublicFn = createServerFn({ method: "GET" })
         },
       });
 
-    return result;
+    if (!result) {
+      throw notFound();
+    }
+
+    result?.rooms.map((room) => ({
+      room: room.images.map((i) => ({
+        id: i.id,
+        url: i.blob.uploadthingMeta?.ufsUrl,
+      })),
+    }));
+
+    return ({
+      ...result,
+      rooms: result?.rooms.map((room) => ({
+        ...room,
+        images: room.images.map((i) => ({
+          id: i.id,
+          url: i.blob.uploadthingMeta?.ufsUrl ?? "",
+        })),
+      })),
+    });
   });

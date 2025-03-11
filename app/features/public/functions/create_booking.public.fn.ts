@@ -1,5 +1,8 @@
 import { db } from "@/db/database";
 import { room_booking } from "@/db/schema";
+import { mailer } from "@/lib/email/resend.client";
+import { BookingCreated } from "@/lib/email/templates/booking_created";
+import { render } from "@react-email/components";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
@@ -26,7 +29,11 @@ export const createBookingPublicFn = createServerFn({ method: "POST" })
       })
       .returning();
 
-    // todo: send email confirmation
+    await mailer.send({
+      to: data.bookedByEmail,
+      subject: "Room booking received",
+      html: await render(BookingCreated({ url: "", name: data.bookedByName })),
+    });
 
     const single = inserted.at(0);
 

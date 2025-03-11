@@ -63,7 +63,7 @@ function RouteComponent() {
 
       <div className="flex flex-col sm:flex-row gap-3 py-8 sm:justify-center flex-wrap">
         {rooms.map((room) => (
-          <RoomCard room={room} photos={room.images} key={room.id} />
+          <RoomCard room={room} images={room.images} key={room.id} />
         ))}
       </div>
     </div>
@@ -71,11 +71,11 @@ function RouteComponent() {
 }
 
 export function RoomCard(
-  { room, photos }: { room: RoomSelect; photos: Image[] },
+  { room, images }: { room: RoomSelect; images: Image[] },
 ) {
   return (
     <Card className="flex flex-col gap-2 p-4 sm:rounded-xl overflow-hidden md:max-w-[328px]">
-      <ImageCarousel images={photos} />
+      <ImageCarousel images={images} />
       <div className="w-full">
         <div className="flex justify-between items-center">
           <span className="font-semibold">
