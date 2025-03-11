@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { listRoomsFn } from "../functions/list_rooms.fn";
+import { getRoomFn } from "../functions/get_room.fn";
 
 export function useRooms() {
   const listRooms = useServerFn(listRoomsFn);
@@ -14,13 +15,15 @@ export function useRooms() {
 }
 
 export function useRoom(roomId: string | undefined) {
-  const rooms = useRooms();
+  const getRoom = useServerFn(getRoomFn);
 
-  if (!roomId) {
-    return { data: undefined };
-  }
+  return useQuery({
+    queryKey: ["rooms", roomId],
+    enabled: !!roomId,
+    queryFn: async () => {
+      if (!roomId) return null;
 
-  const room = rooms.data?.find((room) => room.id === roomId);
-
-  return { data: room };
+      return await getRoom({ data: { roomId } });
+    },
+  });
 }

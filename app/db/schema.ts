@@ -13,6 +13,7 @@ import {
 import { user } from "./auth_schema";
 import type { Address } from "@/lib/types/address";
 import { defaultColumns } from "./helpers";
+import type { UploadedFileData } from "uploadthing/types";
 
 export const day_of_week = pgEnum("day_of_week", [
   "mon",
@@ -120,16 +121,27 @@ export const room_booking = pgTable("room_booking", {
 export const room_image = pgTable("room_image", {
   id: uuid("id").primaryKey().defaultRandom(),
   roomId: uuid("room_id").references(() => room.id, { onDelete: "set null" }),
-  path: text().notNull(),
+  blobId: uuid("blob_id").notNull().references(() => blob.id),
   ...defaultColumns,
 });
 
-export const room_photo_relations = relations(room_image, ({ one }) => ({
+export const room_image_relations = relations(room_image, ({ one }) => ({
   room: one(room, {
     fields: [room_image.roomId],
     references: [room.id],
   }),
+  blob: one(blob, {
+    fields: [room_image.blobId],
+    references: [blob.id],
+  }),
 }));
+
+export const blob = pgTable("blob", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  uploadthingMeta: jsonb("uploadthing_meta")
+    .$type<Omit<UploadedFileData, "url" | "appUrl">>(),
+  ...defaultColumns,
+});
 
 export const google_calendar = pgTable("google_calendar", {
   id: text("id").notNull(),

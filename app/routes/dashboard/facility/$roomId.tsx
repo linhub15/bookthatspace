@@ -9,7 +9,7 @@ import { EditRoomModalButton } from "@/features/facility_management/rooms/compon
 import { useRoom } from "@/features/facility_management/rooms/hooks/use_rooms";
 import { useWeekCalendar } from "@/features/facility_management/rooms/use_week_calendar";
 import { maskHourlyRate } from "@/lib/masks/masks";
-import { PhotoIcon, UserIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon, UserIcon, XCircleIcon } from "@heroicons/react/24/outline";
 import {
   createFileRoute,
   Link,
@@ -17,6 +17,11 @@ import {
   useNavigate,
 } from "@tanstack/react-router";
 import { Temporal } from "temporal-polyfill";
+import { UploadDropzone } from "@/lib/file_store/uploadthing.components";
+import { twMerge } from "tailwind-merge";
+import { Spinner } from "@/components/spinner";
+import { useQueryClient } from "@tanstack/react-query";
+import { useDeleteImage } from "@/features/facility_management/rooms/hooks/use_delete_image";
 
 export const Route = createFileRoute("/dashboard/facility/$roomId")({
   component: RouteComponent,
@@ -26,6 +31,8 @@ function RouteComponent() {
   const { roomId } = Route.useParams();
   const navigate = useNavigate();
   const { data: room } = useRoom(roomId);
+
+  const deleteImage = useDeleteImage();
 
   if (!room) {
     redirect({ to: ".." });
@@ -92,39 +99,41 @@ function RouteComponent() {
             </div>
           </Card>
 
-          {
-            /* <Card>
-          <div className="px-4 py-5 sm:px-6">
-            <div className="flex flex-wrap items-center justify-between sm:flex-nowrap">
-              <h3 className="text-base font-semibold leading-6 text-gray-900">
-                Photos
-              </h3>
+          <Card>
+            <div className="px-4 py-5 sm:px-6">
+              <div className="flex flex-wrap items-center justify-between sm:flex-nowrap">
+                <h3 className="text-base font-semibold leading-6 text-gray-900">
+                  Photos
+                </h3>
+              </div>
             </div>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 px-4 py-5 sm:px-6 gap-4">
-            {!!photos.data?.length &&
-              photos.data.map(({ id, url }) => (
-                <div className="relative" key={id}>
-                  <button
-                    className="absolute top-0 right-0 p-1 m-1"
-                    onClick={() =>
-                      deletePhoto.mutateAsync({ photoId: id })}
-                    type="button"
-                  >
-                    <XCircleIcon className="w-6 bg-white rounded-full">
-                    </XCircleIcon>
-                  </button>
-                  <img
-                    className="w-full rounded-lg aspect-1/1 object-cover"
-                    src={url}
-                    alt=""
-                  />
-                </div>
-              ))}
-            <AddImage roomId={room.id} />
-          </div>
-        </Card> */
-          }
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 px-4 py-5 sm:px-6 gap-4">
+              {!!room.images.length &&
+                room.images.map(({ id, blob }) => (
+                  <div className="relative" key={id}>
+                    <button
+                      className="absolute top-0 right-0 p-1 m-1"
+                      onClick={() =>
+                        deleteImage.mutateAsync({ roomImageId: id })}
+                      type="button"
+                      disabled={deleteImage.isPending}
+                    >
+                      {deleteImage.isPending &&
+                          deleteImage.variables.roomImageId === id
+                        ? <Spinner className="text-gray-500" />
+                        : <XCircleIcon className="w-6 bg-white rounded-full" />}
+                    </button>
+                    <img
+                      className="w-full rounded-lg aspect-1/1 object-cover"
+                      src={blob.uploadthingMeta?.ufsUrl}
+                      alt=""
+                    />
+                  </div>
+                ))}
+              <AddImage roomId={room.id} />
+            </div>
+          </Card>
         </div>
 
         <AvailabilityCard />
@@ -223,34 +232,31 @@ function AvailabilityCard() {
   );
 }
 
-// function AddImage(props: { roomId: string }) {
-//   const input = useRef<HTMLInputElement>(null);
-//   const uploadPhoto = useUploadPhoto({ roomId: props.roomId });
+function AddImage(props: { roomId: string }) {
+  const queryClient = useQueryClient();
+  const { roomId } = props;
 
-//   const upload = async (files: FileList | null) => {
-//     const file = files?.item(0);
-//     if (!file) return;
-
-//     await uploadPhoto.mutateAsync(file);
-//   };
-
-//   return (
-//     <button
-//       type="button"
-//       className="aspect-1/1 block w-full rounded-lg border-2 border-dashed border-gray-300 p-4 text-center hover:border-gray-400 focus:outline-hidden focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-//       onClick={() => input.current?.click()}
-//     >
-//       <PhotoIcon className="text-gray-500 w-8 mx-auto" />
-//       <span className="mt-2 block text-sm font-semibold text-gray-800">
-//         Add Photo
-//       </span>
-//       <input
-//         className="hidden"
-//         ref={input}
-//         type="file"
-//         accept="input/*"
-//         onChange={(e) => upload(e.target.files)}
-//       />
-//     </button>
-//   );
-// }
+  return (
+    <div>
+      <UploadDropzone
+        endpoint="room_image"
+        input={{ roomId: roomId }}
+        config={{ cn: twMerge, mode: "auto" }}
+        appearance={{ container: "mt-0 h-full", button: "hidden" }}
+        content={{
+          label: ({ files }) => <>Add image</>,
+          uploadIcon: ({ isUploading, ready }) => (
+            <div className="size-6">
+              {ready && !isUploading
+                ? <PhotoIcon className="text-gray-500 w-8 mx-auto" />
+                : <Spinner className="text-gray-500" />}
+            </div>
+          ),
+        }}
+        onClientUploadComplete={() => {
+          queryClient.invalidateQueries({ queryKey: ["rooms", roomId] });
+        }}
+      />
+    </div>
+  );
+}

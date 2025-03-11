@@ -1,6 +1,6 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import tailwind from "@/index.css?url";
+import tailwind from "@/main.css?url";
 import {
   CatchBoundary,
   createRootRouteWithContext,
