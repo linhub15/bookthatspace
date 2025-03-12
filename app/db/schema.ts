@@ -6,7 +6,6 @@ import {
   pgEnum,
   pgTable,
   text,
-  time,
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
@@ -14,6 +13,7 @@ import { user } from "./auth_schema";
 import type { Address } from "@/lib/types/address";
 import { defaultColumns } from "./helpers";
 import type { UploadedFileData } from "uploadthing/types";
+import { plainDateTime, plainTime } from "./custom.types";
 
 export const day_of_week = pgEnum("day_of_week", [
   "mon",
@@ -88,8 +88,8 @@ export const room_availability = pgTable("room_availability", {
   id: uuid("id").primaryKey().defaultRandom(),
   roomId: uuid("room_id").notNull().references(() => room.id),
   dayOfWeek: day_of_week("day_of_week").notNull(),
-  start: time("start").notNull(),
-  end: time("end").notNull(),
+  start: plainTime("start").notNull(),
+  end: plainTime("end").notNull(),
   ...defaultColumns,
 });
 
@@ -107,8 +107,8 @@ export const room_booking = pgTable("room_booking", {
   id: uuid("id").primaryKey().defaultRandom(),
   roomId: uuid("room_id").notNull().references(() => room.id),
   profileId: uuid("profile_id").references(() => profile.id),
-  start: timestamp("start", { withTimezone: true, mode: "string" }).notNull(),
-  end: timestamp("end", { withTimezone: true, mode: "string" }).notNull(),
+  start: plainDateTime("start").notNull(),
+  end: plainDateTime("end").notNull(),
   status: room_booking_status("status"),
   totalCost: integer("total_cost"),
   bookedByEmail: text("booked_by_email").notNull(),

@@ -1,13 +1,9 @@
 import { db } from "@/db/database";
 import { room_availability, room_booking } from "@/db/schema";
 import { asDayOfWeekEnum } from "@/db/types";
-import {
-  asPlainDate,
-  asPlainTime,
-  zPlainDateString,
-} from "@/lib/types/safe_date";
+import { zPlainDateString } from "@/lib/types/safe_date";
 import { createServerFn } from "@tanstack/react-start";
-import { and, eq, gte, lte } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { Temporal } from "temporal-polyfill";
 import { z } from "zod";
 
@@ -25,7 +21,7 @@ export const listRoomAvailabilityPublicFn = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const roomId = data.roomId;
 
-    const date = asPlainDate(data.date);
+    const date = Temporal.PlainDate.from(data.date);
 
     const availability = await db
       .select()
@@ -38,28 +34,21 @@ export const listRoomAvailabilityPublicFn = createServerFn({ method: "GET" })
         ),
       ));
 
-    const open = availability.map((a) =>
-      [
-        Temporal.PlainTime.from(a.start),
-        Temporal.PlainTime.from(a.end),
-      ] as TimeRange
-    );
+    const open: TimeRange[] = availability.map((a) => [a.start, a.end]);
 
     const roomBookings = await db
       .select()
       .from(room_booking)
       .where(and(
         eq(room_booking.roomId, roomId),
-        gte(room_booking.start, date.toString()),
-        lte(room_booking.start, date.add({ days: 1 }).toString()),
+        sql`date(${room_booking.start}) >= ${date.toString()}`,
+        sql`date(${room_booking.start}) <= ${date.add({ days: 1 }).toString()}`,
       ));
 
-    const booked = roomBookings.map((b) =>
-      [
-        asPlainTime(b.start),
-        asPlainTime(b.end),
-      ] as TimeRange
-    );
+    const booked: TimeRange[] = roomBookings.map((b) => [
+      b.start.toPlainTime(),
+      b.end.toPlainTime(),
+    ]);
 
     return JSON.parse(JSON.stringify(freeTime(open, booked))) as [
       string,

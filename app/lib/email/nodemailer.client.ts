@@ -18,6 +18,6 @@ export class NodeMailer implements Mailer {
       ...args,
     });
 
-    console.log("Message sent: %s", info.messageId);
+    console.info("Message sent: %s", info.messageId);
   }
 }

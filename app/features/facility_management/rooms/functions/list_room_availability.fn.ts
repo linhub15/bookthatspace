@@ -22,5 +22,9 @@ export const listRoomAvailabilityFn = createServerFn({ method: "GET" })
         ),
       );
 
-    return result.map((r) => r.room_availability);
+    return result.map((r) => ({
+      ...r.room_availability,
+      start: r.room_availability.start.toString(),
+      end: r.room_availability.end.toString(),
+    }));
   });

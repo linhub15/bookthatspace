@@ -18,5 +18,14 @@ export const listRoomBookingsFn = createServerFn({ method: "GET" })
       .where(and(eq(user.id, context.session.user.id)));
 
     const mapped = result.map((r) => ({ ...r.room_booking, room: r.room }));
-    return mapped;
+
+    const serializable = JSON.stringify(mapped, (key, value) => {
+      if (key === "start" || key === "end") {
+        return value.toString();
+      }
+
+      return value;
+    });
+
+    return serializable;
   });

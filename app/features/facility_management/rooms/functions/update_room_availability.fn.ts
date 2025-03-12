@@ -6,12 +6,16 @@ import { z } from "zod";
 import { listRoomAvailabilityFn } from "./list_room_availability.fn";
 import { and, eq, inArray } from "drizzle-orm";
 import { zRoomAvailabilityInsert } from "@/db/types";
+import { Temporal } from "temporal-polyfill";
 
 const request = z.object({
   roomId: z.string(),
-  next: z.array(zRoomAvailabilityInsert),
+  next: z.array(zRoomAvailabilityInsert.merge(z.object({
+    start: z.string().transform((v) => Temporal.PlainTime.from(v)),
+    end: z.string().transform((v) => Temporal.PlainTime.from(v)),
+  }))),
 });
-export type UpdateRoomAvailabilityRequest = z.infer<typeof request>;
+export type UpdateRoomAvailabilityRequest = z.input<typeof request>;
 
 export const updateRoomAvailabilityFn = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
@@ -35,6 +39,7 @@ export const updateRoomAvailabilityFn = createServerFn({ method: "POST" })
           ));
       }
 
+      // Using a loop instead of passing in array because we may need to update
       for (const availability of next) {
         await transaction
           .insert(room_availability)

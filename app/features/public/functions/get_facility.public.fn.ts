@@ -1,8 +1,6 @@
 import { db } from "@/db/database";
-import { blob, room_image } from "@/db/schema";
 import { notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { sql } from "drizzle-orm";
 import { z } from "zod";
 
 const request = z.object({

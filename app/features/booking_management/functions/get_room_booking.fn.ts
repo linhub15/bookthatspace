@@ -1,6 +1,7 @@
 import { db } from "@/db/database";
 import { room, room_booking } from "@/db/schema";
 import { authMiddleware } from "@/lib/auth/auth_middleware";
+import { notFound } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
@@ -23,5 +24,20 @@ export const getRoomBookingFn = createServerFn({ method: "GET" })
         eq(room_booking.id, data.bookingId),
       );
 
-    return result.at(0);
+    const single = result.at(0);
+
+    if (!single) {
+      throw notFound();
+    }
+
+    const serializable = {
+      booking: {
+        ...single.booking,
+        start: single.booking.start.toString(),
+        end: single.booking.end.toString(),
+      },
+      room: single.room,
+    };
+
+    return serializable;
   });
