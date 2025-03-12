@@ -12,17 +12,25 @@ export default createStartHandler({
   getRouterManifest,
 })(defaultStreamHandler);
 
+/** dotenv validation - not sure the best place to put it */
 const env = z.object({
-  VITE_AUTH_URL: z.string(),
+  VITE_APP_URL: z.string(),
   DATABASE_URL: z.string(),
   AUTH_SECRET: z.string(),
   GOOGLE_OAUTH_ID: z.string(),
   GOOGLE_OAUTH_SECRET: z.string(),
   UPLOADTHING_TOKEN: z.string(),
-  RESEND_API_KEY: z.string(),
+
+  // EMAIL
+  SMTP_HOST: z.string(),
+  SMTP_PORT: z.string().default("465"),
+  SMTP_USER: z.string(),
+  SMTP_PASSWORD: z.string().optional(),
+  SMTP_SECURE: z.literal("true").optional(),
+  EMAIL_FROM: z.string(),
 });
 
-env.parse(process.env);
+process.env = { ...process.env, ...env.parse(process.env) };
 
 declare global {
   namespace NodeJS {

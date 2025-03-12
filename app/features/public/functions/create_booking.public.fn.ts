@@ -1,10 +1,12 @@
 import { db } from "@/db/database";
 import { room_booking } from "@/db/schema";
-import { mailer } from "@/lib/email/resend.client";
-import { BookingCreated } from "@/lib/email/templates/booking_created";
+import { mailer } from "@/lib/email/mailer";
+import BookingCreated from "@/lib/email/templates/booking_created";
 import { render } from "@react-email/components";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+
+import { Route as publicBookingRoute } from "@/routes/@/booking-success.$bookingId";
 
 const request = z.object({
   roomId: z.string(),
@@ -31,8 +33,14 @@ export const createBookingPublicFn = createServerFn({ method: "POST" })
 
     await mailer.send({
       to: data.bookedByEmail,
-      subject: "Room booking received",
-      html: await render(BookingCreated({ url: "", name: data.bookedByName })),
+      subject: "Booking received",
+      html: await render(
+        BookingCreated({
+          url: new URL(publicBookingRoute.fullPath, process.env.VITE_APP_URL)
+            .toString(),
+          name: data.bookedByName,
+        }),
+      ),
     });
 
     const single = inserted.at(0);

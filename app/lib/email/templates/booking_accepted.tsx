@@ -5,15 +5,15 @@ type Props = {
   name: string;
 };
 
-const BookingCreated = (props: Props) => (
+const BookingAccepted = (props: Props) => (
   <Html>
     <p>
       Hi {props.name},
     </p>
     <p>
-      Your booking has been created. You can view the updates here. {props.url}
+      Your booking has been accepted. You can view the updates here. {props.url}
     </p>
   </Html>
 );
 
-export default BookingCreated;
+export default BookingAccepted;
