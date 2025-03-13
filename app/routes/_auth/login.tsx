@@ -41,8 +41,8 @@ function OAuthSection(props: { redirect?: string }) {
         provider: "google",
         callbackURL: props.redirect,
         scopes: [
-          "https://www.googleapis.com/auth/calendar.events",
-          "https://www.googleapis.com/auth/calendar.readonly",
+          // "https://www.googleapis.com/auth/calendar.events",
+          // "https://www.googleapis.com/auth/calendar.readonly",
         ],
       });
       // await supabase.auth.signInWithOAuth({

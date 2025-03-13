@@ -9,19 +9,17 @@ export function Calendar({
 }: Props) {
   return (
     <DayPicker
-      showOutsideDays={false}
       mode="single"
+      showOutsideDays={false}
       className="p-3"
       classNames={{
-        months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+        months: "relative w-fit",
         month: "space-y-4",
-        month_caption: "flex justify-center pt-1 relative items-center",
+        month_caption: "flex pt-1 relative",
         caption_label: "text-sm font-medium",
-        nav: "space-x-1 flex items-center",
-        button_previous:
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute left-1",
-        button_next:
-          "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 absolute right-1",
+        nav: "absolute end-0 z-1",
+        button_previous: "h-7 w-7",
+        button_next: "h-7 w-7",
         month_grid: "w-full border-collapse space-y-1",
         weekdays: "flex",
         weekday:
@@ -42,8 +40,16 @@ export function Calendar({
         hidden: "invisible",
       }}
       components={{
-        PreviousMonthButton: () => <ChevronLeftIcon className="h-4 w-4" />,
-        NextMonthButton: () => <ChevronRightIcon className="h-4 w-4" />,
+        PreviousMonthButton: (props) => (
+          <button {...props}>
+            <ChevronLeftIcon className="h-4 w-4" />
+          </button>
+        ),
+        NextMonthButton: (props) => (
+          <button {...props}>
+            <ChevronRightIcon className="h-4 w-4" />
+          </button>
+        ),
       }}
       {...props}
     />
