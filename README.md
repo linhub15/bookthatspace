@@ -7,7 +7,6 @@ Facility booking software for halls and multi-purpose rooms.
 - Prerequisites: install latest LTS `node.js` and latest `pnpm`
 - create your `.env` file entries. [Example](.env.example)
 - push database schema `pnpm drizzle push`
-- read the [Style Guide](docs/style_guide.md)
 
 ```sh
 pnpm install && pnpm dev

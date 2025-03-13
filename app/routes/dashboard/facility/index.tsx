@@ -20,7 +20,6 @@ function RouteComponent() {
     <div className="space-y-4">
       <FacilityCard />
 
-      {/* todo: add loading skeletons */}
       {rooms.isPending ? <>loading</> : (
         <Card>
           <div className="px-4 py-6 space-y-4 sm:px-6 sm:flex sm:items-center sm:justify-between">
