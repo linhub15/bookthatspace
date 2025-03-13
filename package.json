@@ -9,6 +9,7 @@
     "dev:db": "pnpm drizzle studio",
     "dev:smtp": "maildev --smtp 2465 --mail-directory=./maildev",
     "dev:emails": "email dev --port 3001 --dir app/lib/email/templates",
+    "dev:storybook": "storybook dev --port 6006 --no-open --disable-telemetry",
     "better-auth:gen": "pnpx @better-auth/cli@latest generate --config ./lib/auth/better_auth.ts --output ./app/db/auth_schema.ts"
   },
   "dependencies": {
@@ -42,6 +43,10 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.4",
+    "@storybook/blocks": "^8.6.4",
+    "@storybook/react": "^8.6.4",
+    "@storybook/react-vite": "^8.6.4",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/vite": "^4.0.12",
@@ -54,6 +59,7 @@
     "drizzle-kit": "^0.30.5",
     "maildev": "^2.2.1",
     "react-email": "^3.0.7",
+    "storybook": "^8.6.4",
     "tailwindcss": "^4.0.12",
     "typescript": "^5.8.2",
     "vite-tsconfig-paths": "^5.1.4"
