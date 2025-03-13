@@ -9,11 +9,11 @@ export function maskDate(date: string) {
 }
 
 export function maskTimeRange(start: string, end: string) {
-  const s = Temporal.Instant.from(start).toLocaleString(
+  const s = Temporal.PlainDateTime.from(start).toLocaleString(
     undefined,
     { hourCycle: "h12", hour: "numeric", minute: "2-digit" },
   );
-  const e = Temporal.Instant.from(end).toLocaleString(
+  const e = Temporal.PlainDateTime.from(end).toLocaleString(
     undefined,
     { hourCycle: "h12", hour: "numeric", minute: "2-digit" },
   );

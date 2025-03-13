@@ -2,7 +2,6 @@ import { Modal } from "@/components/modal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useCalendars } from "./use_calendars";
-import { api } from "@/clients/api";
 
 type Props = {
   roomId: string;
