@@ -1,4 +1,5 @@
 import { Dashboard } from "@/features/dashboard/dashboard";
+import { AnalyticsProvider } from "@/lib/analytics/analytics.provider";
 import { getSessionFn } from "@/lib/auth/get_session.fn";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
@@ -18,5 +19,9 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function RouteComponent() {
-  return <Dashboard />;
+  return (
+    <AnalyticsProvider>
+      <Dashboard />
+    </AnalyticsProvider>
+  );
 }

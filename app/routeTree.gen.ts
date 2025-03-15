@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard/route'
+import { Route as RouteImport } from './routes/@/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as DashboardProfileImport } from './routes/dashboard/profile'
@@ -33,6 +34,12 @@ import { Route as DashboardBookingRequestsBookingIdReviewImport } from './routes
 const DashboardRouteRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RouteRoute = RouteImport.update({
+  id: '/@',
+  path: '/@',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -86,9 +93,9 @@ const DashboardBookingRequestsIndexRoute =
   } as any)
 
 const FacilityIdIndexRoute = FacilityIdIndexImport.update({
-  id: '/@/$facilityId/',
-  path: '/@/$facilityId/',
-  getParentRoute: () => rootRoute,
+  id: '/$facilityId/',
+  path: '/$facilityId/',
+  getParentRoute: () => RouteRoute,
 } as any)
 
 const DashboardFacilityRoomIdRoute = DashboardFacilityRoomIdImport.update({
@@ -98,21 +105,21 @@ const DashboardFacilityRoomIdRoute = DashboardFacilityRoomIdImport.update({
 } as any)
 
 const BookingSuccessBookingIdRoute = BookingSuccessBookingIdImport.update({
-  id: '/@/booking-success/$bookingId',
-  path: '/@/booking-success/$bookingId',
-  getParentRoute: () => rootRoute,
+  id: '/booking-success/$bookingId',
+  path: '/booking-success/$bookingId',
+  getParentRoute: () => RouteRoute,
 } as any)
 
 const FacilityIdBookRoute = FacilityIdBookImport.update({
-  id: '/@/$facilityId/book',
-  path: '/@/$facilityId/book',
-  getParentRoute: () => rootRoute,
+  id: '/$facilityId/book',
+  path: '/$facilityId/book',
+  getParentRoute: () => RouteRoute,
 } as any)
 
 const FacilityIdAvailabilityRoute = FacilityIdAvailabilityImport.update({
-  id: '/@/$facilityId/availability',
-  path: '/@/$facilityId/availability',
-  getParentRoute: () => rootRoute,
+  id: '/$facilityId/availability',
+  path: '/$facilityId/availability',
+  getParentRoute: () => RouteRoute,
 } as any)
 
 const DashboardBookingsBookingIdViewRoute =
@@ -138,6 +145,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/@': {
+      id: '/@'
+      path: '/@'
+      fullPath: '/@'
+      preLoaderRoute: typeof RouteImport
       parentRoute: typeof rootRoute
     }
     '/dashboard': {
@@ -177,24 +191,24 @@ declare module '@tanstack/react-router' {
     }
     '/@/$facilityId/availability': {
       id: '/@/$facilityId/availability'
-      path: '/@/$facilityId/availability'
+      path: '/$facilityId/availability'
       fullPath: '/@/$facilityId/availability'
       preLoaderRoute: typeof FacilityIdAvailabilityImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof RouteImport
     }
     '/@/$facilityId/book': {
       id: '/@/$facilityId/book'
-      path: '/@/$facilityId/book'
+      path: '/$facilityId/book'
       fullPath: '/@/$facilityId/book'
       preLoaderRoute: typeof FacilityIdBookImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof RouteImport
     }
     '/@/booking-success/$bookingId': {
       id: '/@/booking-success/$bookingId'
-      path: '/@/booking-success/$bookingId'
+      path: '/booking-success/$bookingId'
       fullPath: '/@/booking-success/$bookingId'
       preLoaderRoute: typeof BookingSuccessBookingIdImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof RouteImport
     }
     '/dashboard/facility/$roomId': {
       id: '/dashboard/facility/$roomId'
@@ -205,10 +219,10 @@ declare module '@tanstack/react-router' {
     }
     '/@/$facilityId/': {
       id: '/@/$facilityId/'
-      path: '/@/$facilityId'
+      path: '/$facilityId'
       fullPath: '/@/$facilityId'
       preLoaderRoute: typeof FacilityIdIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof RouteImport
     }
     '/dashboard/booking-requests/': {
       id: '/dashboard/booking-requests/'
@@ -250,6 +264,22 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
+interface RouteRouteChildren {
+  FacilityIdAvailabilityRoute: typeof FacilityIdAvailabilityRoute
+  FacilityIdBookRoute: typeof FacilityIdBookRoute
+  BookingSuccessBookingIdRoute: typeof BookingSuccessBookingIdRoute
+  FacilityIdIndexRoute: typeof FacilityIdIndexRoute
+}
+
+const RouteRouteChildren: RouteRouteChildren = {
+  FacilityIdAvailabilityRoute: FacilityIdAvailabilityRoute,
+  FacilityIdBookRoute: FacilityIdBookRoute,
+  BookingSuccessBookingIdRoute: BookingSuccessBookingIdRoute,
+  FacilityIdIndexRoute: FacilityIdIndexRoute,
+}
+
+const RouteRouteWithChildren = RouteRoute._addFileChildren(RouteRouteChildren)
+
 interface DashboardRouteRouteChildren {
   DashboardProfileRoute: typeof DashboardProfileRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
@@ -279,6 +309,7 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/@': typeof RouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
@@ -298,6 +329,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/@': typeof RouteRouteWithChildren
   '/login': typeof AuthLoginRoute
   '/signup': typeof AuthSignupRoute
   '/dashboard/profile': typeof DashboardProfileRoute
@@ -317,6 +349,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/@': typeof RouteRouteWithChildren
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/_auth/signup': typeof AuthSignupRoute
@@ -338,6 +371,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/@'
     | '/dashboard'
     | '/login'
     | '/signup'
@@ -356,6 +390,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/@'
     | '/login'
     | '/signup'
     | '/dashboard/profile'
@@ -373,6 +408,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/@'
     | '/dashboard'
     | '/_auth/login'
     | '/_auth/signup'
@@ -393,24 +429,18 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RouteRoute: typeof RouteRouteWithChildren
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
-  FacilityIdAvailabilityRoute: typeof FacilityIdAvailabilityRoute
-  FacilityIdBookRoute: typeof FacilityIdBookRoute
-  BookingSuccessBookingIdRoute: typeof BookingSuccessBookingIdRoute
-  FacilityIdIndexRoute: typeof FacilityIdIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RouteRoute: RouteRouteWithChildren,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
-  FacilityIdAvailabilityRoute: FacilityIdAvailabilityRoute,
-  FacilityIdBookRoute: FacilityIdBookRoute,
-  BookingSuccessBookingIdRoute: BookingSuccessBookingIdRoute,
-  FacilityIdIndexRoute: FacilityIdIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -424,17 +454,23 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/@",
         "/dashboard",
         "/_auth/login",
-        "/_auth/signup",
+        "/_auth/signup"
+      ]
+    },
+    "/": {
+      "filePath": "index.tsx"
+    },
+    "/@": {
+      "filePath": "@/route.tsx",
+      "children": [
         "/@/$facilityId/availability",
         "/@/$facilityId/book",
         "/@/booking-success/$bookingId",
         "/@/$facilityId/"
       ]
-    },
-    "/": {
-      "filePath": "index.tsx"
     },
     "/dashboard": {
       "filePath": "dashboard/route.tsx",
@@ -464,20 +500,24 @@ export const routeTree = rootRoute
       "parent": "/dashboard"
     },
     "/@/$facilityId/availability": {
-      "filePath": "@/$facilityId/availability.tsx"
+      "filePath": "@/$facilityId/availability.tsx",
+      "parent": "/@"
     },
     "/@/$facilityId/book": {
-      "filePath": "@/$facilityId/book.tsx"
+      "filePath": "@/$facilityId/book.tsx",
+      "parent": "/@"
     },
     "/@/booking-success/$bookingId": {
-      "filePath": "@/booking-success.$bookingId.tsx"
+      "filePath": "@/booking-success.$bookingId.tsx",
+      "parent": "/@"
     },
     "/dashboard/facility/$roomId": {
       "filePath": "dashboard/facility/$roomId.tsx",
       "parent": "/dashboard"
     },
     "/@/$facilityId/": {
-      "filePath": "@/$facilityId/index.tsx"
+      "filePath": "@/$facilityId/index.tsx",
+      "parent": "/@"
     },
     "/dashboard/booking-requests/": {
       "filePath": "dashboard/booking-requests/index.tsx",

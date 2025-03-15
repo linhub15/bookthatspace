@@ -15,6 +15,9 @@ export default createStartHandler({
 /** dotenv validation - not sure the best place to put it */
 const env = z.object({
   VITE_APP_URL: z.string(),
+  VITE_POSTHOG_HOST: z.string(),
+  VITE_POSTHOG_PUBLIC_KEY: z.string(),
+
   DATABASE_URL: z.string(),
   AUTH_SECRET: z.string(),
   GOOGLE_OAUTH_ID: z.string(),
